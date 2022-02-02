@@ -1,0 +1,271 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>ClickHouse Keeper | ClickHouse Documentation</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/en/operations/clickhouse-keeper/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "ClickHouse Keeper | ClickHouse Documentation",
+"mainEntityOfPage": "https://clickhouse.com/docs/en/operations/clickhouse-keeper/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "ClickHouse Keeper | ClickHouse Documentation",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer,main,section{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}ol,ul{margin-bottom:1rem}ol,ul{margin-top:0}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}b{font-weight:bolder}small{font-size:80%}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}pre{margin-top:0;margin-bottom:1rem;overflow:auto}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}table{border-collapse:collapse}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.small,small{font-size:80%;font-weight:400}.list-inline{padding-left:0;list-style:none}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}pre{display:block;font-size:87.5%;color:#495057}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-auto,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-auto,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-auto{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-auto{flex:0 0 auto;width:auto;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-auto{flex:0 0 auto;width:auto;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-auto{flex:0 0 auto;width:auto;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}}.table{width:100%;margin-bottom:8px;color:#212529}.table-primary{background-color:#fff1b8}.table-info{background-color:#bee5eb}.table-warning{background-color:#ffeeba}.table-light{background-color:#fbfcfd}.table-dark{background-color:#ccced0}.table-primary-light{background-color:#fffefb}.table-white{background-color:#fff}.table-black{background-color:#c1c2c3}.table-orange{background-color:#ffdfb8}.table-light-orange{background-color:#fff7ea}.table-active{background-color:rgba(33,37,41,.075)}.table-dark{color:#fff;background-color:#343a40}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:none}.btn:disabled{opacity:.65}.btn-primary{color:#495057;background-color:#fc0;border-color:#fc0}.btn-primary:focus,.btn-primary:hover{color:#495057;background-color:#d9ad00;border-color:#cca300}.btn-primary:focus{box-shadow:0 0 0 0 rgba(228,185,13,.5)}.btn-primary:disabled{color:#495057;background-color:#fc0;border-color:#fc0}.btn-info{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-info:focus,.btn-info:hover{color:#fff;background-color:#138496;border-color:#117a8b}.btn-info:focus{box-shadow:0 0 0 0 rgba(58,176,195,.5)}.btn-info:disabled{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-warning{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-warning:focus,.btn-warning:hover{color:#495057;background-color:#e0a800;border-color:#d39e00}.btn-warning:focus{box-shadow:0 0 0 0 rgba(228,176,19,.5)}.btn-warning:disabled{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-primary-light{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-primary-light:focus,.btn-primary-light:hover{color:#495057;background-color:#ffedca;border-color:#ffe9bd}.btn-primary-light:focus{box-shadow:0 0 0 0 rgba(228,225,217,.5)}.btn-primary-light:disabled{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-primary{color:#fc0;border-color:#fc0}.btn-outline-primary:hover{color:#495057;background-color:#fc0;border-color:#fc0}.btn-outline-primary:focus{box-shadow:0 0 0 0 rgba(255,204,0,.5)}.btn-outline-primary:disabled{color:#fc0;background-color:transparent}.btn-outline-info{color:#17a2b8;border-color:#17a2b8}.btn-outline-info:hover{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-outline-info:focus{box-shadow:0 0 0 0 rgba(23,162,184,.5)}.btn-outline-info:disabled{color:#17a2b8;background-color:transparent}.btn-outline-warning{color:#ffc107;border-color:#ffc107}.btn-outline-warning:hover{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-outline-warning:focus{box-shadow:0 0 0 0 rgba(255,193,7,.5)}.btn-outline-warning:disabled{color:#ffc107;background-color:transparent}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-primary-light{color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:hover{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:focus{box-shadow:0 0 0 0 rgba(255,250,240,.5)}.btn-outline-primary-light:disabled{color:#fffaf0;background-color:transparent}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}.custom-control{position:relative;display:block;min-height:1.5rem;padding-left:1.5rem}.custom-control-inline{display:inline-flex;margin-right:1rem}.custom-file{display:inline-block;margin-bottom:0}.custom-file{position:relative;width:100%;height:calc(1.5em+.75rem+2px)}pre{white-space:pre-wrap}pre{border:1px solid #d6dbdf;page-break-inside:avoid}img{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}.table{border-collapse:collapse}.table-dark{color:inherit}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+          <h1 id=clickHouse-keeper>[pre-production] ClickHouse Keeper<a class=headerlink href=../amp/#clickHouse-keeper title="Permanent link"> </a></h1> <p>ClickHouse server uses <a href=https://zookeeper.apache.org/ rel="external nofollow noreferrer" target=_blank>ZooKeeper</a> coordination system for data <a href=../../../engines/table-engines/mergetree-family/replication/amp/ >replication</a> and <a href=../../../sql-reference/distributed-ddl/amp/ >distributed DDL</a> queries execution. ClickHouse Keeper is an alternative coordination system compatible with ZooKeeper.</p> <div class="admonition warning alert pb-0 mb-4 alert-warning" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">Warning</p> <p>This feature is currently in the pre-production stage. We test it in our CI and on small internal installations.</p> </div> <h2 id=implementation-details>Implementation details<a class=headerlink href=../amp/#implementation-details title="Permanent link"> </a></h2> <p>ZooKeeper is one of the first well-known open-source coordination systems. It's implemented in Java, has quite a simple and powerful data model. ZooKeeper's coordination algorithm called ZAB (ZooKeeper Atomic Broadcast) doesn't provide linearizability guarantees for reads, because each ZooKeeper node serves reads locally. Unlike ZooKeeper ClickHouse Keeper is written in C++ and uses <a href=https://raft.github.io/ rel="external nofollow noreferrer" target=_blank>RAFT algorithm</a> <a href=https://github.com/eBay/NuRaft rel="external nofollow noreferrer" target=_blank>implementation</a>. This algorithm allows to have linearizability for reads and writes, has several open-source implementations in different languages.</p> <p>By default, ClickHouse Keeper provides the same guarantees as ZooKeeper (linearizable writes, non-linearizable reads). It has a compatible client-server protocol, so any standard ZooKeeper client can be used to interact with ClickHouse Keeper. Snapshots and logs have an incompatible format with ZooKeeper, but <code class=syntax>clickhouse-keeper-converter</code> tool allows to convert ZooKeeper data to ClickHouse Keeper snapshot. Interserver protocol in ClickHouse Keeper is also incompatible with ZooKeeper so mixed ZooKeeper / ClickHouse Keeper cluster is impossible.</p> <p>ClickHouse Keeper supports Access Control List (ACL) the same way as <a href=https://zookeeper.apache.org/doc/r3.1.2/zookeeperProgrammers.html#sc_ZooKeeperAccessControl rel="external nofollow noreferrer" target=_blank>ZooKeeper</a> does. ClickHouse Keeper supports the same set of permissions and has the identical built-in schemes: <code class=syntax>world</code>, <code class=syntax>auth</code>, <code class=syntax>digest</code>, <code class=syntax>host</code> and <code class=syntax>ip</code>. Digest authentication scheme uses pair <code class=syntax>username:password</code>. Password is encoded in Base64. </p> <div class="admonition info alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">Note</p> <p>External integrations are not supported.</p> </div> <h2 id=configuration>Configuration<a class=headerlink href=../amp/#configuration title="Permanent link"> </a></h2> <p>ClickHouse Keeper can be used as a standalone replacement for ZooKeeper or as an internal part of the ClickHouse server, but in both cases configuration is almost the same <code class=syntax>.xml</code> file. The main ClickHouse Keeper configuration tag is <code class=syntax>&lt;keeper_server&gt;</code>. Keeper configuration has the following parameters:</p> <ul> <li><code class=syntax>tcp_port</code> — Port for a client to connect (default for ZooKeeper is <code class=syntax>2181</code>).</li> <li><code class=syntax>tcp_port_secure</code> — Secure port for an SSL connection between client and keeper-server.</li> <li><code class=syntax>server_id</code> — Unique server id, each participant of the ClickHouse Keeper cluster must have a unique number (1, 2, 3, and so on).</li> <li><code class=syntax>log_storage_path</code> — Path to coordination logs, better to store logs on the non-busy device (same for ZooKeeper).</li> <li><code class=syntax>snapshot_storage_path</code> — Path to coordination snapshots.</li> </ul> <p>Other common parameters are inherited from the ClickHouse server config (<code class=syntax>listen_host</code>, <code class=syntax>logger</code>, and so on).</p> <p>Internal coordination settings are located in <code class=syntax>&lt;keeper_server&gt;.&lt;coordination_settings&gt;</code> section:</p> <ul> <li><code class=syntax>operation_timeout_ms</code> — Timeout for a single client operation (ms) (default: 10000).</li> <li><code class=syntax>min_session_timeout_ms</code> — Min timeout for client session (ms) (default: 10000).</li> <li><code class=syntax>session_timeout_ms</code> — Max timeout for client session (ms) (default: 100000).</li> <li><code class=syntax>dead_session_check_period_ms</code> — How often ClickHouse Keeper check dead sessions and remove them (ms) (default: 500).</li> <li><code class=syntax>heart_beat_interval_ms</code> — How often a ClickHouse Keeper leader will send heartbeats to followers (ms) (default: 500).</li> <li><code class=syntax>election_timeout_lower_bound_ms</code> — If the follower didn't receive heartbeats from the leader in this interval, then it can initiate leader election (default: 1000).</li> <li><code class=syntax>election_timeout_upper_bound_ms</code> — If the follower didn't receive heartbeats from the leader in this interval, then it must initiate leader election (default: 2000).</li> <li><code class=syntax>rotate_log_storage_interval</code> — How many log records to store in a single file (default: 100000).</li> <li><code class=syntax>reserved_log_items</code> — How many coordination log records to store before compaction (default: 100000).</li> <li><code class=syntax>snapshot_distance</code> — How often ClickHouse Keeper will create new snapshots (in the number of records in logs) (default: 100000).</li> <li><code class=syntax>snapshots_to_keep</code> — How many snapshots to keep (default: 3).</li> <li><code class=syntax>stale_log_gap</code> — Threshold when leader considers follower as stale and sends the snapshot to it instead of logs (default: 10000).</li> <li><code class=syntax>fresh_log_gap</code> — When node became fresh (default: 200).</li> <li><code class=syntax>max_requests_batch_size</code> - Max size of batch in requests count before it will be sent to RAFT (default: 100).</li> <li><code class=syntax>force_sync</code> — Call <code class=syntax>fsync</code> on each write to coordination log (default: true).</li> <li><code class=syntax>quorum_reads</code> — Execute read requests as writes through whole RAFT consensus with similar speed (default: false).</li> <li><code class=syntax>raft_logs_level</code> — Text logging level about coordination (trace, debug, and so on) (default: system default).</li> <li><code class=syntax>auto_forwarding</code> — Allow to forward write requests from followers to the leader (default: true).</li> <li><code class=syntax>shutdown_timeout</code> — Wait to finish internal connections and shutdown (ms) (default: 5000).</li> <li><code class=syntax>startup_timeout</code> — If the server doesn't connect to other quorum participants in the specified timeout it will terminate (ms) (default: 30000).</li> <li><code class=syntax>four_letter_word_white_list</code> — White list of 4lw commands (default: "conf,cons,crst,envi,ruok,srst,srvr,stat,wchc,wchs,dirs,mntr,isro").</li> </ul> <p>Quorum configuration is located in <code class=syntax>&lt;keeper_server&gt;.&lt;raft_configuration&gt;</code> section and contain servers description.</p> <p>The only parameter for the whole quorum is <code class=syntax>secure</code>, which enables encrypted connection for communication between quorum participants. The parameter can be set <code class=syntax>true</code> if SSL connection is required for internal communication between nodes, or left unspecified otherwise.</p> <p>The main parameters for each <code class=syntax>&lt;server&gt;</code> are:</p> <ul> <li><code class=syntax>id</code> — Server identifier in a quorum.</li> <li><code class=syntax>hostname</code> — Hostname where this server is placed.</li> <li><code class=syntax>port</code> — Port where this server listens for connections.</li> </ul> <p>Examples of configuration for quorum with three nodes can be found in <a href=https://github.com/ClickHouse/ClickHouse/tree/master/tests/integration rel="external nofollow noreferrer" target=_blank>integration tests</a> with <code class=syntax>test_keeper_</code> prefix. Example configuration for server #1:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;keeper_server&gt;</span>
+    <span class=nt>&lt;tcp_port&gt;</span>2181<span class=nt>&lt;/tcp_port&gt;</span>
+    <span class=nt>&lt;server_id&gt;</span>1<span class=nt>&lt;/server_id&gt;</span>
+    <span class=nt>&lt;log_storage_path&gt;</span>/var/lib/clickhouse/coordination/log<span class=nt>&lt;/log_storage_path&gt;</span>
+    <span class=nt>&lt;snapshot_storage_path&gt;</span>/var/lib/clickhouse/coordination/snapshots<span class=nt>&lt;/snapshot_storage_path&gt;</span>
+
+    <span class=nt>&lt;coordination_settings&gt;</span>
+        <span class=nt>&lt;operation_timeout_ms&gt;</span>10000<span class=nt>&lt;/operation_timeout_ms&gt;</span>
+        <span class=nt>&lt;session_timeout_ms&gt;</span>30000<span class=nt>&lt;/session_timeout_ms&gt;</span>
+        <span class=nt>&lt;raft_logs_level&gt;</span>trace<span class=nt>&lt;/raft_logs_level&gt;</span>
+    <span class=nt>&lt;/coordination_settings&gt;</span>
+
+    <span class=nt>&lt;raft_configuration&gt;</span>
+        <span class=nt>&lt;server&gt;</span>
+            <span class=nt>&lt;id&gt;</span>1<span class=nt>&lt;/id&gt;</span>
+            <span class=nt>&lt;hostname&gt;</span>zoo1<span class=nt>&lt;/hostname&gt;</span>
+            <span class=nt>&lt;port&gt;</span>9444<span class=nt>&lt;/port&gt;</span>
+        <span class=nt>&lt;/server&gt;</span>
+        <span class=nt>&lt;server&gt;</span>
+            <span class=nt>&lt;id&gt;</span>2<span class=nt>&lt;/id&gt;</span>
+            <span class=nt>&lt;hostname&gt;</span>zoo2<span class=nt>&lt;/hostname&gt;</span>
+            <span class=nt>&lt;port&gt;</span>9444<span class=nt>&lt;/port&gt;</span>
+        <span class=nt>&lt;/server&gt;</span>
+        <span class=nt>&lt;server&gt;</span>
+            <span class=nt>&lt;id&gt;</span>3<span class=nt>&lt;/id&gt;</span>
+            <span class=nt>&lt;hostname&gt;</span>zoo3<span class=nt>&lt;/hostname&gt;</span>
+            <span class=nt>&lt;port&gt;</span>9444<span class=nt>&lt;/port&gt;</span>
+        <span class=nt>&lt;/server&gt;</span>
+    <span class=nt>&lt;/raft_configuration&gt;</span>
+<span class=nt>&lt;/keeper_server&gt;</span>
+</code></pre></div> <h2 id=how-to-run>How to run<a class=headerlink href=../amp/#how-to-run title="Permanent link"> </a></h2> <p>ClickHouse Keeper is bundled into the ClickHouse server package, just add configuration of <code class=syntax>&lt;keeper_server&gt;</code> and start ClickHouse server as always. If you want to run standalone ClickHouse Keeper you can start it in a similar way with:</p> <div class=codehilite><pre><span></span><code class=syntax>clickhouse-keeper --config /etc/your_path_to_config/config.xml --daemon
+</code></pre></div> <h2 id=four-letter-word-commands>Four Letter Word Commands<a class=headerlink href=../amp/#four-letter-word-commands title="Permanent link"> </a></h2> <p>ClickHouse Keeper also provides 4lw commands which are almost the same with Zookeeper. Each command is composed of four letters such as <code class=syntax>mntr</code>, <code class=syntax>stat</code> etc. There are some more interesting commands: <code class=syntax>stat</code> gives some general information about the server and connected clients, while <code class=syntax>srvr</code> and <code class=syntax>cons</code> give extended details on server and connections respectively. </p> <p>The 4lw commands has a white list configuration <code class=syntax>four_letter_word_white_list</code> which has default value "conf,cons,crst,envi,ruok,srst,srvr,stat,wchc,wchs,dirs,mntr,isro".</p> <p>You can issue the commands to ClickHouse Keeper via telnet or nc, at the client port.</p> <div class=codehilite><pre><span></span><code class=syntax>echo mntr | nc localhost 9181
+</code></pre></div> <p>Bellow is the detailed 4lw commands:</p> <ul> <li><code class=syntax>ruok</code>: Tests if server is running in a non-error state. The server will respond with imok if it is running. Otherwise it will not respond at all. A response of "imok" does not necessarily indicate that the server has joined the quorum, just that the server process is active and bound to the specified client port. Use "stat" for details on state wrt quorum and client connection information.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>imok
+</code></pre></div> <ul> <li><code class=syntax>mntr</code>: Outputs a list of variables that could be used for monitoring the health of the cluster.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>zk_version      v21.11.1.1-prestable-7a4a0b0edef0ad6e0aa662cd3b90c3f4acf796e7
+zk_avg_latency  0
+zk_max_latency  0
+zk_min_latency  0
+zk_packets_received     68
+zk_packets_sent 68
+zk_num_alive_connections        1
+zk_outstanding_requests 0
+zk_server_state leader
+zk_znode_count  4
+zk_watch_count  1
+zk_ephemerals_count     0
+zk_approximate_data_size        723
+zk_open_file_descriptor_count   310
+zk_max_file_descriptor_count    10240
+zk_followers    0
+zk_synced_followers     0
+</code></pre></div> <ul> <li><code class=syntax>srvr</code>: Lists full details for the server.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>ClickHouse Keeper version: v21.11.1.1-prestable-7a4a0b0edef0ad6e0aa662cd3b90c3f4acf796e7
+Latency min/avg/max: 0/0/0
+Received: 2
+Sent : 2
+Connections: 1
+Outstanding: 0
+Zxid: 34
+Mode: leader
+Node count: 4
+</code></pre></div> <ul> <li><code class=syntax>stat</code>: Lists brief details for the server and connected clients.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>ClickHouse Keeper version: v21.11.1.1-prestable-7a4a0b0edef0ad6e0aa662cd3b90c3f4acf796e7
+Clients:
+ 192.168.1.1:52852(recved=0,sent=0)
+ 192.168.1.1:52042(recved=24,sent=48)
+Latency min/avg/max: 0/0/0
+Received: 4
+Sent : 4
+Connections: 1
+Outstanding: 0
+Zxid: 36
+Mode: leader
+Node count: 4
+</code></pre></div> <ul> <li><code class=syntax>srst</code>: Reset server statistics. The command will affect the result of <code class=syntax>srvr</code>, <code class=syntax>mntr</code> and <code class=syntax>stat</code>.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>Server stats reset.
+</code></pre></div> <ul> <li><code class=syntax>conf</code>: Print details about serving configuration.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>server_id=1
+tcp_port=2181
+four_letter_word_white_list=*
+log_storage_path=./coordination/logs
+snapshot_storage_path=./coordination/snapshots
+max_requests_batch_size=100
+session_timeout_ms=30000
+operation_timeout_ms=10000
+dead_session_check_period_ms=500
+heart_beat_interval_ms=500
+election_timeout_lower_bound_ms=1000
+election_timeout_upper_bound_ms=2000
+reserved_log_items=1000000000000000
+snapshot_distance=10000
+auto_forwarding=true
+shutdown_timeout=5000
+startup_timeout=240000
+raft_logs_level=information
+snapshots_to_keep=3
+rotate_log_storage_interval=100000
+stale_log_gap=10000
+fresh_log_gap=200
+max_requests_batch_size=100
+quorum_reads=false
+force_sync=false
+compress_logs=true
+compress_snapshots_with_zstd_format=true
+configuration_change_tries_count=20
+</code></pre></div> <ul> <li><code class=syntax>cons</code>: List full connection/session details for all clients connected to this server. Includes information on numbers of packets received/sent, session id, operation latencies, last operation performed, etc...</li> </ul> <div class=codehilite><pre><span></span><code class=syntax> 192.168.1.1:52163(recved=0,sent=0,sid=0xffffffffffffffff,lop=NA,est=1636454787393,to=30000,lzxid=0xffffffffffffffff,lresp=0,llat=0,minlat=0,avglat=0,maxlat=0)
+ 192.168.1.1:52042(recved=9,sent=18,sid=0x0000000000000001,lop=List,est=1636454739887,to=30000,lcxid=0x0000000000000005,lzxid=0x0000000000000005,lresp=1636454739892,llat=0,minlat=0,avglat=0,maxlat=0)
+</code></pre></div> <ul> <li><code class=syntax>crst</code>: Reset connection/session statistics for all connections.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>Connection stats reset.
+</code></pre></div> <ul> <li><code class=syntax>envi</code>: Print details about serving environment</li> </ul> <div class=codehilite><pre><span></span><code class=syntax><span class=n>Environment</span><span class=o>:</span><span class=w></span>
+<span class=n>clickhouse</span><span class=o>.</span><span class=na>keeper</span><span class=o>.</span><span class=na>version</span><span class=o>=</span><span class=n>v21</span><span class=o>.</span><span class=mf>11.1</span><span class=o>.</span><span class=mi>1</span><span class=o>-</span><span class=n>prestable</span><span class=o>-</span><span class=mi>7</span><span class=n>a4a0b0edef0ad6e0aa662cd3b90c3f4acf796e7</span><span class=w></span>
+<span class=n>host</span><span class=o>.</span><span class=na>name</span><span class=o>=</span><span class=n>ZBMAC</span><span class=o>-</span><span class=n>C02D4054M</span><span class=o>.</span><span class=na>local</span><span class=w></span>
+<span class=n>os</span><span class=o>.</span><span class=na>name</span><span class=o>=</span><span class=n>Darwin</span><span class=w></span>
+<span class=n>os</span><span class=o>.</span><span class=na>arch</span><span class=o>=</span><span class=n>x86_64</span><span class=w></span>
+<span class=n>os</span><span class=o>.</span><span class=na>version</span><span class=o>=</span><span class=mf>19.6</span><span class=o>.</span><span class=mi>0</span><span class=w></span>
+<span class=n>cpu</span><span class=o>.</span><span class=na>count</span><span class=o>=</span><span class=mi>12</span><span class=w></span>
+<span class=n>user</span><span class=o>.</span><span class=na>name</span><span class=o>=</span><span class=n>root</span><span class=w></span>
+<span class=n>user</span><span class=o>.</span><span class=na>home</span><span class=o>=/</span><span class=n>Users</span><span class=sr>/JackyWoo/</span><span class=w></span>
+<span class=n>user</span><span class=o>.</span><span class=na>dir</span><span class=o>=/</span><span class=n>Users</span><span class=sr>/JackyWoo/project/jd/clickhouse/cmake-build-debug/programs/</span><span class=w></span>
+<span class=n>user</span><span class=o>.</span><span class=na>tmp</span><span class=o>=/</span><span class=n>var</span><span class=sr>/folders/b4/smbq5mfj7578f2jzwn602tt40000gn/T/</span><span class=w></span>
+</code></pre></div> <ul> <li><code class=syntax>dirs</code>: Shows the total size of snapshot and log files in bytes</li> </ul> <div class=codehilite><pre><span></span><code class=syntax><span class=n>snapshot_dir_size</span><span class=o>:</span><span class=w> </span><span class=mi>0</span><span class=w></span>
+<span class=n>log_dir_size</span><span class=o>:</span><span class=w> </span><span class=mi>3875</span><span class=w></span>
+</code></pre></div> <ul> <li><code class=syntax>isro</code>: Tests if server is running in read-only mode. The server will respond with "ro" if in read-only mode or "rw" if not in read-only mode.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>rw
+</code></pre></div> <ul> <li><code class=syntax>wchs</code>: Lists brief information on watches for the server.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax><span class=mf>1</span><span class=w> </span><span class=n>connections</span><span class=w> </span><span class=n>watching</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=n>paths</span><span class=w></span>
+<span class=kr>To</span><span class=n>tal</span><span class=w> </span><span class=n>watches</span><span class=p>:</span><span class=mf>1</span><span class=w></span>
+</code></pre></div> <ul> <li><code class=syntax>wchc</code>: Lists detailed information on watches for the server, by session. This outputs a list of sessions (connections) with associated watches (paths). Note, depending on the number of watches this operation may be expensive (ie impact server performance), use it carefully.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax><span class=mf>0</span><span class=n>x0000000000000001</span><span class=w></span>
+<span class=w>    </span><span class=o>/</span><span class=n>clickhouse</span><span class=o>/</span><span class=n>task_queue</span><span class=o>/</span><span class=n>ddl</span><span class=w></span>
+</code></pre></div> <ul> <li><code class=syntax>wchp</code>: Lists detailed information on watches for the server, by path. This outputs a list of paths (znodes) with associated sessions. Note, depending on the number of watches this operation may be expensive (i. e. impact server performance), use it carefully.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>/clickhouse/task_queue/ddl
+    0x0000000000000001
+</code></pre></div> <ul> <li><code class=syntax>dump</code>: Lists the outstanding sessions and ephemeral nodes. This only works on the leader.</li> </ul> <div class=codehilite><pre><span></span><code class=syntax>Sessions dump (2):
+0x0000000000000001
+0x0000000000000002
+Sessions with Ephemerals (1):
+0x0000000000000001
+ /clickhouse/task_queue/ddl
+</code></pre></div> <h2 id=migration-from-zookeeper>[experimental] Migration from ZooKeeper<a class=headerlink href=../amp/#migration-from-zookeeper title="Permanent link"> </a></h2> <p>Seamlessly migration from ZooKeeper to ClickHouse Keeper is impossible you have to stop your ZooKeeper cluster, convert data and start ClickHouse Keeper. <code class=syntax>clickhouse-keeper-converter</code> tool allows converting ZooKeeper logs and snapshots to ClickHouse Keeper snapshot. It works only with ZooKeeper &gt; 3.4. Steps for migration:</p> <ol> <li> <p>Stop all ZooKeeper nodes.</p> </li> <li> <p>Optional, but recommended: find ZooKeeper leader node, start and stop it again. It will force ZooKeeper to create a consistent snapshot.</p> </li> <li> <p>Run <code class=syntax>clickhouse-keeper-converter</code> on a leader, for example:</p> </li> </ol> <div class=codehilite><pre><span></span><code class=syntax>clickhouse-keeper-converter --zookeeper-logs-dir /var/lib/zookeeper/version-2 --zookeeper-snapshots-dir /var/lib/zookeeper/version-2 --output-dir /path/to/clickhouse/keeper/snapshots
+</code></pre></div> <ol start=4> <li>Copy snapshot to ClickHouse server nodes with a configured <code class=syntax>keeper</code> or start ClickHouse Keeper instead of ZooKeeper. The snapshot must persist on all nodes, otherwise, empty nodes can be faster and one of them can become a leader.</li> </ol>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/c60fd44c5b70c56ff0f9c7fc538e58c6c8186aea" rel="external nofollow noreferrer" target="_blank" class="text-reset">c60fd44c</a>
+    
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/en/operations/clickhouse-keeper/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>

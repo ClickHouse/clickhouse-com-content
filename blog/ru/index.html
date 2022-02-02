@@ -1,0 +1,562 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="ru" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Блог ClickHouse</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="Блог ClickHouse"/>
+<meta property="og:description" content="ClickHouse is a fast open-source column-oriented database management system that allows generating analytical data reports in real-time using SQL queries" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://clickhouse.com/images/logo.png" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/ru/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/ru/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Блог ClickHouse",
+"mainEntityOfPage": "https://clickhouse.com/blog/ru/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="ClickHouse is a fast open-source column-oriented database management system that allows generating analytical data reports in real-time using SQL queries" />
+
+<meta name="keywords"
+      content="ClickHouse, DBMS, OLAP, SQL, open-source, relational, analytics, analytical, Big Data, web-analytics" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/ru/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/ru/" class="text-reset text-decoration-none">
+                    Блог ClickHouse
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/ru/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/ru.svg" alt="Русский" title="Русский" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+        
+        <a href="/blog/ru/2019/clickhouse-meetup-v-moskve-5-sentyabrya-2019/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-moskve-5-sentyabrya-2019/main.jpg" alt="ClickHouse Meetup в Москве, 5 сентября 2019" title="ClickHouse Meetup в Москве, 5 сентября 2019" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Москве, 5 сентября 2019</h2>
+                    <span class="text-muted">2019-09-06</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2019/clickhouse-meetup-v-sankt-peterburge-27-iyulya-2019/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-sankt-peterburge-27-iyulya-2019/main.jpg" alt="ClickHouse Meetup в Санкт-Петербурге, 27 июля 2019" title="ClickHouse Meetup в Санкт-Петербурге, 27 июля 2019" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Санкт-Петербурге, 27 июля 2019</h2>
+                    <span class="text-muted">2019-08-01</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2019/clickrouse-meetup-v-minske-11-iyulya-2019/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2019/clickrouse-meetup-v-minske-11-iyulya-2019/main.jpg" alt="ClickHouse Meetup в Минске, 11 июля 2019" title="ClickHouse Meetup в Минске, 11 июля 2019" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Минске, 11 июля 2019</h2>
+                    <span class="text-muted">2019-07-12</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/main.jpg" alt="ClickHouse Meetup в Новосибирске, 26 июня 2019" title="ClickHouse Meetup в Новосибирске, 26 июня 2019" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Новосибирске, 26 июня 2019</h2>
+                    <span class="text-muted">2019-06-05</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2019/clickhouse-meetup-v-limassole-7-maya-2019/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-limassole-7-maya-2019/main.jpg" alt="ClickHouse Meetup в Лимассоле, 7 мая 2019" title="ClickHouse Meetup в Лимассоле, 7 мая 2019" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Лимассоле, 7 мая 2019</h2>
+                    <span class="text-muted">2019-05-14</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2017/clickhouse-meetup-v-minske-itogi/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-v-minske-itogi/main.jpg" alt="ClickHouse MeetUp в Минске: итоги" title="ClickHouse MeetUp в Минске: итоги" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse MeetUp в Минске: итоги</h2>
+                    <span class="text-muted">2017-06-19</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2017/clickhouse-meetup-edet-v-minsk/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-edet-v-minsk/main.jpg" alt="ClickHouse MeetUp едет в Минск!" title="ClickHouse MeetUp едет в Минск!" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse MeetUp едет в Минск!</h2>
+                    <span class="text-muted">2017-06-13</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2017/clickhouse-na-uwdc-2017/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2017/clickhouse-na-uwdc-2017/main.jpg" alt="ClickHouse на UWDC 2017" title="ClickHouse на UWDC 2017" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse на UWDC 2017</h2>
+                    <span class="text-muted">2017-05-20</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2017/clickhouse-meetup-v-ekaterinburge-16-maya-2017/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-v-ekaterinburge-16-maya-2017/main.jpg" alt="ClickHouse Meetup в Екатеринбурге, 16 мая 2017" title="ClickHouse Meetup в Екатеринбурге, 16 мая 2017" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Екатеринбурге, 16 мая 2017</h2>
+                    <span class="text-muted">2017-05-17</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2017/clickhouse-meetup-v-novosibirske-3-aprelya-2017/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-v-novosibirske-3-aprelya-2017/main.jpg" alt="ClickHouse Meetup в Новосибирске, 3 апреля 2017" title="ClickHouse Meetup в Новосибирске, 3 апреля 2017" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Новосибирске, 3 апреля 2017</h2>
+                    <span class="text-muted">2017-04-04</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2017/clickhouse-meetup-v-sankt-peterburge-28-fevralya-2017/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-v-sankt-peterburge-28-fevralya-2017/main.jpg" alt="ClickHouse Meetup в Санкт-Петербурге, 28 февраля 2017" title="ClickHouse Meetup в Санкт-Петербурге, 28 февраля 2017" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Санкт-Петербурге, 28 февраля 2017</h2>
+                    <span class="text-muted">2017-03-01</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2016/clickhouse-na-highload-2016/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2016/clickhouse-na-highload-2016/main.jpg" alt="ClickHouse на HighLoad++ 2016" title="ClickHouse на HighLoad++ 2016" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse на HighLoad++ 2016</h2>
+                    <span class="text-muted">2016-12-10</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2016/clickhouse-meetup-v-moskve-21-noyabrya-2016/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2016/clickhouse-meetup-v-moskve-21-noyabrya-2016/main.jpg" alt="ClickHouse Meetup в Москве, 21 ноября 2016" title="ClickHouse Meetup в Москве, 21 ноября 2016" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse Meetup в Москве, 21 ноября 2016</h2>
+                    <span class="text-muted">2016-11-22</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2016/clickhouse-na-vstreche-pro-infrastrukturu-khraneniya-i-obrabotki-dannykh-v-yandekse/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2016/clickhouse-na-vstreche-pro-infrastrukturu-khraneniya-i-obrabotki-dannykh-v-yandekse/main.jpg" alt="ClickHouse на встрече про инфраструктуру хранения и обработки данных в Яндексе" title="ClickHouse на встрече про инфраструктуру хранения и обработки данных в Яндексе" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>ClickHouse на встрече про инфраструктуру хранения и обработки данных в Яндексе</h2>
+                    <span class="text-muted">2016-10-16</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/blog/ru/2016/yandeks-otkryvaet-clickhouse/" class="d-block text-reset text-decoration-none mt-3 mb-5">
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid" data-src="https://blog-images.clickhouse.com/ru/2016/yandeks-otkryvaet-clickhouse/main.jpg" alt="Яндекс открывает ClickHouse" title="Яндекс открывает ClickHouse" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2>Яндекс открывает ClickHouse</h2>
+                    <span class="text-muted">2016-06-15</span>
+                </div>
+            </div>
+        </a>
+        
+    
+</div>
+            </div>
+        </div>
+        
+            <div id="community"></div>
+<div class="section pb-lg-10 pt-10 pt-lg-15">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4 mb-5 mb-lg-0">
+
+                <h2 class="display-2 mb-3 mb-lg-5" style="max-width: 400px;">
+                    Join our growing ClickHouse community
+                </h2>
+
+                <div>
+                    <a href="/blog/en/" class="btn btn-outline-secondary" role="button" rel="nofollow">
+                        See Our Blog
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+
+                <div class="bg-inset-right bg-light" style="bottom:40px;top:40px;"></div>
+
+                <div class="row mx-n2">
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 mb-4 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://github.com/ClickHouse/ClickHouse" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-github.svg" alt="ClickHouse GitHub" title="ClickHouse GitHub" class="icon mx-auto mb-0">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 mb-4 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://join.slack.com/t/clickhousedb/shared_invite/zt-rxm3rdrk-lIUmhLC3V8WTaL0TGxsOmg" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-slack.svg" alt="ClickHouse Slack Workspace" title="ClickHouse Slack Workspace" class="icon mx-auto mb-0">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 mb-4 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://stackoverflow.com/questions/tagged/clickhouse" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-stack-overflow.svg" alt="ClickHouse at Stack Overflow" title="ClickHouse at Stack Overflow" class="icon mx-auto mb-0">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 mb-4 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://groups.google.com/group/clickhouse" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-google.svg" alt="ClickHouse at Google Groups" title="ClickHouse at Google Groups" class="icon mx-auto mb-0">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 mb-4 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://www.youtube.com/c/ClickHouseDB" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-youtube.svg" alt="ClickHouse YouTube Channel" title="ClickHouse YouTube Channel" class="icon mx-auto mb-0">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 mb-4 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://telegram.me/clickhouse_en" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-telegram.svg" alt="ClickHouse at Telegram" title="ClickHouse at Telegram" class="icon mx-auto mb-0">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 mb-4 mb-sm-0 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://www.facebook.com/ClickHouseInc/" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-facebook.svg" alt="ClickHouse at Facebook" title="ClickHouse at Facebook" class="icon mx-auto mb-0">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 mb-4 mb-sm-0 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://twitter.com/ClickhouseDB" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-twitter.svg" alt="ClickHouse at Twitter" title="ClickHouse at Twitter" class="icon mx-auto mb-0">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-6 px-2 d-flex align-items-stretch">
+
+                        <div class="embed-responsive embed-responsive-1by1" style="overflow: visible;">
+                            <div class="embed-responsive-item d-flex align-items-stretch">
+                                <a href="https://www.linkedin.com/company/ClickHouseInc/" rel="external nofollow noreferrer" target="_blank" class="card d-flex align-items-stretch text-decoration-none">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+
+                                        <img data-src="/images/icons/icon-linkedin.png" alt="ClickHouse at LinkedIn" title="ClickHouse at LinkedIn" class="icon mx-auto mb-0">
+
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

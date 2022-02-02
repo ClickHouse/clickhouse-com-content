@@ -1,0 +1,5751 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+        
+    
+    <!DOCTYPE html>
+<html lang="ru" data-version="master" data-single-page="false">
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Набор данных о воздушном движении OpenSky Network 2020 | Документация ClickHouse</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="Набор данных о воздушном движении OpenSky Network 2020 | Документация ClickHouse"/>
+<meta property="og:description" content="Набор данных о воздушном движении OpenSky Network 2020 "Данные в этом наборе получены и отфильтрованы из полного набора " />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://clickhouse.com/images/logo.png" />
+
+<meta property="og:url" content="https://clickhouse.com/docs/ru/getting-started/example-datasets/opensky/"/>
+<link rel="canonical" href="https://clickhouse.com/docs/ru/getting-started/example-datasets/opensky/" />
+
+<link rel="amphtml" href="https://clickhouse.com/docs/ru/getting-started/example-datasets/opensky/amp/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "Набор данных о воздушном движении OpenSky Network 2020 | Документация ClickHouse",
+"mainEntityOfPage": "https://clickhouse.com/docs/ru/getting-started/example-datasets/opensky/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "Набор данных о воздушном движении OpenSky Network 2020 | Документация ClickHouse",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+
+<meta name="description" content="Набор данных о воздушном движении OpenSky Network 2020 "Данные в этом наборе получены и отфильтрованы из полного набора " />
+
+<meta name="keywords"
+      content="ClickHouse, DBMS, OLAP, SQL, open-source, relational, analytics, analytical, Big Data, web-analytics" />
+
+
+
+
+    
+    <link rel="alternate" hreflang="en" href="https://clickhouse.com/docs/en/getting-started/example-datasets/opensky/" />
+    
+    <link rel="alternate" hreflang="zh" href="https://clickhouse.com/docs/zh/getting-started/example-datasets/opensky/" />
+    
+    <link rel="alternate" hreflang="ru" href="https://clickhouse.com/docs/ru/getting-started/example-datasets/opensky/" />
+    
+    <link rel="alternate" hreflang="ja" href="https://clickhouse.com/docs/ja/getting-started/example-datasets/opensky/" />
+    
+    <link rel="alternate" hreflang="x-default" href="https://clickhouse.com/docs/en/getting-started/example-datasets/opensky/" />
+
+
+
+
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" data-spy="scroll" data-target="#toc" data-offset="80">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar py-1 navbar-dark navbar-expand-md bg-dark-alt text-white fixed-top">
+    <div class="container-fluid justify-content-between">
+        <a class="d-block navbar-brand mr-3" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h1 class="h3 m-0 p-0 d-inline">
+                <a href="#" class="text-white text-decoration-none">
+                    
+                        Набор данных о воздушном движении OpenSky Network 2020
+                    
+                </a>
+            </h1>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                
+                    
+                
+                
+                <li id="edit-wrapper" class="nav-item">
+                    <a id="edit-link" href="https://github.com/ClickHouse/ClickHouse/edit/master/docs/ru/getting-started/example-datasets/opensky.md" title="Edit this article" class="nav-link" rel="external nofollow noreferrer" target="_blank"><img src="/images/mkdocs/edit.svg" alt="Edit this article" height="60" /></a>
+                </li>
+                
+                <li class="nav-item">
+                     <a class="nav-link" href="https://github.com/ClickHouse/ClickHouse" rel="external nofollow noreferrer">
+                        <img src="/images/index/github.svg" alt="GitHub repository" title="Go to GitHub" height="72" />
+                    </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block mt-1 text-muted" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/ru.svg" alt="Русский" title="Русский" width="60" class="d-inline-block mt-n1" />
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item"
+                               href="/docs/en/getting-started/example-datasets/opensky/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />English
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/zh/getting-started/example-datasets/opensky/">
+                                <img src="/images/flags/zh.svg" alt="" title="" width="32" class="d-inline-block mr-2" />中文
+                            </a>
+                            
+                            <a class="dropdown-item disabled"
+                               href="/docs/ru/getting-started/example-datasets/opensky/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />Русский
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/ja/getting-started/example-datasets/opensky/">
+                                <img src="/images/flags/ja.svg" alt="" title="" width="32" class="d-inline-block mr-2" />日本語
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <form id="search-form" class="form-inline m-0">
+            <div class="input-group">
+                <div class="input-group-prepend w-100">
+                    <span class="input-group-text bg-secondary-alt text-muted border-0 mr-n1" id="search-icon">
+                        <img src="/images/mkdocs/search.svg" />
+                    </span>
+                    <input id="docsearch-input" class="form-control bg-secondary-alt text-muted border-0 pl-1" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+        </form>
+
+        <button id="navbar-toggler" class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+        <div class="docs container-fluid mt-3">
+            <div class="row justify-content-end justify-content-xl-center">
+                <div id="sidebar" class="col-xl-2 col-md-4 bg-secondary-alt p-3 d-print-none min-vh-100 overflow-auto">
+    <div class="overflow-auto">
+        <div id="single-page-switch" class="btn-group mb-2 float-right" role="group" aria-label="Multi-page or single-page">
+            <a href="../../.." role="button" class="btn btn-dark active" aria-pressed="true">
+                <img src="/images/mkdocs/multi.svg" alt="Multi-page version" title="Multi-page version" />
+            </a>
+            <a href="../../../single/" role="button" class="btn btn-dark-alt active" aria-pressed="true">
+                <img src="/images/mkdocs/single.svg" alt="Single-page version" title="Single-page version" />
+            </a>
+        </div>
+        
+        <nav id="sidebar-nav" class="nav flex-column mb-5">
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-1" title="Введение" class="nav-link text-light dropdown-toggle px-0">Введение</a>
+<div id="sidebar-sidebar-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../" title="Обзор" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обзор</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/distinctive-features/" title="Отличительные возможности ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Отличительные возможности ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/performance/" title="Производительность" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Производительность</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/history/" title="История ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">История ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/adopters/" title="Adopters" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Adopters</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2" title="Начало работы" class="nav-link text-light dropdown-toggle px-0">Начало работы</a>
+<div id="sidebar-sidebar-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/install/" title="Установка" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Установка</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/tutorial/" title="Tutorial" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tutorial</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/playground/" title="Playground" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Playground</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-2-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2-5" title="Тестовые массивы данных" class="nav-link text-light dropdown-toggle px-0">Тестовые массивы данных</a>
+<div id="sidebar-sidebar-2-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/github-events/" title="GitHub Events" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GitHub Events</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/metrica/" title="Анонимизированные данные Яндекс.Метрики" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Анонимизированные данные Яндекс.Метрики</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/star-schema/" title="Star Schema Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Star Schema Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/recipes/" title="Набор данных кулинарных рецептов" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Набор данных кулинарных рецептов</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/wikistat/" title="WikiStat" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WikiStat</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/criteo/" title="Терабайт логов кликов от Criteo" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Терабайт логов кликов от Criteo</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/amplab-benchmark/" title="AMPLab Big Data Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AMPLab Big Data Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/brown-benchmark/" title="Brown University Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Brown University Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/nyc-taxi/" title="Данные о такси в Нью-Йорке" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Данные о такси в Нью-Йорке</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/opensky/" title="Набор данных о воздушном движении OpenSky Network 2020" class="nav-link text-white active text-wrap d-inline-block w-100 px-0">Набор данных о воздушном движении OpenSky Network 2020</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/uk-price-paid/" title="Набор данных о стоимости недвижимости в Великобритании" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Набор данных о стоимости недвижимости в Великобритании</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/ontime/" title="OnTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OnTime</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/cell-towers/" title="Вышки сотовой связи" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Вышки сотовой связи</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/menus/" title="Меню" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Меню</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3" title="Интерфейсы" class="nav-link text-light dropdown-toggle px-0">Интерфейсы</a>
+<div id="sidebar-sidebar-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/cli/" title="Клиент командной строки" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Клиент командной строки</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/grpc/" title="gRPC интерфейс" class="nav-link text-light text-wrap d-inline-block w-100 px-0">gRPC интерфейс</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/tcp/" title="Родной интерфейс (TCP)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Родной интерфейс (TCP)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/http/" title="HTTP-интерфейс" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HTTP-интерфейс</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/mysql/" title="MySQL-интерфейс" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL-интерфейс</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/formats/" title="Форматы входных и выходных данных" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Форматы входных и выходных данных</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/jdbc/" title="JDBC-драйвер" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBC-драйвер</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/odbc/" title="ODBC-драйвер" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBC-драйвер</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/cpp/" title="C++ клиентская библиотека" class="nav-link text-light text-wrap d-inline-block w-100 px-0">C++ клиентская библиотека</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-11" title="Сторонние интерфейсы" class="nav-link text-light dropdown-toggle px-0">Сторонние интерфейсы</a>
+<div id="sidebar-sidebar-3-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/" title="Сторонние интерфейсы" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Сторонние интерфейсы</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/client-libraries/" title="Клиентские библиотеки от сторонних разработчиков" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Клиентские библиотеки от сторонних разработчиков</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/integrations/" title="Библиотеки для интеграции от сторонних разработчиков" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Библиотеки для интеграции от сторонних разработчиков</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/gui/" title="Визуальные интерфейсы от сторонних разработчиков" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Визуальные интерфейсы от сторонних разработчиков</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/proxy/" title="Прокси-серверы от сторонних разработчиков" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Прокси-серверы от сторонних разработчиков</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4" title="Engines" class="nav-link text-light dropdown-toggle px-0">Engines</a>
+<div id="sidebar-sidebar-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2" title="Движки таблиц" class="nav-link text-light dropdown-toggle px-0">Движки таблиц</a>
+<div id="sidebar-sidebar-4-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-2" title="MergeTree Family" class="nav-link text-light dropdown-toggle px-0">MergeTree Family</a>
+<div id="sidebar-sidebar-4-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/mergetree/" title="MergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/replication/" title="Репликация данных" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Репликация данных</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/custom-partitioning-key/" title="Произвольный ключ партиционирования" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Произвольный ключ партиционирования</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/replacingmergetree/" title="ReplacingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ReplacingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/summingmergetree/" title="SummingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SummingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/aggregatingmergetree/" title="AggregatingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregatingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/collapsingmergetree/" title="CollapsingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CollapsingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/versionedcollapsingmergetree/" title="VersionedCollapsingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">VersionedCollapsingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/graphitemergetree/" title="GraphiteMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GraphiteMergeTree</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-3" title="Семейство Log" class="nav-link text-light dropdown-toggle px-0">Семейство Log</a>
+<div id="sidebar-sidebar-4-2-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/stripelog/" title="StripeLog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">StripeLog</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/log/" title="Log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/tinylog/" title="TinyLog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TinyLog</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-4" title="Движки таблиц для интеграции" class="nav-link text-light dropdown-toggle px-0">Движки таблиц для интеграции</a>
+<div id="sidebar-sidebar-4-2-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/odbc/" title="ODBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/jdbc/" title="JDBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/s3/" title="S3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">S3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/mongodb/" title="MongoDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MongoDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/hdfs/" title="HDFS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HDFS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/kafka/" title="Kafka" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Kafka</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/embedded-rocksdb/" title="EmbeddedRocksDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EmbeddedRocksDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/ExternalDistributed/" title="ExternalDistributed" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ExternalDistributed</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/" title="Движки таблиц для интеграции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Движки таблиц для интеграции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/rabbitmq/" title="RabbitMQ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RabbitMQ</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-5" title="Специальные движки таблиц" class="nav-link text-light dropdown-toggle px-0">Специальные движки таблиц</a>
+<div id="sidebar-sidebar-4-2-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/" title="Специальные движки таблиц" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Специальные движки таблиц</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/distributed/" title="Distributed" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Distributed</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/dictionary/" title="Dictionary" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Dictionary</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/merge/" title="Merge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Merge</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/file/" title="File" class="nav-link text-light text-wrap d-inline-block w-100 px-0">File</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/null/" title="Null" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/set/" title="Set" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Set</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/join/" title="Join" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Join</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/url/" title="URL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">URL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/view/" title="View" class="nav-link text-light text-wrap d-inline-block w-100 px-0">View</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/materializedview/" title="MaterializedView" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedView</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/memory/" title="Memory" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Memory</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/buffer/" title="Buffer" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Buffer</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/external-data/" title="Внешние данные для обработки запроса" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Внешние данные для обработки запроса</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/generate/" title="GenerateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GenerateRandom</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-3" title="Движки баз данных" class="nav-link text-light dropdown-toggle px-0">Движки баз данных</a>
+<div id="sidebar-sidebar-4-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/materialized-mysql/" title="[experimental] MaterializedMySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">[experimental] MaterializedMySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/lazy/" title="Lazy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Lazy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/atomic/" title="Atomic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Atomic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/replicated/" title="Replicated" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Replicated</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5" title="Справка по SQL" class="nav-link text-light dropdown-toggle px-0">Справка по SQL</a>
+<div id="sidebar-sidebar-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2" title="Выражения" class="nav-link text-light dropdown-toggle px-0">Выражения</a>
+<div id="sidebar-sidebar-5-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/" title="SQL выражения в ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQL выражения в ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2-2" title="SELECT" class="nav-link text-light dropdown-toggle px-0">SELECT</a>
+<div id="sidebar-sidebar-5-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/" title="Обзор" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обзор</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/all/" title="ALL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/array-join/" title="ARRAY JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ARRAY JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/distinct/" title="DISTINCT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DISTINCT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/except/" title="EXCEPT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXCEPT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/format/" title="FORMAT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FORMAT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/from/" title="FROM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FROM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/group-by/" title="GROUP BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GROUP BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/having/" title="HAVING" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HAVING</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/intersect/" title="INTERSECT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INTERSECT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/into-outfile/" title="INTO OUTFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INTO OUTFILE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/join/" title="JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/limit/" title="LIMIT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/limit-by/" title="LIMIT BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/offset/" title="OFFSET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OFFSET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/order-by/" title="ORDER BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ORDER BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/prewhere/" title="PREWHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PREWHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/sample/" title="SAMPLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SAMPLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/union/" title="UNION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UNION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/where/" title="WHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/with/" title="WITH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WITH</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/insert-into/" title="INSERT INTO" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INSERT INTO</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2-4" title="CREATE" class="nav-link text-light dropdown-toggle px-0">CREATE</a>
+<div id="sidebar-sidebar-5-2-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/" title="Обзор" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обзор</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/database/" title="База данных" class="nav-link text-light text-wrap d-inline-block w-100 px-0">База данных</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/table/" title="Таблица" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Таблица</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/view/" title="Представление" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Представление</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/function/" title="FUNCTION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FUNCTION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/dictionary/" title="Словарь" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Словарь</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/user/" title="Пользователь" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Пользователь</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/role/" title="Роль" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Роль</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/row-policy/" title="Политика доступа" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Политика доступа</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/quota/" title="Квота" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Квота</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/settings-profile/" title="Профиль настроек" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Профиль настроек</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2-5" title="ALTER" class="nav-link text-light dropdown-toggle px-0">ALTER</a>
+<div id="sidebar-sidebar-5-2-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/" title="ALTER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALTER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/column/" title="Манипуляции со столбцами" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Манипуляции со столбцами</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/partition/" title="PARTITION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PARTITION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/setting/" title="SETTING" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SETTING</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/delete/" title="DELETE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DELETE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/update/" title="UPDATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UPDATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/order-by/" title="ORDER BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ORDER BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/sample-by/" title="SAMPLE BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SAMPLE BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/index/" title="Манипуляции с индексами" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Манипуляции с индексами</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/constraint/" title="Манипуляции с ограничениями" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Манипуляции с ограничениями</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/ttl/" title="TTL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TTL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/user/" title="USER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/quota/" title="QUOTA" class="nav-link text-light text-wrap d-inline-block w-100 px-0">QUOTA</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/role/" title="ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/row-policy/" title="ROW POLICY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ROW POLICY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/settings-profile/" title="SETTINGS PROFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SETTINGS PROFILE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/projection/" title="PROJECTION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PROJECTION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/view/" title="VIEW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">VIEW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/comment/" title="COMMENT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">COMMENT</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/system/" title="SYSTEM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SYSTEM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/show/" title="SHOW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SHOW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/grant/" title="GRANT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GRANT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/explain/" title="EXPLAIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXPLAIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/revoke/" title="REVOKE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">REVOKE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/attach/" title="ATTACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ATTACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/check-table/" title="CHECK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CHECK</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/describe-table/" title="DESCRIBE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DESCRIBE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/detach/" title="DETACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DETACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/drop/" title="DROP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DROP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/exists/" title="EXISTS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXISTS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/kill/" title="KILL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">KILL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/optimize/" title="OPTIMIZE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OPTIMIZE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/rename/" title="RENAME" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RENAME</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/exchange/" title="EXCHANGE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXCHANGE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/set/" title="SET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/set-role/" title="SET ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/truncate/" title="TRUNCATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TRUNCATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/use/" title="USE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/watch/" title="WATCH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WATCH</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/syntax/" title="Синтаксис" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Синтаксис</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/distributed-ddl/" title="Распределенные DDL запросы" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Распределенные DDL запросы</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-5" title="Функции" class="nav-link text-light dropdown-toggle px-0">Функции</a>
+<div id="sidebar-sidebar-5-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/arithmetic-functions/" title="Арифметические функции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Арифметические функции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/array-functions/" title="Массивы" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Массивы</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/comparison-functions/" title="Функции сравнения" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции сравнения</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/logical-functions/" title="Логические функции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Логические функции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/type-conversion-functions/" title="Функции преобразования типов" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции преобразования типов</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/date-time-functions/" title="Функции для работы с датами и временем" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с датами и временем</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-functions/" title="Функции для работы со строками" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы со строками</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-search-functions/" title="Функции поиска в строках" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции поиска в строках</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-replace-functions/" title="Функции поиска и замены в строках" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции поиска и замены в строках</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/conditional-functions/" title="Условные функции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Условные функции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/files/" title="Функции для работы с файлами" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с файлами</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/math-functions/" title="Математические функции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Математические функции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/rounding-functions/" title="Функции округления" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции округления</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/tuple-map-functions/" title="Работа с контейнерами map" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Работа с контейнерами map</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/splitting-merging-functions/" title="Функции разбиения и слияния строк и массивов" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции разбиения и слияния строк и массивов</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/bit-functions/" title="Битовые функции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Битовые функции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/bitmap-functions/" title="Функции для битмапов" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для битмапов</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/hash-functions/" title="Функции хэширования" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции хэширования</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/random-functions/" title="Функции генерации псевдослучайных чисел" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции генерации псевдослучайных чисел</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/encoding-functions/" title="Функции кодирования" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции кодирования</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/uuid-functions/" title="Функции для работы с UUID" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с UUID</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/url-functions/" title="Функции для работы с URL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с URL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ip-address-functions/" title="Функции для работы с IP-адресами" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с IP-адресами</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/json-functions/" title="JSON" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JSON</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ext-dict-functions/" title="Функции для работы с внешними словарями" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с внешними словарями</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ym-dict-functions/" title="Функции для работы со словарями Яндекс.Метрики" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы со словарями Яндекс.Метрики</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/in-functions/" title="Функции для реализации оператора IN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для реализации оператора IN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/array-join/" title="Функция ArrayJoin" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функция ArrayJoin</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-5-30" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-5-30" title="Гео-данные" class="nav-link text-light dropdown-toggle px-0">Гео-данные</a>
+<div id="sidebar-sidebar-5-5-30" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/coordinates/" title="Функции для работы с географическими координатами" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с географическими координатами</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/h3/" title="Функции для работы с индексами H3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с индексами H3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/s2/" title="Функции для работы с индексами S2" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с индексами S2</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/geohash/" title="Функции для работы с системой Geohash" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с системой Geohash</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/functions-for-nulls/" title="Функции для работы с Nullable-аргументами" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с Nullable-аргументами</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/machine-learning-functions/" title="Функции машинного обучения" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции машинного обучения</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/introspection/" title="Функции интроспекции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции интроспекции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/other-functions/" title="Прочие функции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Прочие функции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/nlp-functions/" title="NLP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">NLP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/encryption-functions/" title="Функции для шифрования" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для шифрования</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/tuple-functions/" title="Функции для работы с кортежами" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для работы с кортежами</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-6" title="Агрегатные функции" class="nav-link text-light dropdown-toggle px-0">Агрегатные функции</a>
+<div id="sidebar-sidebar-5-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-6-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-6-2" title="Справочник" class="nav-link text-light dropdown-toggle px-0">Справочник</a>
+<div id="sidebar-sidebar-5-6-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/count/" title="count" class="nav-link text-light text-wrap d-inline-block w-100 px-0">count</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/min/" title="min" class="nav-link text-light text-wrap d-inline-block w-100 px-0">min</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/max/" title="max" class="nav-link text-light text-wrap d-inline-block w-100 px-0">max</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sum/" title="sum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/avg/" title="avg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/any/" title="any" class="nav-link text-light text-wrap d-inline-block w-100 px-0">any</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stddevpop/" title="stddevPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stddevsamp/" title="stddevSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/varpop/" title="varPop(x)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varPop(x)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/varsamp/" title="varSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/covarpop/" title="covarPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarPop</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/covarsamp/" title="covarSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/anyheavy/" title="anyHeavy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyHeavy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/anylast/" title="anyLast" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyLast</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/argmin/" title="argMin" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMin</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/argmax/" title="argMax" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMax</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/avgweighted/" title="avgWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avgWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/corr/" title="corr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">corr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/exponentialmovingaverage/" title="exponentialMovingAverage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">exponentialMovingAverage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/topk/" title="topK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topK</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/topkweighted/" title="topKWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topKWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparray/" title="groupArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupuniqarray/" title="groupUniqArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupUniqArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparrayinsertat/" title="groupArrayInsertAt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayInsertAt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraymovingsum/" title="groupArrayMovingSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraymovingavg/" title="groupArrayMovingAvg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingAvg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraysample/" title="groupArraySample" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArraySample</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitand/" title="groupBitAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitor/" title="groupBitOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitxor/" title="groupBitXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmap/" title="groupBitmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapand/" title="groupBitmapAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapor/" title="groupBitmapOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapxor/" title="groupBitmapXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumwithoverflow/" title="sumWithOverflow" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumWithOverflow</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/deltasum/" title="deltaSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/deltasumtimestamp/" title="deltaSumTimestamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSumTimestamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/summap/" title="sumMap(key, value), sumMap(Tuple(key, value))" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumMap(key, value), sumMap(Tuple(key, value))</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/minmap/" title="minMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">minMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/maxmap/" title="maxMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">maxMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumcount/" title="sumCount" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumCount</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/rankCorr/" title="rankCorr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">rankCorr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumkahan/" title="sumKahan" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumKahan</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/intervalLengthSum/" title="intervalLengthSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">intervalLengthSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/skewpop/" title="skewPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/skewsamp/" title="skewSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/kurtpop/" title="kurtPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/kurtsamp/" title="kurtSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniq/" title="uniq" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniq</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqexact/" title="uniqExact" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqExact</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqcombined/" title="uniqCombined" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqcombined64/" title="uniqCombined64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqhll12/" title="uniqHLL12" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqHLL12</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqthetasketch/" title="uniqTheta" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqTheta</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantile/" title="quantile" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantile</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiles/" title="Функции для нескольких квантилей" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции для нескольких квантилей</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantileexact/" title="Функции quantileExact" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Функции quantileExact</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantileexactweighted/" title="quantileExactWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExactWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletiming/" title="quantileTiming" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTiming</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletimingweighted/" title="quantileTimingWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTimingWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiledeterministic/" title="quantileDeterministic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileDeterministic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletdigest/" title="quantileTDigest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletdigestweighted/" title="quantileTDigestWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigestWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantilebfloat16/" title="quantileBFloat16" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileBFloat16</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/simplelinearregression/" title="simpleLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">simpleLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stochasticlinearregression/" title="stochasticLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stochasticlogisticregression/" title="stochasticLogisticRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLogisticRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/categoricalinformationvalue/" title="categoricalInformationValue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">categoricalInformationValue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/studentttest/" title="studentTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">studentTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/welchttest/" title="welchTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">welchTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/entropy/" title="entropy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">entropy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/mannwhitneyutest/" title="mannWhitneyUTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mannWhitneyUTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sparkbar/" title="sparkbar" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sparkbar</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/median/" title="median" class="nav-link text-light text-wrap d-inline-block w-100 px-0">median</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/combinators/" title="Комбинаторы агрегатных функций" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Комбинаторы агрегатных функций</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/parametric-functions/" title="Параметрические агрегатные функции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Параметрические агрегатные функции</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-7" title="Табличные функции" class="nav-link text-light dropdown-toggle px-0">Табличные функции</a>
+<div id="sidebar-sidebar-5-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/file/" title="file" class="nav-link text-light text-wrap d-inline-block w-100 px-0">file</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/merge/" title="merge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">merge</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/numbers/" title="numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/remote/" title="remote" class="nav-link text-light text-wrap d-inline-block w-100 px-0">remote</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/url/" title="url" class="nav-link text-light text-wrap d-inline-block w-100 px-0">url</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/mysql/" title="mysql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mysql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/postgresql/" title="postgresql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">postgresql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/jdbc/" title="jdbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">jdbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/odbc/" title="odbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">odbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/hdfs/" title="hdfs" class="nav-link text-light text-wrap d-inline-block w-100 px-0">hdfs</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/s3/" title="s3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/input/" title="input" class="nav-link text-light text-wrap d-inline-block w-100 px-0">input</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/generate/" title="generateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">generateRandom</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/cluster/" title="cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/null/" title="null функция" class="nav-link text-light text-wrap d-inline-block w-100 px-0">null функция</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/dictionary/" title="dictionary" class="nav-link text-light text-wrap d-inline-block w-100 px-0">dictionary</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/s3Cluster/" title="s3Cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3Cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/sqlite/" title="sqlite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sqlite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/view/" title="view" class="nav-link text-light text-wrap d-inline-block w-100 px-0">view</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-8" title="Словари" class="nav-link text-light dropdown-toggle px-0">Словари</a>
+<div id="sidebar-sidebar-5-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-8-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-8-2" title="Внешние словари" class="nav-link text-light dropdown-toggle px-0">Внешние словари</a>
+<div id="sidebar-sidebar-5-8-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts/" title="Внешние словари" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Внешние словари</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict/" title="Настройка внешнего словаря" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Настройка внешнего словаря</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-layout/" title="Хранение словарей в памяти" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Хранение словарей в памяти</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-lifetime/" title="Обновление словарей" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обновление словарей</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources/" title="Источники внешних словарей" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Источники внешних словарей</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-structure/" title="Ключ и поля словаря" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Ключ и поля словаря</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-hierarchical/" title="Иерархические словари" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Иерархические словари</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-polygon/" title="Cловари полигонов" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Cловари полигонов</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/internal-dicts/" title="Встроенные словари" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Встроенные словари</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9" title="Типы данных" class="nav-link text-light dropdown-toggle px-0">Типы данных</a>
+<div id="sidebar-sidebar-5-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/int-uint/" title="UInt8, UInt16, UInt32, UInt64, Int8, Int16, Int32, Int64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UInt8, UInt16, UInt32, UInt64, Int8, Int16, Int32, Int64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/float/" title="Float32, Float64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Float32, Float64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/decimal/" title="Decimal" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Decimal</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/boolean/" title="Булевы значения" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Булевы значения</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/string/" title="String" class="nav-link text-light text-wrap d-inline-block w-100 px-0">String</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/fixedstring/" title="FixedString(N)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FixedString(N)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/uuid/" title="UUID" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUID</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/date/" title="Date" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Date</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/date32/" title="Date32" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Date32</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/datetime/" title="DateTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/datetime64/" title="DateTime64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/enum/" title="Enum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Enum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/lowcardinality/" title="LowCardinality" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LowCardinality</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/array/" title="Array(T)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Array(T)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/aggregatefunction/" title="AggregateFunction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregateFunction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/tuple/" title="Tuple(T1, T2, ...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuple(T1, T2, ...)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-18" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-18" title="Вложенные структуры данных" class="nav-link text-light dropdown-toggle px-0">Вложенные структуры данных</a>
+<div id="sidebar-sidebar-5-9-18" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/nested-data-structures/nested/" title="Nested" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nested</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/nullable/" title="Nullable" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nullable</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-20" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-20" title="Служебные типы данных" class="nav-link text-light dropdown-toggle px-0">Служебные типы данных</a>
+<div id="sidebar-sidebar-5-9-20" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/expression/" title="Expression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Expression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/set/" title="Set" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Set</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/nothing/" title="Nothing" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nothing</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/interval/" title="Interval" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Interval</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-21" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-21" title="Домены" class="nav-link text-light dropdown-toggle px-0">Домены</a>
+<div id="sidebar-sidebar-5-9-21" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/" title="Домены" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Домены</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/ipv4/" title="IPv4" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv4</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/ipv6/" title="IPv6" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv6</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/multiword-types/" title="Составные типы" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Составные типы</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/geo/" title="Географические структуры" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Географические структуры</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/map/" title="Map(key, value)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Map(key, value)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/simpleaggregatefunction/" title="SimpleAggregateFunction(func, type)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SimpleAggregateFunction(func, type)</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-10" title="Операторы" class="nav-link text-light dropdown-toggle px-0">Операторы</a>
+<div id="sidebar-sidebar-5-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/operators/" title="Операторы" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Операторы</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/operators/exists/" title="EXISTS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXISTS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/operators/in/" title="Операторы IN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Операторы IN</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/ansi/" title="ANSI Compatibility" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ANSI Compatibility</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-12" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-12" title="Window Functions" class="nav-link text-light dropdown-toggle px-0">Window Functions</a>
+<div id="sidebar-sidebar-5-12" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/window-functions/" title="Window Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Window Functions</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6" title="Руководства" class="nav-link text-light dropdown-toggle px-0">Руководства</a>
+<div id="sidebar-sidebar-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../guides/" title="Обзор" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обзор</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../guides/apply-catboost-model/" title="Применение модели CatBoost в ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Применение модели CatBoost в ClickHouse</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7" title="Эксплуатация" class="nav-link text-light dropdown-toggle px-0">Эксплуатация</a>
+<div id="sidebar-sidebar-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/" title="Эксплуатация" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Эксплуатация</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/requirements/" title="Требования" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Требования</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/monitoring/" title="Мониторинг" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Мониторинг</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/troubleshooting/" title="Устранение неисправностей" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Устранение неисправностей</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/update/" title="Обновление ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обновление ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-6" title="Внешние аутентификаторы пользователей и каталоги" class="nav-link text-light dropdown-toggle px-0">Внешние аутентификаторы пользователей и каталоги</a>
+<div id="sidebar-sidebar-7-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/kerberos/" title="Kerberos" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Kerberos</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/ldap/" title="LDAP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LDAP</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/access-rights/" title="Управление доступом" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Управление доступом</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/backup/" title="Резервное копирование данных" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Резервное копирование данных</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/configuration-files/" title="Конфигурационные файлы" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Конфигурационные файлы</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/quotas/" title="Квоты" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Квоты</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-11" title="Optimizing Performance" class="nav-link text-light dropdown-toggle px-0">Optimizing Performance</a>
+<div id="sidebar-sidebar-7-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/optimizing-performance/sampling-query-profiler/" title="Query Profiling" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Query Profiling</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-12" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-12" title="Системные таблицы" class="nav-link text-light dropdown-toggle px-0">Системные таблицы</a>
+<div id="sidebar-sidebar-7-12" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/" title="Системные таблицы" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Системные таблицы</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/information_schema/" title="INFORMATION_SCHEMA" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INFORMATION_SCHEMA</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/asynchronous_metric_log/" title="system.asynchronous_metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/asynchronous_metrics/" title="system.asynchronous_metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/clusters/" title="system.clusters" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.clusters</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/columns/" title="system.columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/contributors/" title="system.contributors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.contributors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/crash-log/" title="system.crash_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.crash_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/current-roles/" title="system.current_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.current_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/data_skipping_indices/" title="system.data_skipping_indices" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_skipping_indices</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/data_type_families/" title="system.data_type_families" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_type_families</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/databases/" title="system.databases" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.databases</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/detached_parts/" title="system.detached_parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.detached_parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/dictionaries/" title="system.dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.dictionaries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/disks/" title="system.disks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.disks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/distributed_ddl_queue/" title="system.distributed_ddl_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distributed_ddl_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/distribution_queue/" title="system.distribution_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distribution_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/enabled-roles/" title="system.enabled_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.enabled_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/errors/" title="system.errors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.errors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/events/" title="system.events" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.events</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/functions/" title="system.functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/grants/" title="system.grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/graphite_retentions/" title="system.graphite_retentions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.graphite_retentions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/licenses/" title="system.licenses" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.licenses</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/merge_tree_settings/" title="system.merge_tree_settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merge_tree_settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/merges/" title="system.merges" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merges</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/metric_log/" title="system.metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/metrics/" title="system.metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/mutations/" title="system.mutations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.mutations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/numbers/" title="system.numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/numbers_mt/" title="system.numbers_mt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers_mt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/one/" title="system.one" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.one</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/opentelemetry_span_log/" title="system.opentelemetry_span_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.opentelemetry_span_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/part_log/" title="system.part_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.part_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/parts/" title="system.parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/parts_columns/" title="system.parts_columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts_columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/processes/" title="system.processes" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.processes</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_log/" title="system.query_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_thread_log/" title="system.query_thread_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_thread_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_views_log/" title="system.query_views_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_views_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quota_limits/" title="system.quota_limits" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_limits</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quota_usage/" title="system.quota_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quotas/" title="system.quotas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quotas_usage/" title="system.quotas_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replicas/" title="system.replicas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replicated_fetches/" title="system.replicated_fetches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicated_fetches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replication_queue/" title="system.replication_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replication_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/role-grants/" title="system.role_grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.role_grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/roles/" title="system.roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/row_policies/" title="system.row_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.row_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/session_log/" title="system.session_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.session_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings/" title="system.settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings_profile_elements/" title="system.settings_profile_elements" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profile_elements</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings_profiles/" title="system.settings_profiles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profiles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/stack_trace/" title="system.stack_trace" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.stack_trace</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/storage_policies/" title="system.storage_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.storage_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/table_engines/" title="system.table_engines" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.table_engines</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/tables/" title="system.tables" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.tables</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/text_log/" title="system.text_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.text_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/time_zones/" title="system.time_zones" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.time_zones</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/trace_log/" title="system.trace_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.trace_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/users/" title="system.users" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.users</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/zookeeper/" title="system.zookeeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/zookeeper_log/" title="system.zookeeper_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper_log</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/performance-test/" title="Testing Hardware" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Testing Hardware</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-14" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-14" title="Конфигурационные параметры сервера" class="nav-link text-light dropdown-toggle px-0">Конфигурационные параметры сервера</a>
+<div id="sidebar-sidebar-7-14" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/server-configuration-parameters/" title="Введение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Введение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/server-configuration-parameters/settings/" title="Конфигурационные параметры сервера" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Конфигурационные параметры сервера</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-15" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-15" title="Settings" class="nav-link text-light dropdown-toggle px-0">Settings</a>
+<div id="sidebar-sidebar-7-15" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/permissions-for-queries/" title="Разрешения для запросов" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Разрешения для запросов</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/query-complexity/" title="Ограничения на сложность запроса" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Ограничения на сложность запроса</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/settings/" title="Настройки" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Настройки</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/settings-profiles/" title="Профили настроек" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Профили настроек</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/constraints-on-settings/" title="Ограничения на изменение настроек" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Ограничения на изменение настроек</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/settings-users/" title="Настройки пользователей" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Настройки пользователей</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/merge-tree-settings/" title="Настройки MergeTree таблиц" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Настройки MergeTree таблиц</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-16" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-16" title="Утилиты" class="nav-link text-light dropdown-toggle px-0">Утилиты</a>
+<div id="sidebar-sidebar-7-16" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/" title="Обзор" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обзор</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-copier/" title="clickhouse-copier" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-copier</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-local/" title="clickhouse-local" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-local</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-benchmark/" title="clickhouse-benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-format/" title="clickhouse-format" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-format</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-compressor/" title="ClickHouse compressor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse compressor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/odbc-bridge/" title="clickhouse-odbc-bridge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-odbc-bridge</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-obfuscator/" title="Обфускатор ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обфускатор ClickHouse</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/tips/" title="Usage Recommendations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Usage Recommendations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/opentelemetry/" title="Поддержка OpenTelemetry" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Поддержка OpenTelemetry</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/caches/" title="Кеши" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Кеши</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/clickhouse-keeper/" title="ClickHouse Keeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse Keeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/storing-data/" title="Хранение данных на внешних дисках" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Хранение данных на внешних дисках</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-8" title="Development" class="nav-link text-light dropdown-toggle px-0">Development</a>
+<div id="sidebar-sidebar-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../development/developer-instruction/" title="Инструкция для разработчиков" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Инструкция для разработчиков</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/continuous-integration/" title="Continuous Integration Checks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Continuous Integration Checks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/architecture/" title="Обзор архитектуры ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Обзор архитектуры ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build/" title="Build on Linux" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Linux</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-osx/" title="Сборка на Mac OS X" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Сборка на Mac OS X</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-cross-osx/" title="Build on Linux for Mac OS X" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Linux for Mac OS X</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-cross-arm/" title="Build on Linux for AARCH64 (ARM64)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Linux for AARCH64 (ARM64)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-cross-riscv/" title="Build on Linux for RISC-V 64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Linux for RISC-V 64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/style/" title="Как писать код на C++" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Как писать код на C++</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/tests/" title="Testing" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Testing</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/contrib/" title="Используемые сторонние библиотеки" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Используемые сторонние библиотеки</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/browse-code/" title="Навигация по коду ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Навигация по коду ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/cmake-in-clickhouse/" title="CMake in ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CMake in ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/adding_test_queries/" title="How to add test queries to ClickHouse CI" class="nav-link text-light text-wrap d-inline-block w-100 px-0">How to add test queries to ClickHouse CI</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-9" title="Коммерческие услуги" class="nav-link text-light dropdown-toggle px-0">Коммерческие услуги</a>
+<div id="sidebar-sidebar-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../commercial/cloud/" title="Поставщики облачных услуг ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Поставщики облачных услуг ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../commercial/support/" title="Support" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Support</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../commercial/" title="Коммерческие услуги" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Коммерческие услуги</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-10" title="F.A.Q." class="nav-link text-light dropdown-toggle px-0">F.A.Q.</a>
+<div id="sidebar-sidebar-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../faq/general/" title="Общие вопросы" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Общие вопросы</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/use-cases/" title="Применение" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Применение</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/operations/" title="Операции" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Операции</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/integration/" title="Интеграция" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Интеграция</a>
+
+
+    
+        
+        
+        
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-11" title="Что нового?" class="nav-link text-light dropdown-toggle px-0">Что нового?</a>
+<div id="sidebar-sidebar-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-11-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-11-1" title="Changelog" class="nav-link text-light dropdown-toggle px-0">Changelog</a>
+<div id="sidebar-sidebar-11-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/" title="2022" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2022</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2020/" title="2020" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2020</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2019/" title="2019" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2019</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2018/" title="2018" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2018</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2017/" title="2017" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2017</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/roadmap/" title="Roadmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Roadmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/security-changelog/" title="Security Changelog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Security Changelog</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/" title="Что нового в ClickHouse?" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Что нового в ClickHouse?</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+        </nav>
+        
+    </div>
+</div>
+                <div id="content-wrapper" class="anchor-fixer col-md-8 mt-5 p-2 p-md-4">
+    <div id="content">
+        
+            
+            
+            
+                
+                <nav class="text-muted" aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent p-0">
+                        
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../../" class="text-reset">Начало работы</a>
+                            
+                        </li>
+                       
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../" class="text-reset">Тестовые массивы данных</a>
+                            
+                        </li>
+                       
+                    </ol>
+                </nav>
+            
+
+            
+            <h1 id="opensky">Набор данных о воздушном движении OpenSky Network 2020<a class="headerlink" href="#opensky" title="Permanent link"> </a></h1>
+<p>"Данные в этом наборе получены и отфильтрованы из полного набора данных OpenSky, чтобы проиллюстрировать развитие воздушного движения во время пандемии COVID-19. Набор включает в себя все рейсы, которые видели более 2500 участников сети с 1 января 2019 года. Дополнительные данные будут периодически включаться в набор данных до окончания пандемии COVID-19".</p>
+<p>Источник: <a href="https://zenodo.org/record/5092942#.YRBCyTpRXYd" target="_blank">https://zenodo.org/record/5092942#.YRBCyTpRXYd</a></p>
+<p>Martin Strohmeier, Xavier Olive, Jannis Lübbe, Matthias Schäfer, and Vincent Lenders<br/>
+"Crowdsourced air traffic data from the OpenSky Network 2019–2020"<br/>
+Earth System Science Data 13(2), 2021<br/>
+<a href="https://doi.org/10.5194/essd-13-357-2021" target="_blank">https://doi.org/10.5194/essd-13-357-2021</a></p>
+<h2 id="download-dataset">Загрузите набор данных<a class="headerlink" href="#download-dataset" title="Permanent link"> </a></h2>
+<p>Выполните команду:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">wget -O- https://zenodo.org/record/5092942 <span class="p">|</span> grep -oP <span class="s1">'https://zenodo.org/record/5092942/files/flightlist_\d+_\d+\.csv\.gz'</span> <span class="p">|</span> xargs wget
+</code></pre></div>
+<p>Загрузка займет около 2 минут при хорошем подключении к интернету. Будет загружено 30 файлов общим размером 4,3 ГБ.</p>
+<h2 id="create-table">Создайте таблицу<a class="headerlink" href="#create-table" title="Permanent link"> </a></h2>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">opensky</span><span class="w"></span>
+<span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">callsign</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nb">number</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">icao24</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">registration</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">typecode</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">origin</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">destination</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">firstseen</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">lastseen</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">day</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">latitude_1</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">longitude_1</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">altitude_1</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">latitude_2</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">longitude_2</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">altitude_2</span><span class="w"> </span><span class="n">Float64</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MergeTree</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">origin</span><span class="p">,</span><span class="w"> </span><span class="n">destination</span><span class="p">,</span><span class="w"> </span><span class="n">callsign</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<h2 id="import-data">Импортируйте данные в ClickHouse<a class="headerlink" href="#import-data" title="Permanent link"> </a></h2>
+<p>Загрузите данные в ClickHouse параллельными потоками:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">ls -1 flightlist_*.csv.gz <span class="p">|</span> xargs -P100 -I<span class="o">{}</span> bash -c <span class="s1">'gzip -c -d "{}" | clickhouse-client --date_time_input_format best_effort --query "INSERT INTO opensky FORMAT CSVWithNames"'</span>
+</code></pre></div>
+<ul>
+<li>Список файлов передаётся (<code class="syntax">ls -1 flightlist_*.csv.gz</code>) в <code class="syntax">xargs</code> для параллельной обработки.</li>
+<li><code class="syntax">xargs -P100</code> указывает на возможность использования до 100 параллельных обработчиков, но поскольку у нас всего 30 файлов, то количество обработчиков будет всего 30.</li>
+<li>Для каждого файла <code class="syntax">xargs</code> будет запускать скрипт с <code class="syntax">bash -c</code>. Сценарий имеет подстановку в виде <code class="syntax">{}</code>, а команда <code class="syntax">xargs</code> заменяет имя файла на указанные в подстановке символы (мы указали это для <code class="syntax">xargs</code> с помощью <code class="syntax">-I{}</code>).</li>
+<li>Скрипт распакует файл (<code class="syntax">gzip -c -d "{}"</code>) в стандартный вывод (параметр <code class="syntax">-c</code>) и перенаправит его в <code class="syntax">clickhouse-client</code>.</li>
+<li>Чтобы распознать формат ISO-8601 со смещениями часовых поясов в полях типа <a href="../../../sql-reference/data-types/datetime/">DateTime</a>, указывается параметр парсера <a href="../../../operations/settings/settings/#settings-date_time_input_format">--date_time_input_format best_effort</a>.</li>
+</ul>
+<p>В итоге: клиент clickhouse добавит данные в таблицу <code class="syntax">opensky</code>. Входные данные импортируются в формате <a href="../../../interfaces/formats/#csvwithnames">CSVWithNames</a>.</p>
+<p>Загрузка параллельными потоками займёт около 24 секунд.</p>
+<p>Также вы можете использовать вариант последовательной загрузки:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">for</span> file <span class="k">in</span> flightlist_*.csv.gz<span class="p">;</span> <span class="k">do</span> gzip -c -d <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span> <span class="p">|</span> clickhouse-client --date_time_input_format best_effort --query <span class="s2">"INSERT INTO opensky FORMAT CSVWithNames"</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+<h2 id="validate-data">Проверьте импортированные данные<a class="headerlink" href="#validate-data" title="Permanent link"> </a></h2>
+<p>Запрос:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="k">count</span><span class="p">()</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">opensky</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Результат:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌──count()─┐
+│ 66010819 │
+└──────────┘
+</code></pre></div>
+<p>Убедитесь, что размер набора данных в ClickHouse составляет всего 2,66 GiB.</p>
+<p>Запрос:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">formatReadableSize</span><span class="p">(</span><span class="n">total_bytes</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'opensky'</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Результат:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─formatReadableSize(total_bytes)─┐
+│ 2.66 GiB                        │
+└─────────────────────────────────┘
+</code></pre></div>
+<h2 id="run-queries">Примеры<a class="headerlink" href="#run-queries" title="Permanent link"> </a></h2>
+<p>Общее пройденное расстояние составляет 68 миллиардов километров.</p>
+<p>Запрос:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">formatReadableQuantity</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">geoDistance</span><span class="p">(</span><span class="n">longitude_1</span><span class="p">,</span><span class="w"> </span><span class="n">latitude_1</span><span class="p">,</span><span class="w"> </span><span class="n">longitude_2</span><span class="p">,</span><span class="w"> </span><span class="n">latitude_2</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">opensky</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Результат:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─formatReadableQuantity(divide(sum(geoDistance(longitude_1, latitude_1, longitude_2, latitude_2)), 1000))─┐
+│ 68.72 billion                                                                                            │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p>Средняя дальность полета составляет около 1000 км.</p>
+<p>Запрос:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">geoDistance</span><span class="p">(</span><span class="n">longitude_1</span><span class="p">,</span><span class="w"> </span><span class="n">latitude_1</span><span class="p">,</span><span class="w"> </span><span class="n">longitude_2</span><span class="p">,</span><span class="w"> </span><span class="n">latitude_2</span><span class="p">))</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">opensky</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Результат:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─avg(geoDistance(longitude_1, latitude_1, longitude_2, latitude_2))─┐
+│                                                 1041090.6465708319 │
+└────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="busy-airports-average-distance">Наиболее загруженные аэропорты в указанных координатах и среднее пройденное расстояние<a class="headerlink" href="#busy-airports-average-distance" title="Permanent link"> </a></h3>
+<p>Запрос:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">origin</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">count</span><span class="p">(),</span><span class="w"></span>
+<span class="w">    </span><span class="n">round</span><span class="p">(</span><span class="k">avg</span><span class="p">(</span><span class="n">geoDistance</span><span class="p">(</span><span class="n">longitude_1</span><span class="p">,</span><span class="w"> </span><span class="n">latitude_1</span><span class="p">,</span><span class="w"> </span><span class="n">longitude_2</span><span class="p">,</span><span class="w"> </span><span class="n">latitude_2</span><span class="p">)))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">distance</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">bar</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10000000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">bar</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">opensky</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">''</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">origin</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">count</span><span class="p">()</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Результат:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">     ┌─origin─┬─count()─┬─distance─┬─bar────────────────────────────────────┐
+  1. │ KORD   │  745007 │  1546108 │ ███████████████▍                       │
+  2. │ KDFW   │  696702 │  1358721 │ █████████████▌                         │
+  3. │ KATL   │  667286 │  1169661 │ ███████████▋                           │
+  4. │ KDEN   │  582709 │  1287742 │ ████████████▊                          │
+  5. │ KLAX   │  581952 │  2628393 │ ██████████████████████████▎            │
+  6. │ KLAS   │  447789 │  1336967 │ █████████████▎                         │
+  7. │ KPHX   │  428558 │  1345635 │ █████████████▍                         │
+  8. │ KSEA   │  412592 │  1757317 │ █████████████████▌                     │
+  9. │ KCLT   │  404612 │   880355 │ ████████▋                              │
+ 10. │ VIDP   │  363074 │  1445052 │ ██████████████▍                        │
+ 11. │ EDDF   │  362643 │  2263960 │ ██████████████████████▋                │
+ 12. │ KSFO   │  361869 │  2445732 │ ████████████████████████▍              │
+ 13. │ KJFK   │  349232 │  2996550 │ █████████████████████████████▊         │
+ 14. │ KMSP   │  346010 │  1287328 │ ████████████▋                          │
+ 15. │ LFPG   │  344748 │  2206203 │ ██████████████████████                 │
+ 16. │ EGLL   │  341370 │  3216593 │ ████████████████████████████████▏      │
+ 17. │ EHAM   │  340272 │  2116425 │ █████████████████████▏                 │
+ 18. │ KEWR   │  337696 │  1826545 │ ██████████████████▎                    │
+ 19. │ KPHL   │  320762 │  1291761 │ ████████████▊                          │
+ 20. │ OMDB   │  308855 │  2855706 │ ████████████████████████████▌          │
+ 21. │ UUEE   │  307098 │  1555122 │ ███████████████▌                       │
+ 22. │ KBOS   │  304416 │  1621675 │ ████████████████▏                      │
+ 23. │ LEMD   │  291787 │  1695097 │ ████████████████▊                      │
+ 24. │ YSSY   │  272979 │  1875298 │ ██████████████████▋                    │
+ 25. │ KMIA   │  265121 │  1923542 │ ███████████████████▏                   │
+ 26. │ ZGSZ   │  263497 │   745086 │ ███████▍                               │
+ 27. │ EDDM   │  256691 │  1361453 │ █████████████▌                         │
+ 28. │ WMKK   │  254264 │  1626688 │ ████████████████▎                      │
+ 29. │ CYYZ   │  251192 │  2175026 │ █████████████████████▋                 │
+ 30. │ KLGA   │  248699 │  1106935 │ ███████████                            │
+ 31. │ VHHH   │  248473 │  3457658 │ ██████████████████████████████████▌    │
+ 32. │ RJTT   │  243477 │  1272744 │ ████████████▋                          │
+ 33. │ KBWI   │  241440 │  1187060 │ ███████████▋                           │
+ 34. │ KIAD   │  239558 │  1683485 │ ████████████████▋                      │
+ 35. │ KIAH   │  234202 │  1538335 │ ███████████████▍                       │
+ 36. │ KFLL   │  223447 │  1464410 │ ██████████████▋                        │
+ 37. │ KDAL   │  212055 │  1082339 │ ██████████▋                            │
+ 38. │ KDCA   │  207883 │  1013359 │ ██████████▏                            │
+ 39. │ LIRF   │  207047 │  1427965 │ ██████████████▎                        │
+ 40. │ PANC   │  206007 │  2525359 │ █████████████████████████▎             │
+ 41. │ LTFJ   │  205415 │   860470 │ ████████▌                              │
+ 42. │ KDTW   │  204020 │  1106716 │ ███████████                            │
+ 43. │ VABB   │  201679 │  1300865 │ █████████████                          │
+ 44. │ OTHH   │  200797 │  3759544 │ █████████████████████████████████████▌ │
+ 45. │ KMDW   │  200796 │  1232551 │ ████████████▎                          │
+ 46. │ KSAN   │  198003 │  1495195 │ ██████████████▊                        │
+ 47. │ KPDX   │  197760 │  1269230 │ ████████████▋                          │
+ 48. │ SBGR   │  197624 │  2041697 │ ████████████████████▍                  │
+ 49. │ VOBL   │  189011 │  1040180 │ ██████████▍                            │
+ 50. │ LEBL   │  188956 │  1283190 │ ████████████▋                          │
+ 51. │ YBBN   │  188011 │  1253405 │ ████████████▌                          │
+ 52. │ LSZH   │  187934 │  1572029 │ ███████████████▋                       │
+ 53. │ YMML   │  187643 │  1870076 │ ██████████████████▋                    │
+ 54. │ RCTP   │  184466 │  2773976 │ ███████████████████████████▋           │
+ 55. │ KSNA   │  180045 │   778484 │ ███████▋                               │
+ 56. │ EGKK   │  176420 │  1694770 │ ████████████████▊                      │
+ 57. │ LOWW   │  176191 │  1274833 │ ████████████▋                          │
+ 58. │ UUDD   │  176099 │  1368226 │ █████████████▋                         │
+ 59. │ RKSI   │  173466 │  3079026 │ ██████████████████████████████▋        │
+ 60. │ EKCH   │  172128 │  1229895 │ ████████████▎                          │
+ 61. │ KOAK   │  171119 │  1114447 │ ███████████▏                           │
+ 62. │ RPLL   │  170122 │  1440735 │ ██████████████▍                        │
+ 63. │ KRDU   │  167001 │   830521 │ ████████▎                              │
+ 64. │ KAUS   │  164524 │  1256198 │ ████████████▌                          │
+ 65. │ KBNA   │  163242 │  1022726 │ ██████████▏                            │
+ 66. │ KSDF   │  162655 │  1380867 │ █████████████▋                         │
+ 67. │ ENGM   │  160732 │   910108 │ █████████                              │
+ 68. │ LIMC   │  160696 │  1564620 │ ███████████████▋                       │
+ 69. │ KSJC   │  159278 │  1081125 │ ██████████▋                            │
+ 70. │ KSTL   │  157984 │  1026699 │ ██████████▎                            │
+ 71. │ UUWW   │  156811 │  1261155 │ ████████████▌                          │
+ 72. │ KIND   │  153929 │   987944 │ █████████▊                             │
+ 73. │ ESSA   │  153390 │  1203439 │ ████████████                           │
+ 74. │ KMCO   │  153351 │  1508657 │ ███████████████                        │
+ 75. │ KDVT   │  152895 │    74048 │ ▋                                      │
+ 76. │ VTBS   │  152645 │  2255591 │ ██████████████████████▌                │
+ 77. │ CYVR   │  149574 │  2027413 │ ████████████████████▎                  │
+ 78. │ EIDW   │  148723 │  1503985 │ ███████████████                        │
+ 79. │ LFPO   │  143277 │  1152964 │ ███████████▌                           │
+ 80. │ EGSS   │  140830 │  1348183 │ █████████████▍                         │
+ 81. │ KAPA   │  140776 │   420441 │ ████▏                                  │
+ 82. │ KHOU   │  138985 │  1068806 │ ██████████▋                            │
+ 83. │ KTPA   │  138033 │  1338223 │ █████████████▍                         │
+ 84. │ KFFZ   │  137333 │    55397 │ ▌                                      │
+ 85. │ NZAA   │  136092 │  1581264 │ ███████████████▋                       │
+ 86. │ YPPH   │  133916 │  1271550 │ ████████████▋                          │
+ 87. │ RJBB   │  133522 │  1805623 │ ██████████████████                     │
+ 88. │ EDDL   │  133018 │  1265919 │ ████████████▋                          │
+ 89. │ ULLI   │  130501 │  1197108 │ ███████████▊                           │
+ 90. │ KIWA   │  127195 │   250876 │ ██▌                                    │
+ 91. │ KTEB   │  126969 │  1189414 │ ███████████▊                           │
+ 92. │ VOMM   │  125616 │  1127757 │ ███████████▎                           │
+ 93. │ LSGG   │  123998 │  1049101 │ ██████████▍                            │
+ 94. │ LPPT   │  122733 │  1779187 │ █████████████████▋                     │
+ 95. │ WSSS   │  120493 │  3264122 │ ████████████████████████████████▋      │
+ 96. │ EBBR   │  118539 │  1579939 │ ███████████████▋                       │
+ 97. │ VTBD   │  118107 │   661627 │ ██████▌                                │
+ 98. │ KVNY   │  116326 │   692960 │ ██████▊                                │
+ 99. │ EDDT   │  115122 │   941740 │ █████████▍                             │
+100. │ EFHK   │  114860 │  1629143 │ ████████████████▎                      │
+     └────────┴─────────┴──────────┴────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="flights-from-moscow">Номера рейсов из трех крупных аэропортов Москвы, еженедельно<a class="headerlink" href="#flights-from-moscow" title="Permanent link"> </a></h3>
+<p>Запрос:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">toMonday</span><span class="p">(</span><span class="k">day</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">count</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">c</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">bar</span><span class="p">(</span><span class="k">c</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">bar</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">opensky</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">'UUEE'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UUDD'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UUWW'</span><span class="p">)</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">k</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">ASC</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>Результат:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">     ┌──────────k─┬────c─┬─bar──────────────────────────────────────────────────────────────────────────┐
+  1. │ 2018-12-31 │ 5248 │ ████████████████████████████████████████████████████▍                        │
+  2. │ 2019-01-07 │ 6302 │ ███████████████████████████████████████████████████████████████              │
+  3. │ 2019-01-14 │ 5701 │ █████████████████████████████████████████████████████████                    │
+  4. │ 2019-01-21 │ 5638 │ ████████████████████████████████████████████████████████▍                    │
+  5. │ 2019-01-28 │ 5731 │ █████████████████████████████████████████████████████████▎                   │
+  6. │ 2019-02-04 │ 5683 │ ████████████████████████████████████████████████████████▋                    │
+  7. │ 2019-02-11 │ 5759 │ █████████████████████████████████████████████████████████▌                   │
+  8. │ 2019-02-18 │ 5736 │ █████████████████████████████████████████████████████████▎                   │
+  9. │ 2019-02-25 │ 5873 │ ██████████████████████████████████████████████████████████▋                  │
+ 10. │ 2019-03-04 │ 5965 │ ███████████████████████████████████████████████████████████▋                 │
+ 11. │ 2019-03-11 │ 5900 │ ███████████████████████████████████████████████████████████                  │
+ 12. │ 2019-03-18 │ 5823 │ ██████████████████████████████████████████████████████████▏                  │
+ 13. │ 2019-03-25 │ 5899 │ ██████████████████████████████████████████████████████████▊                  │
+ 14. │ 2019-04-01 │ 6043 │ ████████████████████████████████████████████████████████████▍                │
+ 15. │ 2019-04-08 │ 6098 │ ████████████████████████████████████████████████████████████▊                │
+ 16. │ 2019-04-15 │ 6196 │ █████████████████████████████████████████████████████████████▊               │
+ 17. │ 2019-04-22 │ 6486 │ ████████████████████████████████████████████████████████████████▋            │
+ 18. │ 2019-04-29 │ 6682 │ ██████████████████████████████████████████████████████████████████▋          │
+ 19. │ 2019-05-06 │ 6739 │ ███████████████████████████████████████████████████████████████████▍         │
+ 20. │ 2019-05-13 │ 6600 │ ██████████████████████████████████████████████████████████████████           │
+ 21. │ 2019-05-20 │ 6575 │ █████████████████████████████████████████████████████████████████▋           │
+ 22. │ 2019-05-27 │ 6786 │ ███████████████████████████████████████████████████████████████████▋         │
+ 23. │ 2019-06-03 │ 6872 │ ████████████████████████████████████████████████████████████████████▋        │
+ 24. │ 2019-06-10 │ 7045 │ ██████████████████████████████████████████████████████████████████████▍      │
+ 25. │ 2019-06-17 │ 7045 │ ██████████████████████████████████████████████████████████████████████▍      │
+ 26. │ 2019-06-24 │ 6852 │ ████████████████████████████████████████████████████████████████████▌        │
+ 27. │ 2019-07-01 │ 7248 │ ████████████████████████████████████████████████████████████████████████▍    │
+ 28. │ 2019-07-08 │ 7284 │ ████████████████████████████████████████████████████████████████████████▋    │
+ 29. │ 2019-07-15 │ 7142 │ ███████████████████████████████████████████████████████████████████████▍     │
+ 30. │ 2019-07-22 │ 7108 │ ███████████████████████████████████████████████████████████████████████      │
+ 31. │ 2019-07-29 │ 7251 │ ████████████████████████████████████████████████████████████████████████▌    │
+ 32. │ 2019-08-05 │ 7403 │ ██████████████████████████████████████████████████████████████████████████   │
+ 33. │ 2019-08-12 │ 7457 │ ██████████████████████████████████████████████████████████████████████████▌  │
+ 34. │ 2019-08-19 │ 7502 │ ███████████████████████████████████████████████████████████████████████████  │
+ 35. │ 2019-08-26 │ 7540 │ ███████████████████████████████████████████████████████████████████████████▍ │
+ 36. │ 2019-09-02 │ 7237 │ ████████████████████████████████████████████████████████████████████████▎    │
+ 37. │ 2019-09-09 │ 7328 │ █████████████████████████████████████████████████████████████████████████▎   │
+ 38. │ 2019-09-16 │ 5566 │ ███████████████████████████████████████████████████████▋                     │
+ 39. │ 2019-09-23 │ 7049 │ ██████████████████████████████████████████████████████████████████████▍      │
+ 40. │ 2019-09-30 │ 6880 │ ████████████████████████████████████████████████████████████████████▋        │
+ 41. │ 2019-10-07 │ 6518 │ █████████████████████████████████████████████████████████████████▏           │
+ 42. │ 2019-10-14 │ 6688 │ ██████████████████████████████████████████████████████████████████▊          │
+ 43. │ 2019-10-21 │ 6667 │ ██████████████████████████████████████████████████████████████████▋          │
+ 44. │ 2019-10-28 │ 6303 │ ███████████████████████████████████████████████████████████████              │
+ 45. │ 2019-11-04 │ 6298 │ ██████████████████████████████████████████████████████████████▊              │
+ 46. │ 2019-11-11 │ 6137 │ █████████████████████████████████████████████████████████████▎               │
+ 47. │ 2019-11-18 │ 6051 │ ████████████████████████████████████████████████████████████▌                │
+ 48. │ 2019-11-25 │ 5820 │ ██████████████████████████████████████████████████████████▏                  │
+ 49. │ 2019-12-02 │ 5942 │ ███████████████████████████████████████████████████████████▍                 │
+ 50. │ 2019-12-09 │ 4891 │ ████████████████████████████████████████████████▊                            │
+ 51. │ 2019-12-16 │ 5682 │ ████████████████████████████████████████████████████████▋                    │
+ 52. │ 2019-12-23 │ 6111 │ █████████████████████████████████████████████████████████████                │
+ 53. │ 2019-12-30 │ 5870 │ ██████████████████████████████████████████████████████████▋                  │
+ 54. │ 2020-01-06 │ 5953 │ ███████████████████████████████████████████████████████████▌                 │
+ 55. │ 2020-01-13 │ 5698 │ ████████████████████████████████████████████████████████▊                    │
+ 56. │ 2020-01-20 │ 5339 │ █████████████████████████████████████████████████████▍                       │
+ 57. │ 2020-01-27 │ 5566 │ ███████████████████████████████████████████████████████▋                     │
+ 58. │ 2020-02-03 │ 5801 │ ██████████████████████████████████████████████████████████                   │
+ 59. │ 2020-02-10 │ 5692 │ ████████████████████████████████████████████████████████▊                    │
+ 60. │ 2020-02-17 │ 5912 │ ███████████████████████████████████████████████████████████                  │
+ 61. │ 2020-02-24 │ 6031 │ ████████████████████████████████████████████████████████████▎                │
+ 62. │ 2020-03-02 │ 6105 │ █████████████████████████████████████████████████████████████                │
+ 63. │ 2020-03-09 │ 5823 │ ██████████████████████████████████████████████████████████▏                  │
+ 64. │ 2020-03-16 │ 4659 │ ██████████████████████████████████████████████▌                              │
+ 65. │ 2020-03-23 │ 3720 │ █████████████████████████████████████▏                                       │
+ 66. │ 2020-03-30 │ 1720 │ █████████████████▏                                                           │
+ 67. │ 2020-04-06 │  849 │ ████████▍                                                                    │
+ 68. │ 2020-04-13 │  710 │ ███████                                                                      │
+ 69. │ 2020-04-20 │  725 │ ███████▏                                                                     │
+ 70. │ 2020-04-27 │  920 │ █████████▏                                                                   │
+ 71. │ 2020-05-04 │  859 │ ████████▌                                                                    │
+ 72. │ 2020-05-11 │ 1047 │ ██████████▍                                                                  │
+ 73. │ 2020-05-18 │ 1135 │ ███████████▎                                                                 │
+ 74. │ 2020-05-25 │ 1266 │ ████████████▋                                                                │
+ 75. │ 2020-06-01 │ 1793 │ █████████████████▊                                                           │
+ 76. │ 2020-06-08 │ 1979 │ ███████████████████▋                                                         │
+ 77. │ 2020-06-15 │ 2297 │ ██████████████████████▊                                                      │
+ 78. │ 2020-06-22 │ 2788 │ ███████████████████████████▊                                                 │
+ 79. │ 2020-06-29 │ 3389 │ █████████████████████████████████▊                                           │
+ 80. │ 2020-07-06 │ 3545 │ ███████████████████████████████████▍                                         │
+ 81. │ 2020-07-13 │ 3569 │ ███████████████████████████████████▋                                         │
+ 82. │ 2020-07-20 │ 3784 │ █████████████████████████████████████▋                                       │
+ 83. │ 2020-07-27 │ 3960 │ ███████████████████████████████████████▌                                     │
+ 84. │ 2020-08-03 │ 4323 │ ███████████████████████████████████████████▏                                 │
+ 85. │ 2020-08-10 │ 4581 │ █████████████████████████████████████████████▋                               │
+ 86. │ 2020-08-17 │ 4791 │ ███████████████████████████████████████████████▊                             │
+ 87. │ 2020-08-24 │ 4928 │ █████████████████████████████████████████████████▎                           │
+ 88. │ 2020-08-31 │ 4687 │ ██████████████████████████████████████████████▋                              │
+ 89. │ 2020-09-07 │ 4643 │ ██████████████████████████████████████████████▍                              │
+ 90. │ 2020-09-14 │ 4594 │ █████████████████████████████████████████████▊                               │
+ 91. │ 2020-09-21 │ 4478 │ ████████████████████████████████████████████▋                                │
+ 92. │ 2020-09-28 │ 4382 │ ███████████████████████████████████████████▋                                 │
+ 93. │ 2020-10-05 │ 4261 │ ██████████████████████████████████████████▌                                  │
+ 94. │ 2020-10-12 │ 4243 │ ██████████████████████████████████████████▍                                  │
+ 95. │ 2020-10-19 │ 3941 │ ███████████████████████████████████████▍                                     │
+ 96. │ 2020-10-26 │ 3616 │ ████████████████████████████████████▏                                        │
+ 97. │ 2020-11-02 │ 3586 │ ███████████████████████████████████▋                                         │
+ 98. │ 2020-11-09 │ 3403 │ ██████████████████████████████████                                           │
+ 99. │ 2020-11-16 │ 3336 │ █████████████████████████████████▎                                           │
+100. │ 2020-11-23 │ 3230 │ ████████████████████████████████▎                                            │
+101. │ 2020-11-30 │ 3183 │ ███████████████████████████████▋                                             │
+102. │ 2020-12-07 │ 3285 │ ████████████████████████████████▋                                            │
+103. │ 2020-12-14 │ 3367 │ █████████████████████████████████▋                                           │
+104. │ 2020-12-21 │ 3748 │ █████████████████████████████████████▍                                       │
+105. │ 2020-12-28 │ 3986 │ ███████████████████████████████████████▋                                     │
+106. │ 2021-01-04 │ 3906 │ ███████████████████████████████████████                                      │
+107. │ 2021-01-11 │ 3425 │ ██████████████████████████████████▎                                          │
+108. │ 2021-01-18 │ 3144 │ ███████████████████████████████▍                                             │
+109. │ 2021-01-25 │ 3115 │ ███████████████████████████████▏                                             │
+110. │ 2021-02-01 │ 3285 │ ████████████████████████████████▋                                            │
+111. │ 2021-02-08 │ 3321 │ █████████████████████████████████▏                                           │
+112. │ 2021-02-15 │ 3475 │ ██████████████████████████████████▋                                          │
+113. │ 2021-02-22 │ 3549 │ ███████████████████████████████████▍                                         │
+114. │ 2021-03-01 │ 3755 │ █████████████████████████████████████▌                                       │
+115. │ 2021-03-08 │ 3080 │ ██████████████████████████████▋                                              │
+116. │ 2021-03-15 │ 3789 │ █████████████████████████████████████▊                                       │
+117. │ 2021-03-22 │ 3804 │ ██████████████████████████████████████                                       │
+118. │ 2021-03-29 │ 4238 │ ██████████████████████████████████████████▍                                  │
+119. │ 2021-04-05 │ 4307 │ ███████████████████████████████████████████                                  │
+120. │ 2021-04-12 │ 4225 │ ██████████████████████████████████████████▎                                  │
+121. │ 2021-04-19 │ 4391 │ ███████████████████████████████████████████▊                                 │
+122. │ 2021-04-26 │ 4868 │ ████████████████████████████████████████████████▋                            │
+123. │ 2021-05-03 │ 4977 │ █████████████████████████████████████████████████▋                           │
+124. │ 2021-05-10 │ 5164 │ ███████████████████████████████████████████████████▋                         │
+125. │ 2021-05-17 │ 4986 │ █████████████████████████████████████████████████▋                           │
+126. │ 2021-05-24 │ 5024 │ ██████████████████████████████████████████████████▏                          │
+127. │ 2021-05-31 │ 4824 │ ████████████████████████████████████████████████▏                            │
+128. │ 2021-06-07 │ 5652 │ ████████████████████████████████████████████████████████▌                    │
+129. │ 2021-06-14 │ 5613 │ ████████████████████████████████████████████████████████▏                    │
+130. │ 2021-06-21 │ 6061 │ ████████████████████████████████████████████████████████████▌                │
+131. │ 2021-06-28 │ 2554 │ █████████████████████████▌                                                   │
+     └────────────┴──────┴──────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="playground">Online Playground<a class="headerlink" href="#playground" title="Permanent link"> </a></h3>
+<p>Вы можете протестировать другие запросы к этому набору данным с помощью интерактивного ресурса <a href="https://gh-api.clickhouse.tech/play?user=play" rel="external nofollow noreferrer" target="_blank">Online Playground</a>. Например, <a href="https://gh-api.clickhouse.tech/play?user=play#U0VMRUNUCiAgICBvcmlnaW4sCiAgICBjb3VudCgpLAogICAgcm91bmQoYXZnKGdlb0Rpc3RhbmNlKGxvbmdpdHVkZV8xLCBsYXRpdHVkZV8xLCBsb25naXR1ZGVfMiwgbGF0aXR1ZGVfMikpKSBBUyBkaXN0YW5jZSwKICAgIGJhcihkaXN0YW5jZSwgMCwgMTAwMDAwMDAsIDEwMCkgQVMgYmFyCkZST00gb3BlbnNreQpXSEVSRSBvcmlnaW4gIT0gJycKR1JPVVAgQlkgb3JpZ2luCk9SREVSIEJZIGNvdW50KCkgREVTQwpMSU1JVCAxMDA=" rel="external nofollow noreferrer" target="_blank">вот так</a>. Однако обратите внимание, что здесь нельзя создавать временные таблицы.</p>
+        
+
+        
+    </div>
+
+    
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Was this content helpful?</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+     data-titles="['Unusable', 'Poor', 'OK', 'Good', 'Excellent']"
+     data-documentation="documentation"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/c60fd44c5b70c56ff0f9c7fc538e58c6c8186aea" rel="external nofollow noreferrer" target="_blank" class="text-reset">c60fd44c</a>
+    
+    </div>
+</div>
+
+</div>
+
+                
+                    <div id="toc" class="col-xl-2 d-none d-xl-block d-print-none p-3 overflow-auto toc-right mb-5">
+    
+    
+        
+    
+    <nav class="nav flex-column text-wrap">
+    
+        <label for="toc">Table of Contents</label>
+    
+    
+        
+        
+        <a href="#download-dataset" title="Загрузите набор данных" class="nav-link text-wrap d-inline-block w-100">
+    Загрузите набор данных
+</a>
+
+    
+        
+        
+        <a href="#create-table" title="Создайте таблицу" class="nav-link text-wrap d-inline-block w-100">
+    Создайте таблицу
+</a>
+
+    
+        
+        
+        <a href="#import-data" title="Импортируйте данные в ClickHouse" class="nav-link text-wrap d-inline-block w-100">
+    Импортируйте данные в ClickHouse
+</a>
+
+    
+        
+        
+        <a href="#validate-data" title="Проверьте импортированные данные" class="nav-link text-wrap d-inline-block w-100">
+    Проверьте импортированные данные
+</a>
+
+    
+        
+        
+        <a href="#run-queries" title="Примеры" class="nav-link text-wrap d-inline-block w-100">
+    Примеры
+</a>
+
+<nav id="toc-toc-5" class="nav flex-column pl-2">
+    
+    
+        
+        
+        <a href="#busy-airports-average-distance" title="Наиболее загруженные аэропорты в указанных координатах и среднее пройденное расстояние" class="nav-link text-wrap d-inline-block w-100">
+    Наиболее загруженные аэропорты в указанных координатах и среднее пройденное расстояние
+</a>
+
+    
+        
+        
+        <a href="#flights-from-moscow" title="Номера рейсов из трех крупных аэропортов Москвы, еженедельно" class="nav-link text-wrap d-inline-block w-100">
+    Номера рейсов из трех крупных аэропортов Москвы, еженедельно
+</a>
+
+    
+        
+        
+        <a href="#playground" title="Online Playground" class="nav-link text-wrap d-inline-block w-100">
+    Online Playground
+</a>
+
+    
+</nav>
+
+    
+    </nav>
+</div>
+                
+            </div>
+        </div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

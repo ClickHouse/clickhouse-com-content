@@ -1,0 +1,5122 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+        
+    
+    <!DOCTYPE html>
+<html lang="ja" data-version="master" data-single-page="false">
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>データ複製 | ClickHouseドキュメント</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="データ複製 | ClickHouseドキュメント"/>
+<meta property="og:description" content="データ複製 複製がサポートされる唯一のためのテーブルのMergeTree家族: 複製マージツリー 複製されたサミングマージツリー レプリケートリプレースマージツリー 複製された集合マージツリー レプリケートコラプシングマージツリー Repl" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://clickhouse.com/images/logo.png" />
+
+<meta property="og:url" content="https://clickhouse.com/docs/ja/engines/table-engines/mergetree-family/replication/"/>
+<link rel="canonical" href="https://clickhouse.com/docs/ja/engines/table-engines/mergetree-family/replication/" />
+
+<link rel="amphtml" href="https://clickhouse.com/docs/ja/engines/table-engines/mergetree-family/replication/amp/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "データ複製 | ClickHouseドキュメント",
+"mainEntityOfPage": "https://clickhouse.com/docs/ja/engines/table-engines/mergetree-family/replication/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "データ複製 | ClickHouseドキュメント",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+
+<meta name="description" content="データ複製 複製がサポートされる唯一のためのテーブルのMergeTree家族: 複製マージツリー 複製されたサミングマージツリー レプリケートリプレースマージツリー 複製された集合マージツリー レプリケートコラプシングマージツリー Repl" />
+
+<meta name="keywords"
+      content="ClickHouse, DBMS, OLAP, SQL, open-source, relational, analytics, analytical, Big Data, web-analytics" />
+
+
+
+
+    
+    <link rel="alternate" hreflang="en" href="https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replication/" />
+    
+    <link rel="alternate" hreflang="zh" href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/replication/" />
+    
+    <link rel="alternate" hreflang="ru" href="https://clickhouse.com/docs/ru/engines/table-engines/mergetree-family/replication/" />
+    
+    <link rel="alternate" hreflang="ja" href="https://clickhouse.com/docs/ja/engines/table-engines/mergetree-family/replication/" />
+    
+    <link rel="alternate" hreflang="x-default" href="https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replication/" />
+
+
+
+
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" data-spy="scroll" data-target="#toc" data-offset="80">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar py-1 navbar-dark navbar-expand-md bg-dark-alt text-white fixed-top">
+    <div class="container-fluid justify-content-between">
+        <a class="d-block navbar-brand mr-3" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h1 class="h3 m-0 p-0 d-inline">
+                <a href="#" class="text-white text-decoration-none">
+                    
+                        データ複製
+                    
+                </a>
+            </h1>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                
+                    
+                
+                
+                <li id="edit-wrapper" class="nav-item">
+                    <a id="edit-link" href="https://github.com/ClickHouse/ClickHouse/edit/master/docs/ja/engines/table-engines/mergetree-family/replication.md" title="Edit this article" class="nav-link" rel="external nofollow noreferrer" target="_blank"><img src="/images/mkdocs/edit.svg" alt="Edit this article" height="60" /></a>
+                </li>
+                
+                <li class="nav-item">
+                     <a class="nav-link" href="https://github.com/ClickHouse/ClickHouse" rel="external nofollow noreferrer">
+                        <img src="/images/index/github.svg" alt="GitHub repository" title="Go to GitHub" height="72" />
+                    </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block mt-1 text-muted" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/ja.svg" alt="日本語" title="日本語" width="60" class="d-inline-block mt-n1" />
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item"
+                               href="/docs/en/engines/table-engines/mergetree-family/replication/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />English
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/zh/engines/table-engines/mergetree-family/replication/">
+                                <img src="/images/flags/zh.svg" alt="" title="" width="32" class="d-inline-block mr-2" />中文
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/ru/engines/table-engines/mergetree-family/replication/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />Русский
+                            </a>
+                            
+                            <a class="dropdown-item disabled"
+                               href="/docs/ja/engines/table-engines/mergetree-family/replication/">
+                                <img src="/images/flags/ja.svg" alt="" title="" width="32" class="d-inline-block mr-2" />日本語
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <form id="search-form" class="form-inline m-0">
+            <div class="input-group">
+                <div class="input-group-prepend w-100">
+                    <span class="input-group-text bg-secondary-alt text-muted border-0 mr-n1" id="search-icon">
+                        <img src="/images/mkdocs/search.svg" />
+                    </span>
+                    <input id="docsearch-input" class="form-control bg-secondary-alt text-muted border-0 pl-1" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+        </form>
+
+        <button id="navbar-toggler" class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+        <div class="docs container-fluid mt-3">
+            <div class="row justify-content-end justify-content-xl-center">
+                <div id="sidebar" class="col-xl-2 col-md-4 bg-secondary-alt p-3 d-print-none min-vh-100 overflow-auto">
+    <div class="overflow-auto">
+        <div id="single-page-switch" class="btn-group mb-2 float-right" role="group" aria-label="Multi-page or single-page">
+            <a href="../../../.." role="button" class="btn btn-dark active" aria-pressed="true">
+                <img src="/images/mkdocs/multi.svg" alt="Multi-page version" title="Multi-page version" />
+            </a>
+            <a href="../../../../single/" role="button" class="btn btn-dark-alt active" aria-pressed="true">
+                <img src="/images/mkdocs/single.svg" alt="Single-page version" title="Single-page version" />
+            </a>
+        </div>
+        
+        <nav id="sidebar-nav" class="nav flex-column mb-5">
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-1" title="はじめに" class="nav-link text-light dropdown-toggle px-0">はじめに</a>
+<div id="sidebar-sidebar-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../" title="概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概要</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/install/" title="インストール" class="nav-link text-light text-wrap d-inline-block w-100 px-0">インストール</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/tutorial/" title="チュートリアル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">チュートリアル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-1-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-1-5" title="データセット例" class="nav-link text-light dropdown-toggle px-0">データセット例</a>
+<div id="sidebar-sidebar-1-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/github-events/" title="GitHub Events" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GitHub Events</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/" title="イントロダクション" class="nav-link text-light text-wrap d-inline-block w-100 px-0">イントロダクション</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/metrica/" title="Yandex.Metrica データ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Yandex.Metrica データ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/ontime/" title="OnTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OnTime</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/recipes/" title="Recipes Dataset" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Recipes Dataset</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/nyc-taxi/" title="ニューヨークタクシー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ニューヨークタクシー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/amplab-benchmark/" title="AMPLab Big Data ベンチマーク" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AMPLab Big Data ベンチマーク</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/wikistat/" title="WikiStat" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WikiStat</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/criteo/" title="Criteo のテラバイトクリックログ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Criteo のテラバイトクリックログ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/brown-benchmark/" title="Brown University Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Brown University Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/opensky/" title="OpenSky" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OpenSky</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/uk-price-paid/" title="UK Property Price Paid" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UK Property Price Paid</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/star-schema/" title="スタースキーマ ベンチマーク" class="nav-link text-light text-wrap d-inline-block w-100 px-0">スタースキーマ ベンチマーク</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/cell-towers/" title="Cell Towers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Cell Towers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/example-datasets/menus/" title="Menus" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Menus</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../getting-started/playground/" title="Playground" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Playground</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2" title="インター" class="nav-link text-light dropdown-toggle px-0">インター</a>
+<div id="sidebar-sidebar-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/cli/" title="コマンド行クライアント" class="nav-link text-light text-wrap d-inline-block w-100 px-0">コマンド行クライアント</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/tcp/" title="ネイティブイ)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ネイティブイ)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/http/" title="HTTPインターフェ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HTTPインターフェ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/mysql/" title="MySQLインタ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQLインタ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/formats/" title="入力および出力フォーマット" class="nav-link text-light text-wrap d-inline-block w-100 px-0">入力および出力フォーマット</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/jdbc/" title="JDBCドライバ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBCドライバ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/odbc/" title="ODBCドライバ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBCドライバ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/cpp/" title="C++クライアントライ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">C++クライアントライ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-2-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2-10" title="サードパーティ" class="nav-link text-light dropdown-toggle px-0">サードパーティ</a>
+<div id="sidebar-sidebar-2-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/third-party/client-libraries/" title="クライアント" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クライアント</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/third-party/integrations/" title="統合" class="nav-link text-light text-wrap d-inline-block w-100 px-0">統合</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/third-party/gui/" title="視界面" class="nav-link text-light text-wrap d-inline-block w-100 px-0">視界面</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../interfaces/third-party/proxy/" title="プロキシ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">プロキシ</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3" title="エンジン" class="nav-link text-light dropdown-toggle px-0">エンジン</a>
+<div id="sidebar-sidebar-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2" title="表エンジン" class="nav-link text-light dropdown-toggle px-0">表エンジン</a>
+<div id="sidebar-sidebar-3-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2-2" title="メルゲツリー族" class="nav-link text-light dropdown-toggle px-0">メルゲツリー族</a>
+<div id="sidebar-sidebar-3-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/mergetree/" title="メルゲツリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">メルゲツリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/replication/" title="データ複製" class="nav-link text-white active text-wrap d-inline-block w-100 px-0">データ複製</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/custom-partitioning-key/" title="カスタム分割キー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">カスタム分割キー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/replacingmergetree/" title="置換マージツリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">置換マージツリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/summingmergetree/" title="サミングマーゲツリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">サミングマーゲツリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/aggregatingmergetree/" title="AggregatingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregatingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/collapsingmergetree/" title="折りたたみマージツリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">折りたたみマージツリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/versionedcollapsingmergetree/" title="バージョニングコラプシングマーゲットリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">バージョニングコラプシングマーゲットリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/mergetree-family/graphitemergetree/" title="GraphiteMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GraphiteMergeTree</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2-3" title="ログファミリ" class="nav-link text-light dropdown-toggle px-0">ログファミリ</a>
+<div id="sidebar-sidebar-3-2-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/log-family/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/log-family/stripelog/" title="ストリップログ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ストリップログ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/log-family/log/" title="ログ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ログ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/log-family/tinylog/" title="TinyLog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TinyLog</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2-4" title="統合" class="nav-link text-light dropdown-toggle px-0">統合</a>
+<div id="sidebar-sidebar-3-2-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/mongodb/" title="MongoDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MongoDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/s3/" title="S3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">S3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/embedded-rocksdb/" title="EmbeddedRocksDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EmbeddedRocksDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/rabbitmq/" title="RabbitMQ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RabbitMQ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/ExternalDistributed/" title="ExternalDistributed" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ExternalDistributed</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/kafka/" title="カフカ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">カフカ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/jdbc/" title="JDBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/odbc/" title="ODBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/integrations/hdfs/" title="HDFS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HDFS</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2-5" title="スペシャル" class="nav-link text-light dropdown-toggle px-0">スペシャル</a>
+<div id="sidebar-sidebar-3-2-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/distributed/" title="分散" class="nav-link text-light text-wrap d-inline-block w-100 px-0">分散</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/external-data/" title="外部データ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部データ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/dictionary/" title="辞書" class="nav-link text-light text-wrap d-inline-block w-100 px-0">辞書</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/merge/" title="マージ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">マージ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/file/" title="ファイル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ファイル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/null/" title="Null" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/set/" title="セット" class="nav-link text-light text-wrap d-inline-block w-100 px-0">セット</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/join/" title="参加" class="nav-link text-light text-wrap d-inline-block w-100 px-0">参加</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/url/" title="URL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">URL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/view/" title="表示" class="nav-link text-light text-wrap d-inline-block w-100 px-0">表示</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/materializedview/" title="マテリアライズドビュー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">マテリアライズドビュー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/memory/" title="メモリ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">メモリ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/buffer/" title="バッファ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">バッファ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/table-engines/special/generate/" title="GenerateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GenerateRandom</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-3" title="データベース" class="nav-link text-light dropdown-toggle px-0">データベース</a>
+<div id="sidebar-sidebar-3-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/materialized-mysql/" title="MaterializedMySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedMySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/lazy/" title="怠け者" class="nav-link text-light text-wrap d-inline-block w-100 px-0">怠け者</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/atomic/" title="Atomic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Atomic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../engines/database-engines/replicated/" title="Replicated" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Replicated</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4" title="SQLリファレンス" class="nav-link text-light dropdown-toggle px-0">SQLリファレンス</a>
+<div id="sidebar-sidebar-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2" title="文" class="nav-link text-light dropdown-toggle px-0">文</a>
+<div id="sidebar-sidebar-4-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-2" title="SELECT" class="nav-link text-light dropdown-toggle px-0">SELECT</a>
+<div id="sidebar-sidebar-4-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/all/" title="ALL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/array-join/" title="ARRAY JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ARRAY JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/distinct/" title="DISTINCT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DISTINCT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/format/" title="FORMAT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FORMAT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/from/" title="FROM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FROM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/group-by/" title="GROUP BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GROUP BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/having/" title="HAVING" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HAVING</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/into-outfile/" title="INTO OUTFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INTO OUTFILE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/join/" title="JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/limit/" title="LIMIT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/limit-by/" title="LIMIT BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/offset/" title="OFFSET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OFFSET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/order-by/" title="ORDER BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ORDER BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/prewhere/" title="PREWHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PREWHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/sample/" title="SAMPLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SAMPLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/where/" title="WHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/select/with/" title="WITH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WITH</a>
+
+
+    
+        
+        
+        
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/create/" title="CREATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CREATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/insert-into/" title="INSERT INTO" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INSERT INTO</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/alter/" title="ALTER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALTER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/system/" title="SYSTEM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SYSTEM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/show/" title="SHOW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SHOW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/explain/" title="EXPLAIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXPLAIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/grant/" title="GRANT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GRANT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/revoke/" title="REVOKE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">REVOKE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/attach/" title="ATTACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ATTACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/check-table/" title="CHECK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CHECK</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/misc/" title="その他" class="nav-link text-light text-wrap d-inline-block w-100 px-0">その他</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/describe-table/" title="DESCRIBE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DESCRIBE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/detach/" title="DETACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DETACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/drop/" title="DROP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DROP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/exists/" title="EXISTS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXISTS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/kill/" title="KILL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">KILL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/rename/" title="RENAME" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RENAME</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/exchange/" title="EXCHANGE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXCHANGE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/optimize/" title="OPTIMIZE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OPTIMIZE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/set/" title="SET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/set-role/" title="SET ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/truncate/" title="TRUNCATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TRUNCATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/use/" title="USE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/statements/watch/" title="WATCH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WATCH</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/syntax/" title="構文" class="nav-link text-light text-wrap d-inline-block w-100 px-0">構文</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/distributed-ddl/" title="Distributed DDL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Distributed DDL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-5" title="関数" class="nav-link text-light dropdown-toggle px-0">関数</a>
+<div id="sidebar-sidebar-4-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/arithmetic-functions/" title="算術" class="nav-link text-light text-wrap d-inline-block w-100 px-0">算術</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/comparison-functions/" title="比較" class="nav-link text-light text-wrap d-inline-block w-100 px-0">比較</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/logical-functions/" title="論理" class="nav-link text-light text-wrap d-inline-block w-100 px-0">論理</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/type-conversion-functions/" title="タイプ変換" class="nav-link text-light text-wrap d-inline-block w-100 px-0">タイプ変換</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/date-time-functions/" title="日付と時刻の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">日付と時刻の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/string-functions/" title="文字列の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/string-search-functions/" title="文字列を検索する場合" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列を検索する場合</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/string-replace-functions/" title="文字列で置換する場合" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列で置換する場合</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/files/" title="Files" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Files</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/conditional-functions/" title="条件付き" class="nav-link text-light text-wrap d-inline-block w-100 px-0">条件付き</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/math-functions/" title="数学" class="nav-link text-light text-wrap d-inline-block w-100 px-0">数学</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/rounding-functions/" title="丸め" class="nav-link text-light text-wrap d-inline-block w-100 px-0">丸め</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/tuple-map-functions/" title="Working with maps" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Working with maps</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/array-functions/" title="配列の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">配列の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/splitting-merging-functions/" title="文字列と配列の分割とマージ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列と配列の分割とマージ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/bit-functions/" title="ビット" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ビット</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/bitmap-functions/" title="ビットマ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ビットマ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/hash-functions/" title="ハッシュ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ハッシュ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/random-functions/" title="擬似乱数の生成" class="nav-link text-light text-wrap d-inline-block w-100 px-0">擬似乱数の生成</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/encoding-functions/" title="エンコード" class="nav-link text-light text-wrap d-inline-block w-100 px-0">エンコード</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/uuid-functions/" title="UUIDの操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUIDの操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/url-functions/" title="Urlの操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Urlの操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/ip-address-functions/" title="IPアドレスの操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPアドレスの操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/json-functions/" title="JSONでの作業" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JSONでの作業</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/higher-order-functions/" title="高次" class="nav-link text-light text-wrap d-inline-block w-100 px-0">高次</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/ext-dict-functions/" title="外部辞書の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部辞書の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/ym-dict-functions/" title="Yandexでの作業。メトリカ辞書" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Yandexでの作業。メトリカ辞書</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/in-functions/" title="IN演算子の実装" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IN演算子の実装</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/array-join/" title="アレイジョイン" class="nav-link text-light text-wrap d-inline-block w-100 px-0">アレイジョイン</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-5-31" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-5-31" title="Geo" class="nav-link text-light dropdown-toggle px-0">Geo</a>
+<div id="sidebar-sidebar-4-5-31" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/geo/coordinates/" title="Geographical Coordinates" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geographical Coordinates</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/geo/geohash/" title="Geohash" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geohash</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/geo/h3/" title="H3 Indexes" class="nav-link text-light text-wrap d-inline-block w-100 px-0">H3 Indexes</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/geo/" title="地理座標の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">地理座標の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/functions-for-nulls/" title="Null許容引数の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null許容引数の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/machine-learning-functions/" title="機械学習機能" class="nav-link text-light text-wrap d-inline-block w-100 px-0">機械学習機能</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/introspection/" title="内省" class="nav-link text-light text-wrap d-inline-block w-100 px-0">内省</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/tuple-functions/" title="Tuples" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuples</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/other-functions/" title="その他" class="nav-link text-light text-wrap d-inline-block w-100 px-0">その他</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/encryption-functions/" title="Encryption" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Encryption</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/functions/nlp-functions/" title="NLP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">NLP</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-6" title="集計関数" class="nav-link text-light dropdown-toggle px-0">集計関数</a>
+<div id="sidebar-sidebar-4-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-6-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-6-2" title="Reference" class="nav-link text-light dropdown-toggle px-0">Reference</a>
+<div id="sidebar-sidebar-4-6-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/count/" title="count" class="nav-link text-light text-wrap d-inline-block w-100 px-0">count</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/min/" title="min" class="nav-link text-light text-wrap d-inline-block w-100 px-0">min</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/max/" title="max" class="nav-link text-light text-wrap d-inline-block w-100 px-0">max</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/sum/" title="sum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/avg/" title="avg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/any/" title="any" class="nav-link text-light text-wrap d-inline-block w-100 px-0">any</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/stddevpop/" title="stddevPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/stddevsamp/" title="stddevSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/varpop/" title="varPop(x)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varPop(x)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/varsamp/" title="varSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/covarpop/" title="covarPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarPop</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/covarsamp/" title="covarSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/anyheavy/" title="anyHeavy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyHeavy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/anylast/" title="anyLast" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyLast</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/argmin/" title="argMin" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMin</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/argmax/" title="argMax" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMax</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/avgweighted/" title="avgWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avgWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/corr/" title="corr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">corr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/topk/" title="topK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topK</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/topkweighted/" title="topKWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topKWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/grouparray/" title="groupArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/groupuniqarray/" title="groupUniqArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupUniqArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/grouparrayinsertat/" title="groupArrayInsertAt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayInsertAt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/grouparraymovingsum/" title="groupArrayMovingSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/grouparraymovingavg/" title="groupArrayMovingAvg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingAvg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/grouparraysample/" title="groupArraySample" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArraySample</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/groupbitand/" title="groupBitAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/groupbitor/" title="groupBitOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/groupbitxor/" title="groupBitXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/groupbitmap/" title="groupBitmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/groupbitmapand/" title="groupBitmapAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/groupbitmapor/" title="groupBitmapOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/groupbitmapxor/" title="groupBitmapXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/sumwithoverflow/" title="sumWithOverflow" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumWithOverflow</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/deltasum/" title="deltaSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/deltasumtimestamp/" title="deltaSumTimestamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSumTimestamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/summap/" title="sumMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/minmap/" title="minMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">minMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/maxmap/" title="maxMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">maxMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/sumcount/" title="sumCount" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumCount</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/rankCorr/" title="rankCorr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">rankCorr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/sumkahan/" title="sumKahan" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumKahan</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/intervalLengthSum/" title="intervalLengthSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">intervalLengthSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/skewpop/" title="skewPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/skewsamp/" title="skewSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/kurtpop/" title="kurtPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/kurtsamp/" title="kurtSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/uniq/" title="uniq" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniq</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/uniqexact/" title="uniqExact" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqExact</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/uniqcombined/" title="uniqCombined" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/uniqcombined64/" title="uniqCombined64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/uniqhll12/" title="uniqHLL12" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqHLL12</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/uniqthetasketch/" title="uniqTheta" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqTheta</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantile/" title="quantile" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantile</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantiles/" title="quantiles Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantiles Functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantileexact/" title="quantileExact Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExact Functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantileexactweighted/" title="quantileExactWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExactWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantiletiming/" title="quantileTiming" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTiming</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantiletimingweighted/" title="quantileTimingWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTimingWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantiledeterministic/" title="quantileDeterministic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileDeterministic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantiletdigest/" title="quantileTDigest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantiletdigestweighted/" title="quantileTDigestWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigestWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/quantilebfloat16/" title="quantileBFloat16" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileBFloat16</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/median/" title="median" class="nav-link text-light text-wrap d-inline-block w-100 px-0">median</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/simplelinearregression/" title="simpleLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">simpleLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/stochasticlinearregression/" title="stochasticLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/stochasticlogisticregression/" title="stochasticLogisticRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLogisticRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/categoricalinformationvalue/" title="categoricalInformationValue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">categoricalInformationValue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/studentttest/" title="studentTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">studentTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/welchttest/" title="welchTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">welchTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/mannwhitneyutest/" title="mannWhitneyUTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mannWhitneyUTest</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/reference/" title="参照" class="nav-link text-light text-wrap d-inline-block w-100 px-0">参照</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/combinators/" title="コンビネータ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">コンビネータ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/aggregate-functions/parametric-functions/" title="パラメトリック" class="nav-link text-light text-wrap d-inline-block w-100 px-0">パラメトリック</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-7" title="テーブル関数" class="nav-link text-light dropdown-toggle px-0">テーブル関数</a>
+<div id="sidebar-sidebar-4-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/file/" title="ファイル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ファイル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/merge/" title="マージ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">マージ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/numbers/" title="数字" class="nav-link text-light text-wrap d-inline-block w-100 px-0">数字</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/remote/" title="リモート" class="nav-link text-light text-wrap d-inline-block w-100 px-0">リモート</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/url/" title="url" class="nav-link text-light text-wrap d-inline-block w-100 px-0">url</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/mysql/" title="mysql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mysql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/postgresql/" title="postgresql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">postgresql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/jdbc/" title="jdbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">jdbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/odbc/" title="odbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">odbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/hdfs/" title="hdfs" class="nav-link text-light text-wrap d-inline-block w-100 px-0">hdfs</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/s3/" title="s3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/input/" title="入力" class="nav-link text-light text-wrap d-inline-block w-100 px-0">入力</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/generate/" title="generateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">generateRandom</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/cluster/" title="cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/view/" title="view" class="nav-link text-light text-wrap d-inline-block w-100 px-0">view</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/null/" title="null function" class="nav-link text-light text-wrap d-inline-block w-100 px-0">null function</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/dictionary/" title="dictionary function" class="nav-link text-light text-wrap d-inline-block w-100 px-0">dictionary function</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/s3Cluster/" title="s3Cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3Cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/table-functions/sqlite/" title="sqlite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sqlite</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-8" title="辞書" class="nav-link text-light dropdown-toggle px-0">辞書</a>
+<div id="sidebar-sidebar-4-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-8-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-8-2" title="外部辞書" class="nav-link text-light dropdown-toggle px-0">外部辞書</a>
+<div id="sidebar-sidebar-4-8-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/external-dictionaries/external-dicts/" title="一般的な説明" class="nav-link text-light text-wrap d-inline-block w-100 px-0">一般的な説明</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict/" title="外部ディクショナリの構成" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部ディクショナリの構成</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-layout/" title="メモリへの辞書の格納" class="nav-link text-light text-wrap d-inline-block w-100 px-0">メモリへの辞書の格納</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-lifetime/" title="辞書の更新" class="nav-link text-light text-wrap d-inline-block w-100 px-0">辞書の更新</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources/" title="外部辞書のソース" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部辞書のソース</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-structure/" title="辞書キーとフィールド" class="nav-link text-light text-wrap d-inline-block w-100 px-0">辞書キーとフィールド</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-hierarchical/" title="階層辞書" class="nav-link text-light text-wrap d-inline-block w-100 px-0">階層辞書</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-polygon/" title="Polygon Dictionaries With Grids" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Polygon Dictionaries With Grids</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/dictionaries/internal-dicts/" title="内部辞書" class="nav-link text-light text-wrap d-inline-block w-100 px-0">内部辞書</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-9" title="データ型" class="nav-link text-light dropdown-toggle px-0">データ型</a>
+<div id="sidebar-sidebar-4-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/int-uint/" title="UInt8、UInt16、UInt32、UInt64、Int8、Int16、Int32、Int64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UInt8、UInt16、UInt32、UInt64、Int8、Int16、Int32、Int64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/float/" title="Float32、Float64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Float32、Float64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/decimal/" title="小数点" class="nav-link text-light text-wrap d-inline-block w-100 px-0">小数点</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/boolean/" title="ブール値" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ブール値</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/string/" title="文字列" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/fixedstring/" title="固定文字列(N)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">固定文字列(N)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/uuid/" title="UUID" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUID</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/date/" title="日付" class="nav-link text-light text-wrap d-inline-block w-100 px-0">日付</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/date32/" title="Date32" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Date32</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/datetime/" title="DateTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/datetime64/" title="DateTime64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/enum/" title="Enum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Enum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/array/" title="配列(T)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">配列(T)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/aggregatefunction/" title="AggregateFunction(名前,types_of_arguments...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregateFunction(名前,types_of_arguments...)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/tuple/" title="Tuple(T1,T2,...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuple(T1,T2,...)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/nullable/" title="Null可能" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null可能</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-9-18" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-9-18" title="入れ子データ構造" class="nav-link text-light dropdown-toggle px-0">入れ子データ構造</a>
+<div id="sidebar-sidebar-4-9-18" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/nested-data-structures/nested/" title="ネストされた(Name1Type1,Name2Type2,...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ネストされた(Name1Type1,Name2Type2,...)</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-9-19" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-9-19" title="特殊データ型" class="nav-link text-light dropdown-toggle px-0">特殊データ型</a>
+<div id="sidebar-sidebar-4-9-19" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/special-data-types/expression/" title="式" class="nav-link text-light text-wrap d-inline-block w-100 px-0">式</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/special-data-types/set/" title="セット" class="nav-link text-light text-wrap d-inline-block w-100 px-0">セット</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/special-data-types/nothing/" title="何もない" class="nav-link text-light text-wrap d-inline-block w-100 px-0">何もない</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/special-data-types/interval/" title="間隔" class="nav-link text-light text-wrap d-inline-block w-100 px-0">間隔</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-9-20" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-9-20" title="ドメイン" class="nav-link text-light dropdown-toggle px-0">ドメイン</a>
+<div id="sidebar-sidebar-4-9-20" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/domains/" title="概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概要</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/domains/ipv4/" title="IPv4" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv4</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/domains/ipv6/" title="IPv6" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv6</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/multiword-types/" title="Multiword Type Names" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Multiword Type Names</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/geo/" title="Geo" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geo</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/map/" title="Map(key, value)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Map(key, value)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/data-types/simpleaggregatefunction/" title="SimpleAggregateFunction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SimpleAggregateFunction</a>
+
+
+    
+        
+        
+        
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-10" title="演算子" class="nav-link text-light dropdown-toggle px-0">演算子</a>
+<div id="sidebar-sidebar-4-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/operators/" title="演算子" class="nav-link text-light text-wrap d-inline-block w-100 px-0">演算子</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/operators/in/" title="IN Operators" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IN Operators</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/ansi/" title="ANSIの互換性" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ANSIの互換性</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-12" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-12" title="Window Functions" class="nav-link text-light dropdown-toggle px-0">Window Functions</a>
+<div id="sidebar-sidebar-4-12" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../sql-reference/window-functions/" title="Window Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Window Functions</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5" title="ガイド" class="nav-link text-light dropdown-toggle px-0">ガイド</a>
+<div id="sidebar-sidebar-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../guides/" title="概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概要</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../guides/apply-catboost-model/" title="CatBoostモデルの適用" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CatBoostモデルの適用</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6" title="操作" class="nav-link text-light dropdown-toggle px-0">操作</a>
+<div id="sidebar-sidebar-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../operations/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/requirements/" title="要件" class="nav-link text-light text-wrap d-inline-block w-100 px-0">要件</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/monitoring/" title="監視" class="nav-link text-light text-wrap d-inline-block w-100 px-0">監視</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/troubleshooting/" title="トラブルシ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">トラブルシ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/update/" title="クリックハウスの更新" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クリックハウスの更新</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-6" title="External User Authenticators and Directories" class="nav-link text-light dropdown-toggle px-0">External User Authenticators and Directories</a>
+<div id="sidebar-sidebar-6-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../operations/external-authenticators/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/external-authenticators/kerberos/" title="Kerberos" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Kerberos</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/external-authenticators/ldap/" title="LDAP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LDAP</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/access-rights/" title="アクセス制御とアカウント管理" class="nav-link text-light text-wrap d-inline-block w-100 px-0">アクセス制御とアカウント管理</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/backup/" title="データバックア" class="nav-link text-light text-wrap d-inline-block w-100 px-0">データバックア</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/configuration-files/" title="設定ファイル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">設定ファイル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/quotas/" title="クォータ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クォータ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-11" title="System Tables" class="nav-link text-light dropdown-toggle px-0">System Tables</a>
+<div id="sidebar-sidebar-6-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/" title="System Tables" class="nav-link text-light text-wrap d-inline-block w-100 px-0">System Tables</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/asynchronous_metric_log/" title="system.asynchronous_metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/asynchronous_metrics/" title="system.asynchronous_metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/clusters/" title="system.clusters" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.clusters</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/columns/" title="system.columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/contributors/" title="system.contributors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.contributors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/crash-log/" title="system.crash_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.crash_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/current-roles/" title="system.current_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.current_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/data_skipping_indices/" title="system.data_skipping_indices" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_skipping_indices</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/data_type_families/" title="system.data_type_families" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_type_families</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/databases/" title="system.databases" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.databases</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/detached_parts/" title="system.detached_parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.detached_parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/dictionaries/" title="system.dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.dictionaries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/disks/" title="system.disks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.disks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/distributed_ddl_queue/" title="system.distributed_ddl_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distributed_ddl_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/distribution_queue/" title="system.distribution_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distribution_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/enabled-roles/" title="system.enabled_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.enabled_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/errors/" title="system.errors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.errors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/events/" title="system.events" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.events</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/functions/" title="system.functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/grants/" title="system.grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/graphite_retentions/" title="system.graphite_retentions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.graphite_retentions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/licenses/" title="system.licenses" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.licenses</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/merge_tree_settings/" title="system.merge_tree_settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merge_tree_settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/merges/" title="system.merges" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merges</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/metric_log/" title="system.metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/metrics/" title="system.metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/mutations/" title="system.mutations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.mutations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/numbers/" title="system.numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/numbers_mt/" title="system.numbers_mt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers_mt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/one/" title="system.one" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.one</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/opentelemetry_span_log/" title="system.opentelemetry_span_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.opentelemetry_span_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/part_log/" title="system.part_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.part_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/parts/" title="system.parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/parts_columns/" title="system.parts_columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts_columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/processes/" title="system.processes" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.processes</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/query_log/" title="system.query_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/query_thread_log/" title="system.query_thread_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_thread_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/query_views_log/" title="system.query_views_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_views_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/quota_limits/" title="system.quota_limits" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_limits</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/quota_usage/" title="system.quota_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/quotas/" title="system.quotas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/quotas_usage/" title="system.quotas_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/replicas/" title="system.replicas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/replicated_fetches/" title="system.replicated_fetches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicated_fetches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/replication_queue/" title="system.replication_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replication_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/role-grants/" title="system.role_grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.role_grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/roles/" title="system.roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/row_policies/" title="system.row_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.row_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/settings/" title="system.settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/settings_profile_elements/" title="system.settings_profile_elements" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profile_elements</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/settings_profiles/" title="system.settings_profiles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profiles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/stack_trace/" title="system.stack_trace" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.stack_trace</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/storage_policies/" title="system.storage_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.storage_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/table_engines/" title="system.table_engines" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.table_engines</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/tables/" title="system.tables" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.tables</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/text_log/" title="system.text_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.text_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/time_zones/" title="system.time_zones" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.time_zones</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/trace_log/" title="system.trace_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.trace_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/users/" title="system.users" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.users</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/zookeeper/" title="system.zookeeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/zookeeper_log/" title="system.zookeeper_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper_log</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/system-tables/" title="システム表" class="nav-link text-light text-wrap d-inline-block w-100 px-0">システム表</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-13" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-13" title="性能の最適化" class="nav-link text-light dropdown-toggle px-0">性能の最適化</a>
+<div id="sidebar-sidebar-6-13" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/optimizing-performance/sampling-query-profiler/" title="Queryプロファイリング" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Queryプロファイリング</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-14" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-14" title="サーバ構成パラメータ" class="nav-link text-light dropdown-toggle px-0">サーバ構成パラメータ</a>
+<div id="sidebar-sidebar-6-14" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../operations/server-configuration-parameters/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/server-configuration-parameters/settings/" title="サーバー設定" class="nav-link text-light text-wrap d-inline-block w-100 px-0">サーバー設定</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/performance-test/" title="ハードウェア試験" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ハードウェア試験</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-16" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-16" title="設定" class="nav-link text-light dropdown-toggle px-0">設定</a>
+<div id="sidebar-sidebar-6-16" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../operations/settings/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/settings/permissions-for-queries/" title="クエリの権限" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クエリの権限</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/settings/query-complexity/" title="クエリの複雑さの制限" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クエリの複雑さの制限</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/settings/settings-profiles/" title="設定プロファイル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">設定プロファイル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/settings/constraints-on-settings/" title="設定の制約" class="nav-link text-light text-wrap d-inline-block w-100 px-0">設定の制約</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/settings/settings-users/" title="ユーザー設定" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ユーザー設定</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/settings/merge-tree-settings/" title="MergeTree tables settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MergeTree tables settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/settings/settings/" title="設定" class="nav-link text-light text-wrap d-inline-block w-100 px-0">設定</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-17" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-17" title="ユーティリ" class="nav-link text-light dropdown-toggle px-0">ユーティリ</a>
+<div id="sidebar-sidebar-6-17" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../operations/utilities/" title="概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概要</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/utilities/clickhouse-copier/" title="クリックハウス-複写機" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クリックハウス-複写機</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/utilities/clickhouse-local/" title="ﾂつｨﾂ姪"ﾂ債ﾂつｹ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ﾂつｨﾂ姪"ﾂ債ﾂつｹ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/utilities/clickhouse-benchmark/" title="clickhouse-ベンチマーク" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-ベンチマーク</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/utilities/clickhouse-format/" title="clickhouse-format" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-format</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/utilities/clickhouse-compressor/" title="ClickHouse compressor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse compressor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/utilities/clickhouse-obfuscator/" title="ClickHouse obfuscator" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse obfuscator</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/utilities/odbc-bridge/" title="clickhouse-odbc-bridge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-odbc-bridge</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/tips/" title="使用法の推奨事項" class="nav-link text-light text-wrap d-inline-block w-100 px-0">使用法の推奨事項</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/opentelemetry/" title="OpenTelemetry Support" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OpenTelemetry Support</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/caches/" title="Caches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Caches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/clickhouse-keeper/" title="ClickHouse Keeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse Keeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../operations/storing-data/" title="External Disks for Storing Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">External Disks for Storing Data</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7" title="開発" class="nav-link text-light dropdown-toggle px-0">開発</a>
+<div id="sidebar-sidebar-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/developer-instruction/" title="初心者ClickHouse開発者の指示" class="nav-link text-light text-wrap d-inline-block w-100 px-0">初心者ClickHouse開発者の指示</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/continuous-integration/" title="Continuous Integration Checks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Continuous Integration Checks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/architecture/" title="クリックハウス建築の概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クリックハウス建築の概要</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/browse-code/" title="ソースコードの参照" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ソースコードの参照</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/build/" title="Linux上でClickHouseを構築する方法" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Linux上でClickHouseを構築する方法</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/build-osx/" title="Mac OS XでClickHouseを構築する方法" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Mac OS XでClickHouseを構築する方法</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/build-cross-osx/" title="Mac OS X用のLinux上でClickHouseを構築する方法" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Mac OS X用のLinux上でClickHouseを構築する方法</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/build-cross-arm/" title="Aarch64用のLinux上でClickHouseを構築する方法(ARM64)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Aarch64用のLinux上でClickHouseを構築する方法(ARM64)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/style/" title="C++コードの書き方" class="nav-link text-light text-wrap d-inline-block w-100 px-0">C++コードの書き方</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/tests/" title="Testing" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Testing</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/contrib/" title="サードパーティ製ライブラリを使用" class="nav-link text-light text-wrap d-inline-block w-100 px-0">サードパーティ製ライブラリを使用</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/cmake-in-clickhouse/" title="CMake in ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CMake in ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../development/adding_test_queries/" title="How to add test queries to ClickHouse CI" class="nav-link text-light text-wrap d-inline-block w-100 px-0">How to add test queries to ClickHouse CI</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-8" title="商業" class="nav-link text-light dropdown-toggle px-0">商業</a>
+<div id="sidebar-sidebar-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../commercial/cloud/" title="クラウド" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クラウド</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../commercial/support/" title="Support" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Support</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../commercial/" title="商業" class="nav-link text-light text-wrap d-inline-block w-100 px-0">商業</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-9" title="新着情報" class="nav-link text-light dropdown-toggle px-0">新着情報</a>
+<div id="sidebar-sidebar-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-9-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-9-2" title="Changelog" class="nav-link text-light dropdown-toggle px-0">Changelog</a>
+<div id="sidebar-sidebar-9-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../whats-new/changelog/" title="2022" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2022</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../whats-new/changelog/2020/" title="2020" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2020</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../whats-new/changelog/2019/" title="2019" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2019</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../whats-new/changelog/2018/" title="2018" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2018</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../whats-new/changelog/2017/" title="2017" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2017</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../whats-new/roadmap/" title="ロード" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ロード</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../whats-new/security-changelog/" title="セキュリティ変更履歴" class="nav-link text-light text-wrap d-inline-block w-100 px-0">セキュリティ変更履歴</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-10" title="F.A.Q." class="nav-link text-light dropdown-toggle px-0">F.A.Q.</a>
+<div id="sidebar-sidebar-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../../faq/general/" title="General" class="nav-link text-light text-wrap d-inline-block w-100 px-0">General</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../faq/use-cases/" title="Use Cases" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Use Cases</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../faq/operations/" title="Operations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Operations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../../faq/integration/" title="Integration" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Integration</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../../faq/general/" title="一般的な質問" class="nav-link text-light text-wrap d-inline-block w-100 px-0">一般的な質問</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+        </nav>
+        
+    </div>
+</div>
+                <div id="content-wrapper" class="anchor-fixer col-md-8 mt-5 p-2 p-md-4">
+    <div id="content">
+        
+            
+            
+            
+                
+                <nav class="text-muted" aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent p-0">
+                        
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../../../" class="text-reset">エンジン</a>
+                            
+                        </li>
+                       
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../../" class="text-reset">表エンジン</a>
+                            
+                        </li>
+                       
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../" class="text-reset">メルゲツリー族</a>
+                            
+                        </li>
+                       
+                    </ol>
+                </nav>
+            
+
+            
+    <div class="alert alert-primary" role="alert">
+      <p class="display-5 mb-2">Help wanted!</p>
+      <p class="lead">The following content of this documentation page has been machine-translated. But unlike other websites, it is not done on the fly. This translated text lives on GitHub repository alongside main ClickHouse codebase and waits for fellow native speakers to make it more human-readable. <a href="/docs/en/engines/table-engines/mergetree-family/replication/" class="alert-link">You can also use the original English version as a reference.</a></p>
+      <p class="lead">
+          <a class="btn btn-lg btn-primary text-white" href="https://github.com/ClickHouse/ClickHouse/edit/master/docs/ja/engines/table-engines/mergetree-family/replication.md" target="_blank" rel="external nofollow noreferrer">
+              Help ClickHouse documentation by editing this page
+          </a>
+      </p>
+    </div>
+
+            <h1 id="table_engines-replication">データ複製<a class="headerlink" href="#table_engines-replication" title="Permanent link"> </a></h1>
+<p>複製がサポートされる唯一のためのテーブルのMergeTree家族:</p>
+<ul>
+<li>複製マージツリー</li>
+<li>複製されたサミングマージツリー</li>
+<li>レプリケートリプレースマージツリー</li>
+<li>複製された集合マージツリー</li>
+<li>レプリケートコラプシングマージツリー</li>
+<li>ReplicatedVersionedCollapsingMergetree</li>
+<li>レプリケートグラフィティマージツリー</li>
+</ul>
+<p>複製の作品のレベルを個別のテーブルではなく、全体のサーバーです。 サーバーでの店舗も複製、非複製のテーブルでも同時に行います。</p>
+<p>複製はシャーディングに依存しません。 各シャードには、独自の独立した複製があります。</p>
+<p>圧縮されたデータ <code class="syntax">INSERT</code> と <code class="syntax">ALTER</code> クエリを複製(詳細については、ドキュメンテーションに <a href="../../../../sql-reference/statements/alter/#query_language_queries_alter">ALTER</a>).</p>
+<p><code class="syntax">CREATE</code>, <code class="syntax">DROP</code>, <code class="syntax">ATTACH</code>, <code class="syntax">DETACH</code> と <code class="syntax">RENAME</code> クエリは単一サーバーで実行され、レプリケートされません:</p>
+<ul>
+<li>その <code class="syntax">CREATE TABLE</code> クエリは、クエリが実行されるサーバー上に新しい複製可能テーブルを作成します。 このテーブルが既にあるその他のサーバーを加え新たなレプリカ.</li>
+<li>その <code class="syntax">DROP TABLE</code> クエリは、クエリが実行されるサーバー上にあるレプリカを削除します。</li>
+<li>その <code class="syntax">RENAME</code> queryは、レプリカのいずれかのテーブルの名前を変更します。 つまり、複製のテーブルでの異なる名称の異なるレプリカ.</li>
+</ul>
+<p>ClickHouseの使用 <a href="https://zookeeper.apache.org" rel="external nofollow noreferrer" target="_blank">アパッチの飼育係</a> レプリカのメタ情報を格納するため。 ZooKeeperバージョン3.4.5以降を使用します。</p>
+<p>レプリケーションを使用するには、 <a href="../../../../operations/server-configuration-parameters/settings/#server-settings_zookeeper">飼育係</a> サーバー構成セクション。</p>
+<div class="admonition attention alert pb-0 mb-4 alert-warning" role="alert">
+<p class="admonition-title alert-heading display-4 text-reset mb-2">注意</p>
+<p>セキュリティ設定を無視しないでください クリックハウスは <code class="syntax">digest</code> <a class="alert-link" href="https://zookeeper.apache.org/doc/current/zookeeperProgrammers.html#sc_ZooKeeperAccessControl" rel="external nofollow noreferrer" target="_blank">ACLスキーム</a> ZooKeeperセキュリティサブシステムの。</p>
+</div>
+<p>ZooKeeperクラスタのアドレスを設定する例:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="nt">&lt;zookeeper&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">index=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;host&gt;</span>example1<span class="nt">&lt;/host&gt;</span>
+        <span class="nt">&lt;port&gt;</span>2181<span class="nt">&lt;/port&gt;</span>
+    <span class="nt">&lt;/node&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">index=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;host&gt;</span>example2<span class="nt">&lt;/host&gt;</span>
+        <span class="nt">&lt;port&gt;</span>2181<span class="nt">&lt;/port&gt;</span>
+    <span class="nt">&lt;/node&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">index=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;host&gt;</span>example3<span class="nt">&lt;/host&gt;</span>
+        <span class="nt">&lt;port&gt;</span>2181<span class="nt">&lt;/port&gt;</span>
+    <span class="nt">&lt;/node&gt;</span>
+<span class="nt">&lt;/zookeeper&gt;</span>
+</code></pre></div>
+<p>既存のZooKeeperクラスタを指定すると、システムはそのクラスタ上のディレクトリを独自のデータとして使用します(複製可能なテーブルを作成するときに</p>
+<p>場合飼育係な設定コンフィグファイルを創り上げられないんで再現しテーブル、および既存の複製のテーブル読み取り専用になります。</p>
+<p>飼育係はで使用されていません <code class="syntax">SELECT</code> レプリケーションのパフォーマン <code class="syntax">SELECT</code> また、クエリは非レプリケートテーブルの場合と同様に高速に実行されます。 時の照会に配布再現し、テーブルClickHouse行動制御の設定 <a href="../../../../operations/settings/settings/#settings-max_replica_delay_for_distributed_queries">max_replica_delay_for_distributed_queries</a> と <a href="../../../../operations/settings/settings/#settings-fallback_to_stale_replicas_for_distributed_queries">フォールバック_to_stale_replicas_for_distributed_queries</a>.</p>
+<p>それぞれのため <code class="syntax">INSERT</code> クエリー、契約時に応募を追加飼育係を務取引等 （より正確には、これは挿入されたデータの各ブロックに対するものです。 <code class="syntax">max_insert_block_size = 1048576</code> 行。)これは、 <code class="syntax">INSERT</code> 非レプリケートテーブルと比較します。 しかし、推奨事項に従ってデータを複数のバッチで挿入する場合 <code class="syntax">INSERT</code> 毎秒、それは問題を作成しません。 一つのZooKeeperクラスターを調整するために使用されるClickHouseクラスター全体の合計は数百です <code class="syntax">INSERTs</code> 毎秒 データ挿入のスループット(秒あたりの行数)は、レプリケートされていないデータの場合と同じくらい高くなります。</p>
+<p>非常に大きなクラスタの場合、異なるシャードに異なるZooKeeperクラスタを使用できます。 しかし、これはYandexの上で必要な証明されていません。メトリカクラスタ（約300台）。</p>
+<p>複製は非同期でマルチマスターです。 <code class="syntax">INSERT</code> クエリ(および <code class="syntax">ALTER</code>）利用可能な任意のサーバに送信することができます。 データは、クエリが実行されるサーバーに挿入され、他のサーバーにコピーされます。 ですので非同期であるため、最近では挿入されデータが表示され、その他のレプリカとの待ち時間をゼロにすることに レプリカの一部が使用できない場合、データは使用可能になったときに書き込まれます。 レプリカが使用可能な場合、待機時間は、圧縮されたデータのブロックをネットワーク経由で転送するのにかかる時間です。</p>
+<p>既定では、挿入クエリは、単一のレプリカからのデータの書き込みの確認を待機します。 データが得られない場合には成功した記述につのレプリカのサーバーのこのレプリカが消滅し、保存したデータは失われます。 複数のレプリカからのデータ書き込みの確認の取得を有効にするには、 <code class="syntax">insert_quorum</code> オプション</p>
+<p>データの各ブロックは原子的に書き込まれます。 挿入クエリは、次のブロックに分割されます <code class="syntax">max_insert_block_size = 1048576</code> 行。 言い換えれば、 <code class="syntax">INSERT</code> クエリには1048576行未満があり、アトミックに作成されます。</p>
+<p>データブロックは重複排除されます。 同じデータブロック（同じ順序で同じ行を含む同じサイズのデータブロック）の複数の書き込みの場合、ブロックは一度だけ書き込まれます。 この理由は、クライアントアプリケーションがデータがDBに書き込まれたかどうかを知らないときにネットワーク障害が発生した場合です。 <code class="syntax">INSERT</code> クエリーするだけで簡単に繰り返します。 どのレプリカ挿入が同一のデータで送信されたかは関係ありません。 <code class="syntax">INSERTs</code> 冪等である。 重複排除圧縮パラメータの制御 <a href="../../../../operations/server-configuration-parameters/settings/#server_configuration_parameters-merge_tree">merge_tree</a> サーバー設定。</p>
+<p>複製時に、元のデータの挿入には転送されます。 さらなるデータ変換(マージ)は、すべてのレプリカで同じ方法で調整され、実行されます。 つまり、レプリカが異なるデータセンターに存在する場合、レプリケーションは適切に機能します。 レプリケーションの主な目的は、異なるデータセンターでデータを複製することです。)</p>
+<p>同じデータの任意の数のレプリカを持つことができます。 Yandex.Metricaは本番環境で二重複製を使用します。 各サーバーはRAID-5またはRAID-6を使用し、場合によってはRAID-10を使用します。 これは比較的信頼性が高く便利な解決策です。</p>
+<p>システムは、レプリカのデータ同期を監視し、障害発生後に回復することができます。 フェールオーバーは、自動(データのわずかな違いの場合)または半自動(データの異なりが多すぎる場合、構成エラーを示す可能性があります)です。</p>
+<h2 id="creating-replicated-tables">複製テーブルの作成<a class="headerlink" href="#creating-replicated-tables" title="Permanent link"> </a></h2>
+<p>その <code class="syntax">Replicated</code> テーブルエンジン名に接頭辞が追加されます。 例えば:<code class="syntax">ReplicatedMergeTree</code>.</p>
+<p><strong>複製*MergeTreeパラメータ</strong></p>
+<ul>
+<li><code class="syntax">zoo_path</code> — The path to the table in ZooKeeper.</li>
+<li><code class="syntax">replica_name</code> — The replica name in ZooKeeper.</li>
+</ul>
+<p>例:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"></span>
+<span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">EventDate</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">CounterID</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">UserID</span><span class="w"> </span><span class="n">UInt32</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">'/clickhouse/tables/{layer}-{shard}/table_name'</span><span class="p">,</span><span class="w"> </span><span class="s1">'{replica}'</span><span class="p">)</span><span class="w"></span>
+<span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">toYYYYMM</span><span class="p">(</span><span class="n">EventDate</span><span class="p">)</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">CounterID</span><span class="p">,</span><span class="w"> </span><span class="n">EventDate</span><span class="p">,</span><span class="w"> </span><span class="n">intHash32</span><span class="p">(</span><span class="n">UserID</span><span class="p">))</span><span class="w"></span>
+<span class="n">SAMPLE</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">intHash32</span><span class="p">(</span><span class="n">UserID</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<details><summary>非推奨の構文の例</summary>
+<p></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"></span>
+<span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">EventDate</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">CounterID</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">UserID</span><span class="w"> </span><span class="n">UInt32</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">'/clickhouse/tables/{layer}-{shard}/table_name'</span><span class="p">,</span><span class="w"> </span><span class="s1">'{replica}'</span><span class="p">,</span><span class="w"> </span><span class="n">EventDate</span><span class="p">,</span><span class="w"> </span><span class="n">intHash32</span><span class="p">(</span><span class="n">UserID</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">CounterID</span><span class="p">,</span><span class="w"> </span><span class="n">EventDate</span><span class="p">,</span><span class="w"> </span><span class="n">intHash32</span><span class="p">(</span><span class="n">UserID</span><span class="p">),</span><span class="w"> </span><span class="n">EventTime</span><span class="p">),</span><span class="w"> </span><span class="mi">8192</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+</details>
+<p>その例としては、これらのパラメータを含むことができ換巻きていただけるボディーです。 置き換えられた値は、 ‘macros’ 設定ファイルのセクション。 例:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="nt">&lt;macros&gt;</span>
+    <span class="nt">&lt;layer&gt;</span>05<span class="nt">&lt;/layer&gt;</span>
+    <span class="nt">&lt;shard&gt;</span>02<span class="nt">&lt;/shard&gt;</span>
+    <span class="nt">&lt;replica&gt;</span>example05-02-1.yandex.ru<span class="nt">&lt;/replica&gt;</span>
+<span class="nt">&lt;/macros&gt;</span>
+</code></pre></div>
+<p>の表の飼育係るべきで機能していませんが将来的には再現します。 テーブルの異なる資料は異なる。<br/>
+この場合、パスは次の部分で構成されます:</p>
+<p><code class="syntax">/clickhouse/tables/</code> 共通の接頭辞です。 の使用をお勧めしまうことです。</p>
+<p><code class="syntax">{layer}-{shard}</code> シャード識別子です。 この例では、Yandexので、二つの部分で構成されています。Metricaクラスターの使用インターネット上のファイル転送sharding. ほとんどのタスクでは、{shard}置換だけを残すことができます。</p>
+<p><code class="syntax">table_name</code> ZooKeeper内のテーブルのノード名です。 テーブル名と同じにすることをお勧めします。 これは、テーブル名とは対照的に、名前変更クエリの後に変更されないため、明示的に定義されています。<br/>
+<em>HINT</em>：データベース名を追加することができます <code class="syntax">table_name</code> 同様に。 例えば <code class="syntax">db_name.table_name</code></p>
+<p>のレプリカの名前を識別のレプリカと同じ。 これには、例のようにサーバー名を使用できます。 名前は、各シャード内で一意である必要があります。</p>
+<p>置換を使用する代わりに、パラメーターを明示的に定義できます。 これは、テストや小さなクラスターの構成に便利です。 ただし、分散DDLクエリは使用できません (<code class="syntax">ON CLUSTER</code>）この場合。</p>
+<p>大規模なクラスターで作業する場合は、エラーの可能性を減らすため、置換を使用することをお勧めします。</p>
+<p>実行 <code class="syntax">CREATE TABLE</code> 各レプリカのクエリ。 このクエリを複製テーブルを追加し、新たなレプリカは、既存します。</p>
+<p>テーブルに他のレプリカのデータがすでに含まれている後に新しいレプリカを追加すると、クエリの実行後にデータが他のレプリカから新しいレプリカ つまり、新しいレプリカは他のレプリカと同期します。</p>
+<p>レプリカを削除するには、 <code class="syntax">DROP TABLE</code>. However, only one replica is deleted – the one that resides on the server where you run the query.</p>
+<h2 id="recovery-after-failures">障害後の回復<a class="headerlink" href="#recovery-after-failures" title="Permanent link"> </a></h2>
+<p>場合飼育係が不可の場合、サーバは、複製のテーブルスイッチ読み取り専用モードになります。 システムは定期的にZooKeeperへの接続を試みます。</p>
+<p>飼育係が中に使用できない場合 <code class="syntax">INSERT</code>、またはZooKeeperとの対話時にエラーが発生すると、例外がスローされます。</p>
+<p>ZooKeeperに接続すると、ローカルファイルシステム内のデータセットが予想されるデータセットと一致するかどうかがチェックされます(ZooKeeperはこの情報を格納し がある場合は軽微な不整合の解消による同期データのレプリカ.</p>
+<p>システムが壊れたデータ部分(ファイルのサイズが間違っている)または認識できない部分(ファイルシステムに書き込まれているが、ZooKeeperに記録されて <code class="syntax">detached</code> サブディレクトリ(削除されません)。 他の部分がコピーからのレプリカ.</p>
+<p>ClickHouseは、大量のデータを自動的に削除するなどの破壊的な操作は実行しません。</p>
+<p>サーバが起動時に表示されます(または新たに設立し、セッションとの飼育係）でのみチェックの量やサイズのすべてのファイルです。 ファイルサイズは一致するが、途中でバイトが変更された場合、これはすぐには検出されず、データを読み取ろうとしたときにのみ検出されます。 <code class="syntax">SELECT</code> クエリ。 クエリが例外をスローしつつ、非マッチングのチェックサムはサイズに圧縮されたブロックです。 この場合、データパーツは検証キューに追加され、必要に応じてレプリカからコピーされます。</p>
+<p>場合には地元のデータセットが異なりすぎとられ、安全機構を起動します。 サーバーはこれをログに入力し、起動を拒否します。 この理由は、シャード上のレプリカが別のシャード上のレプリカのように誤って構成された場合など、このケースが構成エラーを示す可能性があるためです。 しかし、しきい値をこの機構の設定かなり低く、こうした状況が起こる中で、失敗を回復しました。 この場合、データは半自動的に復元されます。 “pushing a button”.</p>
+<p>回復を開始するには、ノードを作成します <code class="syntax">/path_to_table/replica_name/flags/force_restore_data</code> で飼育係とコンテンツ、またはコマンドを実行し復元すべての複製のテーブル:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">sudo -u clickhouse touch /var/lib/clickhouse/flags/force_restore_data
+</code></pre></div>
+<p>次に、サーバーを再起動します。 起動時に、サーバーはこれらのフラグを削除し、回復を開始します。</p>
+<h2 id="recovery-after-complete-data-loss">完全なデータ損失の後の回復<a class="headerlink" href="#recovery-after-complete-data-loss" title="Permanent link"> </a></h2>
+<p>すべてのデータやメタデータ消えたらサーバには、次の手順に従ってください復興:</p>
+<ol>
+<li>ClickHouseをサーバにインストールします。 シャード識別子とレプリカを使用する場合は、設定ファイルで置換を正しく定義します。</li>
+<li>サーバー上で手動で複製する必要がある未複製のテーブルがある場合は、レプリカからデータをコピーします(ディレクトリ内)。 <code class="syntax">/var/lib/clickhouse/data/db_name/table_name/</code>).</li>
+<li>テーブル定義のコピー <code class="syntax">/var/lib/clickhouse/metadata/</code> レプリカから。 シャード識別子またはレプリカ識別子がテーブル定義で明示的に定義されている場合は、このレプリカに対応するように修正します。 (または、サーバーを起動し、すべての <code class="syntax">ATTACH TABLE</code> にあったはずのクエリ.sqlファイル <code class="syntax">/var/lib/clickhouse/metadata/</code>.)</li>
+<li>回復を開始するには、ZooKeeperノードを作成します <code class="syntax">/path_to_table/replica_name/flags/force_restore_data</code> コマンドを実行してレプリケートされたテーブルをすべて復元します: <code class="syntax">sudo -u clickhouse touch /var/lib/clickhouse/flags/force_restore_data</code></li>
+</ol>
+<p>次に、サーバーを起動します（すでに実行されている場合は再起動します）。 データダウンロードからのレプリカ.</p>
+<p>代替の回復オプションは削除に関する情報は失われたレプリカから飼育係 (<code class="syntax">/path_to_table/replica_name</code>)で説明したように、レプリカを再度作成します “<a href="#creating-replicated-tables">複製テーブルの作成</a>”.</p>
+<p>復旧時のネットワーク帯域幅に制限はありません。 一度に多数のレプリカを復元する場合は、この点に注意してください。</p>
+<h2 id="converting-from-mergetree-to-replicatedmergetree">MergeTreeからReplicatedMergeTreeへの変換<a class="headerlink" href="#converting-from-mergetree-to-replicatedmergetree" title="Permanent link"> </a></h2>
+<p>我々はこの用語を使用する <code class="syntax">MergeTree</code> すべてのテーブルエンジンを参照するには <code class="syntax">MergeTree family</code> の場合と同じです。 <code class="syntax">ReplicatedMergeTree</code>.</p>
+<p>あなたが持っていた場合 <code class="syntax">MergeTree</code> 手動で複製されたテーブルは、複製されたテーブルに変換することができます。 すでに大量のデータを収集している場合は、これを行う必要があるかもしれません。 <code class="syntax">MergeTree</code> レプリケーションを有効にします。</p>
+<p>さまざまなレプリカでデータが異なる場合は、最初に同期するか、このデータを除くすべてのレプリカで削除します。</p>
+<p>既存のMergeTreeテーブルの名前を変更し、次に <code class="syntax">ReplicatedMergeTree</code> 古い名前のテーブル。<br/>
+データを古いテーブルから <code class="syntax">detached</code> サブディレクトリ内のディレクトリを新しいテーブルデータ (<code class="syntax">/var/lib/clickhouse/data/db_name/table_name/</code>).<br/>
+その後、実行 <code class="syntax">ALTER TABLE ATTACH PARTITION</code> これらのデータパーツを作業セットに追加するレプリカのいずれかで。</p>
+<h2 id="converting-from-replicatedmergetree-to-mergetree">ReplicatedMergeTreeからMergeTreeへの変換<a class="headerlink" href="#converting-from-replicatedmergetree-to-mergetree" title="Permanent link"> </a></h2>
+<p>別の名前のMergeTreeテーブルを作成します。 ディレクトリからすべてのデータを移動します。 <code class="syntax">ReplicatedMergeTree</code> テーブルデータを新しいテーブルのデータディレクトリです。 その後、削除 <code class="syntax">ReplicatedMergeTree</code> サーバーを表にして再起動します。</p>
+<p>あなたが取り除きたい場合は、 <code class="syntax">ReplicatedMergeTree</code> サーバーを起動しないテーブル:</p>
+<ul>
+<li>対応するものを削除する <code class="syntax">.sql</code> ファイルのメタデータディレクトリ (<code class="syntax">/var/lib/clickhouse/metadata/</code>).</li>
+<li>ZooKeeperで対応するパスを削除します (<code class="syntax">/path_to_table/replica_name</code>).</li>
+</ul>
+<p>この後、サーバーを起動し、 <code class="syntax">MergeTree</code> データをそのディレクトリに移動し、サーバーを再起動します。</p>
+<h2 id="recovery-when-metadata-in-the-zookeeper-cluster-is-lost-or-damaged">Zookeeperクラスター内のメタデータが紛失または破損した場合の復旧<a class="headerlink" href="#recovery-when-metadata-in-the-zookeeper-cluster-is-lost-or-damaged" title="Permanent link"> </a></h2>
+<p>ZooKeeperのデータが紛失または破損している場合は、上記のように再生されていないテーブルに移動することでデータを保存できます。</p>
+        
+
+        
+    </div>
+
+    
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Was this content helpful?</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+     data-titles="['Unusable', 'Poor', 'OK', 'Good', 'Excellent']"
+     data-documentation="documentation"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/c60fd44c5b70c56ff0f9c7fc538e58c6c8186aea" rel="external nofollow noreferrer" target="_blank" class="text-reset">c60fd44c</a>
+    
+    </div>
+</div>
+
+</div>
+
+                
+                    <div id="toc" class="col-xl-2 d-none d-xl-block d-print-none p-3 overflow-auto toc-right mb-5">
+    
+    
+        
+    
+    <nav class="nav flex-column text-wrap">
+    
+        <label for="toc">Table of Contents</label>
+    
+    
+        
+        
+        <a href="#creating-replicated-tables" title="複製テーブルの作成" class="nav-link text-wrap d-inline-block w-100">
+    複製テーブルの作成
+</a>
+
+    
+        
+        
+        <a href="#recovery-after-failures" title="障害後の回復" class="nav-link text-wrap d-inline-block w-100">
+    障害後の回復
+</a>
+
+    
+        
+        
+        <a href="#recovery-after-complete-data-loss" title="完全なデータ損失の後の回復" class="nav-link text-wrap d-inline-block w-100">
+    完全なデータ損失の後の回復
+</a>
+
+    
+        
+        
+        <a href="#converting-from-mergetree-to-replicatedmergetree" title="MergeTreeからReplicatedMergeTreeへの変換" class="nav-link text-wrap d-inline-block w-100">
+    MergeTreeからReplicatedMergeTreeへの変換
+</a>
+
+    
+        
+        
+        <a href="#converting-from-replicatedmergetree-to-mergetree" title="ReplicatedMergeTreeからMergeTreeへの変換" class="nav-link text-wrap d-inline-block w-100">
+    ReplicatedMergeTreeからMergeTreeへの変換
+</a>
+
+    
+        
+        
+        <a href="#recovery-when-metadata-in-the-zookeeper-cluster-is-lost-or-damaged" title="Zookeeperクラスター内のメタデータが紛失または破損した場合の復旧" class="nav-link text-wrap d-inline-block w-100">
+    Zookeeperクラスター内のメタデータが紛失または破損した場合の復旧
+</a>
+
+    
+    </nav>
+</div>
+                
+            </div>
+        </div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

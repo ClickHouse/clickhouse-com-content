@@ -1,0 +1,282 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>ClickHouse at Percona Live Europe 2018</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="ClickHouse at Percona Live Europe 2018"/>
+<meta property="og:description" content="Open-source database management systems conference Percona Live this time took place on November 5-7 in Germany, Frankfu" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2018/clickhouse-at-percona-live-europe-2018/main.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2018/clickhouse-at-percona-live-europe-2018/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2018/clickhouse-at-percona-live-europe-2018/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "ClickHouse at Percona Live Europe 2018",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2018/clickhouse-at-percona-live-europe-2018/",
+
+"datePublished": "2018-11-21",
+"dateModified": "2018-11-21",
+
+"image": "https://blog-images.clickhouse.com/en/2018/clickhouse-at-percona-live-europe-2018/main.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="Open-source database management systems conference Percona Live this time took place on November 5-7 in Germany, Frankfu" />
+
+<meta name="keywords"
+      content="conference, Frankfurt, Germany, events, Percona Live, Europe" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2018/clickhouse-at-percona-live-europe-2018/main.jpg" alt="ClickHouse at Percona Live Europe 2018" title="ClickHouse at Percona Live Europe 2018" />
+            
+            <h1 class="display-2 mt-3 mb-5">ClickHouse at Percona Live Europe 2018</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>Open-source database management systems conference <a href="https://www.percona.com/live/e18/" rel="external nofollow noreferrer" target="_blank">Percona Live</a> this time took place on November 5-7 in Germany, Frankfurt am Main. Over last couple years ClickHouse became a solid member of this community as demand in analytics with subsecond latencies appeared to be pretty high.</p>
+<p>There were three talks about ClickHouse in agenda, while only one of them was from Yandex. Also we had a lot of interesting conversations with conference attendees at ClickHouse booth sponsored by Altinity.</p>
+<p>Alexander Zaitsev, CTO and co-founder of Altinity, gives an overview of ClickHouse and then demonstrates case studies and best practices (<a href="https://presentations.clickhouse.com/percona_europe_2018/Altinity.pdf" rel="external nofollow noreferrer" target="_blank">slides</a>):<br/>
+<img alt="" class="img-fluid" src="https://blog-images.clickhouse.com/en/2018/clickhouse-at-percona-live-europe-2018/1.jpg"/></p>
+<p>Fast! Flexible! Free! Fun!<br/>
+<img alt="Fast! Flexible! Free! Fun!" class="img-fluid" src="https://blog-images.clickhouse.com/en/2018/clickhouse-at-percona-live-europe-2018/2.jpg"/></p>
+<p>Aleksey Milovidov, lead ClickHouse developer from Yandex, talks about unusual and unique ClickHouse features (<a href="https://presentations.clickhouse.com/percona_europe_2018" rel="external nofollow noreferrer" target="_blank">slides</a>):<br/>
+<img alt="Aleksey Milovidov" class="img-fluid" src="https://blog-images.clickhouse.com/en/2018/clickhouse-at-percona-live-europe-2018/3.jpg"/></p>
+<p>Aleksandar Aleksandrov and Felix Mattrat, data engineers from MessageBird, show how they use ClickHouse to analyze process of delivery of SMS and other kinds of messages (<a href="http://presentations.clickhouse.com/percona_europe_2018/MessageBird.pdf" rel="external nofollow noreferrer" target="_blank">slides</a>):<br/>
+<img alt="Aleksandar Aleksandrov and Felix Mattrat" class="img-fluid" src="https://blog-images.clickhouse.com/en/2018/clickhouse-at-percona-live-europe-2018/4.jpg"/></p>
+<p>Live demo at ClickHouse booth by Alexey Milovidov:<br/>
+<img alt="Demo at ClickHouse booth by Alexey Milovidov" class="img-fluid" src="https://blog-images.clickhouse.com/en/2018/clickhouse-at-percona-live-europe-2018/5.jpg"/></p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=ClickHouse%20at%20Percona%20Live%20Europe%202018+https%3A//clickhouse.com/blog/en/2018/clickhouse-at-percona-live-europe-2018/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=ClickHouse%20at%20Percona%20Live%20Europe%202018&u=https%3A//clickhouse.com/blog/en/2018/clickhouse-at-percona-live-europe-2018/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=ClickHouse%20at%20Percona%20Live%20Europe%202018&url=https%3A//clickhouse.com/blog/en/2018/clickhouse-at-percona-live-europe-2018/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2018-11-21</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        conference
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        Frankfurt
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        Germany
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        events
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        Percona Live
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        Europe
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

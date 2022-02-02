@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Performance comparison of database management systems</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="Performance comparison of database management systems"/>
+<meta property="og:description" content="ClickHouse is a fast open-source column-oriented database management system that allows generating analytical data reports in real-time using SQL queries" />
+<meta property="og:type" content="website" />
+
+<meta property="og:image" content="https://clickhouse.com/images/logo.png" />
+
+<meta property="og:url" content="https://clickhouse.com/benchmark/dbms/"/>
+<link rel="canonical" href="https://clickhouse.com/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+
+<meta name="description" content="ClickHouse is a fast open-source column-oriented database management system that allows generating analytical data reports in real-time using SQL queries" />
+
+<meta name="keywords"
+      content="ClickHouse, DBMS, OLAP, SQL, open-source, relational, analytics, analytical, Big Data, web-analytics" />
+
+
+
+
+
+
+
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" >
+    
+    
+    
+    <div class="page">
+        
+<div class="container-fluid py-3">
+
+<div class="row mb-3">
+    <div class="col">
+        <a href="/" title="Main page" class="float-left mr-3">
+            <img src="/images/logo.svg" alt="ClickHouse" />
+        </a>
+        <h1>Performance comparison of analytical DBMS</h1>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div id="selectors" class="col"></div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <h3 class="my-3">Relative query processing time <span class="text-muted">(lower is better)</span></h3>
+        <div id="diagram"></div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <h3 class="my-3">Full results</h3>
+        <div id="comparison_table" class="overflow-auto"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <h3 class="my-3">Comments</h3>
+        <p>Most results are for single server setup with the following configuration: two socket Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.60GHz; 128 GiB RAM; md RAID-5 on 8 6TB SATA HDD; ext4.</p>
+
+        <p>Some additional results (marked as x2, x3, x6) are for clustered setup for comparison. These results are contributed from independent teams and hardware specification may differ.</p>
+
+        <p>
+            <strong>Disclaimer!</strong> Some results are outdated:
+            <ul>
+                <li>Results for MemSQL were obtained in 2015 for version 3.2.</li>
+                <li>Results for Vertica were obtained in 2015 for version 7.1.1.</li>
+            </ul>
+        </p>
+        <p>See also: <a href="../hardware/">performance comparison of ClickHouse on various hardware</a>.</p>
+    </div>
+</div>
+
+        
+        <script type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+<script type="text/javascript" src="queries.js?c60fd44c"></script>
+
+<script type="text/javascript" src="results.js?c60fd44c"></script>
+
+<script type="text/javascript" src="../benchmark.js?c60fd44c"></script>
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

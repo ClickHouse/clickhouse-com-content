@@ -1,0 +1,321 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>参数聚合函数 | ClickHouse文档</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/zh/sql-reference/aggregate-functions/parametric-functions/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "参数聚合函数 | ClickHouse文档",
+"mainEntityOfPage": "https://clickhouse.com/docs/zh/sql-reference/aggregate-functions/parametric-functions/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "参数聚合函数 | ClickHouse文档",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}ol,ul{margin-bottom:1rem}ol,ul{margin-top:0}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}b,strong{font-weight:bolder}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}pre{margin-top:0;margin-bottom:1rem;overflow:auto}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}table{border-collapse:collapse}select{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}select{text-transform:none}select{word-wrap:normal}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}pre{display:block;font-size:87.5%;color:#495057}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}.order-0{order:0}.order-1{order:1}.order-2{order:2}.order-3{order:3}.order-4{order:4}.order-5{order:5}.order-6{order:6}.order-7{order:7}.order-8{order:8}.order-9{order:9}.order-10{order:10}.order-11{order:11}.order-12{order:12}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}.order-md-0{order:0}.order-md-1{order:1}.order-md-2{order:2}.order-md-3{order:3}.order-md-4{order:4}.order-md-5{order:5}.order-md-6{order:6}.order-md-7{order:7}.order-md-8{order:8}.order-md-9{order:9}.order-md-10{order:10}.order-md-11{order:11}.order-md-12{order:12}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}.order-lg-0{order:0}.order-lg-1{order:1}.order-lg-2{order:2}.order-lg-3{order:3}.order-lg-4{order:4}.order-lg-5{order:5}.order-lg-6{order:6}.order-lg-7{order:7}.order-lg-8{order:8}.order-lg-9{order:9}.order-lg-10{order:10}.order-lg-11{order:11}.order-lg-12{order:12}}.table{width:100%;margin-bottom:8px;color:#212529}.table-warning{background-color:#ffeeba}.table-light{background-color:#fbfcfd}.table-dark{background-color:#ccced0}.table-white{background-color:#fff}.table-black{background-color:#c1c2c3}.table-orange{background-color:#ffdfb8}.table-light-orange{background-color:#fff7ea}.table-dark{color:#fff;background-color:#343a40}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:none}.btn:disabled{opacity:.65}.btn-warning{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-warning:focus,.btn-warning:hover{color:#495057;background-color:#e0a800;border-color:#d39e00}.btn-warning:focus{box-shadow:0 0 0 0 rgba(228,176,19,.5)}.btn-warning:disabled{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-warning{color:#ffc107;border-color:#ffc107}.btn-outline-warning:hover{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-outline-warning:focus{box-shadow:0 0 0 0 rgba(255,193,7,.5)}.btn-outline-warning:disabled{color:#ffc107;background-color:transparent}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-group-lg>.btn,.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}.btn-group{position:relative;display:inline-flex;vertical-align:middle}.btn-group>.btn{position:relative;flex:1 1 auto}.btn-group>.btn:active,.btn-group>.btn:focus,.btn-group>.btn:hover{z-index:1}.btn-group>.btn-group:not(:first-child),.btn-group>.btn:not(:first-child){margin-left:-1px}.btn-group>.btn-group:not(:last-child)>.btn{border-top-right-radius:0;border-bottom-right-radius:0}.btn-group>.btn-group:not(:first-child)>.btn,.btn-group>.btn:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.custom-select{display:inline-block;width:100%;height:calc(1.5em+.75rem+2px);padding:.375rem 1.75rem .375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;border:1px solid #ced4da;border-radius:8px;-webkit-appearance:none;-moz-appearance:none;appearance:none}.custom-select:focus{border-color:#ffe680;outline:0;box-shadow:0 0 0 .2rem rgba(255,204,0,.25)}.custom-select:focus::-ms-value{color:#6c757d;background-color:#fff}.custom-select[multiple],.custom-select[size]:not([size="1"]){height:auto;padding-right:.75rem;background-image:none}.custom-select:disabled{color:#6c757d;background-color:#e9ecef}.custom-select::-ms-expand{display:none}.custom-select:-moz-focusring{color:transparent;text-shadow:0 0 0 #6c757d}.custom-select-lg{height:calc(1.5em+1rem+2px);padding-top:.5rem;padding-bottom:.5rem;padding-left:1rem;font-size:1.125rem}.custom-select{transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.custom-select{transition:none}}pre{white-space:pre-wrap}pre{border:1px solid #d6dbdf;page-break-inside:avoid}img{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}.table{border-collapse:collapse}.table-dark{color:inherit}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+          <h1 id=aggregate_functions_parametric>参数聚合函数<a class=headerlink href=../amp/#aggregate_functions_parametric title="Permanent link"> </a></h1> <p>一些聚合函数不仅可以接受参数列（用于压缩），也可以接收常量的初始化参数。这种语法是接受两个括号的参数，第一个数初始化参数，第二个是入参。</p> <h2 id=histogram>histogram<a class=headerlink href=../amp/#histogram title="Permanent link"> </a></h2> <p>计算自适应直方图。 它不能保证精确的结果。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>histogram</span><span class=p>(</span><span class=n>number_of_bins</span><span class=p>)(</span><span class=k>values</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p>该函数使用 <a href=http://jmlr.org/papers/volume11/ben-haim10a/ben-haim10a.pdf rel="external nofollow noreferrer" target=_blank>流式并行决策树算法</a>. 当新数据输入函数时，hist图分区的边界将被调整。 在通常情况下，箱的宽度不相等。</p> <p><strong>参数</strong></p> <p><code class=syntax>number_of_bins</code> — 直方图bin个数，这个函数会自动计算bin的数量，而且会尽量使用指定值，如果无法做到，那就使用更小的bin个数。</p> <p><code class=syntax>values</code> — <a href=../../../syntax/amp/#syntax-expressions>表达式</a> 输入值。</p> <p><strong>返回值</strong></p> <ul> <li><a href=../../../data-types/array/amp/ >Array</a> 的 <a href=../../../data-types/tuple/amp/ >Tuples</a> 如下：<div class=codehilite><pre><span></span><code class=syntax><span class="n n-Quoted">`</span><span class="n n-Quoted n-Quoted-Escape">``</span><span class="n n-Quoted"></span>
+<span class="n n-Quoted">[(lower_1, upper_1, height_1), ... (lower_N, upper_N, height_N)]</span>
+<span class="n n-Quoted n-Quoted-Escape">``</span><span class="n n-Quoted">`</span><span class=w></span>
+
+<span class=o>-</span><span class=w> </span><span class="n n-Quoted">`lower`</span><span class=w> </span><span class=n>—</span><span class=w> </span><span class=n>bin的下边界。</span><span class=w></span>
+<span class=o>-</span><span class=w> </span><span class="n n-Quoted">`upper`</span><span class=w> </span><span class=n>—</span><span class=w> </span><span class=n>bin的上边界。</span><span class=w></span>
+<span class=o>-</span><span class=w> </span><span class="n n-Quoted">`height`</span><span class=w> </span><span class=n>—</span><span class=w> </span><span class=n>bin的计算权重。</span><span class=w></span>
+</code></pre></div> </li> </ul> <p><strong>示例</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>histogram</span><span class=p>(</span><span class=mi>5</span><span class=p>)(</span><span class=nb>number</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w></span>
+<span class=w>    </span><span class=k>FROM</span><span class=w> </span><span class=k>system</span><span class=p>.</span><span class=n>numbers</span><span class=w></span>
+<span class=w>    </span><span class=k>LIMIT</span><span class=w> </span><span class=mi>20</span><span class=w></span>
+<span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─histogram(5)(plus(number, 1))───────────────────────────────────────────┐
+│ [(1,4.5,4),(4.5,8.5,4),(8.5,12.75,4.125),(12.75,17,4.625),(17,20,3.25)] │
+└─────────────────────────────────────────────────────────────────────────┘
+</code></pre></div> <p>您可以使用 <a href=../../../functions/other-functions/amp/#function-bar>bar</a> 功能，例如:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>WITH</span><span class=w> </span><span class=n>histogram</span><span class=p>(</span><span class=mi>5</span><span class=p>)(</span><span class=n>rand</span><span class=p>()</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>hist</span><span class=w></span>
+<span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>arrayJoin</span><span class=p>(</span><span class=n>hist</span><span class=p>).</span><span class=mi>3</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>height</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>bar</span><span class=p>(</span><span class=n>height</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=mi>6</span><span class=p>,</span><span class=w> </span><span class=mi>5</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>bar</span><span class=w></span>
+<span class=k>FROM</span><span class=w></span>
+<span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w></span>
+<span class=w>    </span><span class=k>FROM</span><span class=w> </span><span class=k>system</span><span class=p>.</span><span class=n>numbers</span><span class=w></span>
+<span class=w>    </span><span class=k>LIMIT</span><span class=w> </span><span class=mi>20</span><span class=w></span>
+<span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─height─┬─bar───┐
+│  2.125 │ █▋    │
+│   3.25 │ ██▌   │
+│  5.625 │ ████▏ │
+│  5.625 │ ████▏ │
+│  3.375 │ ██▌   │
+└────────┴───────┘
+</code></pre></div> <p>在这种情况下，您应该记住您不知道直方图bin边界。</p> <h2 id=function-sequencematch>sequenceMatch(pattern)(timestamp, cond1, cond2, …)<a class=headerlink href=../amp/#function-sequencematch title="Permanent link"> </a></h2> <p>检查序列是否包含与模式匹配的事件链。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>sequenceMatch</span><span class=p>(</span><span class=n>pattern</span><span class=p>)(</span><span class=k>timestamp</span><span class=p>,</span><span class=w> </span><span class=n>cond1</span><span class=p>,</span><span class=w> </span><span class=n>cond2</span><span class=p>,</span><span class=w> </span><span class=p>...)</span><span class=w></span>
+</code></pre></div> <div class="admonition warning alert pb-0 mb-4 alert-warning" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">警告</p> <p>在同一秒钟发生的事件可能以未定义的顺序排列在序列中，影响结果。</p> </div> <p><strong>参数</strong></p> <ul> <li> <p><code class=syntax>pattern</code> — 模式字符串。 参考 <a href=../amp/#sequence-function-pattern-syntax>模式语法</a>.</p> </li> <li> <p><code class=syntax>timestamp</code> — 包含时间的列。典型的时间类型是： <code class=syntax>Date</code> 和 <code class=syntax>DateTime</code>。您还可以使用任何支持的 <a href=../../../data-types/int-uint/amp/ >UInt</a> 数据类型。</p> </li> <li> <p><code class=syntax>cond1</code>, <code class=syntax>cond2</code> — 事件链的约束条件。 数据类型是： <code class=syntax>UInt8</code>。 最多可以传递32个条件参数。 该函数只考虑这些条件中描述的事件。 如果序列包含未在条件中描述的数据，则函数将跳过这些数据。</p> </li> </ul> <p><strong>返回值</strong></p> <ul> <li>1，如果模式匹配。</li> <li>0，如果模式不匹配。</li> </ul> <p>类型: <code class=syntax>UInt8</code>.</p> <p><a name=sequence-function-pattern-syntax></a><br> <strong>模式语法</strong></p> <ul> <li> <p><code class=syntax>(?N)</code> — 在位置<code class=syntax>N</code>匹配条件参数。 条件在编号 <code class=syntax>[1, 32]</code> 范围。 例如, <code class=syntax>(?1)</code> 匹配传递给 <code class=syntax>cond1</code> 参数。</p> </li> <li> <p><code class=syntax>.*</code> — 匹配任何事件的数字。 不需要条件参数来匹配这个模式。</p> </li> <li> <p><code class=syntax>(?t operator value)</code> — 分开两个事件的时间。 例如： <code class=syntax>(?1)(?t&gt;1800)(?2)</code> 匹配彼此发生超过1800秒的事件。 这些事件之间可以存在任意数量的任何事件。 您可以使用 <code class=syntax>&gt;=</code>, <code class=syntax>&gt;</code>, <code class=syntax>&lt;</code>, <code class=syntax>&lt;=</code>, <code class=syntax>==</code> 运算符。</p> </li> </ul> <p><strong>例</strong></p> <p>考虑在数据 <code class=syntax>t</code> 表:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─time─┬─number─┐
+│    1 │      1 │
+│    2 │      3 │
+│    3 │      2 │
+└──────┴────────┘
+</code></pre></div> <p>执行查询:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>sequenceMatch</span><span class=p>(</span><span class=s1>'(?1)(?2)'</span><span class=p>)(</span><span class=k>time</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>2</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>t</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─sequenceMatch('(?1)(?2)')(time, equals(number, 1), equals(number, 2))─┐
+│                                                                     1 │
+└───────────────────────────────────────────────────────────────────────┘
+</code></pre></div> <p>该函数找到了数字2跟随数字1的事件链。 它跳过了它们之间的数字3，因为该数字没有被描述为事件。 如果我们想在搜索示例中给出的事件链时考虑这个数字，我们应该为它创建一个条件。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>sequenceMatch</span><span class=p>(</span><span class=s1>'(?1)(?2)'</span><span class=p>)(</span><span class=k>time</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>3</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>t</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─sequenceMatch('(?1)(?2)')(time, equals(number, 1), equals(number, 2), equals(number, 3))─┐
+│                                                                                        0 │
+└──────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div> <p>在这种情况下，函数找不到与模式匹配的事件链，因为数字3的事件发生在1和2之间。 如果在相同的情况下，我们检查了数字4的条件，则序列将与模式匹配。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>sequenceMatch</span><span class=p>(</span><span class=s1>'(?1)(?2)'</span><span class=p>)(</span><span class=k>time</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>4</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>t</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─sequenceMatch('(?1)(?2)')(time, equals(number, 1), equals(number, 2), equals(number, 4))─┐
+│                                                                                        1 │
+└──────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div> <p><strong>另请参阅</strong></p> <ul> <li><a href=../amp/#function-sequencecount>sequenceCount</a></li> </ul> <h2 id=function-sequencecount>sequenceCount(pattern)(time, cond1, cond2, …)<a class=headerlink href=../amp/#function-sequencecount title="Permanent link"> </a></h2> <p>计算与模式匹配的事件链的数量。该函数搜索不重叠的事件链。当前链匹配后，它开始搜索下一个链。</p> <div class="admonition warning alert pb-0 mb-4 alert-warning" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">警告</p> <p>在同一秒钟发生的事件可能以未定义的顺序排列在序列中，影响结果。</p> </div> <div class=codehilite><pre><span></span><code class=syntax><span class=n>sequenceCount</span><span class=p>(</span><span class=n>pattern</span><span class=p>)(</span><span class=k>timestamp</span><span class=p>,</span><span class=w> </span><span class=n>cond1</span><span class=p>,</span><span class=w> </span><span class=n>cond2</span><span class=p>,</span><span class=w> </span><span class=p>...)</span><span class=w></span>
+</code></pre></div> <p><strong>参数</strong></p> <ul> <li> <p><code class=syntax>pattern</code> — 模式字符串。 参考：<a href=../amp/#sequence-function-pattern-syntax>模式语法</a>.</p> </li> <li> <p><code class=syntax>timestamp</code> — 包含时间的列。典型的时间类型是： <code class=syntax>Date</code> 和 <code class=syntax>DateTime</code>。您还可以使用任何支持的 <a href=../../../data-types/int-uint/amp/ >UInt</a> 数据类型。</p> </li> <li> <p><code class=syntax>cond1</code>, <code class=syntax>cond2</code> — 事件链的约束条件。 数据类型是： <code class=syntax>UInt8</code>。 最多可以传递32个条件参数。该函数只考虑这些条件中描述的事件。 如果序列包含未在条件中描述的数据，则函数将跳过这些数据。</p> </li> </ul> <p><strong>返回值</strong></p> <ul> <li>匹配的非重叠事件链数。</li> </ul> <p>类型: <code class=syntax>UInt64</code>.</p> <p><strong>示例</strong></p> <p>考虑在数据 <code class=syntax>t</code> 表:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─time─┬─number─┐
+│    1 │      1 │
+│    2 │      3 │
+│    3 │      2 │
+│    4 │      1 │
+│    5 │      3 │
+│    6 │      2 │
+└──────┴────────┘
+</code></pre></div> <p>计算数字2在数字1之后出现的次数以及它们之间的任何其他数字:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>sequenceCount</span><span class=p>(</span><span class=s1>'(?1).*(?2)'</span><span class=p>)(</span><span class=k>time</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>2</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>t</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─sequenceCount('(?1).*(?2)')(time, equals(number, 1), equals(number, 2))─┐
+│                                                                       2 │
+└─────────────────────────────────────────────────────────────────────────┘
+</code></pre></div> <p><strong>另请参阅</strong></p> <ul> <li><a href=../amp/#function-sequencematch>sequenceMatch</a></li> </ul> <h2 id=windowfunnel>windowFunnel<a class=headerlink href=../amp/#windowfunnel title="Permanent link"> </a></h2> <p>搜索滑动时间窗中的事件链，并计算从链中发生的最大事件数。</p> <p>该函数采用如下算法：</p> <ul> <li> <p>该函数搜索触发链中的第一个条件并将事件计数器设置为1。 这是滑动窗口启动的时刻。</p> </li> <li> <p>如果来自链的事件在窗口内顺序发生，则计数器将递增。 如果事件序列中断，则计数器不再增加。</p> </li> <li> <p>如果数据在不同的完成点具有多个事件链，则该函数将仅输出最长链的大小。</p> </li> </ul> <p><strong>语法</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>windowFunnel</span><span class=p>(</span><span class=n>window</span><span class=p>,</span><span class=w> </span><span class=p>[</span><span class=k>mode</span><span class=p>,</span><span class=w> </span><span class=p>[</span><span class=k>mode</span><span class=p>,</span><span class=w> </span><span class=p>...</span><span class=w> </span><span class=p>]])(</span><span class=k>timestamp</span><span class=p>,</span><span class=w> </span><span class=n>cond1</span><span class=p>,</span><span class=w> </span><span class=n>cond2</span><span class=p>,</span><span class=w> </span><span class=p>...,</span><span class=w> </span><span class=n>condN</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>参数</strong></p> <ul> <li><code class=syntax>window</code> — 滑动窗户的大小，表示事件链中第一个事件和最后一个事件的最大间隔。 单位取决于<code class=syntax>timestamp</code>。用表达式来表示则是：<code class=syntax>timestamp of cond1 &lt;= timestamp of cond2 &lt;= ... &lt;= timestamp of condN &lt;= timestamp of cond1 + window</code>。</li> <li><code class=syntax>mode</code> - 这是一个可选的参数，可以设置一个或多个参数。<ul> <li><code class=syntax>'strict_deduplication'</code> - 如果事件链中出现相同的条件，则会停止进一步搜索。</li> <li><code class=syntax>'strict_order'</code> - 不允许其他事件的介入。 例如：在<code class=syntax>A-&gt;B-&gt;D-&gt;C</code>的情况下，它在<code class=syntax>D</code>停止继续搜索<code class=syntax>A-&gt;B-&gt;C</code>，最大事件数为2。</li> <li><code class=syntax>'strict_increase'</code> - 事件链中的时间戳必须严格上升。</li> </ul> </li> <li><code class=syntax>timestamp</code> — 包含时间戳的列。 数据类型支持： <a href=../../../data-types/date/amp/ >日期</a>, <a href=../../../data-types/datetime/amp/#data_type-datetime>日期时间</a> 和其他无符号整数类型（请注意，即使时间戳支持 <code class=syntax>UInt64</code> 类型，它的值也不能超过Int64最大值，即2^63-1）。</li> <li><code class=syntax>cond</code> — 事件链的约束条件。 <a href=../../../data-types/int-uint/amp/ >UInt8</a> 类型。</li> </ul> <p><strong>返回值</strong></p> <p>滑动时间窗口内连续触发条件链的最大数目。<br> 对选择中的所有链进行了分析。</p> <p>类型: <code class=syntax>Integer</code>.</p> <p><strong>示例</strong></p> <p>确定设定的时间段是否足以让用户选择手机并在在线商店中购买两次。</p> <p>设置以下事件链:</p> <ol> <li>用户登录到其在应用商店中的帐户 (<code class=syntax>eventID = 1003</code>).</li> <li>用户搜索手机 (<code class=syntax>eventID = 1007, product = 'phone'</code>).</li> <li>用户下了订单 (<code class=syntax>eventID = 1009</code>).</li> <li>用户再次下订单 (<code class=syntax>eventID = 1010</code>).</li> </ol> <p>输入表:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─event_date─┬─user_id─┬───────────timestamp─┬─eventID─┬─product─┐
+│ 2019-01-28 │       1 │ 2019-01-29 10:00:00 │    1003 │ phone   │
+└────────────┴─────────┴─────────────────────┴─────────┴─────────┘
+┌─event_date─┬─user_id─┬───────────timestamp─┬─eventID─┬─product─┐
+│ 2019-01-31 │       1 │ 2019-01-31 09:00:00 │    1007 │ phone   │
+└────────────┴─────────┴─────────────────────┴─────────┴─────────┘
+┌─event_date─┬─user_id─┬───────────timestamp─┬─eventID─┬─product─┐
+│ 2019-01-30 │       1 │ 2019-01-30 08:00:00 │    1009 │ phone   │
+└────────────┴─────────┴─────────────────────┴─────────┴─────────┘
+┌─event_date─┬─user_id─┬───────────timestamp─┬─eventID─┬─product─┐
+│ 2019-02-01 │       1 │ 2019-02-01 08:00:00 │    1010 │ phone   │
+└────────────┴─────────┴─────────────────────┴─────────┴─────────┘
+</code></pre></div> <p>了解用户<code class=syntax>user_id</code> 可以在2019的1-2月期间通过链条多远。</p> <p>查询:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=k>level</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=k>count</span><span class=p>()</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>c</span><span class=w></span>
+<span class=k>FROM</span><span class=w></span>
+<span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>SELECT</span><span class=w></span>
+<span class=w>        </span><span class=n>user_id</span><span class=p>,</span><span class=w></span>
+<span class=w>        </span><span class=n>windowFunnel</span><span class=p>(</span><span class=mi>6048000000000000</span><span class=p>)(</span><span class=k>timestamp</span><span class=p>,</span><span class=w> </span><span class=n>eventID</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1003</span><span class=p>,</span><span class=w> </span><span class=n>eventID</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1009</span><span class=p>,</span><span class=w> </span><span class=n>eventID</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1007</span><span class=p>,</span><span class=w> </span><span class=n>eventID</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1010</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>level</span><span class=w></span>
+<span class=w>    </span><span class=k>FROM</span><span class=w> </span><span class=n>trend</span><span class=w></span>
+<span class=w>    </span><span class=k>WHERE</span><span class=w> </span><span class=p>(</span><span class=n>event_date</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=s1>'2019-01-01'</span><span class=p>)</span><span class=w> </span><span class=k>AND</span><span class=w> </span><span class=p>(</span><span class=n>event_date</span><span class=w> </span><span class=o>&lt;=</span><span class=w> </span><span class=s1>'2019-02-02'</span><span class=p>)</span><span class=w></span>
+<span class=w>    </span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>user_id</span><span class=w></span>
+<span class=p>)</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>level</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>level</span><span class=w> </span><span class=k>ASC</span><span class=w></span>
+</code></pre></div> <p>结果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─level─┬─c─┐
+│     4 │ 1 │
+└───────┴───┘
+</code></pre></div> <h2 id=retention>Retention<a class=headerlink href=../amp/#retention title="Permanent link"> </a></h2> <p>该函数将一组条件作为参数，类型为1到32个 <code class=syntax>UInt8</code> 类型的参数，用来表示事件是否满足特定条件。<br> 任何条件都可以指定为参数（如 <a href=../../../statements/select/where/amp/#select-where>WHERE</a>).</p> <p>除了第一个以外，条件成对适用：如果第一个和第二个是真的，第二个结果将是真的，如果第一个和第三个是真的，第三个结果将是真的，等等。</p> <p><strong>语法</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>retention</span><span class=p>(</span><span class=n>cond1</span><span class=p>,</span><span class=w> </span><span class=n>cond2</span><span class=p>,</span><span class=w> </span><span class=p>...,</span><span class=w> </span><span class=n>cond32</span><span class=p>);</span><span class=w></span>
+</code></pre></div> <p><strong>参数</strong></p> <ul> <li><code class=syntax>cond</code> — 返回 <code class=syntax>UInt8</code> 结果（1或0）的表达式。</li> </ul> <p><strong>返回值</strong></p> <p>数组为1或0。</p> <ul> <li>1 — 条件满足。</li> <li>0 — 条件不满足。</li> </ul> <p>类型: <code class=syntax>UInt8</code>.</p> <p><strong>示例</strong></p> <p>让我们考虑使用 <code class=syntax>retention</code> 功能的一个例子 ，以确定网站流量。</p> <p><strong>1.</strong> 举例说明，先创建一张表。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>retention_test</span><span class=p>(</span><span class=nb>date</span><span class=w> </span><span class=nb>Date</span><span class=p>,</span><span class=w> </span><span class=n>uid</span><span class=w> </span><span class=n>Int32</span><span class=p>)</span><span class=w> </span><span class=n>ENGINE</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Memory</span><span class=p>;</span><span class=w></span>
+
+<span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=n>retention_test</span><span class=w> </span><span class=k>SELECT</span><span class=w> </span><span class=s1>'2020-01-01'</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>5</span><span class=p>);</span><span class=w></span>
+<span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=n>retention_test</span><span class=w> </span><span class=k>SELECT</span><span class=w> </span><span class=s1>'2020-01-02'</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>10</span><span class=p>);</span><span class=w></span>
+<span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=n>retention_test</span><span class=w> </span><span class=k>SELECT</span><span class=w> </span><span class=s1>'2020-01-03'</span><span class=p>,</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>15</span><span class=p>);</span><span class=w></span>
+</code></pre></div> <p>输入表:</p> <p>查询:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>retention_test</span><span class=w></span>
+</code></pre></div> <p>结果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌───────date─┬─uid─┐
+│ 2020-01-01 │   0 │
+│ 2020-01-01 │   1 │
+│ 2020-01-01 │   2 │
+│ 2020-01-01 │   3 │
+│ 2020-01-01 │   4 │
+└────────────┴─────┘
+┌───────date─┬─uid─┐
+│ 2020-01-02 │   0 │
+│ 2020-01-02 │   1 │
+│ 2020-01-02 │   2 │
+│ 2020-01-02 │   3 │
+│ 2020-01-02 │   4 │
+│ 2020-01-02 │   5 │
+│ 2020-01-02 │   6 │
+│ 2020-01-02 │   7 │
+│ 2020-01-02 │   8 │
+│ 2020-01-02 │   9 │
+└────────────┴─────┘
+┌───────date─┬─uid─┐
+│ 2020-01-03 │   0 │
+│ 2020-01-03 │   1 │
+│ 2020-01-03 │   2 │
+│ 2020-01-03 │   3 │
+│ 2020-01-03 │   4 │
+│ 2020-01-03 │   5 │
+│ 2020-01-03 │   6 │
+│ 2020-01-03 │   7 │
+│ 2020-01-03 │   8 │
+│ 2020-01-03 │   9 │
+│ 2020-01-03 │  10 │
+│ 2020-01-03 │  11 │
+│ 2020-01-03 │  12 │
+│ 2020-01-03 │  13 │
+│ 2020-01-03 │  14 │
+└────────────┴─────┘
+</code></pre></div> <p><strong>2.</strong> 按唯一ID <code class=syntax>uid</code> 对用户进行分组，使用 <code class=syntax>retention</code> 功能。</p> <p>查询:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>uid</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>retention</span><span class=p>(</span><span class=nb>date</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'2020-01-01'</span><span class=p>,</span><span class=w> </span><span class=nb>date</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'2020-01-02'</span><span class=p>,</span><span class=w> </span><span class=nb>date</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'2020-01-03'</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>r</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>retention_test</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=nb>date</span><span class=w> </span><span class=k>IN</span><span class=w> </span><span class=p>(</span><span class=s1>'2020-01-01'</span><span class=p>,</span><span class=w> </span><span class=s1>'2020-01-02'</span><span class=p>,</span><span class=w> </span><span class=s1>'2020-01-03'</span><span class=p>)</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>uid</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>uid</span><span class=w> </span><span class=k>ASC</span><span class=w></span>
+</code></pre></div> <p>结果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─uid─┬─r───────┐
+│   0 │ [1,1,1] │
+│   1 │ [1,1,1] │
+│   2 │ [1,1,1] │
+│   3 │ [1,1,1] │
+│   4 │ [1,1,1] │
+│   5 │ [0,0,0] │
+│   6 │ [0,0,0] │
+│   7 │ [0,0,0] │
+│   8 │ [0,0,0] │
+│   9 │ [0,0,0] │
+│  10 │ [0,0,0] │
+│  11 │ [0,0,0] │
+│  12 │ [0,0,0] │
+│  13 │ [0,0,0] │
+│  14 │ [0,0,0] │
+└─────┴─────────┘
+</code></pre></div> <p><strong>3.</strong> 计算每天的现场访问总数。</p> <p>查询:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=k>sum</span><span class=p>(</span><span class=n>r</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>r1</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=k>sum</span><span class=p>(</span><span class=n>r</span><span class=p>[</span><span class=mi>2</span><span class=p>])</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>r2</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=k>sum</span><span class=p>(</span><span class=n>r</span><span class=p>[</span><span class=mi>3</span><span class=p>])</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>r3</span><span class=w></span>
+<span class=k>FROM</span><span class=w></span>
+<span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>SELECT</span><span class=w></span>
+<span class=w>        </span><span class=n>uid</span><span class=p>,</span><span class=w></span>
+<span class=w>        </span><span class=n>retention</span><span class=p>(</span><span class=nb>date</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'2020-01-01'</span><span class=p>,</span><span class=w> </span><span class=nb>date</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'2020-01-02'</span><span class=p>,</span><span class=w> </span><span class=nb>date</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'2020-01-03'</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>r</span><span class=w></span>
+<span class=w>    </span><span class=k>FROM</span><span class=w> </span><span class=n>retention_test</span><span class=w></span>
+<span class=w>    </span><span class=k>WHERE</span><span class=w> </span><span class=nb>date</span><span class=w> </span><span class=k>IN</span><span class=w> </span><span class=p>(</span><span class=s1>'2020-01-01'</span><span class=p>,</span><span class=w> </span><span class=s1>'2020-01-02'</span><span class=p>,</span><span class=w> </span><span class=s1>'2020-01-03'</span><span class=p>)</span><span class=w></span>
+<span class=w>    </span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>uid</span><span class=w></span>
+<span class=p>)</span><span class=w></span>
+</code></pre></div> <p>结果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─r1─┬─r2─┬─r3─┐
+│  5 │  5 │  5 │
+└────┴────┴────┘
+</code></pre></div> <p>条件:</p> <ul> <li><code class=syntax>r1</code>-2020-01-01期间访问该网站的独立访问者数量（ <code class=syntax>cond1</code> 条件）。</li> <li><code class=syntax>r2</code>-在2020-01-01和2020-01-02之间的特定时间段内访问该网站的唯一访问者的数量 (<code class=syntax>cond1</code> 和 <code class=syntax>cond2</code> 条件）。</li> <li><code class=syntax>r3</code>-在2020-01-01和2020-01-03之间的特定时间段内访问该网站的唯一访问者的数量 (<code class=syntax>cond1</code> 和 <code class=syntax>cond3</code> 条件）。</li> </ul> <h2 id=uniquptonx>uniqUpTo(N)(x)<a class=headerlink href=../amp/#uniquptonx title="Permanent link"> </a></h2> <p>计算小于或者等于N的不同参数的个数。如果结果大于N，那返回N+1。</p> <p>建议使用较小的Ns，比如：10。N的最大值为100。</p> <p>对于聚合函数的状态，它使用的内存量等于1+N*一个字节值的大小。<br> 对于字符串，它存储8个字节的非加密哈希。 也就是说，计算是近似的字符串。</p> <p>该函数也适用于多个参数。</p> <p>它的工作速度尽可能快，除了使用较大的N值并且唯一值的数量略小于N的情况。</p> <p>用法示例:</p> <div class=codehilite><pre><span></span><code class=syntax>问题：产出一个不少于五个唯一用户的关键字报告
+解决方案： 写group by查询语句 HAVING uniqUpTo(4)(UserID) &gt;= 5
+</code></pre></div> <h2 id=summapfilteredkeys-to-keepkeys-values>sumMapFiltered(keys_to_keep)(keys, values)<a class=headerlink href=../amp/#summapfilteredkeys-to-keepkeys-values title="Permanent link"> </a></h2> <p>和 <a href=../../reference/summap/amp/#agg_functions-summap>sumMap</a> 基本一致， 除了一个键数组作为参数传递。这在使用高基数key时尤其有用。</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/c60fd44c5b70c56ff0f9c7fc538e58c6c8186aea" rel="external nofollow noreferrer" target="_blank" class="text-reset">c60fd44c</a>
+    
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/zh/sql-reference/aggregate-functions/parametric-functions/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>

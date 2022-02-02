@@ -1,0 +1,324 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Package Repository Behind CDN</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="Package Repository Behind CDN"/>
+<meta property="og:description" content="On initial open-source launch, ClickHouse packages were published at an independent repository implemented on Yandex inf" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2020/package-repository-behind-cdn/main.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2020/package-repository-behind-cdn/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2020/package-repository-behind-cdn/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Package Repository Behind CDN",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2020/package-repository-behind-cdn/",
+
+"datePublished": "2020-07-02",
+"dateModified": "2020-07-02",
+
+"image": "https://blog-images.clickhouse.com/en/2020/package-repository-behind-cdn/main.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="On initial open-source launch, ClickHouse packages were published at an independent repository implemented on Yandex inf" />
+
+<meta name="keywords"
+      content="article, CDN, Cloudflare, repository, deb, rpm, tgz" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2020/package-repository-behind-cdn/main.jpg" alt="Package Repository Behind CDN" title="Package Repository Behind CDN" />
+            
+            <h1 class="display-2 mt-3 mb-5">Package Repository Behind CDN</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>On initial open-source launch, ClickHouse packages were published at an independent repository implemented on Yandex infrastructure. We'd love to use the default repositories of Linux distributions, but, unfortunately, they have their own strict rules on third-party library usage and software compilation options. These rules happen to contradict with how ClickHouse is produced. In 2018 ClickHouse was added to <a href="https://packages.debian.org/sid/clickhouse-server" rel="external nofollow noreferrer" target="_blank">official Debian repository</a> as an experiment, but it didn't get much traction. Adaptation to those rules ended up producing more like a demo version of ClickHouse with crippled performance and limited features.</p>
+<div class="admonition info alert pb-0 mb-4 alert-primary" role="alert">
+<p class="admonition-title alert-heading display-4 text-reset mb-2">TL;DR</p>
+<p>If you have configured your system to use <a class="alert-link" href="http://repo.yandex.ru/clickhouse/" target="_blank">http://repo.yandex.ru/clickhouse/</a> for fetching ClickHouse packages, replace it with <a class="alert-link" href="https://repo.clickhouse.com/" target="_blank">https://repo.clickhouse.com/</a>.</p>
+</div>
+<p>Distributing packages via our own repository was working totally fine until ClickHouse has started getting traction in countries far from Moscow, most notably the USA and China. Downloading large files of packages from remote location was especially painful for Chinese ClickHouse users, likely due to how China is connected to the rest of the world via its famous firewall. But at least it worked (with high latencies and low throughput), while in some smaller countries there was completely no access to this repository and people living there had to host their own mirrors on neutral ground as a workaround.</p>
+<p>Earlier this year we made the ClickHouse official website to be served via global CDN by <a href="https://www.cloudflare.com" rel="external nofollow noreferrer" target="_blank">Cloudflare</a> on a <code class="syntax">clickhouse.com</code> domain. To solve the download issues discussed above, we have also configured a new location for ClickHouse packages that are also served by Cloudflare at <a href="https://repo.clickhouse.com" rel="external nofollow noreferrer" target="_blank">repo.clickhouse.com</a>. It used to have some quirks, but now it seems to be working fine while improving throughput and latencies in remote geographical locations by over an order of magnitude.</p>
+<h2 id="switching-to-repository-behind-cdn">Switching To Repository Behind CDN<a class="headerlink" href="#switching-to-repository-behind-cdn" title="Permanent link"> </a></h2>
+<p>This transition has some more benefits besides improving the package fetching, but let's get back to them in a minute. One of the key reasons for this post is that we can't actually influence the repository configuration of ClickHouse users. We have updated all instructions, but for people who have followed these instructions earlier, <strong>action is required</strong> to use the new location behind CDN. Basically, you need to replace <code class="syntax">http://repo.yandex.ru/clickhouse/</code> with <code class="syntax">https://repo.clickhouse.com/</code> in your package manager configuration.</p>
+<p>One-liner for Ubuntu or Debian:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">sudo apt-get install apt-transport-https ca-certificates <span class="o">&amp;&amp;</span> sudo perl -pi -e <span class="s1">'s|http://repo.yandex.ru/clickhouse/|https://repo.clickhouse.com/|g'</span> /etc/apt/sources.list.d/clickhouse.list <span class="o">&amp;&amp;</span> sudo apt-get update
+</code></pre></div>
+<p>One-liner for RedHat or CentOS:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">sudo perl -pi -e <span class="s1">'s|http://repo.yandex.ru/clickhouse/|https://repo.clickhouse.com/|g'</span> /etc/yum.repos.d/clickhouse*
+</code></pre></div>
+<p>As you might have noticed, the domain name is not the only thing that has changed: the new URL uses <code class="syntax">https://</code> protocol. Usually, it's considered less important for package repositories compared to normal websites because most package managers check <a href="https://en.wikipedia.org/wiki/GNU_Privacy_Guard" rel="external nofollow noreferrer" target="_blank">GPG signatures</a> for what they download anyway. However it still has some benefits: for example, it's not so uncommon for people to download packages via browser, <code class="syntax">curl</code> or <code class="syntax">wget</code>, and install them manually (while for <a href="https://repo.clickhouse.com/tgz/" rel="external nofollow noreferrer" target="_blank">tgz</a> builds it's the only option). Fewer opportunities for sniffing traffic can't hurt either. The downside is that <code class="syntax">apt</code> in some Debian flavors has no HTTPS support by default and needs a couple more packages to be installed (<code class="syntax">apt-transport-https</code> and <code class="syntax">ca-certificates</code>).</p>
+<h2 id="investigating-repository-usage">Investigating Repository Usage<a class="headerlink" href="#investigating-repository-usage" title="Permanent link"> </a></h2>
+<p>The next important thing we obtained by using Cloudflare for our package repository is observability. Of course the same could have been implemented from scratch, but it'd require extra resources to develop and maintain, while Cloudflare provides quite rich tools for analyzing what's going on in your domains.</p>
+<div class="admonition info alert pb-0 mb-4 alert-primary" role="alert">
+<p class="admonition-title alert-heading display-4 text-reset mb-2">Did you know?</p>
+<p>It's kind of off-topic, but those Cloudflare features are internally based on ClickHouse, see their <a class="alert-link" href="https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/" rel="external nofollow noreferrer" target="_blank">HTTP analytics</a> and <a class="alert-link" href="https://blog.cloudflare.com/how-cloudflare-analyzes-1m-dns-queries-per-second/" rel="external nofollow noreferrer" target="_blank">DNS analytics</a> blog posts.</p>
+</div>
+<p>Just a few weeks ago they have also added <a href="https://blog.cloudflare.com/introducing-cache-analytics/" rel="external nofollow noreferrer" target="_blank">cache analytics</a> feature, which allowed to drill into how effectively the content is cached on CDN edges and improve the CDN configuration accordingly. For example, it allowed debugging some inconsistencies in cached repository metadata.</p>
+<h2 id="digging-deeper">Digging Deeper<a class="headerlink" href="#digging-deeper" title="Permanent link"> </a></h2>
+<p>All those built-in observability tools provided by Cloudflare share one weak point: they are purely technical and generic, without any domain-specific awareness. They excel at debugging low-level issues, but it's hard to get a higher-level picture based on them. With our package repository scenario, we're not so interested in frequent metadata update requests, but we'd like to see reports on package downloads by version, kind, and so on. We definitely didn't want to operate a separate infrastructure to get those reports, but given there was no out-of-the-box solution, we had to be creative and managed to find a cool middle ground.</p>
+<p>Ever heard the <a href="https://en.wikipedia.org/wiki/Serverless_computing" rel="external nofollow noreferrer" target="_blank">“serverless computing”</a> hype recently? That was the basic idea: let's assemble a bunch of serverless or managed services to get what we want, without any dedicated servers. The plan was pretty straightforward:</p>
+<ol>
+<li>Dump details about package downloads to a ClickHouse database.</li>
+<li>Connect some <a href="https://en.wikipedia.org/wiki/Business_intelligence" rel="external nofollow noreferrer" target="_blank">BI</a> tool to that ClickHouse database and configure required charts/dashboards.</li>
+</ol>
+<p>Implementing it required a little bit of research, but the overall solution appeared to be quite elegant:</p>
+<ol>
+<li>For a ClickHouse database, it was a no-brainer to use <a href="https://cloud.yandex.com/services/managed-clickhouse" rel="external nofollow noreferrer" target="_blank">Yandex Managed Service for ClickHouse</a>. With a few clicks in the admin interface, we got a running ClickHouse cluster with properly configured high-availability and automated backups. Ad-hoc SQL queries could be run from that same admin interface.</li>
+<li>Cloudflare allows customers to run custom code on CDN edge servers in a serverless fashion (so-called <a href="https://workers.cloudflare.com" rel="external nofollow noreferrer" target="_blank">workers</a>). Those workers are executed in a tight sandbox which doesn't allow for anything complicated, but this feature fits perfectly to gather some data about download events and send it somewhere else. This is normally a paid feature, but special thanks to Connor Peshek from Cloudflare who arranged a lot of extra features for free on <code class="syntax">clickhouse.com</code> when we have applied to their <a href="https://developers.cloudflare.com/sponsorships/" rel="external nofollow noreferrer" target="_blank">open-source support program</a>.</li>
+<li>To avoid publicly exposing yet another ClickHouse instance (like we did with <strong><a href="/docs/en/getting-started/playground/">playground</a></strong> regardless of being a 100% anti-pattern), the download event data is sent to <a href="https://cloud.yandex.com/services/functions" rel="external nofollow noreferrer" target="_blank">Yandex Cloud Functions</a>. It's a generic serverless computing framework at Yandex Cloud, which also allows running custom code without maintaining any servers, but with less strict sandbox limitations and direct access to other cloud services like Managed ClickHouse that was needed for this task.</li>
+<li>It didn't require much effort to choose a visualization tool either, as <a href="https://cloud.yandex.com/docs/datalens/" rel="external nofollow noreferrer" target="_blank">DataLens BI</a> is tightly integrated with ClickHouse, capable to build what's required right from the UI, and satisfies the “no servers” requirement because it's a SaaS solution. Public access option for charts and dashboards have also appeared to be handy.</li>
+</ol>
+<p>There's not so much data collected yet, but here's a live example of how the resulting data visualization looks like. For example, here we can see that LTS releases of ClickHouse are not so popular yet <em>(yes, we have <a href="https://clickhouse.com/docs/en/faq/operations/production/" target="_blank">LTS releases</a>!)</em>:<br/>
+<div class="embed-responsive embed-responsive-16by9"><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1" alt="iframe" class="embed-responsive-item" frameborder="0" src="https://datalens.yandex/qk01mwxkgiysm?_embedded=1"></iframe></div></p>
+<p>While here we confirmed that <code class="syntax">rpm</code> is at least as popular as <code class="syntax">deb</code>:<br/>
+<div class="embed-responsive embed-responsive-16by9"><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1" alt="iframe" class="embed-responsive-item" frameborder="0" src="https://datalens.yandex/lfvldsf92i2uh?_embedded=1"></iframe></div></p>
+<p>Or you can take a look at all key charts for <code class="syntax">repo.clickhouse.com</code> together on a handy <strong><a href="https://datalens.yandex/pjzq4rot3t2ql" rel="external nofollow noreferrer" target="_blank">dashboard</a></strong> with a filtering possibility.</p>
+<h2 id="lessons-learned">Lessons Learned<a class="headerlink" href="#lessons-learned" title="Permanent link"> </a></h2>
+<ul>
+<li>CDN is a must-have if you want people from all over the world to download some artifacts that you produce. Beware the huge pay-for-traffic bills from most CDN providers though.</li>
+<li>Generic technical system metrics and drill-downs are a good starting point, but not always enough.</li>
+<li>Serverless is not a myth. Nowadays it is indeed possible to build useful products by just integrating various infrastructure services together, without any dedicated servers to take care of.</li>
+</ul>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=Package%20Repository%20Behind%20CDN+https%3A//clickhouse.com/blog/en/2020/package-repository-behind-cdn/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=Package%20Repository%20Behind%20CDN&u=https%3A//clickhouse.com/blog/en/2020/package-repository-behind-cdn/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=Package%20Repository%20Behind%20CDN&url=https%3A//clickhouse.com/blog/en/2020/package-repository-behind-cdn/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Ivan Blinkov</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2020-07-02</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        article
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        CDN
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        Cloudflare
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        repository
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        deb
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        rpm
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        tgz
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

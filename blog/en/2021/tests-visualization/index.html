@@ -1,0 +1,290 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Decorating a Christmas Tree With the Help Of Flaky Tests</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="Decorating a Christmas Tree With the Help Of Flaky Tests"/>
+<meta property="og:description" content="Test suites and testing infrastructure are one of the main assets of ClickHouse. We have tons of functional, integration" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2021/tests-visualization/tests.png" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2021/tests-visualization/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2021/tests-visualization/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Decorating a Christmas Tree With the Help Of Flaky Tests",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2021/tests-visualization/",
+
+"datePublished": "2021-12-27",
+"dateModified": "2021-12-27",
+
+"image": "https://blog-images.clickhouse.com/en/2021/tests-visualization/tests.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="Test suites and testing infrastructure are one of the main assets of ClickHouse. We have tons of functional, integration" />
+
+<meta name="keywords"
+      content="tests, ci, flaky, christmas, visualization" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2021/tests-visualization/tests.png" alt="Decorating a Christmas Tree With the Help Of Flaky Tests" title="Decorating a Christmas Tree With the Help Of Flaky Tests" />
+            
+            <h1 class="display-2 mt-3 mb-5">Decorating a Christmas Tree With the Help Of Flaky Tests</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>Test suites and testing infrastructure are one of the main assets of ClickHouse. We have tons of functional, integration, unit, performance, stress and fuzz tests. Tests are run on a per commit basis and results are publicly available.</p>
+<p>We also save the results of all test runs into the database in ClickHouse. We started collecting results in June 2020, and we have 1 777 608 240 records so far. Now we run around 5 to 9 million tests every day.</p>
+<p>Tests are good (in general). A good test suite allows for fast development iterations, stable releases, and to accept more contributions from the community. We love tests. If there's something strange in ClickHouse, what are we gonna do? Write more tests.</p>
+<p>Some tests can be flaky. The reasons for flakiness are uncountable - most of them are simple timing issues in the test script itself, but sometimes if a test has failed one of a thousand times it can uncover subtle logic errors in code.</p>
+<p>The problem is how to deal with flaky tests. Some people suggest automatically muting the "annoying" flaky tests. Or adding automatic retries in case of failure. We believe that this is all wrong. Instead of trying to ignore flaky tests, we do the opposite: we put maximum effort into making the tests even more flaky!</p>
+<p>Our recipes for flaky tests:<br/>
+— never mute or restart them; if the test failed once, always look and investigate the cause;<br/>
+— randomize the environment for every test run so the test will have more possible reasons to fail;<br/>
+— if new tests are added, run them 100 times and if at least one fails, do not merge the pull request;<br/>
+— if new tests are added, use them as a corpus for fuzzing - it will uncover corner cases even if author did not write tests for them;<br/>
+— <a href="https://github.com/ClickHouse/ClickHouse/blob/master/src/Common/ThreadFuzzer.h" rel="external nofollow noreferrer" target="_blank">randomize thread scheduling</a> and add random sleeps and switching between CPU cores at random places and before and after mutex locks/unlocks;<br/>
+— run everything in parallel on slow machines;</p>
+<p>Key point: to prevent flaky tests, we make our tests as flaky as possible.</p>
+<h2 id="nice-way-to-visualize-flaky-tests">Nice Way To Visualize Flaky Tests<a class="headerlink" href="#nice-way-to-visualize-flaky-tests" title="Permanent link"> </a></h2>
+<p>There is a test suite named "<a href="https://github.com/ClickHouse/ClickHouse/tree/master/tests/queries/0_stateless" rel="external nofollow noreferrer" target="_blank">functional stateless tests</a>" that has 3772 tests. For every day since 2020-06-13 (561 days) and every test (3772 tests), I drew a picture of size 561x3772 where a pixel is green if all test runs finished successfully in the master branch during this day (for all commits and all combinations: release, debug+assertions, ASan, MSan, TSan, UBSan), and a pixel is red if at least one run failed. The pixel will be transparent if the test did not exist that day.</p>
+<p>This visualization is a toy that I've made for fun:</p>
+<p><img alt="Visualization" class="img-fluid" src="https://blog-images.clickhouse.com/en/2021/tests-visualization/tree_half.png"/></p>
+<p>It looks like a Christmas Tree (you need a bit of imagination). If you have a different kind of imagination, you can see it as a green field with flowers.</p>
+<p>The time is from left to right. The tests are numbered with non-unique numbers (new tests usually get larger numbers), and these numbers are on the vertical axis (newer tests on top).</p>
+<p>If you see red dots in a horizontal line - it is a flaky test. If you see red dots in a vertical line - it means that one day we accidentally broke the master branch. If you see black horizontal lines or cuts in the tree - it means that the tests were added with some old numbers, most likely because some long living feature branch was merged. If you see black vertical lines - it means that some days tests were not run.</p>
+<p>The velocity of adding new tests is represented by how tall and narrow the Christmas tree is. When we add a large number of tests, the tree grows with almost vertical slope.</p>
+<p>The image is prepared by <a href="https://github.com/ClickHouse/ClickHouse/pull/33185" rel="external nofollow noreferrer" target="_blank">HTML page</a> with some JavaScript that is querying a ClickHouse database directly and writing to a canvas. It took around ten seconds to build this picture. I also prepared an <a href="https://blog-images.clickhouse.com/en/2021/tests-visualization/demo.html" rel="external nofollow noreferrer" target="_blank">interactive version</a> with already-saved data where you can play and find your favorite tests.</p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=Decorating%20a%20Christmas%20Tree%20With%20the%20Help%20Of%20Flaky%20Tests+https%3A//clickhouse.com/blog/en/2021/tests-visualization/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=Decorating%20a%20Christmas%20Tree%20With%20the%20Help%20Of%20Flaky%20Tests&u=https%3A//clickhouse.com/blog/en/2021/tests-visualization/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=Decorating%20a%20Christmas%20Tree%20With%20the%20Help%20Of%20Flaky%20Tests&url=https%3A//clickhouse.com/blog/en/2021/tests-visualization/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Alexey Milovidov</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2021-12-27</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        tests
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        ci
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        flaky
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        christmas
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        visualization
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

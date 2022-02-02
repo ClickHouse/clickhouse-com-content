@@ -1,0 +1,284 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>ClickHouse v21.11 Released</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="ClickHouse v21.11 Released"/>
+<meta property="og:description" content="We're continuing our monthly release cadence and blog updates at ClickHouse, Inc. The 21.11 release includes asynchronou" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2021/clickhouse-v21-11/featured-dog.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2021/clickhouse-v21.11-released/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2021/clickhouse-v21.11-released/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "ClickHouse v21.11 Released",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2021/clickhouse-v21.11-released/",
+
+"datePublished": "2021-11-11",
+"dateModified": "2021-11-11",
+
+"image": "https://blog-images.clickhouse.com/en/2021/clickhouse-v21-11/featured-dog.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="We're continuing our monthly release cadence and blog updates at ClickHouse, Inc. The 21.11 release includes asynchronou" />
+
+<meta name="keywords"
+      content="company, community" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2021/clickhouse-v21-11/featured-dog.jpg" alt="ClickHouse v21.11 Released" title="ClickHouse v21.11 Released" />
+            
+            <h1 class="display-2 mt-3 mb-5">ClickHouse v21.11 Released</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>We're continuing our monthly release cadence and blog updates at<a href="https://clickhouse.com/blog/en/2021/clickhouse-inc/" target="_blank"> ClickHouse, Inc</a>. The 21.11 release includes asynchronous inserts, interactive mode, UDFs, predefined connections, and compression gains. Thank you to the 142 committers and 4337 commits for making this release possible. </p>
+<p>Let's highlight some of these new exciting new capabilities in 21.11:</p>
+<h2 id="async-inserts">Async Inserts<a class="headerlink" href="#async-inserts" title="Permanent link"> </a></h2>
+<p>New asynchronous INSERT mode allows to accumulate inserted data and store it in a single batch utilizing less disk resources(IOPS) enabling support of high rate of INSERT queries. On a client it can be enabled by setting <code class="syntax">async_insert</code> for <code class="syntax">INSERT</code> queries with data inlined in a query or in a separate buffer (e.g. for <code class="syntax">INSERT</code> queries via HTTP protocol). If <code class="syntax">wait_for_async_insert</code> is true (by default) the client will wait until data will be flushed to the table. On the server-side it can be tuned by the settings <code class="syntax">async_insert_threads</code>, <code class="syntax">async_insert_max_data_size</code> and <code class="syntax">async_insert_busy_timeout_ms</code>. </p>
+<p><strong>How does this help our ClickHouse Users?</strong></p>
+<p>A notable pain point for users was around having to insert data in large batches and performance can sometimes be hindered. What if you have a monitoring use case and you want to do 1M records per second into ClickHouse; you would do large 100k record batches, but if you have 1,000 clients shipping data then that was hard to collect these batches to insert into ClickHouse. Historically to solve for this you might have to use Kafka or buffer tables to help with the balancing and insertion of data.</p>
+<p>Now, we've introduced this new mode of Async inserts where you can do a high rate of small inserts concurrently and ClickHouse will automatically group them together into batches and insert it into the table automatically. Every client will get an acknowledgement that the data was inserted successfully.</p>
+<h2 id="local-interactive-mode">Local Interactive Mode<a class="headerlink" href="#local-interactive-mode" title="Permanent link"> </a></h2>
+<p>We have added interactive mode for <code class="syntax">clickhouse-local</code> so that you can just run <code class="syntax">clickhouse-local</code> to get a command line ClickHouse interface without connecting to a server and process data from files and external data sources.</p>
+<p><strong>How does this help our ClickHouse Users?</strong></p>
+<p>What if you have an ad-hoc use case that you want to run analytics on a local file with ClickHouse? Historically, you'd have to spin up an empty ClickHouse server and connect it to the external data source that you were interested in running the query on e.g. S3, HDFS, URL's. Now with ClickHouse Local you can just run it just like a ClickHouse Client and have the same full interactive experience without any additional overhead steps around setup and ingestion of data to try out your idea or hypothesis. Hope you enjoy!</p>
+<h2 id="executable-udfs">Executable UDFs<a class="headerlink" href="#executable-udfs" title="Permanent link"> </a></h2>
+<p>Added support for executable (scriptable) user defined functions. These are UDFs that can be written in any programming language. </p>
+<p><strong>How does this help our ClickHouse Users?</strong></p>
+<p>We added UDFs in our 21.10 release. Similar to our October release we're continuing to innovate around the idea of making it more user friendly to plug in tools into ClickHouse as functions. This could be you doing an ML inference in your Python script and now you can define it as a function as available in SQL. Or, what if you wanted to do a DNS lookup? You have a domain name in a ClickHouse table and want to convert to an IP address with some function. Now just plug in an external script and this will go process and convert the domain names into IP addresses.</p>
+<h2 id="predefined-connections">Predefined Connections<a class="headerlink" href="#predefined-connections" title="Permanent link"> </a></h2>
+<p>Allow predefined connections to external data sources. This allows to avoid specifying credentials or addresses while using external data sources, they can be referenced by names instead. </p>
+<p><strong>How does this help our ClickHouse Users?</strong></p>
+<p>You're just trying to connect ClickHouse to another data source to load data, like MySQL for example, how do you do that? Before this feature you would have to handle all the credentials for MySql, use the MySQL table functions, know the user and password permissions to access certain tables, etc. Now you have a predefined required parameters inside the ClickHouse configuration and the user can just refer to this by a name e.g. MongoDB, HDFS, S3, MySQL and it's a one-time configuration going forward. </p>
+<h2 id="compression">Compression<a class="headerlink" href="#compression" title="Permanent link"> </a></h2>
+<p>Add support for compression and decompression for <code class="syntax">INTO OUTFILE</code> and <code class="syntax">FROM INFILE</code> (with autodetect or with additional optional parameter).</p>
+<p><strong>How does this help our ClickHouse Users?</strong></p>
+<p>Are you just looking to import and export data into ClickHouse more easily if you have compressed data? Before this feature you had to manually specify compression of input and output data into ClickHouse and even for stream insertion you'd still have to manage the decompression there too. Now, you can just write it as a file e.g. mytable.csv.gz --- and, go!</p>
+<p>In the last month, we've added new free Training modules including a What's New in 21.11. Take the lesson <a href="https://clickhouse.com/learn/lessons/whatsnew-clickhouse-21.11/" target="_blank">here</a>.</p>
+<h2 id="clickhouse-release-notes">ClickHouse Release Notes<a class="headerlink" href="#clickhouse-release-notes" title="Permanent link"> </a></h2>
+<p>Release 21.11</p>
+<p>Release Date: 2021-11-09</p>
+<p>Release Notes: <a href="https://github.com/ClickHouse/ClickHouse/blob/master/CHANGELOG.md" rel="external nofollow noreferrer" target="_blank">21.11</a></p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=ClickHouse%20v21.11%20Released+https%3A//clickhouse.com/blog/en/2021/clickhouse-v21.11-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=ClickHouse%20v21.11%20Released&u=https%3A//clickhouse.com/blog/en/2021/clickhouse-v21.11-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=ClickHouse%20v21.11%20Released&url=https%3A//clickhouse.com/blog/en/2021/clickhouse-v21.11-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Rich Raposa, Alexey Milovidov</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2021-11-11</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        company
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        community
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="ru" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>ClickHouse Meetup в Новосибирске, 26 июня 2019</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="ClickHouse Meetup в Новосибирске, 26 июня 2019"/>
+<meta property="og:description" content="Изюминкой второго ClickHouse митапа в Новосибирске были два низкоуровневых доклада с погружением во внутренности ClickHo" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/main.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "ClickHouse Meetup в Новосибирске, 26 июня 2019",
+"mainEntityOfPage": "https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/",
+
+"datePublished": "2019-06-05",
+"dateModified": "2019-06-05",
+
+"image": "https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/main.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="Изюминкой второго ClickHouse митапа в Новосибирске были два низкоуровневых доклада с погружением во внутренности ClickHo" />
+
+<meta name="keywords"
+      content="мероприятия, meetup, Новосибирск" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/ru/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/ru/" class="text-reset text-decoration-none">
+                    Блог ClickHouse
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/ru/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/ru.svg" alt="Русский" title="Русский" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/main.jpg" alt="ClickHouse Meetup в Новосибирске, 26 июня 2019" title="ClickHouse Meetup в Новосибирске, 26 июня 2019" />
+            
+            <h1 class="display-2 mt-3 mb-5">ClickHouse Meetup в Новосибирске, 26 июня 2019</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>Изюминкой второго ClickHouse митапа в Новосибирске были два низкоуровневых доклада с погружением во внутренности ClickHouse, а остальная часть контента была очень прикладной с конкретными сценариями. Любезно предоставленный S7 зал на сто человек был полон до самого завершения последнего доклада где-то ближе к полуночи.</p>
+<p><div class="embed-responsive embed-responsive-16by9"><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1" alt="iframe" class="embed-responsive-item" frameborder="0" src="https://www.youtube.com/embed/videoseries?list=PL0Z2YDlm0b3ionSVt-NYC9Vu_83xxhb4J"></iframe></div></p>
+<p>Как обычно, <a href="https://presentations.clickhouse.com/meetup25" rel="external nofollow noreferrer" target="_blank">все слайды опубликованы на GitHub</a>.</p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=ClickHouse%20Meetup%20%D0%B2%20%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%B8%D0%B1%D0%B8%D1%80%D1%81%D0%BA%D0%B5%2C%2026%20%D0%B8%D1%8E%D0%BD%D1%8F%202019+https%3A//clickhouse.com/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=ClickHouse%20Meetup%20%D0%B2%20%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%B8%D0%B1%D0%B8%D1%80%D1%81%D0%BA%D0%B5%2C%2026%20%D0%B8%D1%8E%D0%BD%D1%8F%202019&u=https%3A//clickhouse.com/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=ClickHouse%20Meetup%20%D0%B2%20%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%B8%D0%B1%D0%B8%D1%80%D1%81%D0%BA%D0%B5%2C%2026%20%D0%B8%D1%8E%D0%BD%D1%8F%202019&url=https%3A//clickhouse.com/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2019-06-05</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        мероприятия
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        meetup
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        Новосибирск
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

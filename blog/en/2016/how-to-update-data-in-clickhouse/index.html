@@ -1,0 +1,385 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>How to Update Data in ClickHouse</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="How to Update Data in ClickHouse"/>
+<meta property="og:description" content="There is no UPDATE or DELETE commands in ClickHouse at the moment. And that's not because we have some religious believe" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2016/how-to-update-data-in-clickhouse/main.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2016/how-to-update-data-in-clickhouse/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2016/how-to-update-data-in-clickhouse/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "How to Update Data in ClickHouse",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2016/how-to-update-data-in-clickhouse/",
+
+"datePublished": "2016-11-20",
+"dateModified": "2016-11-20",
+
+"image": "https://blog-images.clickhouse.com/en/2016/how-to-update-data-in-clickhouse/main.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="There is no UPDATE or DELETE commands in ClickHouse at the moment. And that's not because we have some religious believe" />
+
+<meta name="keywords"
+      content="features, update, delete, CollapsingMergeTree, partitions" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2016/how-to-update-data-in-clickhouse/main.jpg" alt="How to Update Data in ClickHouse" title="How to Update Data in ClickHouse" />
+            
+            <h1 class="display-2 mt-3 mb-5">How to Update Data in ClickHouse</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>There is no UPDATE or DELETE commands in ClickHouse at the moment. And that's not because we have some religious believes. ClickHouse is performance-oriented system; and data modifications are hard to store and process optimally in terms of performance.</p>
+<p>But sometimes we have to modify data. And sometimes data should be updated in realtime. Don't worry, we have these cases covered.</p>
+<h2 id="work-with-partitions">Work with Partitions<a class="headerlink" href="#work-with-partitions" title="Permanent link"> </a></h2>
+<p>Data in MergeTree engine family is partitioned by partition_key engine parameter. MergeTree split all the data by this partition key. Partition size is one month.</p>
+<p>That's very useful in many terms. Especially when we're talking about data modification.</p>
+<h2 id="yandex-metrica-hits-table">Yandex.Metrica "hits" Table<a class="headerlink" href="#yandex-metrica-hits-table" title="Permanent link"> </a></h2>
+<p>Let's look at an example on Yandex.Metrica server mtlog02-01-1 which store some Yandex.Metrica data for year 2013. Table we are looking at contains user events we call “hits”. This is the engine description for hits table:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">ENGINE = ReplicatedMergeTree(
+    '/clickhouse/tables/{layer}-{shard}/hits', -- zookeeper path
+    '{replica}', -- settings in config describing replicas
+    EventDate, -- partition key column
+    intHash32(UserID), -- sampling key
+    (CounterID, EventDate, intHash32(UserID), WatchID), -- index
+    8192 -- index granularity
+)
+</code></pre></div>
+<p>You can see that the partition key column is EventDate. That means that all the data will be splitted by months using this column.</p>
+<p>With this SQL we can get partitions list and some stats about current partitions:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="n">partition</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="k">count</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">number_of_parts</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">formatReadableSize</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">bytes</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sum_size</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">parts</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span>
+<span class="w">    </span><span class="n">active</span><span class="w"> </span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'merge'</span><span class="w"> </span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'hits'</span><span class="w"> </span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">partition</span><span class="w"> </span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">partition</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─partition─┬─number_of_parts─┬─sum_size───┐
+│ 201306    │               1 │ 191.34 GiB │
+│ 201307    │               4 │ 537.86 GiB │
+│ 201308    │               6 │ 608.77 GiB │
+│ 201309    │               5 │ 658.68 GiB │    
+│ 201310    │               5 │ 768.74 GiB │
+│ 201311    │               5 │ 654.61 GiB │
+└───────────┴─────────────────┴────────────┘
+</code></pre></div>
+<p>There are 6 partitions with a few parts in each of them. Each partition is around 600 Gb of data. Partition is strictly one piece of data for partition key, here we can see that it is months. Part is one piece of data inside partition. Basically it's one node of LSMT structure, so there are not so many of them, especially for old data. If there are too many of them, they merge and form bigger ones.</p>
+<h2 id="partition-operations">Partition Operations<a class="headerlink" href="#partition-operations" title="Permanent link"> </a></h2>
+<p>There is a nice set of operations to work with partitions:</p>
+<ul>
+<li><code class="syntax">DETACH PARTITION</code> - Move a partition to the 'detached' directory and forget it.</li>
+<li><code class="syntax">DROP PARTITION</code> - Delete a partition.</li>
+<li><code class="syntax">ATTACH PART|PARTITION</code> -- Add a new part or partition from the 'detached' directory to the table.</li>
+<li><code class="syntax">FREEZE PARTITION</code> - Create a backup of a partition.</li>
+<li><code class="syntax">FETCH PARTITION</code> - Download a partition from another server.</li>
+</ul>
+<p>We can do any data management operations on partitions level: move, copy and delete. Also, special DETACH and ATTACH operations are created to simplify data manipulation. DETACH detaches partition from table, moving all data to detached directory. Data is still there and you can copy it anywhere but detached data is not visible on request level. ATTACH is the opposite: attaches data from detached directory so it become visible.</p>
+<p>This attach-detach commands works almost in no time so you can make your updates almost transparently to database clients.</p>
+<p>Here is the plan how to update data using partitions:</p>
+<ul>
+<li>Create modified partition with updated data on another table</li>
+<li>Copy data for this partition to detached directory</li>
+<li><code class="syntax">DROP PARTITION</code> in main table</li>
+<li><code class="syntax">ATTACH PARTITION</code> in main table</li>
+</ul>
+<p>Partition swap especially useful for huge data updates with low frequency. But they're not so handy when you need to update a lot of data in real time.</p>
+<h2 id="update-data-on-the-fly">Update Data on the Fly<a class="headerlink" href="#update-data-on-the-fly" title="Permanent link"> </a></h2>
+<p>In Yandex.Metrica we have user sessions table. Each row is one session on a website: some pages checked, some time spent, some banners clicked. This data is updated every second: user on a website view more pages, click more buttons, and do other things. Site owner can see that actions in Yandex.Metrica interface in real time.</p>
+<p>So how do we do that?</p>
+<p>We update data not by updating that data, but adding more data about what have changed. This is usually called CRDT approach, and there is an article on Wikipedia about that.</p>
+<p>It was created to solve conflict problem in transactions but this concept also allows updating data. We use our own data model with this approach. We call it Incremental Log.</p>
+<h2 id="incremental-log">Incremental Log<a class="headerlink" href="#incremental-log" title="Permanent link"> </a></h2>
+<p>Let's look at an example.</p>
+<p>Here we have one session information with user identifier UserID, number of page viewed PageViews, time spent on site in seconds Duration. There is also Sign field, we describe it later.</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌──────────────UserID─┬─PageViews─┬─Duration─┬─Sign─┐
+│ 4324182021466249494 │         5 │      146 │    1 │
+└─────────────────────┴───────────┴──────────┴──────┘
+</code></pre></div>
+<p>And let's say we calculate some metrics over this data.</p>
+<ul>
+<li><code class="syntax">count()</code>- number of sessions</li>
+<li><code class="syntax">sum(PageViews)</code>- total number of pages all users checked</li>
+<li><code class="syntax">avg(Duration)</code> - average session duration, how long user usually spent on the website</li>
+</ul>
+<p>Let's say now we have update on that: user checked one more page, so we should change PageViews from 5 to 6 and Duration from 146 to 185.</p>
+<p>We insert two more rows:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌──────────────UserID─┬─PageViews─┬─Duration─┬─Sign─┐
+│ 4324182021466249494 │         5 │      146 │   -1 │
+│ 4324182021466249494 │         6 │      185 │    1 │
+└─────────────────────┴───────────┴──────────┴──────┘
+</code></pre></div>
+<p>First one is delete row. It's exactly the same row what we already have there but with Sign set to -1. Second one is updated row with all data set to new values.</p>
+<p>After that we have three rows of data:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌──────────────UserID─┬─PageViews─┬─Duration─┬─Sign─┐
+│ 4324182021466249494 │         5 │      146 │    1 │
+│ 4324182021466249494 │         5 │      146 │   -1 │
+│ 4324182021466249494 │         6 │      185 │    1 │
+└─────────────────────┴───────────┴──────────┴──────┘
+</code></pre></div>
+<p>The most important part is modified metrics calculation. We should update our queries like this:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"> -- number of sessions
+count() -&gt; sum(Sign)
+ -- total number of pages all users checked
+sum(PageViews) -&gt; sum(Sign * PageViews)
+ -- average session duration, how long user usually spent on the website
+avg(Duration) -&gt; sum(Sign * Duration) / sum(Sign)
+</code></pre></div>
+<p>You can see that it works as expected over this data. Deleted row 'hide' old row, same values come with + and - signs inside aggregation and annihilate each other.</p>
+<p>Moreover, it works totally fine with changing keys for grouping. If we want to group data by PageViews, all data for PageView = 5 will be 'hidden' for this rows.</p>
+<p>There are some limitations with this approach:</p>
+<ul>
+<li>It works only for metrics which can be presented through this Sign operations. It covers most cases, but it's not possible to calculate min or max values. There is an impact to uniq calculations also. But it's fine at least for Yandex.Metrica cases, and there are a lot of different analytical calculations;</li>
+<li>You need to remember somehow old value in external system doing updates, so you can insert this 'delete' rows;</li>
+<li>Some other effects; there is a <a href="https://groups.google.com/forum/#!msg/clickhouse/VixyOUD-K68/Km8EpkCyAQAJ" rel="external nofollow noreferrer" target="_blank">great answer</a> on Google Groups.</li>
+</ul>
+<h2 id="collapsingmergetree">CollapsingMergeTree<a class="headerlink" href="#collapsingmergetree" title="Permanent link"> </a></h2>
+<p>ClickHouse has support of Incremental Log model in Collapsing engines family.</p>
+<p>If you use Collapsing family, 'delete' row and old 'deleted' rows will collapse during merge process. Merge is a background process of merging data into larger chunks. Here is a great article about merges and LSMT structures.</p>
+<p>For most cases 'delete' and 'deleted' rows will be removed in terms of days. What's important here is that you will not have any significant overhead on data size. Using Sign field on selects still required.</p>
+<p>Also there is FINAL modifier available over Collapsing family. Using FINAL guarantees that user will see already collapsing data, thus using Sign field isn't required. FINAL usually make tremendous performance degradation because ClickHouse have to group data by key and delete rows during SELECT execution. But it's useful when you want to check your queries or if you want to see raw, unaggregated data in their final form.</p>
+<h2 id="future-plans">Future Plans<a class="headerlink" href="#future-plans" title="Permanent link"> </a></h2>
+<p>We know that current feature set is not enough. There are some cases which do not fit to limitations. But we have huge plans, and here are some insights what we've preparing:</p>
+<ul>
+<li>Partitions by custom key: current partitioning scheme is binded to months only. We will remove this limitation and it will be possible to create partitions by any key. All partition operations like FETCH PARTITION will be available.</li>
+<li>UPDATE and DELETE: there are a lot of issues with updates and deletes support. Performance degradation, consistency guarantees, distributed queries and more. But we believe that if you need to update few rows of data in your dataset, it should not be painful. It will be done.</li>
+</ul>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=How%20to%20Update%20Data%20in%20ClickHouse+https%3A//clickhouse.com/blog/en/2016/how-to-update-data-in-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=How%20to%20Update%20Data%20in%20ClickHouse&u=https%3A//clickhouse.com/blog/en/2016/how-to-update-data-in-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=How%20to%20Update%20Data%20in%20ClickHouse&url=https%3A//clickhouse.com/blog/en/2016/how-to-update-data-in-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2016-11-20</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        features
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        update
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        delete
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        CollapsingMergeTree
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        partitions
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

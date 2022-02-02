@@ -1,0 +1,266 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Plausible Analytics uses ClickHouse to power their privacy-friendly Google Analytics alternative</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="Plausible Analytics uses ClickHouse to power their privacy-friendly Google Analytics alternative"/>
+<meta property="og:description" content="Plausible Analytics is a lightweight, open source web analytics tool that has quickly gained popularity as the privacy-f" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/featured-cropped.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Plausible Analytics uses ClickHouse to power their privacy-friendly Google Analytics alternative",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/",
+
+"datePublished": "2021-12-08",
+"dateModified": "2021-12-08",
+
+"image": "https://blog-images.clickhouse.com/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/featured-cropped.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="Plausible Analytics is a lightweight, open source web analytics tool that has quickly gained popularity as the privacy-f" />
+
+<meta name="keywords"
+      content="company" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/featured-cropped.jpg" alt="Plausible Analytics uses ClickHouse to power their privacy-friendly Google Analytics alternative" title="Plausible Analytics uses ClickHouse to power their privacy-friendly Google Analytics alternative" />
+            
+            <h1 class="display-2 mt-3 mb-5">Plausible Analytics uses ClickHouse to power their privacy-friendly Google Analytics alternative</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>Plausible Analytics is a lightweight, open source web analytics tool that has quickly gained popularity as the privacy-friendly alternative to Google Analytics. By using Plausible Analytics, customers keep 100% ownership of their website data and protect the privacy of their visitors since there are no cookies and it is fully compliant with GDPR.</p>
+<p>Since its launch in April 2019, the analytics platform has scaled to service 5000+ paying subscribers. With an annual recurring revenue of half a million dollars, Plausible Analytics currently tracks 28,000 different websites and more than 1 billion page views per month.</p>
+<p>Marko Saric, co-founder at Plausible Analytics, said to handle this increase in volume, it became clear early on that the original architecture using Postgres to store analytics data could not handle the platform’s future growth. </p>
+<p>“We knew that if we’re going to go anywhere in the future we needed something better,” Saric said.</p>
+<h2 id="best-technical-decision-we-ever-made">“Best technical decision we ever made”<a class="headerlink" href="#best-technical-decision-we-ever-made" title="Permanent link"> </a></h2>
+<p>Through word of mouth, the Plausible team received the recommendation to try ClickHouse. They quickly noticed significant improvements in the loading speed of their dashboards. With Postgres, their dashboards were taking 5 seconds to load; Now with ClickHouse, it took less than a second. </p>
+<p>Plausible co-founder Uku Täht said the team also tried a couple of other solutions, but “Clickhouse came on top in terms of both performance and features that we would make use of,” he said.</p>
+<p>“Plausible Analytics is a lightweight product, so it is important that everything loads quickly—the dashboard, segmentation of the data, and all the cool stuff in the background. Customers don’t know what we’re doing in the background, but they know that they want a fast experience,” Saric added.</p>
+<p>“Plausible Analytics is a lightweight product, so it is important that everything loads quickly—the dashboard, segmentation of the data, and all the cool stuff in the background. Customers don’t know what we’re doing in the background, but they know that they want a fast experience,” Saric added. Using ClickHouse, Plausible Analytics is able to serve even its largest customers with ease, including the biggest customer, with 150 million pages per month. “This would not have been possible previously, it would have crashed everything, it would not have been able to load.,” Saric said. “There would have been no chance we could have had that kind of customer.”</p>
+<p>According to Täht, switching to ClickHouse was the best technical decision their team ever made. “Clickhouse is amazingly efficient, not just in terms of compute power needed but also the time that it saves us. It's very easy to work with Clickhouse. It does exactly what we need and it does it exceptionally well. It's one of those technologies that feels really simple to use but also has a rich feature set.”</p>
+<p>“I don’t think we would be able to be where we are today without ClickHouse,” Saric said. “Without switching from Postgres, Plausible would not have all this growth and new customers.”</p>
+<h2 id="about-plausible">About Plausible<a class="headerlink" href="#about-plausible" title="Permanent link"> </a></h2>
+<p>Plausible Analytics is an open-source project dedicated to making web analytics more privacy-friendly. Our mission is to reduce corporate surveillance by providing an alternative web analytics tool which doesn’t come from the AdTech world.</p>
+<p>Visit <a href="https://plausible.io/" rel="external nofollow noreferrer" target="_blank">plausible.io</a> for more information or to start a free trial.</p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=Plausible%20Analytics%20uses%20ClickHouse%20to%20power%20their%20privacy-friendly%20Google%20Analytics%20alternative+https%3A//clickhouse.com/blog/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=Plausible%20Analytics%20uses%20ClickHouse%20to%20power%20their%20privacy-friendly%20Google%20Analytics%20alternative&u=https%3A//clickhouse.com/blog/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=Plausible%20Analytics%20uses%20ClickHouse%20to%20power%20their%20privacy-friendly%20Google%20Analytics%20alternative&url=https%3A//clickhouse.com/blog/en/2021/plausible-uses-clickHouse-to-power-privacy-friendly-google-analytics-alternative/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Elissa Weve</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2021-12-08</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        company
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

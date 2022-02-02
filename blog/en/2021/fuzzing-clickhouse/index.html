@@ -1,0 +1,290 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Fuzzing ClickHouse</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="Fuzzing ClickHouse"/>
+<meta property="og:description" content="Testing is a major problem in software development: there is never enough of it. It becomes especially true for a databa" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2021/fuzzing-clickhouse/some-checks-were-not-successful.png" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2021/fuzzing-clickhouse/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2021/fuzzing-clickhouse/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Fuzzing ClickHouse",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2021/fuzzing-clickhouse/",
+
+"datePublished": "2021-03-11",
+"dateModified": "2021-03-11",
+
+"image": "https://blog-images.clickhouse.com/en/2021/fuzzing-clickhouse/some-checks-were-not-successful.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="Testing is a major problem in software development: there is never enough of it. It becomes especially true for a databa" />
+
+<meta name="keywords"
+      content="fuzzing, testing" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2021/fuzzing-clickhouse/some-checks-were-not-successful.png" alt="Fuzzing ClickHouse" title="Fuzzing ClickHouse" />
+            
+            <h1 class="display-2 mt-3 mb-5">Fuzzing ClickHouse</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>Testing is a major problem in software development: there is never enough of it. It becomes especially true for a database management system, whose task is to interpret a query language that works on the persistent state managed by the system in a distributed fashion. Each of these three functions is hard enough to test even in isolation, and it gets much worse when you combine them. As ClickHouse developers, we know this from experience. Despite a large amount of automated testing of all kinds we routinely perform as part of our continuous integration system, new bugs and regressions are creeping in. We are always looking for the ways to improve our test coverage, and this article will describe our recent development in this area — the AST-based query fuzzer.</p>
+<h2 id="how-to-test-a-sql-dbms">How to Test a SQL DBMS<a class="headerlink" href="#how-to-test-a-sql-dbms" title="Permanent link"> </a></h2>
+<p>A natural form of testing for a SQL DBMS is to create a SQL script describing the test case, and record its reference result. To test, we run the script and check that the result matches the reference. This is used in many SQL DBMS, and it is the default kind of a test you are expected to write for any ClickHouse feature or fix. Currently we have <a href="https://github.com/ClickHouse/ClickHouse/tree/master/tests/queries/0_stateless" rel="external nofollow noreferrer" target="_blank">73k lines of SQL tests alone</a>, that reach the <a href="https://clickhouse-test-reports.s3.yandex.net/0/47d684a5c35410201d4dd4f63f3287bf25cdabb7/coverage_report/test_output/index.html" rel="external nofollow noreferrer" target="_blank">code coverage of 76%</a>.</p>
+<p>This form of testing, where a developer writes a few simplified examples of how the feature can and cannot be used, is sometimes called "example-based testing". Sadly, the bugs often appear in various corner cases and intersections of features, and it is not practical to enumerate all of these cases by hand. There is a technique for automating this process, called "property-based testing". It lets you write more general tests of the form "for all values matching these specs, the result of some operation on them should match this other spec". For example, such a test can check that if you add two positive numbers, the result is greater than both of them. But you don't specify which numbers exactly, only these properties. Then, the property testing system randomly generates some examples with particular numbers that match the specification, and checks that the result also matches its specification.</p>
+<p>Property-based testing is said to be very efficient, but requires some developer effort and expertise to write the tests in a special way. There is another well-known testing technique that is in some sense a corner case of property-based testing, and that doesn't require much developer time. It is called fuzzing. When you are fuzzing your program, you feed it random inputs generated according to some grammar, and the property you are checking is that your program terminates correctly (no segfaults or assertions or other kinds of program errors). Most often, the grammar of input for fuzzing is simple — say, bit flips and additions, or maybe some dictionary. The space of possible inputs is huge, so to find interesting paths in it, fuzzing software records the code paths taken by the program under test for a particular input, and focuses on the inputs that lead to new code paths that were not seen before. It also employs some techniques for finding interesting constant values, and so on. In general, fuzzing allows you to find many interesting corner cases in your program automatically, without much developer involvement.</p>
+<p>Generating valid SQL queries with bit flips would take a long time, so there are systems that generate queries based on the SQL grammar, such as <a href="https://github.com/anse1/sqlsmith" rel="external nofollow noreferrer" target="_blank">SQLSmith</a>.  They are succesfully used for finding bugs in databases. It would be interesting to use such a system for ClickHouse, but it requires some up-front effort to support the ClickHouse SQL grammar and functions, which may be different from the standard. Also, such systems don't use any feedback, so while they are much better than systems with primitive grammar, they still might have a hard time finding interesting examples. But we already have a big corpus of human-written interesting SQL queries — it's in our regression tests. Maybe we can use them as a base for fuzzing? We tried to do this, and it turned out to be surprisingly simple and efficient.</p>
+<h2 id="ast-based-query-fuzzer">AST-based Query Fuzzer<a class="headerlink" href="#ast-based-query-fuzzer" title="Permanent link"> </a></h2>
+<p>Consider some SQL query from a regression test. After parsing, it is easy to mutate the resulting AST (abstract syntax tree, an internal representation of the parsed query) before execution to introduce random changes into the query.  For strings and arrays, we make random modifications such as inserting a random character or doubling the string. For numbers, there are well-known Bad Numbers such as 0, 1, powers of two and nearby, integer limits, <code class="syntax">NaN</code>. <code class="syntax">NaN</code>s proved to be especially efficient in finding bugs, because you can often have some alternative branches in your numeric code, but for a <code class="syntax">NaN</code>, both branches hold (or not) simultaneously, so this leads to nasty effects. </p>
+<p>Another interesting thing we can do is change the arguments of functions, or the list of expressions in <code class="syntax">SELECT</code>, <code class="syntax">ORDER BY</code> and so on. Naturally, all the interesting arguments can be taken from other test queries. Same goes for changing the tables used in the queries. When the fuzzer runs in CI, it runs queries from all the SQL tests in random order, mixing into them some parts of queries it has seen previously. This process can eventually cover all the possible permutations of our features.</p>
+<p>The core implementation of the fuzzer is relatively small, consisting of about 700 lines of C++ code. A prototype was made in a couple of days, but naturally it took significantly longer to polish it and to start routinely using it in CI. It is very productive and let us find more than 200 bugs already (see the label <a href="https://github.com/ClickHouse/ClickHouse/labels/fuzz" rel="external nofollow noreferrer" target="_blank">fuzz</a> on GitHub), some of which are serious logic errors or even memory errors. When we only started, we could segfault the server or make it enter a never-ending loop with simplest read-only queries such as <code class="syntax">SELECT arrayReverseFill(x -&gt; (x &lt; 10), [])</code> or <code class="syntax">SELECT geoDistance(0., 0., -inf, 1.)</code>. Of course I couldn't resist bringing down our <a href="https://gh-api.clickhouse.com/play?user=play#LS0gWW91IGNhbiBxdWVyeSB0aGUgR2l0SHViIGhpc3RvcnkgZGF0YSBoZXJlLiBTZWUgaHR0cHM6Ly9naC5jbGlja2hvdXNlLnRlY2gvZXhwbG9yZXIvIGZvciB0aGUgZGVzY3JpcHRpb24gYW5kIGV4YW1wbGUgcXVlcmllcy4Kc2VsZWN0ICdoZWxsbyB3b3JsZCc=" rel="external nofollow noreferrer" target="_blank">public playground</a> with some of these queries, and was content to see that the server soon restarts correctly.  These queries are actually minified by hand, normally the fuzzer would generate something barely intelligible such as:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT
+    (val + 257,
+      (((tuple(NULL), 10.000100135803223), tuple(-inf)), '-1', (NULL, '0.10', NULL), NULL),
+      (val + 9223372036854775807) = (rval * 100),
+      tuple(65535), tuple(NULL), NULL, NULL),
+    *
+FROM 
+(
+    SELECT dummy AS val
+    FROM system.one
+) AS s1
+ANY LEFT JOIN 
+(
+    SELECT toLowCardinality(toNullable(dummy)) AS rval
+    FROM system.one
+) AS s2 ON (val + 100) = (rval * 7)
+</code></pre></div>
+<p>In principle, we could add automated test case minification by modifying AST in the same vein with fuzzing. This is somewhat complicated by the fact that the server dies after every, excuse my pun, successfully failed query, so we didn't implement it yet.</p>
+<p>Not all errors the fuzzer finds are significant, some of them are pretty boring and harmless, such as a wrong error code for an out-of-bounds argument. We still try to fix all of them, because this lets us ensure that under normal operation, the fuzzer doesn't find any errors.  This is similar to the approach usually taken with compiler warnings and other optional diagnostics — it's better to fix or disable every single case, so that you can be sure you have no diagnostics if everything is OK, and it's easy to notice new problems.</p>
+<p>After fixing the majority of pre-existing error, this fuzzer became efficient for finding errors in new features. Pull requests introducing new features normally add an SQL test, and we pay extra attention to the new tests when fuzzing, generating more permutations for them. Even if the coverage of the test is not sufficient, there is a good chance that the fuzzer will find the missing corner cases. So when we see that all the fuzzer runs in different configurations have failed for a particular pull request, this almost always means that it introduces a new bug. When developing a feature that requires new grammar, it is also helpful to add fuzzing support for it. I did this for window functions early in the development, and it helped me find several bugs.</p>
+<p>A major factor that makes fuzzing really efficient for us is that we have a lot of assertions and other checks of program logic in our code. For debug-only checks, we use the plain <code class="syntax">assert</code> macro from <code class="syntax">&lt;cassert&gt;</code>. For checks that are needed even in release mode, we use an exception with a special code <code class="syntax">LOGICAL_ERROR</code> that signifies an internal program error. We did some work to ensure that these errors are distinct from errors caused by the wrong user actions. A user error reported for a randomly generated query is normal (e.g.  it references some non-existent columns), but when we see an internal program error, we know that it's definitely a bug, same as an assertion. Of course, even without assertions, you get some checks for memory errors provided by the OS (segfaults). Another way to add runtime checks to your program is to use some kind of sanitizer. We already run most of our tests under clang's Address, Memory, UndefinedBehavior and Thread sanitizers. Using them in conjunction with this fuzzer also proved to be very efficient.</p>
+<p>To see for yourself how the fuzzer works, you only need the normal ClickHouse client.  Start <code class="syntax">clickhouse-client --query-fuzzer-runs=100</code>, enter any query, and enjoy the client going crazy and running a hundred of random queries instead. All queries from the current session become a source for expressions for fuzzing, so try entering several different queries to get more interesting results. Be careful not to do this in production! When you do this experiment, you'll soon notice that the fuzzer tends to generate queries that take very long to run. This is why for the CI fuzzer runs we have to configure the server to limit query execution time, memory usage and so on using the corresponding <a href="/docs/en/operations/settings/query-complexity/#:~:text=In%20the%20default%20configuration%20file,query%20within%20a%20single%20server.">server settings</a>. We had a hilarious situation after that: the fuzzer figured out how to remove the limits by generating a <code class="syntax">SET max_execution_time = 0</code> query, and then generated a never-ending query and failed. Thankfully we were able to defeat its cleverness by using <a href="/docs/en/operations/settings/constraints-on-settings/">settings constraints</a>.</p>
+<h2 id="other-fuzzers">Other Fuzzers<a class="headerlink" href="#other-fuzzers" title="Permanent link"> </a></h2>
+<p>The AST-based fuzzer we discussed is only one of the many kinds of fuzzers we have in ClickHouse. There is a <a href="https://www.youtube.com/watch?v=GbmK84ZwSeI&amp;t=4481s" rel="external nofollow noreferrer" target="_blank">talk</a> (in Russian, <a href="https://presentations.clickhouse.com/cpp_siberia_2021/" rel="external nofollow noreferrer" target="_blank">slides are here</a>) by Alexey Milovidov that explores all the fuzzers we have. Another interesting recent development is application of pivoted query synthesis technique, implemented in <a href="https://github.com/sqlancer/sqlancer" rel="external nofollow noreferrer" target="_blank">SQLancer</a>, to ClickHouse.  The authors are going to give <a href="https://heisenbug-piter.ru/2021/spb/talks/nr1cwknssdodjkqgzsbvh/" rel="external nofollow noreferrer" target="_blank">a talk about this</a> soon, so stay tuned.</p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=Fuzzing%20ClickHouse+https%3A//clickhouse.com/blog/en/2021/fuzzing-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=Fuzzing%20ClickHouse&u=https%3A//clickhouse.com/blog/en/2021/fuzzing-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=Fuzzing%20ClickHouse&url=https%3A//clickhouse.com/blog/en/2021/fuzzing-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Alexander Kuzmenkov</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2021-03-11</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        fuzzing
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        testing
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

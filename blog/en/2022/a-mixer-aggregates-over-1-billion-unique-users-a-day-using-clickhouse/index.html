@@ -1,0 +1,344 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Admixer Aggregates Over 1 Billion Unique Users a Day using ClickHouse</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="Admixer Aggregates Over 1 Billion Unique Users a Day using ClickHouse"/>
+<meta property="og:description" content="Highlights Inserting around 100 billion records per day, over 1 million records per second Able to aggregate over 1 bill" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2022/a-mixer-case-study/featured.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2022/a-mixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2022/a-mixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Admixer Aggregates Over 1 Billion Unique Users a Day using ClickHouse",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2022/a-mixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse/",
+
+"datePublished": "2022-01-11",
+"dateModified": "2022-01-11",
+
+"image": "https://blog-images.clickhouse.com/en/2022/a-mixer-case-study/featured.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="Highlights Inserting around 100 billion records per day, over 1 million records per second Able to aggregate over 1 bill" />
+
+<meta name="keywords"
+      content="company" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                            <a class="dropdown-item text-reset "
+                               href="/blog/ru/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                Русский
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2022/a-mixer-case-study/featured.jpg" alt="Admixer Aggregates Over 1 Billion Unique Users a Day using ClickHouse" title="Admixer Aggregates Over 1 Billion Unique Users a Day using ClickHouse" />
+            
+            <h1 class="display-2 mt-3 mb-5">Admixer Aggregates Over 1 Billion Unique Users a Day using ClickHouse</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link"> </a></h2>
+<ul>
+<li>Inserting around 100 billion records per day, over 1 million records per second</li>
+<li>Able to aggregate over 1 billion unique users a day</li>
+<li>Moved from MSSQL to Azure Table Storage to ClickHouse </li>
+<li>ClickHouse is deployed on 15 servers with 2 TB total RAM</li>
+</ul>
+<p>Admixer is an Ad-Tech company that provides all the components to build infrastructure for advertising products for brands, ad agencies, media houses, publishers, ad networks, and other buy- and sell-side industry players looking for effective ad management. A distinctive feature of Admixer is their technology, which allows:</p>
+<ul>
+<li>Agencies to place advertising campaigns with specified execution conditions (terms, budget, creative display settings)</li>
+<li>Set the rules for distributing advertising campaign budgets among thousands of publishers</li>
+<li>Provide accounts for publishers, where they could not only see income statistics or withdraw money but also create their advertising campaigns, as well as connect other sources of monetization in addition to Network advertising campaigns.</li>
+</ul>
+<p>Admixers products include:</p>
+<ul>
+<li>SSP - Supply-side platform where publishers/websites offer advertising space</li>
+<li>DSP - Demand-side platform where advertisers buy advertising space</li>
+<li>ADX - Ad exchange (connects SSPs and DSPs - buyers and sellers of advertisements and advertising space)</li>
+<li>DMP - Data management platform (used by advertisers to configure the audience they want to target)</li>
+</ul>
+<p>Admixer provides not only access to these products but allows customers to build an entire ecosystem.</p>
+<h2 id="why-we-chose-clickhouse">Why We Chose ClickHouse<a class="headerlink" href="#why-we-chose-clickhouse" title="Permanent link"> </a></h2>
+<p>To implement the previous point, Admixer began developing an Advertising Exchange. Initially, AdExchange was based on the sale of local inventory by external DSPs. Then it began to aggregate the traffic of external SSPs to place local advertisements on it and later redirect this traffic to external DSPs. Thus, ADX was created.</p>
+<p>In 2015-2016, the share of external inventory was 3% (100 million requests), then at the end of 2016, it was more than 90% (3 billion requests). With a sharp increase in requests, the load on their processing increased, and most importantly, the load on the storage and provision of online analytics increased. Relational databases could not handle that many inserts for statistics records. Before migrating to Azure, we used a MSSQL server which stored the object structure and statistics.</p>
+<p>In 2011, when migrating to Azure, we used Azure Table Storage to store and issue statistics. But with an increase in the number of transactions and the amount of data, it was not optimal to use this solution since Azure Table Storage charges for the number of transactions and the amount of data.</p>
+<p>Thus we needed to:</p>
+<ul>
+<li>Display statistics on advertising transactions in the user interface in real-time;</li>
+<li>Accept a significant amount (1 million records per second) of data for insertion;</li>
+<li>Aggregate the received data for different sections (40 operations and the same number of metrics);</li>
+<li>Be able to scale the data warehouse as the number of requests grew;</li>
+<li>Have full control over our costs.</li>
+</ul>
+<p><img alt="Profile Report" class="img-fluid" src="https://blog-images.clickhouse.com/en/2022/a-mixer-case-study/profile-report.png"/></p>
+<p>This image shows the Profile Report. Any Ad Campaign in Admixer is split by Line Items (Profiles). It is possible to overview detailed reports by each Profile including Date-Time Statistics, Geo, Domans, SSPs. This report is also updated in real time.</p>
+<h2 id="the-advantages-of-using-clickhouse">The Advantages of Using ClickHouse<a class="headerlink" href="#the-advantages-of-using-clickhouse" title="Permanent link"> </a></h2>
+<p>ClickHouse helps to cope with the challenges above and provides the following benefits:</p>
+<ul>
+<li>Not tied to the platform (we decided to migrate from the cloud);</li>
+<li>The cluster we built allows us to receive up to a million inserts per second (and we know how to scale up on demand);</li>
+<li>Has built-in mechanisms for aggregating and distributing data across tables (materialized views);</li>
+<li>Excellent data compression;</li>
+<li>Reading speed makes it possible to display statistics directly in the user interface in real-time;</li>
+<li>Has a SQL dialect that provides the ability to build any reports;</li>
+<li>Has several advanced functions (and allows you to write your own) for processing statistics;</li>
+<li>Built-in HyperLogLog for storing rough data;</li>
+<li>Data sampling;</li>
+<li>Open source / community / good documentation;</li>
+<li>Constant additions of new features, bug fixes, and improvements to the current functionality;</li>
+<li>Convenient operations.</li>
+</ul>
+<h2 id="clickhouse-architecture">ClickHouse Architecture<a class="headerlink" href="#clickhouse-architecture" title="Permanent link"> </a></h2>
+<p>Our architecture changed from 2016 to 2020. There are two diagrams below: the state we started and the state we came to.</p>
+<p><img alt="Architecture 2016" class="img-fluid" src="https://blog-images.clickhouse.com/en/2022/a-mixer-case-study/architecture-2016.png"/></p>
+<p><em>Architecture 2016</em></p>
+<p><img alt="Architecture 2020" class="img-fluid" src="https://blog-images.clickhouse.com/en/2022/a-mixer-case-study/architecture-2020.png"/></p>
+<p><em>Architecture 2020</em></p>
+<p>Requests Handler is a component that accepts a request for an advertisement and determines which banner to display. After the banner is selected, it records this in the statistics. Since 2020, these components have been receiving over 1 million requests per second. Statistics were recorded through an intermediate element named Global Events Queue. Events were retrieved from GlobalEventsQueue, read by the EventsProcessor components, and additionally validated/enriched, then written to the ClickHouse cluster.</p>
+<p>Initially, we wrote from EventsProcessor in ClickHouse into several tables in parallel but then switched through Buffer-&gt; Null-table-&gt; MatViews. We will next investigate if the new <a href="https://clickhouse.com/blog/en/2021/clickhouse-v21.11-released/#async-inserts" target="_blank">asynchronous insert feature</a> in version 21.11 would be an alternative to using a buffer table.</p>
+<p>We also reviewed the implementation of the event queue. Initially, we used Redis (but Redis is InMemory storage), thus:</p>
+<ul>
+<li>On server restart, there was a risk of losing events;</li>
+<li>The amount of RAM is relatively small, and if we planned to stop the Events Processor or ClickHouse, there was a risk of overflowing the event queue, so a very high response rate to event processor problems was required.</li>
+</ul>
+<p>We tried to replace Redis and use Kafka instead, but the Kafka driver for ClickHouse at the time had issues with arrays (which has since been fixed).</p>
+<p>Therefore, we implemented our event queue, which was stored on the disk of each EventHandler component, and the local EventsProcessor was located on the same server. The number of EventsProcessor components has increased, which means that the number of insert requests in ClickHouse has also increased, but this was not a problem.</p>
+<p>Since financial optimization was also an essential factor for us, this scheme proved to be excellent in this regard as well. To receive processing and storage of data from ADX, we assembled a cluster with 15 servers (40 threads, 128 RAM, SSD storage), and we also took this with a margin. For the storage cluster for unique users, we used a cluster with 6 of the same servers. </p>
+<p>An important point was also the work with receiving data from clusters. If you recklessly send a request to the cluster, this could create a pretty significant load on it, leading to the slowdown of other processes. But ClickHouse has settings for limiting resources and allocating quotas for specific users, which allowed us to solve this case quickly. All configuration files can be perfectly placed in the configuration management system and managed from there.</p>
+<h2 id="clickhouse-handles-over-1-billion-unique-users-per-day">ClickHouse Handles Over 1 Billion Unique Users Per Day<a class="headerlink" href="#clickhouse-handles-over-1-billion-unique-users-per-day" title="Permanent link"> </a></h2>
+<p>In addition to statistics aggregation, which summed up metrics by dimension, Admixer provides information on how many unique users have watched ads for an arbitrary time. The number of uniques cannot be summed up. In our system, the user ID is the UUID. When we want to get several unique UUIDs for some arbitrary period, we need to recalculate the unique UUIDs for this period each time. We cannot decompose all possible combinations in advance since the intersection will be too large.</p>
+<p>Before using ClickHouse, we could count uniques only for predefined periods: day, week, month, all the time. Also, the number of slices was limited. Also, constant bulk requests for Aerospike slowed down the event processor.</p>
+<p>AggregatingMergeTree allowed us with minimal costs to count unique users by a large number of keys in one report. In the beginning, with a cluster from three servers, we could easily count 1 billion uniques per day in ~ 12 slices. There are nuances; large slices cannot be output to the interface since simultaneous scanning of large tables will take a lot of CPU time. The solution to this problem was the report generation service, which has its internal queue and sends the already generated CSV files to the interface. On the other hand, we can output small slices to the interface with a limited date range.</p>
+<p>ClickHouse was perfect as Big Data Storage for our ML models.</p>
+<h2 id="advice-to-others-who-might-be-considering-clickhouse">Advice To Others Who Might Be Considering ClickHouse<a class="headerlink" href="#advice-to-others-who-might-be-considering-clickhouse" title="Permanent link"> </a></h2>
+<p>The Devil is in the details!</p>
+<p>ClickHouse technical tips:</p>
+<ul>
+<li>If you do not need high data accuracy, use HyperLogLog and sampling;</li>
+<li>Run load tests to determine the number of operations that your cluster can withstand given your data structure before assembling the cluster;</li>
+<li>Buffer is a great way to insert data, but watch out for memory;</li>
+<li>Use Native format for insert;</li>
+<li>Avoid large numbers of small parts for continuous flow insertion. Too many tables generate a lot of merges in the background such as the Too many parts (300) error; </li>
+<li>It is necessary to decide on the replication scheme at the beginning. One option is to use ZooKeeper and let tables replicate themselves using ReplicatedMergeTree and other replicating table engines. Because we had many tables and we wanted to choose what parts of the data to replicate to which servers we chose to not use ZooKeeper and have our client spread the writes - each write goes to two servers.</li>
+</ul>
+<p>Over the past five years, the Admixer's Core team has been working with a high-load and aggregation of big data. Any work has its subtleties, do not step on your rake. Use ours. </p>
+<p>We offer customers specialized audit, consultation, or create ready-made solutions using ClickHouse to solve high-load tasks. These speciality services are now offered via our new initiative <a href="https://loadfighters.com" rel="external nofollow noreferrer" target="_blank">LoadFighters</a>.</p>
+<h3 id="about-admixer">About Admixer<a class="headerlink" href="#about-admixer" title="Permanent link"> </a></h3>
+<p>Admixer is an independent adtech company that develops an ecosystem of full-stack programmatic solutions. Admixer has its own line of adtech products for brands, ad agencies, media houses, publishers, ad networks, and other buy- and sell-side industry players looking for effective ad management. Our customizable technology, in-depth expertise, and a personal approach help businesses turn programmatic advertising into a scalable revenue channel.</p>
+<p>Since their start in 2008, we’ve been on a mission to build an ecosystem with effective and transparent relationships between all of the players in the digital advertising industry.</p>
+<p>Today, the company has over 100 supply and demand partners, 3,000+ customers, and 200+ employees worldwide. They run offices in Ukraine, Belarus, Kazakhstan, Moldova, Georgia, and legal entities in the UK and Germany.</p>
+<p>For more information please visit:<br/>
+<a href="https://admixer.com/" rel="external nofollow noreferrer" target="_blank">https://admixer.com/</a></p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=Admixer%20Aggregates%20Over%201%20Billion%20Unique%20Users%20a%20Day%20using%20ClickHouse+https%3A//clickhouse.com/blog/en/2022/a-mixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=Admixer%20Aggregates%20Over%201%20Billion%20Unique%20Users%20a%20Day%20using%20ClickHouse&u=https%3A//clickhouse.com/blog/en/2022/a-mixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=Admixer%20Aggregates%20Over%201%20Billion%20Unique%20Users%20a%20Day%20using%20ClickHouse&url=https%3A//clickhouse.com/blog/en/2022/a-mixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Vladimir Zakrevsky</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2022-01-11</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        company
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

@@ -1,0 +1,457 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>HTTP客户端 | ClickHouse文档</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/zh/interfaces/http/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "HTTP客户端 | ClickHouse文档",
+"mainEntityOfPage": "https://clickhouse.com/docs/zh/interfaces/http/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "HTTP客户端 | ClickHouse文档",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer,header{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}address{font-style:normal;line-height:inherit}address,ol,ul{margin-bottom:1rem}ol,ul{margin-top:0}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}b{font-weight:bolder}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}pre{margin-top:0;margin-bottom:1rem;overflow:auto}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}table{border-collapse:collapse}select{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}select{text-transform:none}select{word-wrap:normal}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}progress{vertical-align:baseline}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}summary{display:list-item;cursor:pointer}template{display:none}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}pre{display:block;font-size:87.5%;color:#495057}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}}.table{width:100%;margin-bottom:8px;color:#212529}.table-primary{background-color:#fff1b8}.table-light{background-color:#fbfcfd}.table-dark{background-color:#ccced0}.table-primary-light{background-color:#fffefb}.table-white{background-color:#fff}.table-black{background-color:#c1c2c3}.table-orange{background-color:#ffdfb8}.table-light-orange{background-color:#fff7ea}.table-dark{color:#fff;background-color:#343a40}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:none}.btn:disabled{opacity:.65}.btn-primary{color:#495057;background-color:#fc0;border-color:#fc0}.btn-primary:focus,.btn-primary:hover{color:#495057;background-color:#d9ad00;border-color:#cca300}.btn-primary:focus{box-shadow:0 0 0 0 rgba(228,185,13,.5)}.btn-primary:disabled{color:#495057;background-color:#fc0;border-color:#fc0}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-primary-light{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-primary-light:focus,.btn-primary-light:hover{color:#495057;background-color:#ffedca;border-color:#ffe9bd}.btn-primary-light:focus{box-shadow:0 0 0 0 rgba(228,225,217,.5)}.btn-primary-light:disabled{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-primary{color:#fc0;border-color:#fc0}.btn-outline-primary:hover{color:#495057;background-color:#fc0;border-color:#fc0}.btn-outline-primary:focus{box-shadow:0 0 0 0 rgba(255,204,0,.5)}.btn-outline-primary:disabled{color:#fc0;background-color:transparent}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-primary-light{color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:hover{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:focus{box-shadow:0 0 0 0 rgba(255,250,240,.5)}.btn-outline-primary-light:disabled{color:#fffaf0;background-color:transparent}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}.custom-select{display:inline-block;width:100%;height:calc(1.5em+.75rem+2px);padding:.375rem 1.75rem .375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;border:1px solid #ced4da;border-radius:8px;-webkit-appearance:none;-moz-appearance:none;appearance:none}.custom-select:focus{border-color:#ffe680;outline:0;box-shadow:0 0 0 .2rem rgba(255,204,0,.25)}.custom-select:focus::-ms-value{color:#6c757d;background-color:#fff}.custom-select[multiple],.custom-select[size]:not([size="1"]){height:auto;padding-right:.75rem;background-image:none}.custom-select:disabled{color:#6c757d;background-color:#e9ecef}.custom-select::-ms-expand{display:none}.custom-select:-moz-focusring{color:transparent;text-shadow:0 0 0 #6c757d}.custom-select-lg{height:calc(1.5em+1rem+2px);padding-top:.5rem;padding-bottom:.5rem;padding-left:1rem;font-size:1.125rem}.custom-file{display:inline-block;margin-bottom:0}.custom-file{position:relative;width:100%;height:calc(1.5em+.75rem+2px)}.custom-select{transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.custom-select{transition:none}}pre{white-space:pre-wrap}pre{border:1px solid #d6dbdf;page-break-inside:avoid}img{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}.table{border-collapse:collapse}.table-dark{color:inherit}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+          <h1 id=http-interface>HTTP客户端<a class=headerlink href=../amp/#http-interface title="Permanent link"> </a></h1> <p>HTTP接口允许您在任何编程语言的任何平台上使用ClickHouse。我们使用它在Java和Perl以及shell脚本中工作。在其他部门中，HTTP接口用于Perl、Python和Go。HTTP接口比原生接口受到更多的限制，但它具有更好的兼容性。</p> <p>默认情况下，<code class=syntax>clickhouse-server</code>会在<code class=syntax>8123</code>端口上监控HTTP请求（这可以在配置中修改）。</p> <p>如果你发送了一个未携带任何参数的<code class=syntax>GET /</code>请求，它会返回一个字符串 «Ok.»（结尾有换行）。可以将它用在健康检查脚本中。</p> <p>如果你发送了一个未携带任何参数的<code class=syntax>GET /</code>请求，它返回响应码200和<code class=syntax>OK</code>字符串定义，可在<a href=../../../operations/server-configuration-parameters/settings/amp/#server_configuration_parameters-http_server_default_response>Http服务响应配置</a>定义(在末尾添加换行)</p> <div class=codehilite><pre><span></span><code class=syntax>$ curl <span class=s1>'http://localhost:8123/'</span>
+Ok.
+</code></pre></div> <p>Web UI 可以通过这个地址访问: <code class=syntax>http://localhost:8123/play</code>.<br> 在运行状况检查脚本中，使用<code class=syntax>GET /ping</code>请求。这个处理方法总是返回 "Ok"。(以换行结尾)。可从18.12.13版获得。请参见' /replicas_status '检查复制集的延迟。</p> <div class=codehilite><pre><span></span><code class=syntax>$ curl <span class=s1>'http://localhost:8123/ping'</span>
+Ok.
+$ curl <span class=s1>'http://localhost:8123/replicas_status'</span>
+Ok.
+</code></pre></div> <p>通过URL中的 <code class=syntax>query</code> 参数来发送请求，或者发送POST请求，或者将查询的开头部分放在URL的<code class=syntax>query</code>参数中，其他部分放在POST中（我们会在后面解释为什么这样做是有必要的）。URL的大小会限制在16KB，所以发送大型查询时要时刻记住这点。</p> <p>如果请求成功，将会收到200的响应状态码和响应主体中的结果。<br> 如果发生了某个异常，将会收到500的响应状态码和响应主体中的异常描述信息。</p> <p>当使用GET方法请求时，<code class=syntax>readonly</code>会被设置。换句话说，若要作修改数据的查询，只能发送POST方法的请求。可以将查询通过POST主体发送，也可以通过URL参数发送。</p> <p>示例:</p> <div class=codehilite><pre><span></span><code class=syntax>$ curl <span class=s1>'http://localhost:8123/?query=SELECT%201'</span>
+<span class=m>1</span>
+
+$ wget -nv -O- <span class=s1>'http://localhost:8123/?query=SELECT 1'</span>
+<span class=m>1</span>
+
+$ <span class=nb>echo</span> -ne <span class=s1>'GET /?query=SELECT%201 HTTP/1.0\r\n\r\n'</span> <span class=p>|</span> nc localhost <span class=m>8123</span>
+HTTP/1.0 <span class=m>200</span> OK
+Date: Wed, <span class=m>27</span> Nov <span class=m>2019</span> <span class=m>10</span>:30:18 GMT
+Connection: Close
+Content-Type: text/tab-separated-values<span class=p>;</span> <span class=nv>charset</span><span class=o>=</span>UTF-8
+X-ClickHouse-Server-Display-Name: clickhouse.ru-central1.internal
+X-ClickHouse-Query-Id: 5abe861c-239c-467f-b955-8a201abb8b7f
+X-ClickHouse-Summary: <span class=o>{</span><span class=s2>"read_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"read_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"written_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"written_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"total_rows_to_read"</span>:<span class=s2>"0"</span><span class=o>}</span>
+
+<span class=m>1</span>
+</code></pre></div> <p>可以看到，curl 命令由于空格需要 URL 转义，所以不是很方便。尽管 wget 命令对url做了 URL 转义，但我们并不推荐使用他，因为在 HTTP 1.1 协议下使用 keep-alive 和 Transfer-Encoding: chunked 头部设置它并不能很好的工作。</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'SELECT 1'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/'</span> --data-binary @-
+<span class=m>1</span>
+
+$ <span class=nb>echo</span> <span class=s1>'SELECT 1'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query='</span> --data-binary @-
+<span class=m>1</span>
+
+$ <span class=nb>echo</span> <span class=s1>'1'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query=SELECT'</span> --data-binary @-
+<span class=m>1</span>
+</code></pre></div> <p>如您所见，curl有些不方便，因为空格必须进行URL转义。<br> 尽管wget本身会对所有内容进行转义，但我们不推荐使用它，因为在使用keepalive和传输编码chunked时，它在HTTP 1.1上不能很好地工作。</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'SELECT 1'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/'</span> --data-binary @-
+<span class=m>1</span>
+
+$ <span class=nb>echo</span> <span class=s1>'SELECT 1'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query='</span> --data-binary @-
+<span class=m>1</span>
+
+$ <span class=nb>echo</span> <span class=s1>'1'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query=SELECT'</span> --data-binary @-
+<span class=m>1</span>
+</code></pre></div> <p>如果部分查询是在参数中发送的，部分是在POST中发送的，则在这两个数据部分之间插入换行。</p> <p>错误示例：</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'ECT 1'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query=SEL'</span> --data-binary @-
+Code: <span class=m>59</span>, e.displayText<span class=o>()</span> <span class=o>=</span> DB::Exception: Syntax error: failed at position <span class=m>0</span>: SEL
+ECT <span class=m>1</span>
+, expected One of: SHOW TABLES, SHOW DATABASES, SELECT, INSERT, CREATE, ATTACH, RENAME, DROP, DETACH, USE, SET, OPTIMIZE., e.what<span class=o>()</span> <span class=o>=</span> DB::Exception
+</code></pre></div> <p>默认情况下，返回的数据是<code class=syntax>TabSeparated</code>格式的，更多信息，见<a href=../../interfaces/formats/amp/ >Formats</a>部分。</p> <p>您可以使用查询的FORMAT子句来设置其他格式。</p> <p>另外，还可以使用<code class=syntax>default_format</code>URL参数或<code class=syntax>X-ClickHouse-Format</code>头来指定TabSeparated之外的默认格式。</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'SELECT 1 FORMAT Pretty'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?'</span> --data-binary @-
+┏━━━┓
+┃ <span class=m>1</span> ┃
+┡━━━┩
+│ <span class=m>1</span> │
+└───┘
+</code></pre></div> <p>INSERT必须通过POST方法来插入数据。在这种情况下，您可以在URL参数中编写查询的开始部分，并使用POST传递要插入的数据。例如，要插入的数据可以是来自MySQL的一个以tab分隔的存储。通过这种方式，INSERT查询替换了从MySQL查询的LOAD DATA LOCAL INFILE。</p> <p>示例: 创建一个表:</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'CREATE TABLE t (a UInt8) ENGINE = Memory'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/'</span> --data-binary @-
+</code></pre></div> <p>使用类似INSERT的查询来插入数据：</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'INSERT INTO t VALUES (1),(2),(3)'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/'</span> --data-binary @-
+</code></pre></div> <p>数据可以从查询中单独发送：</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'(4),(5),(6)'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query=INSERT%20INTO%20t%20VALUES'</span> --data-binary @-
+</code></pre></div> <p>您可以指定任何数据格式。<code class=syntax>Values</code>格式与将INSERT写入<code class=syntax>t</code>值时使用的格式相同:</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'(7),(8),(9)'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query=INSERT%20INTO%20t%20FORMAT%20Values'</span> --data-binary @-
+</code></pre></div> <p>若要插入tab分割的数据，需要指定对应的格式：</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> -ne <span class=s1>'10\n11\n12\n'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query=INSERT%20INTO%20t%20FORMAT%20TabSeparated'</span> --data-binary @-
+</code></pre></div> <p>从表中读取内容。由于查询处理是并行的，数据以随机顺序输出。</p> <div class=codehilite><pre><span></span><code class=syntax>$ curl <span class=s1>'http://localhost:8123/?query=SELECT%20a%20FROM%20t'</span>
+<span class=m>7</span>
+<span class=m>8</span>
+<span class=m>9</span>
+<span class=m>10</span>
+<span class=m>11</span>
+<span class=m>12</span>
+<span class=m>1</span>
+<span class=m>2</span>
+<span class=m>3</span>
+<span class=m>4</span>
+<span class=m>5</span>
+<span class=m>6</span>
+</code></pre></div> <p>删除表：</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'DROP TABLE t'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/'</span> --data-binary @-
+</code></pre></div> <p>成功请求后并不会返回数据，返回一个空的响应体。</p> <p>在传输数据时，可以使用ClickHouse内部压缩格式。压缩的数据具有非标准格式，您需要使用特殊的<code class=syntax>clickhouse-compressor</code>程序来处理它(它是与<code class=syntax>clickhouse-client</code>包一起安装的)。为了提高数据插入的效率，您可以通过使用<a href=../../../operations/settings/settings/amp/#settings-http_native_compression_disable_checksumming_on_decompress>http_native_compression_disable_checksumming_on_decompress</a>设置禁用服务器端校验。</p> <p>如果在URL中指定了<code class=syntax>compress=1</code>，服务会返回压缩的数据。<br> 如果在URL中指定了<code class=syntax>decompress=1</code>，服务会解压通过POST方法发送的数据。</p> <p>您也可以选择使用<a href=https://en.wikipedia.org/wiki/HTTP_compression rel="external nofollow noreferrer" target=_blank>HTTP compression</a>。发送一个压缩的POST请求，附加请求头<code class=syntax>Content-Encoding: compression_method</code>。为了使ClickHouse响应，您必须附加<code class=syntax>Accept-Encoding: compression_method</code>。ClickHouse支持<code class=syntax>gzip</code>，<code class=syntax>br</code>和<code class=syntax>deflate</code> <a href=https://en.wikipedia.org/wiki/HTTP_compression#Content-Encoding_tokens rel="external nofollow noreferrer" target=_blank>compression methods</a>。要启用HTTP压缩，必须使用ClickHouse<a href=../../../operations/settings/settings/amp/#settings-enable_http_compression>启用Http压缩</a>配置。您可以在<a href=../amp/#settings-http_zlib_compression_level>Http zlib压缩级别</a>设置中为所有压缩方法配置数据压缩级别。</p> <p>您可以使用它在传输大量数据时减少网络流量，或者创建立即压缩的转储。</p> <p>通过压缩发送数据的例子:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=c1>#Sending data to the server:</span>
+$ curl -vsS <span class=s2>"http://localhost:8123/?enable_http_compression=1"</span> -d <span class=s1>'SELECT number FROM system.numbers LIMIT 10'</span> -H <span class=s1>'Accept-Encoding: gzip'</span>
+
+<span class=c1>#Sending data to the client:</span>
+$ <span class=nb>echo</span> <span class=s2>"SELECT 1"</span> <span class=p>|</span> gzip -c <span class=p>|</span> curl -sS --data-binary @- -H <span class=s1>'Content-Encoding: gzip'</span> <span class=s1>'http://localhost:8123/'</span>
+</code></pre></div> <div class="admonition note alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">警告</p> <p>一些HTTP客户端可能会在默认情况下从服务器解压数据(使用<code class=syntax>gzip</code>和<code class=syntax>deflate</code>)，即使您未正确地使用了压缩设置，您也可能会得到解压数据。</p> </div> <p>您可以使用<code class=syntax>database</code>URL参数或<code class=syntax>X-ClickHouse-Database</code>头来指定默认数据库。</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'SELECT number FROM numbers LIMIT 10'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?database=system'</span> --data-binary @-
+<span class=m>0</span>
+<span class=m>1</span>
+<span class=m>2</span>
+<span class=m>3</span>
+<span class=m>4</span>
+<span class=m>5</span>
+<span class=m>6</span>
+<span class=m>7</span>
+<span class=m>8</span>
+<span class=m>9</span>
+</code></pre></div> <p>默认情况下，在服务器设置中注册的数据库被用作默认数据库。默认情况下，它是名为<code class=syntax>default</code>的数据库。或者，您可以始终在表名之前使用点来指定数据库。</p> <p>用户名和密码可以通过以下三种方式指定：</p> <ol> <li>通过HTTP Basic Authentication。示例：</li> </ol> <!-- --> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'SELECT 1'</span> <span class=p>|</span> curl <span class=s1>'http://user:password@localhost:8123/'</span> -d @-
+</code></pre></div> <ol> <li>通过URL参数中的<code class=syntax>user</code>和<code class=syntax>password</code>。示例：</li> </ol> <!-- --> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'SELECT 1'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?user=user&amp;password=password'</span> -d @-
+</code></pre></div> <ol> <li>使用<code class=syntax>X-ClickHouse-User</code>或<code class=syntax>X-ClickHouse-Key</code>头指定，示例:</li> </ol> <!-- --> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'SELECT 1'</span> <span class=p>|</span> curl -H <span class=s1>'X-ClickHouse-User: user'</span> -H <span class=s1>'X-ClickHouse-Key: password'</span> <span class=s1>'http://localhost:8123/'</span> -d @-
+</code></pre></div> <p>如果未指定用户名，则使用<code class=syntax>default</code>。如果未指定密码，则使用空密码。<br> 您还可以使用URL参数来指定处理单个查询或整个设置配置文件的任何设置。例子:<code class=syntax>http://localhost:8123/?profile=web&amp;max_rows_to_read=1000000000&amp;query=SELECT+1</code></p> <p>更多信息，详见<a href=../../../operations/settings/amp/#settings>设置</a>部分。</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'SELECT number FROM system.numbers LIMIT 10'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?'</span> --data-binary @-
+<span class=m>0</span>
+<span class=m>1</span>
+<span class=m>2</span>
+<span class=m>3</span>
+<span class=m>4</span>
+<span class=m>5</span>
+<span class=m>6</span>
+<span class=m>7</span>
+<span class=m>8</span>
+<span class=m>9</span>
+</code></pre></div> <p>有关其他参数的信息，请参考<code class=syntax>SET</code>一节。</p> <p>类似地，您可以在HTTP协议中使用ClickHouse会话。为此，需要向请求添加<code class=syntax>session_id</code>GET参数。您可以使用任何字符串作为会话ID。默认情况下，会话在60秒不活动后终止。要更改此超时配置，请修改服务器配置中的<code class=syntax>default_session_timeout</code>设置，或向请求添加<code class=syntax>session_timeout</code>GET参数。要检查会话状态，使用<code class=syntax>session_check=1</code>参数。一次只能在单个会话中执行一个查询。</p> <p>您可以在<code class=syntax>X-ClickHouse-Progress</code>响应头中收到查询进度的信息。为此，启用<a href=../../../operations/settings/settings/amp/#settings-send_progress_in_http_headers>Http Header携带进度</a>。示例：</p> <div class=codehilite><pre><span></span><code class=syntax>X-ClickHouse-Progress: {"read_rows":"2752512","read_bytes":"240570816","total_rows_to_read":"8880128"}
+X-ClickHouse-Progress: {"read_rows":"5439488","read_bytes":"482285394","total_rows_to_read":"8880128"}
+X-ClickHouse-Progress: {"read_rows":"8783786","read_bytes":"819092887","total_rows_to_read":"8880128"}
+</code></pre></div> <p>显示字段信息:</p> <ul> <li><code class=syntax>read_rows</code> — 读取的行数。</li> <li><code class=syntax>read_bytes</code> — 读取的数据字节数。</li> <li><code class=syntax>total_rows_to_read</code> — 读取的数据总行数。</li> <li><code class=syntax>written_rows</code> — 写入数据行数。</li> <li><code class=syntax>written_bytes</code> — 写入数据字节数。</li> </ul> <p>如果HTTP连接丢失，运行的请求不会自动停止。解析和数据格式化是在服务器端执行的，使用Http连接可能无效。</p> <p>可选的<code class=syntax>query_id</code>参数可能当做query ID传入（或者任何字符串）。更多信息，详见<a href=../../../operations/settings/settings/amp/ >replace_running_query</a>部分。</p> <p>可选的<code class=syntax>quota_key</code>参数可能当做quota key传入（或者任何字符串）。更多信息，详见<a href=../../../operations/quotas/amp/#quotas>Quotas</a>部分。</p> <p>HTTP接口允许传入额外的数据（外部临时表）来查询。更多信息，详见<a href=../../../engines/table-engines/special/external-data/amp/ >外部数据查询处理</a>部分。</p> <h2 id=response-buffering>响应缓冲<a class=headerlink href=../amp/#response-buffering title="Permanent link"> </a></h2> <p>可以在服务器端启用响应缓冲。提供了<code class=syntax>buffer_size</code>和<code class=syntax>wait_end_of_query</code>两个URL参数来达此目的。</p> <p><code class=syntax>buffer_size</code>决定了查询结果要在服务内存中缓冲多少个字节数据. 如果响应体比这个阈值大，缓冲区会写入到HTTP管道，剩下的数据也直接发到HTTP管道中。</p> <p>为了确保整个响应体被缓冲，可以设置<code class=syntax>wait_end_of_query=1</code>。这种情况下，存入内存的数据会被缓冲到服务端的一个临时文件中。</p> <p>示例:</p> <div class=codehilite><pre><span></span><code class=syntax>$ curl -sS <span class=s1>'http://localhost:8123/?max_result_bytes=4000000&amp;buffer_size=3000000&amp;wait_end_of_query=1'</span> -d <span class=s1>'SELECT toUInt8(number) FROM system.numbers LIMIT 9000000 FORMAT RowBinary'</span>
+</code></pre></div> <p>查询请求响应状态码和HTTP头被发送到客户端后，若发生查询处理出错，使用缓冲区可以避免这种情况的发生。在这种情况下，响应主体的结尾会写入一条错误消息，而在客户端，只能在解析阶段检测到该错误。</p> <h3 id=cli-queries-with-parameters>查询参数<a class=headerlink href=../amp/#cli-queries-with-parameters title="Permanent link"> </a></h3> <p>您可以使用参数创建查询，并通过相应的HTTP请求参数为它们传递值。有关更多信息，请参见<a href=../../cli/amp/#cli-queries-with-parameters>CLI查询参数</a>。</p> <h3 id=example>示例<a class=headerlink href=../amp/#example title="Permanent link"> </a></h3> <div class=codehilite><pre><span></span><code class=syntax>$ curl -sS <span class=s2>"&lt;address&gt;?param_id=2&amp;param_phrase=test"</span> -d <span class=s2>"SELECT * FROM table WHERE int_column = {id:UInt8} and string_column = {phrase:String}"</span>
+</code></pre></div> <h2 id=predefined_http_interface>特定的HTTP接口<a class=headerlink href=../amp/#predefined_http_interface title="Permanent link"> </a></h2> <p>ClickHouse通过HTTP接口支持特定的查询。例如，您可以如下所示向表写入数据:</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=s1>'(4),(5),(6)'</span> <span class=p>|</span> curl <span class=s1>'http://localhost:8123/?query=INSERT%20INTO%20t%20VALUES'</span> --data-binary @-
+</code></pre></div> <p>ClickHouse还支持预定义的HTTP接口，可以帮助您更容易与第三方工具集成，如<a href=https://github.com/percona-lab/clickhouse_exporter rel="external nofollow noreferrer" target=_blank>Prometheus Exporter</a>.</p> <p>示例:</p> <ul> <li>首先，将此部分添加到服务器配置文件中:</li> </ul> <!-- --> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;http_handlers&gt;</span>
+    <span class=nt>&lt;rule&gt;</span>
+        <span class=nt>&lt;url&gt;</span>/predefined_query<span class=nt>&lt;/url&gt;</span>
+        <span class=nt>&lt;methods&gt;</span>POST,GET<span class=nt>&lt;/methods&gt;</span>
+        <span class=nt>&lt;handler&gt;</span>
+            <span class=nt>&lt;type&gt;</span>predefined_query_handler<span class=nt>&lt;/type&gt;</span>
+            <span class=nt>&lt;query&gt;</span>SELECT * FROM system.metrics LIMIT 5 FORMAT Template SETTINGS format_template_resultset = 'prometheus_template_output_format_resultset', format_template_row = 'prometheus_template_output_format_row', format_template_rows_between_delimiter = '\n'<span class=nt>&lt;/query&gt;</span>
+        <span class=nt>&lt;/handler&gt;</span>
+    <span class=nt>&lt;/rule&gt;</span>
+    <span class=nt>&lt;rule&gt;</span>...<span class=nt>&lt;/rule&gt;</span>
+    <span class=nt>&lt;rule&gt;</span>...<span class=nt>&lt;/rule&gt;</span>
+<span class=nt>&lt;/http_handlers&gt;</span>
+</code></pre></div> <ul> <li>请求Prometheus格式的URL以获取数据:</li> </ul> <!-- --> <div class=codehilite><pre><span></span><code class=syntax>$ curl -v <span class=s1>'http://localhost:8123/predefined_query'</span>
+*   Trying ::1...
+* Connected to localhost <span class=o>(</span>::1<span class=o>)</span> port <span class=m>8123</span> <span class=o>(</span><span class=c1>#0)</span>
+&gt; GET /predefined_query HTTP/1.1
+&gt; Host: localhost:8123
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt;
+&lt; HTTP/1.1 <span class=m>200</span> OK
+&lt; Date: Tue, <span class=m>28</span> Apr <span class=m>2020</span> <span class=m>08</span>:52:56 GMT
+&lt; Connection: Keep-Alive
+&lt; Content-Type: text/plain<span class=p>;</span> <span class=nv>charset</span><span class=o>=</span>UTF-8
+&lt; X-ClickHouse-Server-Display-Name: i-mloy5trc
+&lt; Transfer-Encoding: chunked
+&lt; X-ClickHouse-Query-Id: 96fe0052-01e6-43ce-b12a-6b7370de6e8a
+&lt; X-ClickHouse-Format: Template
+&lt; X-ClickHouse-Timezone: Asia/Shanghai
+&lt; Keep-Alive: <span class=nv>timeout</span><span class=o>=</span><span class=m>3</span>
+&lt; X-ClickHouse-Summary: <span class=o>{</span><span class=s2>"read_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"read_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"written_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"written_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"total_rows_to_read"</span>:<span class=s2>"0"</span><span class=o>}</span>
+&lt;
+<span class=c1># HELP "Query" "Number of executing queries"</span>
+<span class=c1># TYPE "Query" counter</span>
+<span class=s2>"Query"</span> <span class=m>1</span>
+
+<span class=c1># HELP "Merge" "Number of executing background merges"</span>
+<span class=c1># TYPE "Merge" counter</span>
+<span class=s2>"Merge"</span> <span class=m>0</span>
+
+<span class=c1># HELP "PartMutation" "Number of mutations (ALTER DELETE/UPDATE)"</span>
+<span class=c1># TYPE "PartMutation" counter</span>
+<span class=s2>"PartMutation"</span> <span class=m>0</span>
+
+<span class=c1># HELP "ReplicatedFetch" "Number of data parts being fetched from replica"</span>
+<span class=c1># TYPE "ReplicatedFetch" counter</span>
+<span class=s2>"ReplicatedFetch"</span> <span class=m>0</span>
+
+<span class=c1># HELP "ReplicatedSend" "Number of data parts being sent to replicas"</span>
+<span class=c1># TYPE "ReplicatedSend" counter</span>
+<span class=s2>"ReplicatedSend"</span> <span class=m>0</span>
+
+* Connection <span class=c1>#0 to host localhost left intact</span>
+
+* Connection <span class=c1>#0 to host localhost left intact</span>
+</code></pre></div> <p>正如您从示例中看到的，如果在<code class=syntax>config.xml</code>文件中配置了<code class=syntax>http_handlers</code>，并且<code class=syntax>http_handlers</code>可以包含许多<code class=syntax>规则</code>。ClickHouse将把接收到的HTTP请求与<code class=syntax>rule</code>中的预定义类型进行匹配，第一个匹配的将运行处理程序。如果匹配成功，ClickHouse将执行相应的预定义查询。</p> <p>现在<code class=syntax>rule</code>可以配置<code class=syntax>method</code>， <code class=syntax>header</code>， <code class=syntax>url</code>， <code class=syntax>handler</code>:<br> - <code class=syntax>method</code> 负责匹配HTTP请求的方法部分。 <code class=syntax>method</code>完全符合HTTP协议中<a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods rel="external nofollow noreferrer" target=_blank>method</a>的定义。这是一个可选的配置。如果它没有在配置文件中定义，那么它与HTTP请求的方法部分不匹配。</p> <ul> <li> <p><code class=syntax>url</code> 负责匹配HTTP请求的URL部分。它匹配<a href=https://github.com/google/re2 rel="external nofollow noreferrer" target=_blank>RE2</a>正则表达式。这是一个可选的配置。如果配置文件中没有定义它，则它与HTTP请求的URL部分不匹配。</p> </li> <li> <p><code class=syntax>headers</code> 负责匹配HTTP请求的头部分。它与RE2的正则表达式兼容。这是一个可选的配置。如果它没有在配置文件中定义，那么它与HTTP请求的头部分不匹配。</p> </li> <li> <p><code class=syntax>handler</code> 包含主要的处理部分。现在<code class=syntax>handler</code>可以配置<code class=syntax>type</code>, <code class=syntax>status</code>, <code class=syntax>content_type</code>, <code class=syntax>response_content</code>, <code class=syntax>query</code>, <code class=syntax>query_param_name</code>。<br> <code class=syntax>type</code> 目前支持三种类型:<a href=../amp/#predefined_query_handler>特定查询</a>, <a href=../amp/#dynamic_query_handler>动态查询</a>, <a href=../amp/#static>static</a>.</p> <ul> <li> <p><code class=syntax>query</code> — 使用<code class=syntax>predefined_query_handler</code>类型，在调用处理程序时执行查询。</p> </li> <li> <p><code class=syntax>query_param_name</code> — 与<code class=syntax>dynamic_query_handler</code>类型一起使用，提取并执行HTTP请求参数中与<code class=syntax>query_param_name</code>值对应的值。</p> </li> <li> <p><code class=syntax>status</code> — 与<code class=syntax>static</code>类型一起使用，响应状态代码。</p> </li> <li> <p><code class=syntax>content_type</code> — 与<code class=syntax>static</code>类型一起使用，响应信息<a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type rel="external nofollow noreferrer" target=_blank>content-type</a>。</p> </li> <li> <p><code class=syntax>response_content</code> — 与<code class=syntax>static</code>类型一起使用，响应发送给客户端的内容，当使用前缀<code class=syntax>file://</code>或<code class=syntax>config://</code>时，从发送给客户端的文件或配置中查找内容。</p> </li> </ul> </li> </ul> <p>接下来是不同<code class=syntax>type</code>的配置方法。</p> <h3 id=predefined_query_handler>特定查询<a class=headerlink href=../amp/#predefined_query_handler title="Permanent link"> </a></h3> <p><code class=syntax>predefined_query_handler</code> 支持设置<code class=syntax>Settings</code>和<code class=syntax>query_params</code>参数。您可以将<code class=syntax>query</code>配置为<code class=syntax>predefined_query_handler</code>类型。</p> <p><code class=syntax>query</code> 是一个预定义的<code class=syntax>predefined_query_handler</code>查询，它由ClickHouse在匹配HTTP请求并返回查询结果时执行。这是一个必须的配置。</p> <p>以下是定义的<a href=../../../operations/settings/settings/amp/#settings-max_threads>max_threads</a>和<code class=syntax>max_final_threads</code>设置， 然后查询系统表以检查这些设置是否设置成功。</p> <p>示例:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;http_handlers&gt;</span>
+    <span class=nt>&lt;rule&gt;</span>
+        <span class=nt>&lt;url&gt;</span><span class=cp>&lt;![CDATA[/query_param_with_url/\w+/(?P&lt;name_1&gt;[^/]+)(/(?P&lt;name_2&gt;[^/]+))?]]&gt;</span><span class=nt>&lt;/url&gt;</span>
+        <span class=nt>&lt;method&gt;</span>GET<span class=nt>&lt;/method&gt;</span>
+        <span class=nt>&lt;headers&gt;</span>
+            <span class=nt>&lt;XXX&gt;</span>TEST_HEADER_VALUE<span class=nt>&lt;/XXX&gt;</span>
+            <span class=nt>&lt;PARAMS_XXX&gt;</span><span class=cp>&lt;![CDATA[(?P&lt;name_1&gt;[^/]+)(/(?P&lt;name_2&gt;[^/]+))?]]&gt;</span><span class=nt>&lt;/PARAMS_XXX&gt;</span>
+        <span class=nt>&lt;/headers&gt;</span>
+        <span class=nt>&lt;handler&gt;</span>
+            <span class=nt>&lt;type&gt;</span>predefined_query_handler<span class=nt>&lt;/type&gt;</span>
+            <span class=nt>&lt;query&gt;</span>SELECT value FROM system.settings WHERE name = {name_1:String}<span class=nt>&lt;/query&gt;</span>
+            <span class=nt>&lt;query&gt;</span>SELECT name, value FROM system.settings WHERE name = {name_2:String}<span class=nt>&lt;/query&gt;</span>
+        <span class=nt>&lt;/handler&gt;</span>
+    <span class=nt>&lt;/rule&gt;</span>
+<span class=nt>&lt;/http_handlers&gt;</span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>$ curl -H <span class=s1>'XXX:TEST_HEADER_VALUE'</span> -H <span class=s1>'PARAMS_XXX:max_threads'</span> <span class=s1>'http://localhost:8123/query_param_with_url/1/max_threads/max_final_threads?max_threads=1&amp;max_final_threads=2'</span>
+<span class=m>1</span>
+max_final_threads   <span class=m>2</span>
+</code></pre></div> <div class="admonition note alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">警告</p> <p>在一个<code class=syntax>predefined_query_handler</code>中，只支持insert类型的一个<code class=syntax>查询</code>。</p> </div> <h3 id=dynamic_query_handler>动态查询<a class=headerlink href=../amp/#dynamic_query_handler title="Permanent link"> </a></h3> <p><code class=syntax>dynamic_query_handler</code>时，查询以HTTP请求参数的形式编写。区别在于，在<code class=syntax>predefined_query_handler</code>中，查询是在配置文件中编写的。您可以在<code class=syntax>dynamic_query_handler</code>中配置<code class=syntax>query_param_name</code>。</p> <p>ClickHouse提取并执行与HTTP请求URL中的<code class=syntax>query_param_name</code>值对应的值。<code class=syntax>query_param_name</code>的默认值是<code class=syntax>/query</code>。这是一个可选的配置。如果配置文件中没有定义，则不会传入参数。</p> <p>为了试验这个功能，示例定义了<a href=../../../operations/settings/settings/amp/#settings-max_threads>max_threads</a>和<code class=syntax>max_final_threads</code>，<code class=syntax>queries</code>设置是否成功的值。</p> <p>示例:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;http_handlers&gt;</span>
+    <span class=nt>&lt;rule&gt;</span>
+    <span class=nt>&lt;headers&gt;</span>
+        <span class=nt>&lt;XXX&gt;</span>TEST_HEADER_VALUE_DYNAMIC<span class=nt>&lt;/XXX&gt;</span>    <span class=nt>&lt;/headers&gt;</span>
+    <span class=nt>&lt;handler&gt;</span>
+        <span class=nt>&lt;type&gt;</span>dynamic_query_handler<span class=nt>&lt;/type&gt;</span>
+        <span class=nt>&lt;query_param_name&gt;</span>query_param<span class=nt>&lt;/query_param_name&gt;</span>
+    <span class=nt>&lt;/handler&gt;</span>
+    <span class=nt>&lt;/rule&gt;</span>
+<span class=nt>&lt;/http_handlers&gt;</span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>$ curl  -H <span class=s1>'XXX:TEST_HEADER_VALUE_DYNAMIC'</span>  <span class=s1>'http://localhost:8123/own?max_threads=1&amp;max_final_threads=2&amp;param_name_1=max_threads&amp;param_name_2=max_final_threads&amp;query_param=SELECT%20name,value%20FROM%20system.settings%20where%20name%20=%20%7Bname_1:String%7D%20OR%20name%20=%20%7Bname_2:String%7D'</span>
+max_threads <span class=m>1</span>
+max_final_threads   <span class=m>2</span>
+</code></pre></div> <h3 id=static>static<a class=headerlink href=../amp/#static title="Permanent link"> </a></h3> <p><code class=syntax>static</code>可以返回<a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type rel="external nofollow noreferrer" target=_blank>content_type</a>, <a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Status rel="external nofollow noreferrer" target=_blank>status</a>和<code class=syntax>response_content</code>。<code class=syntax>response_content</code>可以返回指定的内容。</p> <p>示例:</p> <p>返回信息.</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;http_handlers&gt;</span>
+        <span class=nt>&lt;rule&gt;</span>
+            <span class=nt>&lt;methods&gt;</span>GET<span class=nt>&lt;/methods&gt;</span>
+            <span class=nt>&lt;headers&gt;&lt;XXX&gt;</span>xxx<span class=nt>&lt;/XXX&gt;&lt;/headers&gt;</span>
+            <span class=nt>&lt;url&gt;</span>/hi<span class=nt>&lt;/url&gt;</span>
+            <span class=nt>&lt;handler&gt;</span>
+                <span class=nt>&lt;type&gt;</span>static<span class=nt>&lt;/type&gt;</span>
+                <span class=nt>&lt;status&gt;</span>402<span class=nt>&lt;/status&gt;</span>
+                <span class=nt>&lt;content_type&gt;</span>text/html; charset=UTF-8<span class=nt>&lt;/content_type&gt;</span>
+                <span class=nt>&lt;response_content&gt;</span>Say Hi!<span class=nt>&lt;/response_content&gt;</span>
+            <span class=nt>&lt;/handler&gt;</span>
+        <span class=nt>&lt;/rule&gt;</span>
+<span class=nt>&lt;/http_handlers&gt;</span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>$ curl -vv  -H <span class=s1>'XXX:xxx'</span> <span class=s1>'http://localhost:8123/hi'</span>
+*   Trying ::1...
+* Connected to localhost <span class=o>(</span>::1<span class=o>)</span> port <span class=m>8123</span> <span class=o>(</span><span class=c1>#0)</span>
+&gt; GET /hi HTTP/1.1
+&gt; Host: localhost:8123
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt; XXX:xxx
+&gt;
+&lt; HTTP/1.1 <span class=m>402</span> Payment Required
+&lt; Date: Wed, <span class=m>29</span> Apr <span class=m>2020</span> <span class=m>03</span>:51:26 GMT
+&lt; Connection: Keep-Alive
+&lt; Content-Type: text/html<span class=p>;</span> <span class=nv>charset</span><span class=o>=</span>UTF-8
+&lt; Transfer-Encoding: chunked
+&lt; Keep-Alive: <span class=nv>timeout</span><span class=o>=</span><span class=m>3</span>
+&lt; X-ClickHouse-Summary: <span class=o>{</span><span class=s2>"read_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"read_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"written_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"written_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"total_rows_to_read"</span>:<span class=s2>"0"</span><span class=o>}</span>
+&lt;
+* Connection <span class=c1>#0 to host localhost left intact</span>
+Say Hi!%
+</code></pre></div> <p>从配置中查找发送到客户端的内容。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;get_config_static_handler&gt;</span><span class=cp>&lt;![CDATA[&lt;html ng-app="SMI2"&gt;&lt;head&gt;&lt;base href="http://ui.tabix.io/"&gt;&lt;/head&gt;&lt;body&gt;&lt;div ui-view="" class="content-ui"&gt;&lt;/div&gt;&lt;script src="http://loader.tabix.io/master.js"&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;]]&gt;</span><span class=nt>&lt;/get_config_static_handler&gt;</span>
+
+<span class=nt>&lt;http_handlers&gt;</span>
+        <span class=nt>&lt;rule&gt;</span>
+            <span class=nt>&lt;methods&gt;</span>GET<span class=nt>&lt;/methods&gt;</span>
+            <span class=nt>&lt;headers&gt;&lt;XXX&gt;</span>xxx<span class=nt>&lt;/XXX&gt;&lt;/headers&gt;</span>
+            <span class=nt>&lt;url&gt;</span>/get_config_static_handler<span class=nt>&lt;/url&gt;</span>
+            <span class=nt>&lt;handler&gt;</span>
+                <span class=nt>&lt;type&gt;</span>static<span class=nt>&lt;/type&gt;</span>
+                <span class=nt>&lt;response_content&gt;</span>config://get_config_static_handler<span class=nt>&lt;/response_content&gt;</span>
+            <span class=nt>&lt;/handler&gt;</span>
+        <span class=nt>&lt;/rule&gt;</span>
+<span class=nt>&lt;/http_handlers&gt;</span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>$ curl -v  -H <span class=s1>'XXX:xxx'</span> <span class=s1>'http://localhost:8123/get_config_static_handler'</span>
+*   Trying ::1...
+* Connected to localhost <span class=o>(</span>::1<span class=o>)</span> port <span class=m>8123</span> <span class=o>(</span><span class=c1>#0)</span>
+&gt; GET /get_config_static_handler HTTP/1.1
+&gt; Host: localhost:8123
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt; XXX:xxx
+&gt;
+&lt; HTTP/1.1 <span class=m>200</span> OK
+&lt; Date: Wed, <span class=m>29</span> Apr <span class=m>2020</span> <span class=m>04</span>:01:24 GMT
+&lt; Connection: Keep-Alive
+&lt; Content-Type: text/plain<span class=p>;</span> <span class=nv>charset</span><span class=o>=</span>UTF-8
+&lt; Transfer-Encoding: chunked
+&lt; Keep-Alive: <span class=nv>timeout</span><span class=o>=</span><span class=m>3</span>
+&lt; X-ClickHouse-Summary: <span class=o>{</span><span class=s2>"read_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"read_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"written_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"written_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"total_rows_to_read"</span>:<span class=s2>"0"</span><span class=o>}</span>
+&lt;
+* Connection <span class=c1>#0 to host localhost left intact</span>
+&lt;html ng-app<span class=o>=</span><span class=s2>"SMI2"</span>&gt;&lt;head&gt;&lt;base <span class=nv>href</span><span class=o>=</span><span class=s2>"http://ui.tabix.io/"</span>&gt;&lt;/head&gt;&lt;body&gt;&lt;div ui-view<span class=o>=</span><span class=s2>""</span> <span class=nv>class</span><span class=o>=</span><span class=s2>"content-ui"</span>&gt;&lt;/div&gt;&lt;script <span class=nv>src</span><span class=o>=</span><span class=s2>"http://loader.tabix.io/master.js"</span>&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;%
+</code></pre></div> <p>从发送到客户端的文件中查找内容。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;http_handlers&gt;</span>
+        <span class=nt>&lt;rule&gt;</span>
+            <span class=nt>&lt;methods&gt;</span>GET<span class=nt>&lt;/methods&gt;</span>
+            <span class=nt>&lt;headers&gt;&lt;XXX&gt;</span>xxx<span class=nt>&lt;/XXX&gt;&lt;/headers&gt;</span>
+            <span class=nt>&lt;url&gt;</span>/get_absolute_path_static_handler<span class=nt>&lt;/url&gt;</span>
+            <span class=nt>&lt;handler&gt;</span>
+                <span class=nt>&lt;type&gt;</span>static<span class=nt>&lt;/type&gt;</span>
+                <span class=nt>&lt;content_type&gt;</span>text/html; charset=UTF-8<span class=nt>&lt;/content_type&gt;</span>
+                <span class=nt>&lt;response_content&gt;</span>file:///absolute_path_file.html<span class=nt>&lt;/response_content&gt;</span>
+            <span class=nt>&lt;/handler&gt;</span>
+        <span class=nt>&lt;/rule&gt;</span>
+        <span class=nt>&lt;rule&gt;</span>
+            <span class=nt>&lt;methods&gt;</span>GET<span class=nt>&lt;/methods&gt;</span>
+            <span class=nt>&lt;headers&gt;&lt;XXX&gt;</span>xxx<span class=nt>&lt;/XXX&gt;&lt;/headers&gt;</span>
+            <span class=nt>&lt;url&gt;</span>/get_relative_path_static_handler<span class=nt>&lt;/url&gt;</span>
+            <span class=nt>&lt;handler&gt;</span>
+                <span class=nt>&lt;type&gt;</span>static<span class=nt>&lt;/type&gt;</span>
+                <span class=nt>&lt;content_type&gt;</span>text/html; charset=UTF-8<span class=nt>&lt;/content_type&gt;</span>
+                <span class=nt>&lt;response_content&gt;</span>file://./relative_path_file.html<span class=nt>&lt;/response_content&gt;</span>
+            <span class=nt>&lt;/handler&gt;</span>
+        <span class=nt>&lt;/rule&gt;</span>
+<span class=nt>&lt;/http_handlers&gt;</span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nv>user_files_path</span><span class=o>=</span><span class=s1>'/var/lib/clickhouse/user_files'</span>
+$ sudo <span class=nb>echo</span> <span class=s2>"&lt;html&gt;&lt;body&gt;Relative Path File&lt;/body&gt;&lt;/html&gt;"</span> &gt; <span class=nv>$user_files_path</span>/relative_path_file.html
+$ sudo <span class=nb>echo</span> <span class=s2>"&lt;html&gt;&lt;body&gt;Absolute Path File&lt;/body&gt;&lt;/html&gt;"</span> &gt; <span class=nv>$user_files_path</span>/absolute_path_file.html
+$ curl -vv -H <span class=s1>'XXX:xxx'</span> <span class=s1>'http://localhost:8123/get_absolute_path_static_handler'</span>
+*   Trying ::1...
+* Connected to localhost <span class=o>(</span>::1<span class=o>)</span> port <span class=m>8123</span> <span class=o>(</span><span class=c1>#0)</span>
+&gt; GET /get_absolute_path_static_handler HTTP/1.1
+&gt; Host: localhost:8123
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt; XXX:xxx
+&gt;
+&lt; HTTP/1.1 <span class=m>200</span> OK
+&lt; Date: Wed, <span class=m>29</span> Apr <span class=m>2020</span> <span class=m>04</span>:18:16 GMT
+&lt; Connection: Keep-Alive
+&lt; Content-Type: text/html<span class=p>;</span> <span class=nv>charset</span><span class=o>=</span>UTF-8
+&lt; Transfer-Encoding: chunked
+&lt; Keep-Alive: <span class=nv>timeout</span><span class=o>=</span><span class=m>3</span>
+&lt; X-ClickHouse-Summary: <span class=o>{</span><span class=s2>"read_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"read_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"written_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"written_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"total_rows_to_read"</span>:<span class=s2>"0"</span><span class=o>}</span>
+&lt;
+&lt;html&gt;&lt;body&gt;Absolute Path File&lt;/body&gt;&lt;/html&gt;
+* Connection <span class=c1>#0 to host localhost left intact</span>
+$ curl -vv -H <span class=s1>'XXX:xxx'</span> <span class=s1>'http://localhost:8123/get_relative_path_static_handler'</span>
+*   Trying ::1...
+* Connected to localhost <span class=o>(</span>::1<span class=o>)</span> port <span class=m>8123</span> <span class=o>(</span><span class=c1>#0)</span>
+&gt; GET /get_relative_path_static_handler HTTP/1.1
+&gt; Host: localhost:8123
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt; XXX:xxx
+&gt;
+&lt; HTTP/1.1 <span class=m>200</span> OK
+&lt; Date: Wed, <span class=m>29</span> Apr <span class=m>2020</span> <span class=m>04</span>:18:31 GMT
+&lt; Connection: Keep-Alive
+&lt; Content-Type: text/html<span class=p>;</span> <span class=nv>charset</span><span class=o>=</span>UTF-8
+&lt; Transfer-Encoding: chunked
+&lt; Keep-Alive: <span class=nv>timeout</span><span class=o>=</span><span class=m>3</span>
+&lt; X-ClickHouse-Summary: <span class=o>{</span><span class=s2>"read_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"read_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"written_rows"</span>:<span class=s2>"0"</span>,<span class=s2>"written_bytes"</span>:<span class=s2>"0"</span>,<span class=s2>"total_rows_to_read"</span>:<span class=s2>"0"</span><span class=o>}</span>
+&lt;
+&lt;html&gt;&lt;body&gt;Relative Path File&lt;/body&gt;&lt;/html&gt;
+* Connection <span class=c1>#0 to host localhost left intact</span>
+</code></pre></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/c60fd44c5b70c56ff0f9c7fc538e58c6c8186aea" rel="external nofollow noreferrer" target="_blank" class="text-reset">c60fd44c</a>
+    
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/zh/interfaces/http/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>

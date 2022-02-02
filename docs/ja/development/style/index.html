@@ -1,0 +1,5502 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+        
+    
+    <!DOCTYPE html>
+<html lang="ja" data-version="master" data-single-page="false">
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>C++コードの書き方 | ClickHouseドキュメント</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png" />
+
+<meta property="og:title" content="C++コードの書き方 | ClickHouseドキュメント"/>
+<meta property="og:description" content="C++コードの書き方 一般的な推奨事項 1. 以下は推奨事項であり、要件ではありません。 2. コードを編集する場合は、既存のコードの書式に従うことが理にかなっています。 3. 一貫性のためにコードスタイルが必要です。 一貫性により、コード" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://clickhouse.com/images/logo.png" />
+
+<meta property="og:url" content="https://clickhouse.com/docs/ja/development/style/"/>
+<link rel="canonical" href="https://clickhouse.com/docs/ja/development/style/" />
+
+<link rel="amphtml" href="https://clickhouse.com/docs/ja/development/style/amp/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "C++コードの書き方 | ClickHouseドキュメント",
+"mainEntityOfPage": "https://clickhouse.com/docs/ja/development/style/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "C++コードの書き方 | ClickHouseドキュメント",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+
+<meta name="description" content="C++コードの書き方 一般的な推奨事項 1. 以下は推奨事項であり、要件ではありません。 2. コードを編集する場合は、既存のコードの書式に従うことが理にかなっています。 3. 一貫性のためにコードスタイルが必要です。 一貫性により、コード" />
+
+<meta name="keywords"
+      content="ClickHouse, DBMS, OLAP, SQL, open-source, relational, analytics, analytical, Big Data, web-analytics" />
+
+
+
+
+    
+    <link rel="alternate" hreflang="en" href="https://clickhouse.com/docs/en/development/style/" />
+    
+    <link rel="alternate" hreflang="zh" href="https://clickhouse.com/docs/zh/development/style/" />
+    
+    <link rel="alternate" hreflang="ru" href="https://clickhouse.com/docs/ru/development/style/" />
+    
+    <link rel="alternate" hreflang="ja" href="https://clickhouse.com/docs/ja/development/style/" />
+    
+    <link rel="alternate" hreflang="x-default" href="https://clickhouse.com/docs/en/development/style/" />
+
+
+
+
+
+    
+    <link href="/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" data-spy="scroll" data-target="#toc" data-offset="80">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar py-1 navbar-dark navbar-expand-md bg-dark-alt text-white fixed-top">
+    <div class="container-fluid justify-content-between">
+        <a class="d-block navbar-brand mr-3" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h1 class="h3 m-0 p-0 d-inline">
+                <a href="#" class="text-white text-decoration-none">
+                    
+                        C++コードの書き方
+                    
+                </a>
+            </h1>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                
+                    
+                
+                
+                <li id="edit-wrapper" class="nav-item">
+                    <a id="edit-link" href="https://github.com/ClickHouse/ClickHouse/edit/master/docs/ja/development/style.md" title="Edit this article" class="nav-link" rel="external nofollow noreferrer" target="_blank"><img src="/images/mkdocs/edit.svg" alt="Edit this article" height="60" /></a>
+                </li>
+                
+                <li class="nav-item">
+                     <a class="nav-link" href="https://github.com/ClickHouse/ClickHouse" rel="external nofollow noreferrer">
+                        <img src="/images/index/github.svg" alt="GitHub repository" title="Go to GitHub" height="72" />
+                    </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block mt-1 text-muted" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/ja.svg" alt="日本語" title="日本語" width="60" class="d-inline-block mt-n1" />
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item"
+                               href="/docs/en/development/style/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />English
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/zh/development/style/">
+                                <img src="/images/flags/zh.svg" alt="" title="" width="32" class="d-inline-block mr-2" />中文
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/ru/development/style/">
+                                <img src="/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />Русский
+                            </a>
+                            
+                            <a class="dropdown-item disabled"
+                               href="/docs/ja/development/style/">
+                                <img src="/images/flags/ja.svg" alt="" title="" width="32" class="d-inline-block mr-2" />日本語
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <form id="search-form" class="form-inline m-0">
+            <div class="input-group">
+                <div class="input-group-prepend w-100">
+                    <span class="input-group-text bg-secondary-alt text-muted border-0 mr-n1" id="search-icon">
+                        <img src="/images/mkdocs/search.svg" />
+                    </span>
+                    <input id="docsearch-input" class="form-control bg-secondary-alt text-muted border-0 pl-1" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+        </form>
+
+        <button id="navbar-toggler" class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+        <div class="docs container-fluid mt-3">
+            <div class="row justify-content-end justify-content-xl-center">
+                <div id="sidebar" class="col-xl-2 col-md-4 bg-secondary-alt p-3 d-print-none min-vh-100 overflow-auto">
+    <div class="overflow-auto">
+        <div id="single-page-switch" class="btn-group mb-2 float-right" role="group" aria-label="Multi-page or single-page">
+            <a href="../.." role="button" class="btn btn-dark active" aria-pressed="true">
+                <img src="/images/mkdocs/multi.svg" alt="Multi-page version" title="Multi-page version" />
+            </a>
+            <a href="../../single/" role="button" class="btn btn-dark-alt active" aria-pressed="true">
+                <img src="/images/mkdocs/single.svg" alt="Single-page version" title="Single-page version" />
+            </a>
+        </div>
+        
+        <nav id="sidebar-nav" class="nav flex-column mb-5">
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-1" title="はじめに" class="nav-link text-light dropdown-toggle px-0">はじめに</a>
+<div id="sidebar-sidebar-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../" title="概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概要</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/install/" title="インストール" class="nav-link text-light text-wrap d-inline-block w-100 px-0">インストール</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/tutorial/" title="チュートリアル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">チュートリアル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-1-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-1-5" title="データセット例" class="nav-link text-light dropdown-toggle px-0">データセット例</a>
+<div id="sidebar-sidebar-1-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/github-events/" title="GitHub Events" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GitHub Events</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/" title="イントロダクション" class="nav-link text-light text-wrap d-inline-block w-100 px-0">イントロダクション</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/metrica/" title="Yandex.Metrica データ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Yandex.Metrica データ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/ontime/" title="OnTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OnTime</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/recipes/" title="Recipes Dataset" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Recipes Dataset</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/nyc-taxi/" title="ニューヨークタクシー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ニューヨークタクシー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/amplab-benchmark/" title="AMPLab Big Data ベンチマーク" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AMPLab Big Data ベンチマーク</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/wikistat/" title="WikiStat" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WikiStat</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/criteo/" title="Criteo のテラバイトクリックログ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Criteo のテラバイトクリックログ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/brown-benchmark/" title="Brown University Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Brown University Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/opensky/" title="OpenSky" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OpenSky</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/uk-price-paid/" title="UK Property Price Paid" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UK Property Price Paid</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/star-schema/" title="スタースキーマ ベンチマーク" class="nav-link text-light text-wrap d-inline-block w-100 px-0">スタースキーマ ベンチマーク</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/cell-towers/" title="Cell Towers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Cell Towers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/example-datasets/menus/" title="Menus" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Menus</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../getting-started/playground/" title="Playground" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Playground</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2" title="インター" class="nav-link text-light dropdown-toggle px-0">インター</a>
+<div id="sidebar-sidebar-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../interfaces/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/cli/" title="コマンド行クライアント" class="nav-link text-light text-wrap d-inline-block w-100 px-0">コマンド行クライアント</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/tcp/" title="ネイティブイ)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ネイティブイ)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/http/" title="HTTPインターフェ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HTTPインターフェ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/mysql/" title="MySQLインタ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQLインタ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/formats/" title="入力および出力フォーマット" class="nav-link text-light text-wrap d-inline-block w-100 px-0">入力および出力フォーマット</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/jdbc/" title="JDBCドライバ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBCドライバ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/odbc/" title="ODBCドライバ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBCドライバ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/cpp/" title="C++クライアントライ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">C++クライアントライ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-2-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2-10" title="サードパーティ" class="nav-link text-light dropdown-toggle px-0">サードパーティ</a>
+<div id="sidebar-sidebar-2-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/third-party/client-libraries/" title="クライアント" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クライアント</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/third-party/integrations/" title="統合" class="nav-link text-light text-wrap d-inline-block w-100 px-0">統合</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/third-party/gui/" title="視界面" class="nav-link text-light text-wrap d-inline-block w-100 px-0">視界面</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../interfaces/third-party/proxy/" title="プロキシ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">プロキシ</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3" title="エンジン" class="nav-link text-light dropdown-toggle px-0">エンジン</a>
+<div id="sidebar-sidebar-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2" title="表エンジン" class="nav-link text-light dropdown-toggle px-0">表エンジン</a>
+<div id="sidebar-sidebar-3-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2-2" title="メルゲツリー族" class="nav-link text-light dropdown-toggle px-0">メルゲツリー族</a>
+<div id="sidebar-sidebar-3-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/mergetree/" title="メルゲツリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">メルゲツリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/replication/" title="データ複製" class="nav-link text-light text-wrap d-inline-block w-100 px-0">データ複製</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/custom-partitioning-key/" title="カスタム分割キー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">カスタム分割キー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/replacingmergetree/" title="置換マージツリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">置換マージツリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/summingmergetree/" title="サミングマーゲツリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">サミングマーゲツリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/aggregatingmergetree/" title="AggregatingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregatingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/collapsingmergetree/" title="折りたたみマージツリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">折りたたみマージツリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/versionedcollapsingmergetree/" title="バージョニングコラプシングマーゲットリー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">バージョニングコラプシングマーゲットリー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/mergetree-family/graphitemergetree/" title="GraphiteMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GraphiteMergeTree</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2-3" title="ログファミリ" class="nav-link text-light dropdown-toggle px-0">ログファミリ</a>
+<div id="sidebar-sidebar-3-2-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/log-family/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/log-family/stripelog/" title="ストリップログ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ストリップログ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/log-family/log/" title="ログ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ログ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/log-family/tinylog/" title="TinyLog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TinyLog</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2-4" title="統合" class="nav-link text-light dropdown-toggle px-0">統合</a>
+<div id="sidebar-sidebar-3-2-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/mongodb/" title="MongoDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MongoDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/s3/" title="S3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">S3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/embedded-rocksdb/" title="EmbeddedRocksDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EmbeddedRocksDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/rabbitmq/" title="RabbitMQ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RabbitMQ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/ExternalDistributed/" title="ExternalDistributed" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ExternalDistributed</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/kafka/" title="カフカ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">カフカ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/jdbc/" title="JDBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/odbc/" title="ODBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/integrations/hdfs/" title="HDFS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HDFS</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-2-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-2-5" title="スペシャル" class="nav-link text-light dropdown-toggle px-0">スペシャル</a>
+<div id="sidebar-sidebar-3-2-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/distributed/" title="分散" class="nav-link text-light text-wrap d-inline-block w-100 px-0">分散</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/external-data/" title="外部データ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部データ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/dictionary/" title="辞書" class="nav-link text-light text-wrap d-inline-block w-100 px-0">辞書</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/merge/" title="マージ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">マージ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/file/" title="ファイル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ファイル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/null/" title="Null" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/set/" title="セット" class="nav-link text-light text-wrap d-inline-block w-100 px-0">セット</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/join/" title="参加" class="nav-link text-light text-wrap d-inline-block w-100 px-0">参加</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/url/" title="URL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">URL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/view/" title="表示" class="nav-link text-light text-wrap d-inline-block w-100 px-0">表示</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/materializedview/" title="マテリアライズドビュー" class="nav-link text-light text-wrap d-inline-block w-100 px-0">マテリアライズドビュー</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/memory/" title="メモリ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">メモリ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/buffer/" title="バッファ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">バッファ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/table-engines/special/generate/" title="GenerateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GenerateRandom</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-3" title="データベース" class="nav-link text-light dropdown-toggle px-0">データベース</a>
+<div id="sidebar-sidebar-3-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/materialized-mysql/" title="MaterializedMySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedMySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/lazy/" title="怠け者" class="nav-link text-light text-wrap d-inline-block w-100 px-0">怠け者</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/atomic/" title="Atomic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Atomic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../engines/database-engines/replicated/" title="Replicated" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Replicated</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4" title="SQLリファレンス" class="nav-link text-light dropdown-toggle px-0">SQLリファレンス</a>
+<div id="sidebar-sidebar-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2" title="文" class="nav-link text-light dropdown-toggle px-0">文</a>
+<div id="sidebar-sidebar-4-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-2" title="SELECT" class="nav-link text-light dropdown-toggle px-0">SELECT</a>
+<div id="sidebar-sidebar-4-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/all/" title="ALL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/array-join/" title="ARRAY JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ARRAY JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/distinct/" title="DISTINCT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DISTINCT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/format/" title="FORMAT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FORMAT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/from/" title="FROM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FROM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/group-by/" title="GROUP BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GROUP BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/having/" title="HAVING" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HAVING</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/into-outfile/" title="INTO OUTFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INTO OUTFILE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/join/" title="JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/limit/" title="LIMIT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/limit-by/" title="LIMIT BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/offset/" title="OFFSET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OFFSET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/order-by/" title="ORDER BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ORDER BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/prewhere/" title="PREWHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PREWHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/sample/" title="SAMPLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SAMPLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/where/" title="WHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/select/with/" title="WITH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WITH</a>
+
+
+    
+        
+        
+        
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/create/" title="CREATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CREATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/insert-into/" title="INSERT INTO" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INSERT INTO</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/alter/" title="ALTER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALTER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/system/" title="SYSTEM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SYSTEM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/show/" title="SHOW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SHOW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/explain/" title="EXPLAIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXPLAIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/grant/" title="GRANT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GRANT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/revoke/" title="REVOKE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">REVOKE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/attach/" title="ATTACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ATTACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/check-table/" title="CHECK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CHECK</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/misc/" title="その他" class="nav-link text-light text-wrap d-inline-block w-100 px-0">その他</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/describe-table/" title="DESCRIBE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DESCRIBE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/detach/" title="DETACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DETACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/drop/" title="DROP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DROP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/exists/" title="EXISTS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXISTS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/kill/" title="KILL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">KILL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/rename/" title="RENAME" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RENAME</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/exchange/" title="EXCHANGE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXCHANGE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/optimize/" title="OPTIMIZE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OPTIMIZE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/set/" title="SET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/set-role/" title="SET ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/truncate/" title="TRUNCATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TRUNCATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/use/" title="USE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/statements/watch/" title="WATCH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WATCH</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/syntax/" title="構文" class="nav-link text-light text-wrap d-inline-block w-100 px-0">構文</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/distributed-ddl/" title="Distributed DDL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Distributed DDL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-5" title="関数" class="nav-link text-light dropdown-toggle px-0">関数</a>
+<div id="sidebar-sidebar-4-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/arithmetic-functions/" title="算術" class="nav-link text-light text-wrap d-inline-block w-100 px-0">算術</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/comparison-functions/" title="比較" class="nav-link text-light text-wrap d-inline-block w-100 px-0">比較</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/logical-functions/" title="論理" class="nav-link text-light text-wrap d-inline-block w-100 px-0">論理</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/type-conversion-functions/" title="タイプ変換" class="nav-link text-light text-wrap d-inline-block w-100 px-0">タイプ変換</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/date-time-functions/" title="日付と時刻の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">日付と時刻の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/string-functions/" title="文字列の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/string-search-functions/" title="文字列を検索する場合" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列を検索する場合</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/string-replace-functions/" title="文字列で置換する場合" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列で置換する場合</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/files/" title="Files" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Files</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/conditional-functions/" title="条件付き" class="nav-link text-light text-wrap d-inline-block w-100 px-0">条件付き</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/math-functions/" title="数学" class="nav-link text-light text-wrap d-inline-block w-100 px-0">数学</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/rounding-functions/" title="丸め" class="nav-link text-light text-wrap d-inline-block w-100 px-0">丸め</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/tuple-map-functions/" title="Working with maps" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Working with maps</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/array-functions/" title="配列の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">配列の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/splitting-merging-functions/" title="文字列と配列の分割とマージ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列と配列の分割とマージ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/bit-functions/" title="ビット" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ビット</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/bitmap-functions/" title="ビットマ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ビットマ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/hash-functions/" title="ハッシュ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ハッシュ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/random-functions/" title="擬似乱数の生成" class="nav-link text-light text-wrap d-inline-block w-100 px-0">擬似乱数の生成</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/encoding-functions/" title="エンコード" class="nav-link text-light text-wrap d-inline-block w-100 px-0">エンコード</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/uuid-functions/" title="UUIDの操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUIDの操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/url-functions/" title="Urlの操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Urlの操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/ip-address-functions/" title="IPアドレスの操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPアドレスの操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/json-functions/" title="JSONでの作業" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JSONでの作業</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/higher-order-functions/" title="高次" class="nav-link text-light text-wrap d-inline-block w-100 px-0">高次</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/ext-dict-functions/" title="外部辞書の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部辞書の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/ym-dict-functions/" title="Yandexでの作業。メトリカ辞書" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Yandexでの作業。メトリカ辞書</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/in-functions/" title="IN演算子の実装" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IN演算子の実装</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/array-join/" title="アレイジョイン" class="nav-link text-light text-wrap d-inline-block w-100 px-0">アレイジョイン</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-5-31" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-5-31" title="Geo" class="nav-link text-light dropdown-toggle px-0">Geo</a>
+<div id="sidebar-sidebar-4-5-31" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/geo/coordinates/" title="Geographical Coordinates" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geographical Coordinates</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/geo/geohash/" title="Geohash" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geohash</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/geo/h3/" title="H3 Indexes" class="nav-link text-light text-wrap d-inline-block w-100 px-0">H3 Indexes</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/geo/" title="地理座標の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">地理座標の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/functions-for-nulls/" title="Null許容引数の操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null許容引数の操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/machine-learning-functions/" title="機械学習機能" class="nav-link text-light text-wrap d-inline-block w-100 px-0">機械学習機能</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/introspection/" title="内省" class="nav-link text-light text-wrap d-inline-block w-100 px-0">内省</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/tuple-functions/" title="Tuples" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuples</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/other-functions/" title="その他" class="nav-link text-light text-wrap d-inline-block w-100 px-0">その他</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/encryption-functions/" title="Encryption" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Encryption</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/functions/nlp-functions/" title="NLP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">NLP</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-6" title="集計関数" class="nav-link text-light dropdown-toggle px-0">集計関数</a>
+<div id="sidebar-sidebar-4-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-6-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-6-2" title="Reference" class="nav-link text-light dropdown-toggle px-0">Reference</a>
+<div id="sidebar-sidebar-4-6-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/count/" title="count" class="nav-link text-light text-wrap d-inline-block w-100 px-0">count</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/min/" title="min" class="nav-link text-light text-wrap d-inline-block w-100 px-0">min</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/max/" title="max" class="nav-link text-light text-wrap d-inline-block w-100 px-0">max</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/sum/" title="sum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/avg/" title="avg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/any/" title="any" class="nav-link text-light text-wrap d-inline-block w-100 px-0">any</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/stddevpop/" title="stddevPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/stddevsamp/" title="stddevSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/varpop/" title="varPop(x)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varPop(x)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/varsamp/" title="varSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/covarpop/" title="covarPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarPop</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/covarsamp/" title="covarSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/anyheavy/" title="anyHeavy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyHeavy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/anylast/" title="anyLast" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyLast</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/argmin/" title="argMin" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMin</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/argmax/" title="argMax" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMax</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/avgweighted/" title="avgWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avgWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/corr/" title="corr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">corr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/topk/" title="topK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topK</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/topkweighted/" title="topKWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topKWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/grouparray/" title="groupArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/groupuniqarray/" title="groupUniqArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupUniqArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/grouparrayinsertat/" title="groupArrayInsertAt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayInsertAt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/grouparraymovingsum/" title="groupArrayMovingSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/grouparraymovingavg/" title="groupArrayMovingAvg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingAvg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/grouparraysample/" title="groupArraySample" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArraySample</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/groupbitand/" title="groupBitAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/groupbitor/" title="groupBitOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/groupbitxor/" title="groupBitXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/groupbitmap/" title="groupBitmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/groupbitmapand/" title="groupBitmapAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/groupbitmapor/" title="groupBitmapOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/groupbitmapxor/" title="groupBitmapXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/sumwithoverflow/" title="sumWithOverflow" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumWithOverflow</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/deltasum/" title="deltaSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/deltasumtimestamp/" title="deltaSumTimestamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSumTimestamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/summap/" title="sumMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/minmap/" title="minMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">minMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/maxmap/" title="maxMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">maxMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/sumcount/" title="sumCount" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumCount</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/rankCorr/" title="rankCorr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">rankCorr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/sumkahan/" title="sumKahan" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumKahan</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/intervalLengthSum/" title="intervalLengthSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">intervalLengthSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/skewpop/" title="skewPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/skewsamp/" title="skewSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/kurtpop/" title="kurtPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/kurtsamp/" title="kurtSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/uniq/" title="uniq" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniq</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/uniqexact/" title="uniqExact" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqExact</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/uniqcombined/" title="uniqCombined" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/uniqcombined64/" title="uniqCombined64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/uniqhll12/" title="uniqHLL12" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqHLL12</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/uniqthetasketch/" title="uniqTheta" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqTheta</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantile/" title="quantile" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantile</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantiles/" title="quantiles Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantiles Functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantileexact/" title="quantileExact Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExact Functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantileexactweighted/" title="quantileExactWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExactWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantiletiming/" title="quantileTiming" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTiming</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantiletimingweighted/" title="quantileTimingWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTimingWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantiledeterministic/" title="quantileDeterministic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileDeterministic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantiletdigest/" title="quantileTDigest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantiletdigestweighted/" title="quantileTDigestWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigestWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/quantilebfloat16/" title="quantileBFloat16" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileBFloat16</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/median/" title="median" class="nav-link text-light text-wrap d-inline-block w-100 px-0">median</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/simplelinearregression/" title="simpleLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">simpleLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/stochasticlinearregression/" title="stochasticLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/stochasticlogisticregression/" title="stochasticLogisticRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLogisticRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/categoricalinformationvalue/" title="categoricalInformationValue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">categoricalInformationValue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/studentttest/" title="studentTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">studentTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/welchttest/" title="welchTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">welchTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/mannwhitneyutest/" title="mannWhitneyUTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mannWhitneyUTest</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/reference/" title="参照" class="nav-link text-light text-wrap d-inline-block w-100 px-0">参照</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/combinators/" title="コンビネータ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">コンビネータ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/aggregate-functions/parametric-functions/" title="パラメトリック" class="nav-link text-light text-wrap d-inline-block w-100 px-0">パラメトリック</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-7" title="テーブル関数" class="nav-link text-light dropdown-toggle px-0">テーブル関数</a>
+<div id="sidebar-sidebar-4-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/file/" title="ファイル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ファイル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/merge/" title="マージ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">マージ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/numbers/" title="数字" class="nav-link text-light text-wrap d-inline-block w-100 px-0">数字</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/remote/" title="リモート" class="nav-link text-light text-wrap d-inline-block w-100 px-0">リモート</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/url/" title="url" class="nav-link text-light text-wrap d-inline-block w-100 px-0">url</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/mysql/" title="mysql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mysql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/postgresql/" title="postgresql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">postgresql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/jdbc/" title="jdbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">jdbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/odbc/" title="odbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">odbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/hdfs/" title="hdfs" class="nav-link text-light text-wrap d-inline-block w-100 px-0">hdfs</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/s3/" title="s3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/input/" title="入力" class="nav-link text-light text-wrap d-inline-block w-100 px-0">入力</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/generate/" title="generateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">generateRandom</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/cluster/" title="cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/view/" title="view" class="nav-link text-light text-wrap d-inline-block w-100 px-0">view</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/null/" title="null function" class="nav-link text-light text-wrap d-inline-block w-100 px-0">null function</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/dictionary/" title="dictionary function" class="nav-link text-light text-wrap d-inline-block w-100 px-0">dictionary function</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/s3Cluster/" title="s3Cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3Cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/table-functions/sqlite/" title="sqlite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sqlite</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-8" title="辞書" class="nav-link text-light dropdown-toggle px-0">辞書</a>
+<div id="sidebar-sidebar-4-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-8-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-8-2" title="外部辞書" class="nav-link text-light dropdown-toggle px-0">外部辞書</a>
+<div id="sidebar-sidebar-4-8-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/external-dictionaries/external-dicts/" title="一般的な説明" class="nav-link text-light text-wrap d-inline-block w-100 px-0">一般的な説明</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict/" title="外部ディクショナリの構成" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部ディクショナリの構成</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-layout/" title="メモリへの辞書の格納" class="nav-link text-light text-wrap d-inline-block w-100 px-0">メモリへの辞書の格納</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-lifetime/" title="辞書の更新" class="nav-link text-light text-wrap d-inline-block w-100 px-0">辞書の更新</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources/" title="外部辞書のソース" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部辞書のソース</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-structure/" title="辞書キーとフィールド" class="nav-link text-light text-wrap d-inline-block w-100 px-0">辞書キーとフィールド</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-hierarchical/" title="階層辞書" class="nav-link text-light text-wrap d-inline-block w-100 px-0">階層辞書</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-polygon/" title="Polygon Dictionaries With Grids" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Polygon Dictionaries With Grids</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/dictionaries/internal-dicts/" title="内部辞書" class="nav-link text-light text-wrap d-inline-block w-100 px-0">内部辞書</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-9" title="データ型" class="nav-link text-light dropdown-toggle px-0">データ型</a>
+<div id="sidebar-sidebar-4-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/int-uint/" title="UInt8、UInt16、UInt32、UInt64、Int8、Int16、Int32、Int64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UInt8、UInt16、UInt32、UInt64、Int8、Int16、Int32、Int64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/float/" title="Float32、Float64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Float32、Float64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/decimal/" title="小数点" class="nav-link text-light text-wrap d-inline-block w-100 px-0">小数点</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/boolean/" title="ブール値" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ブール値</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/string/" title="文字列" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文字列</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/fixedstring/" title="固定文字列(N)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">固定文字列(N)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/uuid/" title="UUID" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUID</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/date/" title="日付" class="nav-link text-light text-wrap d-inline-block w-100 px-0">日付</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/date32/" title="Date32" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Date32</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/datetime/" title="DateTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/datetime64/" title="DateTime64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/enum/" title="Enum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Enum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/array/" title="配列(T)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">配列(T)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/aggregatefunction/" title="AggregateFunction(名前,types_of_arguments...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregateFunction(名前,types_of_arguments...)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/tuple/" title="Tuple(T1,T2,...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuple(T1,T2,...)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/nullable/" title="Null可能" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null可能</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-9-18" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-9-18" title="入れ子データ構造" class="nav-link text-light dropdown-toggle px-0">入れ子データ構造</a>
+<div id="sidebar-sidebar-4-9-18" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/nested-data-structures/nested/" title="ネストされた(Name1Type1,Name2Type2,...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ネストされた(Name1Type1,Name2Type2,...)</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-9-19" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-9-19" title="特殊データ型" class="nav-link text-light dropdown-toggle px-0">特殊データ型</a>
+<div id="sidebar-sidebar-4-9-19" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/special-data-types/expression/" title="式" class="nav-link text-light text-wrap d-inline-block w-100 px-0">式</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/special-data-types/set/" title="セット" class="nav-link text-light text-wrap d-inline-block w-100 px-0">セット</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/special-data-types/nothing/" title="何もない" class="nav-link text-light text-wrap d-inline-block w-100 px-0">何もない</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/special-data-types/interval/" title="間隔" class="nav-link text-light text-wrap d-inline-block w-100 px-0">間隔</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-9-20" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-9-20" title="ドメイン" class="nav-link text-light dropdown-toggle px-0">ドメイン</a>
+<div id="sidebar-sidebar-4-9-20" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/domains/" title="概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概要</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/domains/ipv4/" title="IPv4" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv4</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/domains/ipv6/" title="IPv6" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv6</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/multiword-types/" title="Multiword Type Names" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Multiword Type Names</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/geo/" title="Geo" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geo</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/map/" title="Map(key, value)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Map(key, value)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/data-types/simpleaggregatefunction/" title="SimpleAggregateFunction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SimpleAggregateFunction</a>
+
+
+    
+        
+        
+        
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-10" title="演算子" class="nav-link text-light dropdown-toggle px-0">演算子</a>
+<div id="sidebar-sidebar-4-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/operators/" title="演算子" class="nav-link text-light text-wrap d-inline-block w-100 px-0">演算子</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/operators/in/" title="IN Operators" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IN Operators</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/ansi/" title="ANSIの互換性" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ANSIの互換性</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-12" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-12" title="Window Functions" class="nav-link text-light dropdown-toggle px-0">Window Functions</a>
+<div id="sidebar-sidebar-4-12" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../sql-reference/window-functions/" title="Window Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Window Functions</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5" title="ガイド" class="nav-link text-light dropdown-toggle px-0">ガイド</a>
+<div id="sidebar-sidebar-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../guides/" title="概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概要</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../guides/apply-catboost-model/" title="CatBoostモデルの適用" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CatBoostモデルの適用</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6" title="操作" class="nav-link text-light dropdown-toggle px-0">操作</a>
+<div id="sidebar-sidebar-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../operations/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/requirements/" title="要件" class="nav-link text-light text-wrap d-inline-block w-100 px-0">要件</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/monitoring/" title="監視" class="nav-link text-light text-wrap d-inline-block w-100 px-0">監視</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/troubleshooting/" title="トラブルシ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">トラブルシ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/update/" title="クリックハウスの更新" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クリックハウスの更新</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-6" title="External User Authenticators and Directories" class="nav-link text-light dropdown-toggle px-0">External User Authenticators and Directories</a>
+<div id="sidebar-sidebar-6-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../operations/external-authenticators/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/external-authenticators/kerberos/" title="Kerberos" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Kerberos</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/external-authenticators/ldap/" title="LDAP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LDAP</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/access-rights/" title="アクセス制御とアカウント管理" class="nav-link text-light text-wrap d-inline-block w-100 px-0">アクセス制御とアカウント管理</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/backup/" title="データバックア" class="nav-link text-light text-wrap d-inline-block w-100 px-0">データバックア</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/configuration-files/" title="設定ファイル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">設定ファイル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/quotas/" title="クォータ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クォータ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-11" title="System Tables" class="nav-link text-light dropdown-toggle px-0">System Tables</a>
+<div id="sidebar-sidebar-6-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/" title="System Tables" class="nav-link text-light text-wrap d-inline-block w-100 px-0">System Tables</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/asynchronous_metric_log/" title="system.asynchronous_metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/asynchronous_metrics/" title="system.asynchronous_metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/clusters/" title="system.clusters" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.clusters</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/columns/" title="system.columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/contributors/" title="system.contributors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.contributors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/crash-log/" title="system.crash_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.crash_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/current-roles/" title="system.current_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.current_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/data_skipping_indices/" title="system.data_skipping_indices" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_skipping_indices</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/data_type_families/" title="system.data_type_families" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_type_families</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/databases/" title="system.databases" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.databases</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/detached_parts/" title="system.detached_parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.detached_parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/dictionaries/" title="system.dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.dictionaries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/disks/" title="system.disks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.disks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/distributed_ddl_queue/" title="system.distributed_ddl_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distributed_ddl_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/distribution_queue/" title="system.distribution_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distribution_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/enabled-roles/" title="system.enabled_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.enabled_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/errors/" title="system.errors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.errors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/events/" title="system.events" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.events</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/functions/" title="system.functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/grants/" title="system.grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/graphite_retentions/" title="system.graphite_retentions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.graphite_retentions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/licenses/" title="system.licenses" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.licenses</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/merge_tree_settings/" title="system.merge_tree_settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merge_tree_settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/merges/" title="system.merges" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merges</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/metric_log/" title="system.metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/metrics/" title="system.metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/mutations/" title="system.mutations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.mutations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/numbers/" title="system.numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/numbers_mt/" title="system.numbers_mt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers_mt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/one/" title="system.one" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.one</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/opentelemetry_span_log/" title="system.opentelemetry_span_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.opentelemetry_span_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/part_log/" title="system.part_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.part_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/parts/" title="system.parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/parts_columns/" title="system.parts_columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts_columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/processes/" title="system.processes" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.processes</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/query_log/" title="system.query_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/query_thread_log/" title="system.query_thread_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_thread_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/query_views_log/" title="system.query_views_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_views_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/quota_limits/" title="system.quota_limits" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_limits</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/quota_usage/" title="system.quota_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/quotas/" title="system.quotas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/quotas_usage/" title="system.quotas_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/replicas/" title="system.replicas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/replicated_fetches/" title="system.replicated_fetches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicated_fetches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/replication_queue/" title="system.replication_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replication_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/role-grants/" title="system.role_grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.role_grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/roles/" title="system.roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/row_policies/" title="system.row_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.row_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/settings/" title="system.settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/settings_profile_elements/" title="system.settings_profile_elements" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profile_elements</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/settings_profiles/" title="system.settings_profiles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profiles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/stack_trace/" title="system.stack_trace" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.stack_trace</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/storage_policies/" title="system.storage_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.storage_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/table_engines/" title="system.table_engines" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.table_engines</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/tables/" title="system.tables" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.tables</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/text_log/" title="system.text_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.text_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/time_zones/" title="system.time_zones" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.time_zones</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/trace_log/" title="system.trace_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.trace_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/users/" title="system.users" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.users</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/zookeeper/" title="system.zookeeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/zookeeper_log/" title="system.zookeeper_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper_log</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/system-tables/" title="システム表" class="nav-link text-light text-wrap d-inline-block w-100 px-0">システム表</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-13" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-13" title="性能の最適化" class="nav-link text-light dropdown-toggle px-0">性能の最適化</a>
+<div id="sidebar-sidebar-6-13" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../operations/optimizing-performance/sampling-query-profiler/" title="Queryプロファイリング" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Queryプロファイリング</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-14" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-14" title="サーバ構成パラメータ" class="nav-link text-light dropdown-toggle px-0">サーバ構成パラメータ</a>
+<div id="sidebar-sidebar-6-14" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../operations/server-configuration-parameters/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/server-configuration-parameters/settings/" title="サーバー設定" class="nav-link text-light text-wrap d-inline-block w-100 px-0">サーバー設定</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/performance-test/" title="ハードウェア試験" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ハードウェア試験</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-16" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-16" title="設定" class="nav-link text-light dropdown-toggle px-0">設定</a>
+<div id="sidebar-sidebar-6-16" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../operations/settings/" title="はじめに" class="nav-link text-light text-wrap d-inline-block w-100 px-0">はじめに</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/settings/permissions-for-queries/" title="クエリの権限" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クエリの権限</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/settings/query-complexity/" title="クエリの複雑さの制限" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クエリの複雑さの制限</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/settings/settings-profiles/" title="設定プロファイル" class="nav-link text-light text-wrap d-inline-block w-100 px-0">設定プロファイル</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/settings/constraints-on-settings/" title="設定の制約" class="nav-link text-light text-wrap d-inline-block w-100 px-0">設定の制約</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/settings/settings-users/" title="ユーザー設定" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ユーザー設定</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/settings/merge-tree-settings/" title="MergeTree tables settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MergeTree tables settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/settings/settings/" title="設定" class="nav-link text-light text-wrap d-inline-block w-100 px-0">設定</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-6-17" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6-17" title="ユーティリ" class="nav-link text-light dropdown-toggle px-0">ユーティリ</a>
+<div id="sidebar-sidebar-6-17" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../operations/utilities/" title="概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概要</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/utilities/clickhouse-copier/" title="クリックハウス-複写機" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クリックハウス-複写機</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/utilities/clickhouse-local/" title="ﾂつｨﾂ姪"ﾂ債ﾂつｹ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ﾂつｨﾂ姪"ﾂ債ﾂつｹ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/utilities/clickhouse-benchmark/" title="clickhouse-ベンチマーク" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-ベンチマーク</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/utilities/clickhouse-format/" title="clickhouse-format" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-format</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/utilities/clickhouse-compressor/" title="ClickHouse compressor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse compressor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/utilities/clickhouse-obfuscator/" title="ClickHouse obfuscator" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse obfuscator</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/utilities/odbc-bridge/" title="clickhouse-odbc-bridge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-odbc-bridge</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/tips/" title="使用法の推奨事項" class="nav-link text-light text-wrap d-inline-block w-100 px-0">使用法の推奨事項</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/opentelemetry/" title="OpenTelemetry Support" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OpenTelemetry Support</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/caches/" title="Caches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Caches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/clickhouse-keeper/" title="ClickHouse Keeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse Keeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../operations/storing-data/" title="External Disks for Storing Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">External Disks for Storing Data</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7" title="開発" class="nav-link text-light dropdown-toggle px-0">開発</a>
+<div id="sidebar-sidebar-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../development/developer-instruction/" title="初心者ClickHouse開発者の指示" class="nav-link text-light text-wrap d-inline-block w-100 px-0">初心者ClickHouse開発者の指示</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/continuous-integration/" title="Continuous Integration Checks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Continuous Integration Checks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/architecture/" title="クリックハウス建築の概要" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クリックハウス建築の概要</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/browse-code/" title="ソースコードの参照" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ソースコードの参照</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/build/" title="Linux上でClickHouseを構築する方法" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Linux上でClickHouseを構築する方法</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/build-osx/" title="Mac OS XでClickHouseを構築する方法" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Mac OS XでClickHouseを構築する方法</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/build-cross-osx/" title="Mac OS X用のLinux上でClickHouseを構築する方法" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Mac OS X用のLinux上でClickHouseを構築する方法</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/build-cross-arm/" title="Aarch64用のLinux上でClickHouseを構築する方法(ARM64)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Aarch64用のLinux上でClickHouseを構築する方法(ARM64)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/style/" title="C++コードの書き方" class="nav-link text-white active text-wrap d-inline-block w-100 px-0">C++コードの書き方</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/tests/" title="Testing" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Testing</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/contrib/" title="サードパーティ製ライブラリを使用" class="nav-link text-light text-wrap d-inline-block w-100 px-0">サードパーティ製ライブラリを使用</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/cmake-in-clickhouse/" title="CMake in ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CMake in ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../development/adding_test_queries/" title="How to add test queries to ClickHouse CI" class="nav-link text-light text-wrap d-inline-block w-100 px-0">How to add test queries to ClickHouse CI</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-8" title="商業" class="nav-link text-light dropdown-toggle px-0">商業</a>
+<div id="sidebar-sidebar-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../commercial/cloud/" title="クラウド" class="nav-link text-light text-wrap d-inline-block w-100 px-0">クラウド</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../commercial/support/" title="Support" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Support</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../commercial/" title="商業" class="nav-link text-light text-wrap d-inline-block w-100 px-0">商業</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-9" title="新着情報" class="nav-link text-light dropdown-toggle px-0">新着情報</a>
+<div id="sidebar-sidebar-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-9-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-9-2" title="Changelog" class="nav-link text-light dropdown-toggle px-0">Changelog</a>
+<div id="sidebar-sidebar-9-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../whats-new/changelog/" title="2022" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2022</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../whats-new/changelog/2020/" title="2020" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2020</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../whats-new/changelog/2019/" title="2019" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2019</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../whats-new/changelog/2018/" title="2018" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2018</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../whats-new/changelog/2017/" title="2017" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2017</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../whats-new/roadmap/" title="ロード" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ロード</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../whats-new/security-changelog/" title="セキュリティ変更履歴" class="nav-link text-light text-wrap d-inline-block w-100 px-0">セキュリティ変更履歴</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-10" title="F.A.Q." class="nav-link text-light dropdown-toggle px-0">F.A.Q.</a>
+<div id="sidebar-sidebar-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../faq/general/" title="General" class="nav-link text-light text-wrap d-inline-block w-100 px-0">General</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../faq/use-cases/" title="Use Cases" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Use Cases</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../faq/operations/" title="Operations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Operations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../faq/integration/" title="Integration" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Integration</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../faq/general/" title="一般的な質問" class="nav-link text-light text-wrap d-inline-block w-100 px-0">一般的な質問</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+        </nav>
+        
+    </div>
+</div>
+                <div id="content-wrapper" class="anchor-fixer col-md-8 mt-5 p-2 p-md-4">
+    <div id="content">
+        
+            
+            
+            
+                
+                <nav class="text-muted" aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent p-0">
+                        
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../" class="text-reset">開発</a>
+                            
+                        </li>
+                       
+                    </ol>
+                </nav>
+            
+
+            
+    <div class="alert alert-primary" role="alert">
+      <p class="display-5 mb-2">Help wanted!</p>
+      <p class="lead">The following content of this documentation page has been machine-translated. But unlike other websites, it is not done on the fly. This translated text lives on GitHub repository alongside main ClickHouse codebase and waits for fellow native speakers to make it more human-readable. <a href="/docs/en/development/style/" class="alert-link">You can also use the original English version as a reference.</a></p>
+      <p class="lead">
+          <a class="btn btn-lg btn-primary text-white" href="https://github.com/ClickHouse/ClickHouse/edit/master/docs/ja/development/style.md" target="_blank" rel="external nofollow noreferrer">
+              Help ClickHouse documentation by editing this page
+          </a>
+      </p>
+    </div>
+
+            <h1 id="how-to-write-c-code">C++コードの書き方<a class="headerlink" href="#how-to-write-c-code" title="Permanent link"> </a></h1>
+<h2 id="general-recommendations">一般的な推奨事項<a class="headerlink" href="#general-recommendations" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> 以下は推奨事項であり、要件ではありません。</p>
+<p><strong>2.</strong> コードを編集する場合は、既存のコードの書式に従うことが理にかなっています。</p>
+<p><strong>3.</strong> 一貫性のためにコードスタイルが必要です。 一貫性により、コードを読みやすくなり、コードの検索も簡単になります。</p>
+<p><strong>4.</strong> ルールの多くは論理的な理由を持っていない;彼らは確立された慣行によって決定されます。</p>
+<h2 id="formatting">書式設定<a class="headerlink" href="#formatting" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> 多くのフォーマットは自動的に実行されるのでよ <code class="syntax">clang-format</code>.</p>
+<p><strong>2.</strong> インデントは4スペースです。 タブにスペースが追加されるように開発環境を構成します。</p>
+<p><strong>3.</strong> 中括弧の開始と終了は別の行にする必要があります。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">readBoolText</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">ReadBuffer</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">buf</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'0'</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">readChar</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">'0'</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>4.</strong> 関数本体全体が単一の場合 <code class="syntax">statement</code>、それは単一行に置くことができます。 中括弧の周りにスペースを配置します（行末のスペースのほかに）。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">mask</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">buf_size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">place</span><span class="p">(</span><span class="n">HashValue</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">mask</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>5.</strong> 機能のため。 をかけないスットに固定して使用します。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="kt">void</span><span class="w"> </span><span class="n">reinsert</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">[</span><span class="n">place_value</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">));</span><span class="w"></span>
+</code></pre></div>
+<p><strong>6.</strong> で <code class="syntax">if</code>, <code class="syntax">for</code>, <code class="syntax">while</code> 他の式では、（関数呼び出しとは対照的に）開始括弧の前にスペースが挿入されます。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">rows</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="n">index_granularity</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p><strong>7.</strong> 二項演算子の周りにスペースを追加 (<code class="syntax">+</code>, <code class="syntax">-</code>, <code class="syntax">*</code>, <code class="syntax">/</code>, <code class="syntax">%</code>, …) and the ternary operator <code class="syntax">?:</code>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">UInt16</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">);</span><span class="w"></span>
+<span class="n">UInt8</span><span class="w"> </span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">);</span><span class="w"></span>
+<span class="n">UInt8</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p><strong>8.</strong> 改行が入力されている場合は、演算子を新しい行に置き、その前にインデントを増やします。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">elapsed_ns</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">message</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" ("</span><span class="w"></span>
+<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rows_read_on_server</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000000000</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">elapsed_ns</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" rows/s., "</span><span class="w"></span>
+<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">bytes_read_on_server</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1000.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">elapsed_ns</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" MB/s.) "</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>9.</strong> 必要に応じて、行内の整列にスペースを使用できます。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">dst</span><span class="p">.</span><span class="n">ClickLogID</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">click</span><span class="p">.</span><span class="n">LogID</span><span class="p">;</span><span class="w"></span>
+<span class="n">dst</span><span class="p">.</span><span class="n">ClickEventID</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">click</span><span class="p">.</span><span class="n">EventID</span><span class="p">;</span><span class="w"></span>
+<span class="n">dst</span><span class="p">.</span><span class="n">ClickGoodEvent</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">click</span><span class="p">.</span><span class="n">GoodEvent</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>10.</strong> 演算子の周りにスペースを使用しない <code class="syntax">.</code>, <code class="syntax">-&gt;</code>.</p>
+<p>必要に応じて、演算子を次の行に折り返すことができます。 この場合、その前のオフセットが増加する。</p>
+<p><strong>11.</strong> 単項演算子の区切りにスペースを使用しないでください (<code class="syntax">--</code>, <code class="syntax">++</code>, <code class="syntax">*</code>, <code class="syntax">&amp;</code>, …) from the argument.</p>
+<p><strong>12.</strong> 入れの後に空白、コンマといえるものです。 同じルールは、内部のセミコロンのために行く <code class="syntax">for</code> 式。</p>
+<p><strong>13.</strong> 区切りにスペースを使用しないで下さい <code class="syntax">[]</code> オペレーター</p>
+<p><strong>14.</strong> で <code class="syntax">template &lt;...&gt;</code> 式は、間にスペースを使用します <code class="syntax">template</code> と <code class="syntax">&lt;</code>;後にスペースなし <code class="syntax">&lt;</code> または前に <code class="syntax">&gt;</code>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">TKey</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">TValue</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">AggregatedStatElement</span><span class="w"></span>
+<span class="p">{}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>15.</strong> クラスと構造体では、 <code class="syntax">public</code>, <code class="syntax">private</code>,and <code class="syntax">protected</code> と同じレベルで <code class="syntax">class/struct</code> コードの残りの部分をインデントします。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultiVersion</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1">/// Version of object for usage. shared_ptr manage lifetime of version.</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>16.</strong> 同じ場合 <code class="syntax">namespace</code> ファイル全体に使用され、他に重要なものはありません。 <code class="syntax">namespace</code>.</p>
+<p><strong>17.</strong> のブロックが <code class="syntax">if</code>, <code class="syntax">for</code>, <code class="syntax">while</code>、または他の式は、単一の <code class="syntax">statement</code>、中括弧は省略可能です。 を置く <code class="syntax">statement</code> 別の行で、代わりに。 この規則は、入れ子に対しても有効です <code class="syntax">if</code>, <code class="syntax">for</code>, <code class="syntax">while</code>, …</p>
+<p>しかし、内側の場合 <code class="syntax">statement</code> 中括弧または <code class="syntax">else</code>、外部ブロックは中括弧で記述する必要があります。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">/// Finish write.</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">streams</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">stream</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
+</code></pre></div>
+<p><strong>18.</strong> 行の終わりにスペースがあってはなりません。</p>
+<p><strong>19.</strong> ソースファイルはUTF-8エンコードです。</p>
+<p><strong>20.</strong> ASCII以外の文字は、文字列リテラルで使用できます。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">timer</span><span class="p">.</span><span class="n">elapsed</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">chunks_stats</span><span class="p">.</span><span class="n">hits</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" μsec/hit."</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>21.</strong> 単一行に複数の式を記述しないでください。</p>
+<p><strong>22.</strong> 関数内のコードのセクションをグループ化し、空行を複数以下で区切ります。</p>
+<p><strong>23.</strong> 関数、クラスなどを空行で区切ります。</p>
+<p><strong>24.</strong> <code class="syntax">A const</code> (値に関連する)型名の前に記述する必要があります。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">//correct</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pos</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="w"></span>
+<span class="c1">//incorrect</span>
+<span class="kt">char</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pos</span><span class="w"></span>
+</code></pre></div>
+<p><strong>25.</strong> ポインタまたは参照を宣言するとき、 <code class="syntax">*</code> と <code class="syntax">&amp;</code> シンボルは、両側のスペースで区切る必要があります。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">//correct</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pos</span><span class="w"></span>
+<span class="c1">//incorrect</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">pos</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pos</span><span class="w"></span>
+</code></pre></div>
+<p><strong>26.</strong> テンプレートタイプを使用するときは、それらを <code class="syntax">using</code> キーワード(最も単純な場合を除く)。</p>
+<p>つまり、テンプレートパラメーターは、 <code class="syntax">using</code> コードでは繰り返されません。</p>
+<p><code class="syntax">using</code> 関数内など、ローカルで宣言できます。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">//correct</span>
+<span class="k">using</span><span class="w"> </span><span class="n">FileStreams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Stream</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="n">FileStreams</span><span class="w"> </span><span class="n">streams</span><span class="p">;</span><span class="w"></span>
+<span class="c1">//incorrect</span>
+<span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Stream</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">streams</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>27.</strong> 一つの文で異なる型の変数を複数宣言しないでください。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">//incorrect</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>28.</strong> Cスタイルのキャストは使用しないでください。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">//incorrect</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="p">;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="c1">//correct</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>29.</strong> クラスと構造体では、各可視スコープ内でメンバーと関数を個別にグループ化します。</p>
+<p><strong>30.</strong> 小さなクラスと構造体の場合、メソッド宣言を実装から分離する必要はありません。</p>
+<p>同じことが、クラスや構造体の小さなメソッドにも当てはまります。</p>
+<p>テンプレート化されたクラスと構造体の場合、メソッド宣言を実装から分離しないでください（そうでない場合は、同じ翻訳単位で定義する必要があ</p>
+<p><strong>31.</strong> 行は140文字で、80文字ではなく折り返すことができます。</p>
+<p><strong>32.</strong> Postfixが必要ない場合は、常に接頭辞の増分/減分演算子を使用します。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Names</span><span class="o">::</span><span class="n">const_iterator</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">column_names</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">column_names</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<h2 id="comments">コメント<a class="headerlink" href="#comments" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> コードのすべての非自明な部分にコメントを追加してください。</p>
+<p>これは非常に重要です。 書面でのコメントだけを更新したいのですが--このコードに必要な、又は間違っています。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="cm">/** Part of piece of memory, that can be used.</span>
+<span class="cm">  * For example, if internal_buffer is 1MB, and there was only 10 bytes loaded to buffer from file for reading,</span>
+<span class="cm">  * then working_buffer will have size of only 10 bytes</span>
+<span class="cm">  * (working_buffer.end() will point to position right after those 10 bytes available for read).</span>
+<span class="cm">  */</span><span class="w"></span>
+</code></pre></div>
+<p><strong>2.</strong> コメントは必要に応じて詳細に設定できます。</p>
+<p><strong>3.</strong> 記述するコードの前にコメントを配置します。 まれに、コメントが同じ行のコードの後に来ることがあります。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="cm">/** Parses and executes the query.</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">executeQuery</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ReadBuffer</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">istr</span><span class="p">,</span><span class="w"> </span><span class="c1">/// Where to read the query from (and data for INSERT, if applicable)</span>
+<span class="w">    </span><span class="n">WriteBuffer</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">ostr</span><span class="p">,</span><span class="w"> </span><span class="c1">/// Where to write the result</span>
+<span class="w">    </span><span class="n">Context</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="c1">/// DB, tables, data types, engines, functions, aggregate functions...</span>
+<span class="w">    </span><span class="n">BlockInputStreamPtr</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">query_plan</span><span class="p">,</span><span class="w"> </span><span class="c1">/// Here could be written the description on how query was executed</span>
+<span class="w">    </span><span class="n">QueryProcessingStage</span><span class="o">::</span><span class="n">Enum</span><span class="w"> </span><span class="n">stage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QueryProcessingStage</span><span class="o">::</span><span class="n">Complete</span><span class="w"> </span><span class="c1">/// Up to which stage process the SELECT query</span>
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p><strong>4.</strong> コメントは英語のみで書く必要があります。</p>
+<p><strong>5.</strong> を書いていて図書館を含む詳細なコメントで説明を主なヘッダファイルです。</p>
+<p><strong>6.</strong> 追加情報を提供しないコメントは追加しないでください。 特に放置しないでください空のコメントこのような:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="cm">/*</span>
+<span class="cm">* Procedure Name:</span>
+<span class="cm">* Original procedure name:</span>
+<span class="cm">* Author:</span>
+<span class="cm">* Date of creation:</span>
+<span class="cm">* Dates of modification:</span>
+<span class="cm">* Modification authors:</span>
+<span class="cm">* Original file name:</span>
+<span class="cm">* Purpose:</span>
+<span class="cm">* Intent:</span>
+<span class="cm">* Designation:</span>
+<span class="cm">* Classes used:</span>
+<span class="cm">* Constants:</span>
+<span class="cm">* Local variables:</span>
+<span class="cm">* Parameters:</span>
+<span class="cm">* Date of creation:</span>
+<span class="cm">* Purpose:</span>
+<span class="cm">*/</span><span class="w"></span>
+</code></pre></div>
+<p>この例はリソースから借用されていますhttp://home.tamk.fi/~jaalto/course/coding-style/doc/unmainainable-code/.</p>
+<p><strong>7.</strong> ごみのコメントを書かないでください（作成者、作成日。.)各ファイルの先頭にある。</p>
+<p><strong>8.</strong> 単一行のコメントはスラッシュで始まります: <code class="syntax">///</code> 複数行のコメントは <code class="syntax">/**</code>. これらのコメントは、 “documentation”.</p>
+<p>注:Doxygenを使用すると、これらのコメントからドキュメントを生成できます。 しかし、Ideでコードをナビゲートする方が便利なので、Doxygenは一般的には使用されません。</p>
+<p><strong>9.</strong> 複数行コメントの先頭と末尾に空行を含めることはできません(複数行コメントを閉じる行を除きます)。</p>
+<p><strong>10.</strong> コメント行コードは、基本的なコメントは、 “documenting” コメント。</p>
+<p><strong>11.</strong> 削除のコメントアウトされていパーツのコード深い.</p>
+<p><strong>12.</strong> コメントやコードで冒涜を使用しないでください。</p>
+<p><strong>13.</strong> 大文字は使用しないでください。 過度の句読点を使用しないでください。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">/// WHAT THE FAIL???</span>
+</code></pre></div>
+<p><strong>14.</strong> 使用しないコメントをdelimeters.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">///******************************************************</span>
+</code></pre></div>
+<p><strong>15.</strong> コメントで議論を開始しないでください。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">/// Why did you do this stuff?</span>
+</code></pre></div>
+<p><strong>16.</strong> それが何であったかを説明するブロックの最後にコメントを書く必要はありません。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">/// for</span>
+</code></pre></div>
+<h2 id="names">名前<a class="headerlink" href="#names" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> 変数とクラスメンバーの名前にアンダースコア付きの小文字を使用します。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="kt">size_t</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>2.</strong> 関数（メソッド）の名前には、小文字で始まるcamelCaseを使用します。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"Memory"</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>3.</strong> クラス(構造体)の名前には、大文字で始まるCamelCaseを使用します。 I以外の接頭辞はインターフェイスには使用されません。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">class</span><span class="w"> </span><span class="nc">StorageMemory</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IStorage</span><span class="w"></span>
+</code></pre></div>
+<p><strong>4.</strong> <code class="syntax">using</code> クラスと同じように、または <code class="syntax">_t</code> 最後に。</p>
+<p><strong>5.</strong> テンプレート型引数の名前:単純な場合は、次のようにします <code class="syntax">T</code>; <code class="syntax">T</code>, <code class="syntax">U</code>; <code class="syntax">T1</code>, <code class="syntax">T2</code>.</p>
+<p>より複雑な場合は、クラス名の規則に従うか、プレフィックスを追加します <code class="syntax">T</code>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">TKey</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">TValue</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">AggregatedStatElement</span><span class="w"></span>
+</code></pre></div>
+<p><strong>6.</strong> テンプレート定数引数の名前:変数名の規則に従うか、または <code class="syntax">N</code> 簡単なケースでは。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">bool</span><span class="w"> </span><span class="n">without_www</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ExtractDomain</span><span class="w"></span>
+</code></pre></div>
+<p><strong>7.</strong> 抽象クラス(インターフェイス)については、 <code class="syntax">I</code> プレフィックス</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">class</span><span class="w"> </span><span class="nc">IBlockInputStream</span><span class="w"></span>
+</code></pre></div>
+<p><strong>8.</strong> 変数をローカルで使用する場合は、短い名前を使用できます。</p>
+<p>それ以外の場合は、意味を説明する名前を使用します。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="kt">bool</span><span class="w"> </span><span class="n">info_successfully_loaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>9.</strong> の名前 <code class="syntax">define</code>sおよびグローバル定数を使用ALL_CAPSをアンダースコア(_).</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="cp">#define MAX_SRC_TABLE_NAMES_TO_STORE 1000</span>
+</code></pre></div>
+<p><strong>10.</strong> ファイル名は内容と同じスタイルを使用する必要があります。</p>
+<p>ファイルに単一のクラスが含まれている場合は、クラス(CamelCase)と同じ方法でファイルに名前を付けます。</p>
+<p>ファイルに単一の関数が含まれている場合は、関数(camelCase)と同じ方法でファイルに名前を付けます。</p>
+<p><strong>11.</strong> 名前に略語が含まれている場合は、:</p>
+<ul>
+<li>変数名の場合、省略形は小文字を使用する必要があります <code class="syntax">mysql_connection</code> （ない <code class="syntax">mySQL_connection</code>).</li>
+<li>クラスおよび関数の名前については、省略形に大文字を使用します<code class="syntax">MySQLConnection</code> （ない <code class="syntax">MySqlConnection</code>).</li>
+</ul>
+<p><strong>12.</strong> クラスメンバーを初期化するためだけに使用されるコンストラクター引数には、クラスメンバーと同じ名前を付ける必要がありますが、最後にアンダースコ</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">FileQueueProcessor</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">path_</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">prefix_</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">FileHandler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">handler_</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">path</span><span class="p">(</span><span class="n">path_</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">prefix</span><span class="p">(</span><span class="n">prefix_</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">handler</span><span class="p">(</span><span class="n">handler_</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">log</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Logger</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="s">"FileQueueProcessor"</span><span class="p">))</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>引数がコンストラクタ本体で使用されていない場合は、アンダースコアの接尾辞を省略できます。</p>
+<p><strong>13.</strong> ローカル変数とクラスメンバーの名前に違いはありません（接頭辞は必要ありません）。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">timer</span><span class="w"> </span><span class="p">(</span><span class="n">not</span><span class="w"> </span><span class="n">m_timer</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p><strong>14.</strong> の定数に対して <code class="syntax">enum</code>、大文字でキャメルケースを使用します。 ALL_CAPSも許容されます。 もし <code class="syntax">enum</code> は非ローカルである。 <code class="syntax">enum class</code>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">CompressionMethod</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">QuickLZ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">LZ4</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</code></pre></div>
+<p><strong>15.</strong> すべての名前は英語である必要があります。 ロシア語の音訳は許可されていません。</p>
+<div class="codehilite"><pre><span></span><code class="syntax">not Stroka
+</code></pre></div>
+<p><strong>16.</strong> 略語は、よく知られている場合（Wikipediaや検索エンジンで略語の意味を簡単に見つけることができる場合）に許容されます。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n n-Quoted">`AST`</span><span class="p">,</span><span class="w"> </span><span class="n n-Quoted">`SQL`</span><span class="p">.</span><span class="w"></span>
+
+<span class="k">Not</span><span class="w"> </span><span class="n n-Quoted">`NVDH`</span><span class="w"> </span><span class="p">(</span><span class="k">some</span><span class="w"> </span><span class="k">random</span><span class="w"> </span><span class="n">letters</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>短縮版が一般的に使用されている場合、不完全な単語は許容されます。</p>
+<p>コメントの横にフルネームが含まれている場合は、略語を使用することもできます。</p>
+<p><strong>17.</strong> C++のソースコードを持つファイル名は、 <code class="syntax">.cpp</code> 延長。 ヘッダファイルには <code class="syntax">.h</code> 延長。</p>
+<h2 id="how-to-write-code">コードの書き方<a class="headerlink" href="#how-to-write-code" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> メモリ管理。</p>
+<p>手動メモリ解放 (<code class="syntax">delete</code>）ライブラリコードでのみ使用できます。</p>
+<p>ライブラリコードでは、 <code class="syntax">delete</code> operatorはデストラクタでのみ使用できます。</p>
+<p>アプリケーショ</p>
+<p>例:</p>
+<ul>
+<li>最も簡単な方法は、スタック上にオブジェクトを配置するか、別のクラスのメンバーにすることです。</li>
+<li>多数の小さなオブジェクトの場合は、コンテナを使用します。</li>
+<li>ヒープ内に存在する少数のオブジェクトの自動割り当て解除には、以下を使用します <code class="syntax">shared_ptr/unique_ptr</code>.</li>
+</ul>
+<p><strong>2.</strong> リソース管理。</p>
+<p>使用 <code class="syntax">RAII</code> 上記を参照してください。</p>
+<p><strong>3.</strong> エラー処理。</p>
+<p>例外を使用します。 ほとんどの場合、例外をスローするだけで、それをキャッチする必要はありません（ <code class="syntax">RAII</code>).</p>
+<p>オフライ</p>
+<p>ユーザー要求を処理するサーバーでは、通常、接続ハンドラの最上位レベルで例外をキャッチするだけで十分です。</p>
+<p>スレッド機能、とくすべての例外rethrowのメインスレッド後 <code class="syntax">join</code>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">/// If there weren't any calculations yet, calculate the first block synchronously</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">started</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">calculate</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">started</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"> </span><span class="c1">/// If calculations are already in progress, wait for the result</span>
+<span class="w">    </span><span class="n">pool</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span><span class="w"></span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">exception</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">exception</span><span class="o">-&gt;</span><span class="n">rethrow</span><span class="p">();</span><span class="w"></span>
+</code></pre></div>
+<p>ない非表示の例外なります。 すべての例外を盲目的に記録するだけではありません。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">//Not correct</span>
+<span class="k">catch</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+</code></pre></div>
+<p>いくつかの例外を無視する必要がある場合は、特定の例外に対してのみ実行し、残りを再スローします。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">DB</span><span class="o">::</span><span class="n">Exception</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ErrorCodes</span><span class="o">::</span><span class="n">UNKNOWN_AGGREGATE_FUNCTION</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>応答コードまたは関数を使用する場合 <code class="syntax">errno</code>、常に結果をチェックし、エラーの場合は例外をスローします。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="n">throwFromErrno</span><span class="p">(</span><span class="s">"Cannot close file "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">file_name</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCodes</span><span class="o">::</span><span class="n">CANNOT_CLOSE_FILE</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p><code class="syntax">Do not use assert</code>.</p>
+<p><strong>4.</strong> 例外タイプ。</p>
+<p>アプリケーションコードで複雑な例外階層を使用する必要はありません。 例外テキストは、システム管理者が理解できるはずです。</p>
+<p><strong>5.</strong> 投げから例外がスローされる場合destructors.</p>
+<p>これは推奨されませんが、許可されています。</p>
+<p>次のオプションを使用しま:</p>
+<ul>
+<li>関数の作成 (<code class="syntax">done()</code> または <code class="syntax">finalize()</code>）それは例外につながる可能性のあるすべての作業を事前に行います。 その関数が呼び出された場合、後でデストラクタに例外はないはずです。</li>
+<li>タスクも複雑で(メッセージを送信するなどのネットワーク)を置くことができます別の方法は、クラスのユーザーを呼び出す前に破壊.</li>
+<li>デストラクタに例外がある場合は、それを非表示にするよりもログに記録する方が良いでしょう（ロガーが利用可能な場合）。</li>
+<li>簡単な適用では、頼ることは受諾可能です <code class="syntax">std::terminate</code> （以下の場合 <code class="syntax">noexcept</code> デフォルトではc++11）例外を処理する。</li>
+</ul>
+<p><strong>6.</strong> 匿名コードブロック。</p>
+<p>特定の変数をローカルにするために、単一の関数内に別のコードブロックを作成して、ブロックを終了するときにデストラクターが呼び出されるようにす</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">Block</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">();</span><span class="w"></span>
+
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">data</span><span class="p">.</span><span class="n">ready</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">data</span><span class="p">.</span><span class="n">block</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">block</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">ready_any</span><span class="p">.</span><span class="n">set</span><span class="p">();</span><span class="w"></span>
+</code></pre></div>
+<p><strong>7.</strong> マルチスレッド</p>
+<p>オフライ:</p>
+<ul>
+<li>単一のCPUコアで可能な限り最高のパフォーマンスを得ようとします。 必要に応じて、コードを並列化できます。</li>
+</ul>
+<p>サーバーアプリ:</p>
+<ul>
+<li>スレッドプールを使用して要求を処理します。 この時点で、まだたタスクを必要とした管理コスイッチング時の値です。※</li>
+</ul>
+<p>Forkは並列化には使用されません。</p>
+<p><strong>8.</strong> 同期スレッド。</p>
+<p>くすることが可能で別のスレッドが別のメモリー細胞により異なるキャッシュ回線)を使用していないスレッドが同期を除く <code class="syntax">joinAll</code>).</p>
+<p>同期が必要な場合は、ほとんどの場合、以下の条件でmutexを使用すれば十分です <code class="syntax">lock_guard</code>.</p>
+<p>他の場合は、システム同期プリミティブを使用します。 Busy waitは使用しないでください。</p>
+<p>原子演算は、最も単純な場合にのみ使用する必要があります。</p>
+<p>主な専門分野でない限り、ロックフリーのデータ構造を実装しようとしないでください。</p>
+<p><strong>9.</strong> ポインタ対参照。</p>
+<p>ほとんどの場合、参照を好む。</p>
+<p><strong>10.</strong> const.</p>
+<p>定数参照、定数へのポインタを使用する, <code class="syntax">const_iterator</code>、およびconstメソッド。</p>
+<p>考慮する <code class="syntax">const</code> デフォルトで非を使用するには-<code class="syntax">const</code> 必要なときだけ。</p>
+<p>変数を値で渡すときは、 <code class="syntax">const</code> 通常は意味がありません。</p>
+<p><strong>11.</strong> 無署名</p>
+<p>使用 <code class="syntax">unsigned</code> 必要に応じて。</p>
+<p><strong>12.</strong> 数値型。</p>
+<p>タイプを使用する <code class="syntax">UInt8</code>, <code class="syntax">UInt16</code>, <code class="syntax">UInt32</code>, <code class="syntax">UInt64</code>, <code class="syntax">Int8</code>, <code class="syntax">Int16</code>, <code class="syntax">Int32</code>,and <code class="syntax">Int64</code> だけでなく、 <code class="syntax">size_t</code>, <code class="syntax">ssize_t</code>,and <code class="syntax">ptrdiff_t</code>.</p>
+<p>これらの型を数値に使用しないでください: <code class="syntax">signed/unsigned long</code>, <code class="syntax">long long</code>, <code class="syntax">short</code>, <code class="syntax">signed/unsigned char</code>, <code class="syntax">char</code>.</p>
+<p><strong>13.</strong> 引数を渡す。</p>
+<p>参照による複素数値の渡し(含む <code class="syntax">std::string</code>).</p>
+<p>関数がヒープ内に作成されたオブジェクトの所有権を取得する場合は、引数の型を作成します <code class="syntax">shared_ptr</code> または <code class="syntax">unique_ptr</code>.</p>
+<p><strong>14.</strong> 戻り値。</p>
+<p>ほとんどの場合、 <code class="syntax">return</code>. 書かない <code class="syntax">return std::move(res)</code>.</p>
+<p>関数がオブジェクトをヒープに割り当てて返す場合は、次のようにします <code class="syntax">shared_ptr</code> または <code class="syntax">unique_ptr</code>.</p>
+<p>まれに、引数を使用して値を返す必要がある場合があります。 この場合、引数は参照でなければなりません。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">using</span><span class="w"> </span><span class="n">AggregateFunctionPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">IAggregateFunction</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/** Allows creating an aggregate function by its name.</span>
+<span class="cm">  */</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AggregateFunctionFactory</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">AggregateFunctionFactory</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">AggregateFunctionPtr</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">DataTypes</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">argument_types</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p><strong>15.</strong> 名前空間。</p>
+<p>別のものを使用する必要はありません <code class="syntax">namespace</code> 適用コードのため。</p>
+<p>小さな図書館でもこれは必要ありません。</p>
+<p>中規模から大規模のライブラリの場合は、すべてを <code class="syntax">namespace</code>.</p>
+<p>図書館の <code class="syntax">.h</code> ファイル、使用できます <code class="syntax">namespace detail</code> アプリケーションコードに必要ない実装の詳細を非表示にする。</p>
+<p>で <code class="syntax">.cpp</code> を使用することができます <code class="syntax">static</code> またはシンボルを非表示にする匿名の名前空間。</p>
+<p>また、 <code class="syntax">namespace</code> に使用することができます <code class="syntax">enum</code> 対応する名前が外部に落ちないようにするには <code class="syntax">namespace</code> （しかし、それを使用する方が良いです <code class="syntax">enum class</code>).</p>
+<p><strong>16.</strong> 遅延初期化。</p>
+<p>初期化に引数が必要な場合は、通常は既定のコンストラクタを記述しないでください。</p>
+<p>後で初期化を遅らせる必要がある場合は、無効なオブジェクトを作成する既定のコンストラクターを追加できます。 または、少数のオブジェクトの場合は、以下を使用できます <code class="syntax">shared_ptr/unique_ptr</code>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">Loader</span><span class="p">(</span><span class="n">DB</span><span class="o">::</span><span class="n">Connection</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">connection_</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">max_block_size_</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">/// For deferred initialization</span>
+<span class="n">Loader</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>17.</strong> 仮想関数。</p>
+<p>クラスが多態的な使用を意図していない場合、関数を仮想にする必要はありません。 これはデストラクタにも当てはまります。</p>
+<p><strong>18.</strong> エンコーディング</p>
+<p>どこでもUTF-8を使用します。 使用 <code class="syntax">std::string</code>と<code class="syntax">char *</code>. 使用しない <code class="syntax">std::wstring</code>と<code class="syntax">wchar_t</code>.</p>
+<p><strong>19.</strong> ロギング</p>
+<p>コードのどこでも例を参照してください。</p>
+<p>コミットする前に、無意味なログやデバッグログ、その他のデバッグ出力をすべて削除します。</p>
+<p>トレースレベルでも、サイクルのログインは避けるべきです。</p>
+<p>ログには必読でログインです。</p>
+<p>ログインできるアプリケーションコードにすることができます。</p>
+<p>ログメッセージは英語で書く必要があります。</p>
+<p>ログは、システム管理者が理解できるようにしてください。</p>
+<p>ログに冒涜を使用しないでください。</p>
+<p>ログでUTF-8エンコーディングを使用します。 まれに、ログに非ASCII文字を使用できます。</p>
+<p><strong>20.</strong> 入出力。</p>
+<p>使用しない <code class="syntax">iostreams</code> 内部のサイクルにおいて不可欠な存在であのためのアプリケーション性能(い利用 <code class="syntax">stringstream</code>).</p>
+<p>使用する <code class="syntax">DB/IO</code> 代わりに図書館。</p>
+<p><strong>21.</strong> 日付と時刻。</p>
+<p>を参照。 <code class="syntax">DateLUT</code> 図書館</p>
+<p><strong>22.</strong> 含める。</p>
+<p>常に使用 <code class="syntax">#pragma once</code> 代わりに警備員を含めます。</p>
+<p><strong>23.</strong> を使用して。</p>
+<p><code class="syntax">using namespace</code> は使用されません。 以下を使用できます <code class="syntax">using</code> 特定の何かと。 しかし、クラスや関数内でローカルにします。</p>
+<p><strong>24.</strong> 使用しない <code class="syntax">trailing return type</code> 必要がない限り機能のため。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">auto</span><span class="w"> </span><span class="n">f</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"></span>
+</code></pre></div>
+<p><strong>25.</strong> 変数の宣言と初期化。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="c1">//right way</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Hello"</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="p">{</span><span class="s">"Hello"</span><span class="p">};</span><span class="w"></span>
+
+<span class="c1">//wrong way</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span><span class="s">"Hello"</span><span class="p">};</span><span class="w"></span>
+</code></pre></div>
+<p><strong>26.</strong> のための仮想関数を書く <code class="syntax">virtual</code> 基本クラスでは、 <code class="syntax">override</code> 代わりに <code class="syntax">virtual</code> 子孫クラスで。</p>
+<h2 id="unused-features-of-c">C++の未使用の機能<a class="headerlink" href="#unused-features-of-c" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> 仮想継承は使用されません。</p>
+<p><strong>2.</strong> C++03の例外指定子は使用されません。</p>
+<h2 id="platform">プラット<a class="headerlink" href="#platform" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> を書いていますコードの特定の。</p>
+<p>それが同じ場合には、クロス-プラットフォームまたは携帯コードが好ましい。</p>
+<p><strong>2.</strong> 言語:C++20.</p>
+<p><strong>3.</strong> コンパイラ: <code class="syntax">gcc</code>. 2020年現在、コードはバージョン9.3を使用してコンパイルされている。 （以下を使ってコンパイルできます <code class="syntax">clang 8</code>.)</p>
+<p>標準ライブラリが使用されます (<code class="syntax">libc++</code>).</p>
+<p><strong>4.</strong>OS：LinuxのUbuntuの、正確よりも古いではありません。</p>
+<p><strong>5.</strong>コードはx86_64CPUアーキテクチャ用に書かれている。</p>
+<p>CPU命令セットは、サーバー間でサポートされる最小のセットです。 現在、SSE4.2です。</p>
+<p><strong>6.</strong> 使用 <code class="syntax">-Wall -Wextra -Werror</code> コンパイルフラグ。</p>
+<p><strong>7.</strong> 静的に接続することが困難なライブラリを除くすべてのライブラリとの静的リンクを使用します。 <code class="syntax">ldd</code> コマンド）。</p>
+<p><strong>8.</strong> コードはリリース設定で開発およびデバッグされます。</p>
+<h2 id="tools">ツール<a class="headerlink" href="#tools" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> KDevelopは良いIDEです。</p>
+<p><strong>2.</strong> デバッグの使用 <code class="syntax">gdb</code>, <code class="syntax">valgrind</code> (<code class="syntax">memcheck</code>), <code class="syntax">strace</code>, <code class="syntax">-fsanitize=...</code>,または <code class="syntax">tcmalloc_minimal_debug</code>.</p>
+<p><strong>3.</strong> のためのプロファイリングを使用 <code class="syntax">Linux Perf</code>, <code class="syntax">valgrind</code> (<code class="syntax">callgrind</code>）、または <code class="syntax">strace -cf</code>.</p>
+<p><strong>4.</strong> ソースはGitにあります。</p>
+<p><strong>5.</strong> アセンブリの使用 <code class="syntax">CMake</code>.</p>
+<p><strong>6.</strong> プログラムは <code class="syntax">deb</code> パッケージ。</p>
+<p><strong>7.</strong> ることを約束し、マスターが破ってはいけないの。</p>
+<p>選択したリビジョンのみが実行可能とみなされます。</p>
+<p><strong>8.</strong> コードが部分的にしか準備できていなくても、できるだけ頻繁にコミットを行います。</p>
+<p>この目的のために分岐を使用します。</p>
+<p>あなたのコードが <code class="syntax">master</code> branchはまだビルド可能ではありません。 <code class="syntax">push</code>. あなたはそれを終了するか、数日以内にそれを削除する必要があります。</p>
+<p><strong>9.</strong> 些細な変更ではない場合は、ブランチを使用してサーバーに公開します。</p>
+<p><strong>10.</strong> 未使用のコードがリポジトリから削除されます。</p>
+<h2 id="libraries">図書館<a class="headerlink" href="#libraries" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> The C++20 standard library is used (experimental extensions are allowed), as well as <code class="syntax">boost</code> and <code class="syntax">Poco</code> frameworks.</p>
+<p><strong>2.</strong> It is not allowed to use libraries from OS packages. It is also not allowed to use pre-installed libraries. All libraries should be placed in form of source code in <code class="syntax">contrib</code> directory and built with ClickHouse.</p>
+<p><strong>3.</strong> Preference is always given to libraries that are already in use.</p>
+<h2 id="general-recommendations-1">一般的な推奨事項<a class="headerlink" href="#general-recommendations-1" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> できるだけ少ないコードを書く。</p>
+<p><strong>2.</strong> う最も単純な解決策です。</p>
+<p><strong>3.</strong> どのように動作し、内部ループがどのように機能するかを知るまで、コードを記述しないでください。</p>
+<p><strong>4.</strong> 最も単純なケースでは、 <code class="syntax">using</code> クラスや構造体の代わりに。</p>
+<p><strong>5.</strong> 可能であれば、コピーコンストラクター、代入演算子、デストラクター(クラスに少なくとも一つの仮想関数が含まれている場合は仮想関数を除く)、コンストラク つまり、コンパイラで生成された関数は正しく動作する必要があります。 以下を使用できます <code class="syntax">default</code>.</p>
+<p><strong>6.</strong> コードの簡素化が推奨されます。 可能であれば、コードのサイズを小さくします。</p>
+<h2 id="additional-recommendations">その他の推奨事項<a class="headerlink" href="#additional-recommendations" title="Permanent link"> </a></h2>
+<p><strong>1.</strong> 明示的に指定する <code class="syntax">std::</code> からのタイプのため <code class="syntax">stddef.h</code></p>
+<p>推奨されません。 つまり、書くことをお勧めします <code class="syntax">size_t</code> 代わりに <code class="syntax">std::size_t</code> それは短いので。</p>
+<p>追加することは許容されます <code class="syntax">std::</code>.</p>
+<p><strong>2.</strong> 明示的に指定する <code class="syntax">std::</code> 標準Cライブラリの関数の場合</p>
+<p>推奨されません。 言い換えれば、 <code class="syntax">memcpy</code> 代わりに <code class="syntax">std::memcpy</code>.</p>
+<p>その理由は、次のような非標準的な機能があるからです <code class="syntax">memmem</code>. 私たちは機会にこれらの機能を使用します。 これらの関数は、 <code class="syntax">namespace std</code>.</p>
+<p>あなたが書く場合 <code class="syntax">std::memcpy</code> 代わりに <code class="syntax">memcpy</code> どこでも、その後、 <code class="syntax">memmem</code> なし <code class="syntax">std::</code> 奇妙に見えます。</p>
+<p>それにもかかわらず、 <code class="syntax">std::</code> あなたがそれを好むなら。</p>
+<p><strong>3.</strong> 標準C++ライブラリで同じ関数が使用できる場合、Cからの関数を使用します。</p>
+<p>これは、より効率的であれば許容されます。</p>
+<p>たとえば、次を使用します <code class="syntax">memcpy</code> 代わりに <code class="syntax">std::copy</code> メモリの大きな塊をコピーするため。</p>
+<p><strong>4.</strong> 複数行の関数の引数。</p>
+<p>の他の包装のスタイルを許可:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">function</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="n">T1</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">T2</span><span class="w"> </span><span class="n">x2</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">function</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">RangesInDataParts</span><span class="w"> </span><span class="n">ranges</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">limit</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">function</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">RangesInDataParts</span><span class="w"> </span><span class="n">ranges</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">limit</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">function</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">RangesInDataParts</span><span class="w"> </span><span class="n">ranges</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">limit</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">function</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">RangesInDataParts</span><span class="w"> </span><span class="n">ranges</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">limit</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+        
+
+        
+    </div>
+
+    
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Was this content helpful?</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+     data-titles="['Unusable', 'Poor', 'OK', 'Good', 'Excellent']"
+     data-documentation="documentation"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/c60fd44c5b70c56ff0f9c7fc538e58c6c8186aea" rel="external nofollow noreferrer" target="_blank" class="text-reset">c60fd44c</a>
+    
+    </div>
+</div>
+
+</div>
+
+                
+                    <div id="toc" class="col-xl-2 d-none d-xl-block d-print-none p-3 overflow-auto toc-right mb-5">
+    
+    
+        
+    
+    <nav class="nav flex-column text-wrap">
+    
+        <label for="toc">Table of Contents</label>
+    
+    
+        
+        
+        <a href="#general-recommendations" title="一般的な推奨事項" class="nav-link text-wrap d-inline-block w-100">
+    一般的な推奨事項
+</a>
+
+    
+        
+        
+        <a href="#formatting" title="書式設定" class="nav-link text-wrap d-inline-block w-100">
+    書式設定
+</a>
+
+    
+        
+        
+        <a href="#comments" title="コメント" class="nav-link text-wrap d-inline-block w-100">
+    コメント
+</a>
+
+    
+        
+        
+        <a href="#names" title="名前" class="nav-link text-wrap d-inline-block w-100">
+    名前
+</a>
+
+    
+        
+        
+        <a href="#how-to-write-code" title="コードの書き方" class="nav-link text-wrap d-inline-block w-100">
+    コードの書き方
+</a>
+
+    
+        
+        
+        <a href="#unused-features-of-c" title="C++の未使用の機能" class="nav-link text-wrap d-inline-block w-100">
+    C++の未使用の機能
+</a>
+
+    
+        
+        
+        <a href="#platform" title="プラット" class="nav-link text-wrap d-inline-block w-100">
+    プラット
+</a>
+
+    
+        
+        
+        <a href="#tools" title="ツール" class="nav-link text-wrap d-inline-block w-100">
+    ツール
+</a>
+
+    
+        
+        
+        <a href="#libraries" title="図書館" class="nav-link text-wrap d-inline-block w-100">
+    図書館
+</a>
+
+    
+        
+        
+        <a href="#general-recommendations-1" title="一般的な推奨事項" class="nav-link text-wrap d-inline-block w-100">
+    一般的な推奨事項
+</a>
+
+    
+        
+        
+        <a href="#additional-recommendations" title="その他の推奨事項" class="nav-link text-wrap d-inline-block w-100">
+    その他の推奨事項
+</a>
+
+    
+    </nav>
+</div>
+                
+            </div>
+        </div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

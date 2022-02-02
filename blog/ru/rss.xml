@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Блог ClickHouse</title>
+    <link>https://clickhouse.com/blog/ru/</link>
+    <atom:link href="https://clickhouse.com/blog/ru/rss.xml" rel="self" type="application/rss+xml" />
+    <description></description>
+    <pubDate>Wed, 02 Feb 2022 00:00:00 GMT</pubDate>
+
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Москве, 5 сентября 2019</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-moskve-5-sentyabrya-2019/main.jpg" />]]></description>
+           <pubDate>Fri, 06 Sep 2019 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-moskve-5-sentyabrya-2019/</guid>
+           <link>https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-moskve-5-sentyabrya-2019/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Санкт-Петербурге, 27 июля 2019</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-sankt-peterburge-27-iyulya-2019/main.jpg" />]]></description>
+           <pubDate>Thu, 01 Aug 2019 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-sankt-peterburge-27-iyulya-2019/</guid>
+           <link>https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-sankt-peterburge-27-iyulya-2019/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Минске, 11 июля 2019</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2019/clickrouse-meetup-v-minske-11-iyulya-2019/main.jpg" />]]></description>
+           <pubDate>Fri, 12 Jul 2019 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2019/clickrouse-meetup-v-minske-11-iyulya-2019/</guid>
+           <link>https://clickhouse.com/blog/ru/2019/clickrouse-meetup-v-minske-11-iyulya-2019/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Новосибирске, 26 июня 2019</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/main.jpg" />]]></description>
+           <pubDate>Wed, 05 Jun 2019 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/</guid>
+           <link>https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-novosibirske-26-iyunya-2019/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Лимассоле, 7 мая 2019</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2019/clickhouse-meetup-v-limassole-7-maya-2019/main.jpg" />]]></description>
+           <pubDate>Tue, 14 May 2019 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-limassole-7-maya-2019/</guid>
+           <link>https://clickhouse.com/blog/ru/2019/clickhouse-meetup-v-limassole-7-maya-2019/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse MeetUp в Минске: итоги</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-v-minske-itogi/main.jpg" />]]></description>
+           <pubDate>Mon, 19 Jun 2017 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2017/clickhouse-meetup-v-minske-itogi/</guid>
+           <link>https://clickhouse.com/blog/ru/2017/clickhouse-meetup-v-minske-itogi/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse MeetUp едет в Минск!</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-edet-v-minsk/main.jpg" />]]></description>
+           <pubDate>Tue, 13 Jun 2017 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2017/clickhouse-meetup-edet-v-minsk/</guid>
+           <link>https://clickhouse.com/blog/ru/2017/clickhouse-meetup-edet-v-minsk/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse на UWDC 2017</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2017/clickhouse-na-uwdc-2017/main.jpg" />]]></description>
+           <pubDate>Sat, 20 May 2017 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2017/clickhouse-na-uwdc-2017/</guid>
+           <link>https://clickhouse.com/blog/ru/2017/clickhouse-na-uwdc-2017/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Екатеринбурге, 16 мая 2017</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-v-ekaterinburge-16-maya-2017/main.jpg" />]]></description>
+           <pubDate>Wed, 17 May 2017 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2017/clickhouse-meetup-v-ekaterinburge-16-maya-2017/</guid>
+           <link>https://clickhouse.com/blog/ru/2017/clickhouse-meetup-v-ekaterinburge-16-maya-2017/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Новосибирске, 3 апреля 2017</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-v-novosibirske-3-aprelya-2017/main.jpg" />]]></description>
+           <pubDate>Tue, 04 Apr 2017 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2017/clickhouse-meetup-v-novosibirske-3-aprelya-2017/</guid>
+           <link>https://clickhouse.com/blog/ru/2017/clickhouse-meetup-v-novosibirske-3-aprelya-2017/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Санкт-Петербурге, 28 февраля 2017</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2017/clickhouse-meetup-v-sankt-peterburge-28-fevralya-2017/main.jpg" />]]></description>
+           <pubDate>Wed, 01 Mar 2017 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2017/clickhouse-meetup-v-sankt-peterburge-28-fevralya-2017/</guid>
+           <link>https://clickhouse.com/blog/ru/2017/clickhouse-meetup-v-sankt-peterburge-28-fevralya-2017/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse на HighLoad++ 2016</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2016/clickhouse-na-highload-2016/main.jpg" />]]></description>
+           <pubDate>Sat, 10 Dec 2016 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2016/clickhouse-na-highload-2016/</guid>
+           <link>https://clickhouse.com/blog/ru/2016/clickhouse-na-highload-2016/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse Meetup в Москве, 21 ноября 2016</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2016/clickhouse-meetup-v-moskve-21-noyabrya-2016/main.jpg" />]]></description>
+           <pubDate>Tue, 22 Nov 2016 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2016/clickhouse-meetup-v-moskve-21-noyabrya-2016/</guid>
+           <link>https://clickhouse.com/blog/ru/2016/clickhouse-meetup-v-moskve-21-noyabrya-2016/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>ClickHouse на встрече про инфраструктуру хранения и обработки данных в Яндексе</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2016/clickhouse-na-vstreche-pro-infrastrukturu-khraneniya-i-obrabotki-dannykh-v-yandekse/main.jpg" />]]></description>
+           <pubDate>Sun, 16 Oct 2016 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2016/clickhouse-na-vstreche-pro-infrastrukturu-khraneniya-i-obrabotki-dannykh-v-yandekse/</guid>
+           <link>https://clickhouse.com/blog/ru/2016/clickhouse-na-vstreche-pro-infrastrukturu-khraneniya-i-obrabotki-dannykh-v-yandekse/</link>
+           
+        </item>
+    
+        
+        <item>
+           <title>Яндекс открывает ClickHouse</title>
+           <description><![CDATA[<img src="https://blog-images.clickhouse.com/ru/2016/yandeks-otkryvaet-clickhouse/main.jpg" />]]></description>
+           <pubDate>Wed, 15 Jun 2016 00:00:00 GMT</pubDate>
+           <guid isPermaLink="true">https://clickhouse.com/blog/ru/2016/yandeks-otkryvaet-clickhouse/</guid>
+           <link>https://clickhouse.com/blog/ru/2016/yandeks-otkryvaet-clickhouse/</link>
+           
+        </item>
+    
+  </channel>
+</rss>
