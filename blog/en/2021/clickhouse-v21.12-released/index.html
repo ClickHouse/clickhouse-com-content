@@ -1,0 +1,409 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>What's New in ClickHouse 21.12</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/images/logo-180x180.png" />
+
+<meta property="og:title" content="What's New in ClickHouse 21.12"/>
+<meta property="og:description" content="We're continuing our monthly release cadence. The 21.12 Christmas release includes 2460 new commits from 125 contributor" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2021/clickhouse-v21-12/featured.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2021/clickhouse-v21.12-released/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2021/clickhouse-v21.12-released/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "What's New in ClickHouse 21.12",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2021/clickhouse-v21.12-released/",
+
+"datePublished": "2021-12-16",
+"dateModified": "2021-12-16",
+
+"image": "https://blog-images.clickhouse.com/en/2021/clickhouse-v21-12/featured.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="We're continuing our monthly release cadence. The 21.12 Christmas release includes 2460 new commits from 125 contributor" />
+
+<meta name="keywords"
+      content="company, community" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/docs/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2021/clickhouse-v21-12/featured.jpg" alt="What's New in ClickHouse 21.12" title="What's New in ClickHouse 21.12" />
+            
+            <h1 class="display-2 mt-3 mb-5">What's New in ClickHouse 21.12</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>We're continuing our monthly release cadence. The 21.12 Christmas release includes 2460 new commits from 125 contributors, including 42 new contributors:</p>
+<blockquote>
+<p>Alex Cao, Amr Alaa, Andrey Torsunov, Constantine Peresypkin, Dmitriy Dorofeev, Egor O'Sten, Elykov Alexandr, Evgeny, Frank Chen, LB, Natasha Murashkina, Peignon Melvyn, Rich Raposa, Roman Chyrva, Roman, SuperDJY, Thom O'Connor, Timur Magomedov, Tom Risse, Tomáš Hromada, cfcz48, cgp, cms, cmsxbc, congbaoyangrou, dongyifeng, frank chen, freedomDR, jus1096, khamadiev, laurieliyang, leosunli, liyang830, loneylee, michael1589, msaf1980, p0ny, qieqieplus, spume, sunlisheng, yandd, zhanghuajie.</p>
+</blockquote>
+<p>If you are wondering, this list is generated by the following command:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">clickhouse-local --query "
+    SELECT arrayStringConcat(groupArray(s), ', ')
+    FROM file('contributors-21.12.txt', LineAsString, 's String')
+    WHERE s NOT IN (
+        SELECT *
+        FROM file('contributors-21.11.txt', LineAsString, 's String'))
+    FORMAT TSVRaw"
+</code></pre></div>
+<p>And to list the contributors, you can always run the</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT * FROM system.contributors
+</code></pre></div>
+<p>query on your production server.</p>
+<p>Let's highlight some of the new capabilities in 21.12:</p>
+<h2 id="clickhouse-keeper-is-feature-complete">ClickHouse Keeper is Feature Complete<a class="headerlink" href="#clickhouse-keeper-is-feature-complete" title="Permanent link"> </a></h2>
+<p>In 21.12 <code class="syntax">clickhouse-keeper</code> started to support <a href="https://zookeeper.apache.org/doc/r3.4.8/zookeeperAdmin.html#sc_zkCommands" rel="external nofollow noreferrer" target="_blank">"four letter commands"</a> for status and monitoring. This feature is contributed by <strong>JackyWoo</strong> and reviewed by <strong>Alexander Sapin</strong> (the author of ClickHouse Keeper).</p>
+<p>It was the only missing feature to implement. In this release, clickhouse-keeper is still considered in pre-production stage, but many companies already started to evaluate and use it as a replacement of ZooKeeper. You can also start using clickhouse-keeper in your testing environments and we will appreciate your feedback.</p>
+<p>ClickHouse Keeper development started in Sep 2020, more than a year ago. It was a long road, and most of the efforts were to ensure correctness and stability in unusual and exceptional scenarios. It is covered by <a href="https://jepsen.io/" rel="external nofollow noreferrer" target="_blank">Jepsen</a> tests (including ZooKeeper tests and <a href="https://github.com/ClickHouse/ClickHouse/tree/master/tests/jepsen.clickhouse-keeper" rel="external nofollow noreferrer" target="_blank">new introduced tests</a>), continuous randomized stress testing with ClickHouse functional and integration tests. It is started to be tested in Yandex Cloud and among our best friends. If you're pretending to be our best friend, you can also do it.</p>
+<p><strong>How does this help you?</strong></p>
+<p>ClickHouse Keeper is a drop-in replacement for ZooKeeper. It implements the ZooKeeper wire protocol and data model, but does it better.</p>
+<p>In contrast to ZooKeeper, there are no issues with zxid overflow or packet sizes. It has better memory usage and it does not require JVM tuning (because it does not use the JVM). Logs and snapshots are compressed (by about 10x typically) and checksummed. It can run as a separate process or directly inside clickhouse-server. You can use it with ClickHouse or with your Kafkas and Hadoops as well.</p>
+<p><a href="http://presentations.clickhouse.tech/meetup54/keeper.pdf" rel="external nofollow noreferrer" target="_blank">More info</a>.</p>
+<h2 id="partitions-for-insert-into-file-url-and-hdfs-storages">Partitions For INSERT INTO File, URL And HDFS Storages<a class="headerlink" href="#partitions-for-insert-into-file-url-and-hdfs-storages" title="Permanent link"> </a></h2>
+<p>When using the table engines <code class="syntax">File</code>, <code class="syntax">URL</code>, and <code class="syntax">HDFS</code> ClickHouse now supports partitions. When creating a table you can specify the partition key using the <code class="syntax">PARTITION BY</code> clause e.g. <code class="syntax">CREATE TABLE hits_files (...) ENGINE = File(TabSeparated) PARTITION BY toYYYYMM(EventDate)</code>.</p>
+<p>Similarly, when exporting data from ClickHouse using the <code class="syntax">file</code>, <code class="syntax">url</code>, and <code class="syntax">hdfs</code> table functions you can now specify that the data is to be partitioned into multiple files using a <code class="syntax">PARTITION BY</code> clause. For example, <code class="syntax">INSERT INTO TABLE FUNCTION file('path/hits_{_partition_id}', 'TSV', 'columns...') PARTITION BY toYYYYMM(EventDate) VALUES ...</code> will create as many files as there are unique months in the dataset.</p>
+<p>The <code class="syntax">s3</code> table function has already supported partitioned writes since ClickHouse 21.10.</p>
+<p><strong>How does this help you?</strong></p>
+<p>If data is split into multiple files, <code class="syntax">SELECT</code> queries will be automatically parallelized. For example:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT user_id, count() FROM s3(
+    'https://s3.us-east-2.amazonaws.com/.../*.csv.zstd',
+    '...', '...',
+    CSV,
+    'user_id UInt64, ...')
+</code></pre></div>
+<p>You can even parallelize data processing across a distributed compute cluster if you use the <code class="syntax">s3Cluster</code> table function:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT user_id, count() FROM s3Cluster(
+    my_cluster,
+    'https://s3.us-east-2.amazonaws.com/.../*.csv.zstd',
+    '...',
+    '...', CSV,
+    'user_id UInt64, ...')
+</code></pre></div>
+<p>It can also be used for integration with external data processing tools that consume data from <code class="syntax">s3</code>.</p>
+<h2 id="from-infile-in-clickhouse-client-now-supports-glob-patterns-and-parallel-reading">FROM INFILE in clickhouse-client now supports glob patterns and parallel reading<a class="headerlink" href="#from-infile-in-clickhouse-client-now-supports-glob-patterns-and-parallel-reading" title="Permanent link"> </a></h2>
+<p>Just write:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">INSERT INTO my_table FROM INFILE '*.csv.gz' FORMAT CSV
+</code></pre></div>
+<p>Glob patterns support <code class="syntax">*</code>, <code class="syntax">?</code> and <code class="syntax">{n..m}</code> with <code class="syntax">{1..10}</code> or (aligned) <code class="syntax">{01..10}</code> forms.<br/>
+This query will be automatically parallelized and it will also automatically detect the compression format from the file extension and decompress transparently.</p>
+<p>This improvement is done by <strong>Arthur Filatenkov</strong>.</p>
+<p><strong>How does this help you?</strong></p>
+<p>Now you don't have to recall how to write a parallel for loop in your command line shell. clickhouse-client will do everything for you, it works intuitively and fast.</p>
+<h2 id="support-for-interval-operator-inside-with-fill-modifier-for-order-by-clause">Support for INTERVAL operator inside WITH FILL modifier for ORDER BY clause<a class="headerlink" href="#support-for-interval-operator-inside-with-fill-modifier-for-order-by-clause" title="Permanent link"> </a></h2>
+<p>What's the... <code class="syntax">WITH FILL</code> modifier in the <code class="syntax">ORDER BY</code> clause? Take a look at the example:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">:) SELECT EventDate, count() FROM test.hits WHERE CounterID = 2841673 GROUP BY EventDate ORDER BY EventDate
+
+┌──EventDate─┬─count()─┐
+│ 2014-03-17 │       3 │
+│ 2014-03-19 │       6 │
+│ 2014-03-21 │       7 │
+│ 2014-03-22 │       6 │
+└────────────┴─────────┘
+</code></pre></div>
+<p>We have the report with Mar 17th, 19th, 21st, and 22nd. But Mar 18th and 20th are missing, because there is no data for these dates.<br/>
+And this is how it works in all SQL databases.</p>
+<p>But ClickHouse also has a quite unique and neat <code class="syntax">WITH FILL</code> modifier for the <code class="syntax">ORDER BY</code> clause.</p>
+<p>You just write:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT EventDate, count() FROM test.hits WHERE CounterID = 2841673 GROUP BY EventDate
+ORDER BY EventDate WITH FILL STEP 1
+
+┌──EventDate─┬─count()─┐
+│ 2014-03-17 │       3 │
+│ 2014-03-18 │       0 │
+│ 2014-03-19 │       6 │
+│ 2014-03-20 │       0 │
+│ 2014-03-21 │       7 │
+│ 2014-03-22 │       6 │
+└────────────┴─────────┘
+</code></pre></div>
+<p>And missing data is automatically filled.</p>
+<p>You can also add <code class="syntax">FROM</code> and <code class="syntax">TO</code>:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">ORDER BY EventDate WITH FILL FROM '2014-03-01'::Date TO '2014-03-31'::Date STEP 1;
+</code></pre></div>
+<p>And it will automatically fill missing rows in the report.</p>
+<p>The <code class="syntax">STEP</code> can be an arbitrary number. But what can you do if you want to fill missing dates for a report by months? You cannot just write <code class="syntax">STEP 30</code> or <code class="syntax">STEP 31</code> because different months contain different number of days...</p>
+<p>Since ClickHouse version 21.12 you can do it like this:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">ORDER BY EventDate WITH FILL STEP INTERVAL 1 MONTH
+</code></pre></div>
+<p><code class="syntax">INTERVAL</code> is a standard SQL operator, you can use SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER and YEAR.</p>
+<p>This is implemented by <strong>Anton Popov</strong> who is the author of the "WITH FILL" feature.</p>
+<p><strong>How does this help you?</strong></p>
+<p>It allows you to avoid a postprocessing step for your reports.</p>
+<h2 id="add-support-for-identifier-table-and-database-query-parameters">Add Support For "Identifier" Table and Database Query Parameters<a class="headerlink" href="#add-support-for-identifier-table-and-database-query-parameters" title="Permanent link"> </a></h2>
+<p>ClickHouse has support for parameterized queries. For example:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT uniq(user_id) FROM table WHERE website = {name:String}
+</code></pre></div>
+<p>It allows to safely substitute parameters without the risk of SQL injections:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">curl https://clickhouse-server:8443/?param_name=upyachka -d 'SELECT uniq(user_id) FROM table WHERE website = {name:String}'
+</code></pre></div>
+<p>You can even create customized API handlers for clickhouse-server based on prepared queries.</p>
+<p>In version 21.12 we introduce support for using parameters for tables and databases in your queries. This is implemented with the <code class="syntax">Identifier</code> table parameter:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT uniq(user_id) FROM {tbl:Identifier}
+</code></pre></div>
+<p>Identifier parameters also work for CREATE, DROP and all DDL queries. This is implemented by <strong>Nikolai Degterinskiy</strong>.</p>
+<p><strong>How does this help you?</strong></p>
+<p>Let ClickHouse do the heavy lifting and keep your scripts safe and secure.</p>
+<h2 id="bool-data-type">Bool Data Type<a class="headerlink" href="#bool-data-type" title="Permanent link"> </a></h2>
+<p>This feature is experimental in version 21.12. It is implemented by <strong>Kevin Wan (MaxWk)</strong> on top of initial work by <strong>hczhcz</strong> and reviewed by <strong>Pavel Kruglov</strong>.</p>
+<p>ClickHouse now natively supports a <code class="syntax">Bool</code> data type. It allows to represent values as "true"/"false" during data import and export in text formats. It can also be adjusted to anything else using the settings <code class="syntax">bool_true_representation</code> and <code class="syntax">bool_false_representation</code> (for example, "yes" and "no").</p>
+<p><strong>How does this help you?</strong></p>
+<p>Native boolean data types exist today in other databases that are often integrated with ClickHouse, such as PostgreSQL. The <code class="syntax">Bool</code> data type in ClickHouse will make it more compatible with existing code and ease migration from other databases.</p>
+<p>Also it simplifies data ingestion from various text sources.</p>
+<h2 id="query-optimizations-with-table-constraints">Query Optimizations With Table Constraints<a class="headerlink" href="#query-optimizations-with-table-constraints" title="Permanent link"> </a></h2>
+<p>This feature is <a href="https://github.com/ClickHouse/ClickHouse/pull/18787" rel="external nofollow noreferrer" target="_blank">contributed</a> by <strong>Nikita Vasilev</strong>. Nikita is one of the most notable ClickHouse contributors. He started in 2019 by introducing data skipping indices into ClickHouse, then continued in 2020 with SSD-optimized key-value dictionaries and now contributed the new advancements in the query optimizer. This feature is reviewed by <strong>Anton Popov</strong>.</p>
+<p>So, what optimizations? ClickHouse already allows to specify constraints for tables:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">CREATE</span><span class="w"> </span><span class="n">TABLE</span><span class="w"></span>
+<span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">URL</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Domain</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">CONSTRAINT</span><span class="w"> </span><span class="n">validate</span><span class="w"> </span><span class="n">CHECK</span><span class="w"> </span><span class="n">isValidUTF8</span><span class="p">(</span><span class="n">URL</span><span class="p">)</span><span class="w"> </span><span class="n">AND</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">URL</span><span class="p">)</span><span class="w"> </span><span class="n">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">AND</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">CONSTRAINT</span><span class="w"> </span><span class="n">my_constraint</span><span class="w"> </span><span class="n">CHECK</span><span class="w"> </span><span class="n">Domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">domainWithoutWWW</span><span class="p">(</span><span class="n">URL</span><span class="p">)</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="o">...</span><span class="w"></span>
+</code></pre></div>
+<p>Constraints are checked on <code class="syntax">INSERT</code>. In this example we validate the URL and check that the <code class="syntax">Domain</code> column actually contains the domain of the URL.</p>
+<p>Since version 21.12 constraints can also automatically optimize your queries! For example, if you write:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT count() FROM hits WHERE domainWithoutWWW(URL) = 'ghe.clickhouse.tech'
+</code></pre></div>
+<p>The query can be automatically rewritten to:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT count() FROM hits WHERE Domain = 'ghe.clickhouse.tech'
+</code></pre></div>
+<p>Because the <code class="syntax">Domain</code> column is smaller and more compressable it will be faster to read and does not require calculation of the domain from the URL.<br/>
+The only thing you need to do is to enable the <code class="syntax">optimize_using_constraints</code> and <code class="syntax">optimize_substitute_columns</code> settings.</p>
+<p>As a bonus, we introduced a new type of constraint: <code class="syntax">ASSUME</code>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">CONSTRAINT</span><span class="w"> </span><span class="n">my_constraint</span><span class="w"> </span><span class="n">ASSUME</span><span class="w"> </span><span class="n">Domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">domainWithoutWWW</span><span class="p">(</span><span class="n">URL</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>This type of constraint will not check anything on <code class="syntax">INSERT</code> but still use the assumption to optimize the queries.</p>
+<p>It can also do logical inference, simplify the conditions and remove the conditions that are proved to be satisfied by constraints.<br/>
+It is controlled by the <code class="syntax">convert_query_to_cnf</code> setting. You can also enable <code class="syntax">optimize_append_index</code>. With this setting ClickHouse will derive more conditions on the table primary key.</p>
+<p>The idea is so powerful that we cannot resist adding one more feature: <em>indices for hypothesis</em>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax">INDEX my_index (a &lt; b) TYPE hypothesis GRANULARITY 1
+</code></pre></div>
+<p>The expression is checked and the result (true/false) is written as an index for query optimization.</p>
+<p><strong>How does this help you?</strong></p>
+<p>Especially in large ClickHouse deployments with many complex tables it can be hard for users to always be up to date on the best way to query a given dataset. Constraints can help optimize queries without having to change the query structure itself. They can also make it easier to make changes to tables.</p>
+<p>For example, let's say you have a table containing web requests and it includes a URL column that contains the full URL of each request. Many times, users will want to know the top level domain (.com, .co.uk, etc.), something ClickHouse provides the <code class="syntax">topLevelDomain</code> function to calculate. If you discover that many people are using this function you might decide to create a new materialized column that pre-calculates the top level domain for each record.</p>
+<p>Rather than tell all your users to change their queries you can use a table constraint to tell ClickHouse that each time a user tries to call the <code class="syntax">topLevelDomain</code> function the request should be rewritten to use the new materialized column.</p>
+<h2 id="read-large-remote-files-in-chunks">Read Large Remote Files In Chunks<a class="headerlink" href="#read-large-remote-files-in-chunks" title="Permanent link"> </a></h2>
+<p>ClickHouse combines a fast query engine and efficient data storage. It also allows to integrate external data sources for data import and export or even to process external datasets on the fly without the need for data import or preprocessing.</p>
+<p>When reading large files in <code class="syntax">Parquet</code>, <code class="syntax">ORC</code>, and <code class="syntax">Arrow</code> format using the <code class="syntax">s3</code>, <code class="syntax">url</code>, and <code class="syntax">hdfs</code> table functions, ClickHouse will now automatically choose whether to read the entire file at once or read parts of it incrementally. This is now enabled by default and the setting <code class="syntax">remote_read_min_bytes_for_seek</code> controls when to switch from reading it all to reading in chunks. The default is 1MiB.</p>
+<p><code class="syntax">Parquet</code>, <code class="syntax">ORC</code>, and <code class="syntax">Arrow</code> are column-oriented formats (quite similar to the ClickHouse Native format) and now we can read only requested columns even if they are being read from a remote HTTP server with the <code class="syntax">url</code> table function (range requests will be performed to skip unneeded data).</p>
+<p>This feature is implemented by <strong>Kseniia Sumarokova</strong>.</p>
+<p><strong>How does this help our ClickHouse Users?</strong></p>
+<p>In previous versions, when reading files in Arrow-based formats from remote locations with the <code class="syntax">s3</code>, <code class="syntax">url</code>, and <code class="syntax">hdfs</code> table functions, ClickHouse would always read the entire file into memory. This works well when the files are small but will cause excessive memory usage or not work at all when the files are large. With this change, ClickHouse will read large files in chunks to keep memory usage in check and is now able to read even very large files.</p>
+<h2 id="and-many-more">... And Many More<a class="headerlink" href="#and-many-more" title="Permanent link"> </a></h2>
+<p>Read the <a href="https://github.com/ClickHouse/ClickHouse/blob/master/CHANGELOG.md" rel="external nofollow noreferrer" target="_blank">full changelog</a> for the 21.12 "Christmas" release for the full list of gifts from the <a href="https://clickhouse.com/company/" target="_blank">ClickHouse Team</a>.</p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=What%27s%20New%20in%20ClickHouse%2021.12+https%3A//clickhouse.com/blog/en/2021/clickhouse-v21.12-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=What%27s%20New%20in%20ClickHouse%2021.12&u=https%3A//clickhouse.com/blog/en/2021/clickhouse-v21.12-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=What%27s%20New%20in%20ClickHouse%2021.12&url=https%3A//clickhouse.com/blog/en/2021/clickhouse-v21.12-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Alexey Milovidov, Christoph Wurm</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2021-12-16</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        company
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        community
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/docs/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

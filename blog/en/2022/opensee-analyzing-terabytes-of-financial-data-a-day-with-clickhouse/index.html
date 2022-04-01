@@ -1,0 +1,284 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Opensee: Analyzing Terabytes of Financial Data a Day With ClickHouse</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/images/logo-180x180.png" />
+
+<meta property="og:title" content="Opensee: Analyzing Terabytes of Financial Data a Day With ClickHouse"/>
+<meta property="og:description" content="We’d like to welcome Christophe Rivoire (UK Country Manager) and Elena Bessis (Product Marketing Assistant) from Opensee" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2022/opensee/featured.png" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2022/opensee-analyzing-terabytes-of-financial-data-a-day-with-clickhouse/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2022/opensee-analyzing-terabytes-of-financial-data-a-day-with-clickhouse/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Opensee: Analyzing Terabytes of Financial Data a Day With ClickHouse",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2022/opensee-analyzing-terabytes-of-financial-data-a-day-with-clickhouse/",
+
+"datePublished": "2022-02-22",
+"dateModified": "2022-02-22",
+
+"image": "https://blog-images.clickhouse.com/en/2022/opensee/featured.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="We’d like to welcome Christophe Rivoire (UK Country Manager) and Elena Bessis (Product Marketing Assistant) from Opensee" />
+
+<meta name="keywords"
+      content="company, community" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/docs/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2022/opensee/featured.png" alt="Opensee: Analyzing Terabytes of Financial Data a Day With ClickHouse" title="Opensee: Analyzing Terabytes of Financial Data a Day With ClickHouse" />
+            
+            <h1 class="display-2 mt-3 mb-5">Opensee: Analyzing Terabytes of Financial Data a Day With ClickHouse</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>We’d like to welcome Christophe Rivoire (UK Country Manager) and Elena Bessis (Product Marketing Assistant) from Opensee as guests to our blog. Today, they’re telling us how their product, powered by ClickHouse, allows financial institutions’ business users to directly harness 100% of their vast quantities of data instantly and on demand, with no size limitations. </p>
+<p>Opensee is a financial technology company providing real time self-service analytics solutions to financial institutions, which help them turn their big data challenges into a competitive advantage — unlocking vital opportunities led by business users. Opensee, formerly ICA, was started by a team of financial industry and technology experts frustrated that no simple big data analytics solution enabled them to dive deeper into all their data easily and efficiently, or perform what-if analysis on the hundreds of terabytes of data they were handling. </p>
+<p>So they built their own. </p>
+<h2 id="clickhouse-for-trillions-of-financial-data-points">ClickHouse For Trillions Of Financial Data Points<a class="headerlink" href="#clickhouse-for-trillions-of-financial-data-points" title="Permanent link"> </a></h2>
+<p>Financial institutions have always been storing a lot of data (customer data, risk data, transaction data...) for their own decision processes and for regulatory reasons. Since the financial crisis, regulators all around the world have been significantly increasing the reporting requirements, insisting on longer historical ranges and deeper granularity. This combination has generated an exponential amount of data, which has forced financial institutions to review and upgrade their infrastructure. Opensee offers a solution to navigate all these very large data cubes, based on millions, billions or even trillions of data points. In order to build it, a data storage system capable of scaling horizontally with data and with fast OLAP query response time was required. In 2016, after thorough evaluation, Opensee concluded ClickHouse was the obvious solution. </p>
+<p>There are many use cases that involve storing and leveraging massive amounts of data on a daily basis, but Opensee built from the strength of their own expertise, evaluating risk linked to activities in the financial market. There are various types of risks (market risk, credit risk, liquidity risk…) and all of them need to aggregate a lot of data in order to calculate linear or non-linear indicators, both business and regulatory, and analyze all those numbers on the fly.</p>
+<p><img alt='"Dashboard in Opensee for a Market Risk use case"' class="img-fluid" src="https://blog-images.clickhouse.com/en/2022/opensee/dashboard.png"/><br/>
+<em>Dashboard in Opensee for a Market Risk use case</em></p>
+<h2 id="clickhouse-for-scalability-granularity-speed-and-cost-control">ClickHouse for Scalability, Granularity, Speed and Cost Control<a class="headerlink" href="#clickhouse-for-scalability-granularity-speed-and-cost-control" title="Permanent link"> </a></h2>
+<p>Financial institutions have sometimes believed that their ability to craft efficient storage solutions like data lakes for their vast amounts of data, typically built on a Hadoop stack, would make real-time analytics available. Unfortunately, many of these systems are too slow for at-scale analytics. </p>
+<p>Running a query on a Hadoop data lake is just not an option for users with real-time needs! Banks experimented with different types of analytical layers between the data lakes and the users, in order to allow access to their stored data and to run analytics, but ran into new challenges: in-memory computing solutions have a lack of scalability and high hardware costs. Others tried query accelerators but were forced to analyze only prepared data (pre-aggregated or specifically indexed data), losing the granularity which is always required to understand things like daily changes. More recently, financial institutions have been contemplating cloud database management systems, but for very large datasets and calculations the speed of these services is far from what ClickHouse can achieve for their specific use cases. </p>
+<p>Ultimately, none of these technologies could simultaneously combine scalability, granularity, speed and cost control, forcing financial institutions into a series of compromises. With Opensee, there is no need to compromise: the platform leverages ClickHouse's capacity to handle the huge volume that data lakes require and the fast response that in-memory databases can give, without the need to pre-aggregate the data. </p>
+<p><img alt='"Dashboard in Opensee for a Market Risk use case"' class="img-fluid" src="https://blog-images.clickhouse.com/en/2022/opensee/pivot-table.png"/><br/>
+<em>Pivot table from the Opensee UI on a liquidity use case</em></p>
+<h2 id="opensee-architecture">Opensee Architecture<a class="headerlink" href="#opensee-architecture" title="Permanent link"> </a></h2>
+<p>Opensee provides a series of APIs which allows users to fully abstract all the complexity and in particular the physical data model. These APIs are typically used for data ingestion, data query, model management, etc. Thanks to Opensee’s low-code API, users don’t need to access data through complex quasi-SQL queries, but rather through simple business queries that are optimized by Opensee to deliver performance. Opensee’s back end, which provides indirect access to Clickhouse, is written in Scala, while PostgreSQL contains all the configuration and context data that must be managed transactionally. Opensee also provides various options for front ends (dedicated Opensee web or rich user interface, Excel, others…) to interact with the data, navigate through the cube and leverage functionality like data versioning — built for the financial institution’s use. </p>
+<p><img alt='"Dashboard in Opensee for a Market Risk use case"' class="img-fluid" src="https://blog-images.clickhouse.com/en/2022/opensee/architecture-chart.png"/><br/>
+<em>Opensee architecture chart</em></p>
+<h2 id="advantages-of-clickhouse">Advantages of ClickHouse<a class="headerlink" href="#advantages-of-clickhouse" title="Permanent link"> </a></h2>
+<p>For Opensee, the most valuable feature is horizontal scalability, the capability to shard the data. Next comes the very fast dictionary lookup, rapid calculations with vectorization and the capability to manage array values. In the financial industry, where time series or historical data is everywhere, this capacity to calculate vectors and manage array values is critical. </p>
+<p>On top of being a solution that is extremely fast and efficient, other advantages include:</p>
+<ul>
+<li>distributed and replicated, with high availability and a performant map/reduce system</li>
+<li>wide range of features fit for analytics</li>
+<li>really good and extensive format support (csv, json, parquet, orc, protobuf ....)</li>
+<li>very rapid evolutions through the high contributions of a wide community to a very popular Open Source technology</li>
+</ul>
+<p>On top of these native ClickHouse strengths and functionalities, Opensee has developed a lot of other functionalities dedicated to financial institutions. To name only a few, a data versioning mechanism has been created allowing business users to either correct on the fly inaccurate data or simulate new values. This ‘What If’ simulation feature can be used to add, amend or delete transactions,with full auditability and traceability, without deleting any data.</p>
+<p>Another key feature is a Python processor which is available to define  more complex calculations. Furthermore, the abstraction model layer has been built to remove the complexity of the physical data model for the users and optimize the queries. And, last but not least, in terms of visualization, a UI dedicated to financial institutions has been developed with and for its users.      </p>
+<h2 id="dividing-hardware-costs-by-10">Dividing Hardware Costs By 10+<a class="headerlink" href="#dividing-hardware-costs-by-10" title="Permanent link"> </a></h2>
+<p>The cost efficiency factor is a key improvement for large financial institutions typically using in-memory computing technology. Dividing by ten (and sometimes more) the hardware cost is no small achievement! Being able to use very large datasets on standard servers on premise or in the cloud is a big achievement. With Opensee powered by ClickHouse, financial institutions are able to alleviate critical limitations of their existing solutions, avoiding legacy compromises and a lack of flexibility. Finally, these organizations are able to provide their users a turn-key solution to analyze all their data sets, which used to be siloed, in one single place, one single data model, one single infrastructure, and all of that in real time, combining very granular and very long historical ranges.</p>
+<h2 id="about-opensee">About Opensee<a class="headerlink" href="#about-opensee" title="Permanent link"> </a></h2>
+<p>Opensee empowers financial data divers to analyze deeper and faster. Headquartered in Paris, with offices in London and New York, Opensee is working with a trusted client base across global Tier 1 banks, asset managers, hedge funds and trading platforms.</p>
+<p>For more information please visit <a href="http://www.opensee.io" rel="external nofollow noreferrer" target="_blank">www.opensee.io</a> or follow them on <a href="https://www.linkedin.com/company/opensee-company" rel="external nofollow noreferrer" target="_blank">LinkedIn</a> and <a href="https://twitter.com/opensee_io" rel="external nofollow noreferrer" target="_blank">Twitter</a>.</p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=Opensee%3A%20Analyzing%20Terabytes%20of%20Financial%20Data%20a%20Day%20With%20ClickHouse+https%3A//clickhouse.com/blog/en/2022/opensee-analyzing-terabytes-of-financial-data-a-day-with-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=Opensee%3A%20Analyzing%20Terabytes%20of%20Financial%20Data%20a%20Day%20With%20ClickHouse&u=https%3A//clickhouse.com/blog/en/2022/opensee-analyzing-terabytes-of-financial-data-a-day-with-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=Opensee%3A%20Analyzing%20Terabytes%20of%20Financial%20Data%20a%20Day%20With%20ClickHouse&url=https%3A//clickhouse.com/blog/en/2022/opensee-analyzing-terabytes-of-financial-data-a-day-with-clickhouse/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Christophe Rivoire, Elena Bessis</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2022-02-22</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        company
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        community
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/docs/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

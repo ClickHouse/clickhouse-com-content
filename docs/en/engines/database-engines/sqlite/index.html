@@ -1,0 +1,5538 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+        
+    
+    <!DOCTYPE html>
+<html lang="en" data-version="master" data-single-page="false">
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>SQLite | ClickHouse Documentation</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/images/logo-180x180.png" />
+
+<meta property="og:title" content="SQLite | ClickHouse Documentation"/>
+<meta property="og:description" content="SQLite Allows to connect to SQLite database and perform INSERT and SELECT queries to exchange data between ClickHouse an" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://clickhouse.com/docs/images/logo.png" />
+
+<meta property="og:url" content="https://clickhouse.com/docs/en/engines/database-engines/sqlite/"/>
+<link rel="canonical" href="https://clickhouse.com/docs/en/engines/database-engines/sqlite/" />
+
+<link rel="amphtml" href="https://clickhouse.com/docs/en/engines/database-engines/sqlite/amp/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "SQLite | ClickHouse Documentation",
+"mainEntityOfPage": "https://clickhouse.com/docs/en/engines/database-engines/sqlite/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "SQLite | ClickHouse Documentation",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+
+<meta name="description" content="SQLite Allows to connect to SQLite database and perform INSERT and SELECT queries to exchange data between ClickHouse an" />
+
+<meta name="keywords"
+      content="ClickHouse, DBMS, OLAP, SQL, open-source, relational, analytics, analytical, Big Data, web-analytics" />
+
+
+
+
+    
+    <link rel="alternate" hreflang="en" href="https://clickhouse.com/docs/en/engines/database-engines/sqlite/" />
+    
+    <link rel="alternate" hreflang="zh" href="https://clickhouse.com/docs/zh/engines/database-engines/sqlite/" />
+    
+    <link rel="alternate" hreflang="ru" href="https://clickhouse.com/docs/ru/engines/database-engines/sqlite/" />
+    
+    <link rel="alternate" hreflang="ja" href="https://clickhouse.com/docs/ja/engines/database-engines/sqlite/" />
+    
+    <link rel="alternate" hreflang="x-default" href="https://clickhouse.com/docs/en/engines/database-engines/sqlite/" />
+
+
+
+
+
+    
+    <link href="/docs/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" data-spy="scroll" data-target="#toc" data-offset="80">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar py-1 navbar-dark navbar-expand-md bg-dark-alt text-white fixed-top">
+    <div class="container-fluid justify-content-between">
+        <a class="d-block navbar-brand mr-3" href="/">
+            <img id="docs-logo-icon" src="/docs/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h1 class="h3 m-0 p-0 d-inline">
+                <a href="#" class="text-white text-decoration-none">
+                    
+                        SQLite
+                    
+                </a>
+            </h1>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                
+                    
+                
+                
+                <li id="edit-wrapper" class="nav-item">
+                    <a id="edit-link" href="https://github.com/ClickHouse/ClickHouse/edit/master/docs/en/engines/database-engines/sqlite.md" title="Edit this article" class="nav-link" rel="external nofollow noreferrer" target="_blank"><img src="/docs/images/mkdocs/edit.svg" alt="Edit this article" height="60" /></a>
+                </li>
+                
+                <li class="nav-item">
+                     <a class="nav-link" href="https://github.com/ClickHouse/ClickHouse" rel="external nofollow noreferrer">
+                        <img src="/docs/images/index/github.svg" alt="GitHub repository" title="Go to GitHub" height="72" />
+                    </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block mt-1 text-muted" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/docs/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block mt-n1" />
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item disabled"
+                               href="/docs/en/engines/database-engines/sqlite/">
+                                <img src="/docs/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />English
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/zh/engines/database-engines/sqlite/">
+                                <img src="/docs/images/flags/zh.svg" alt="" title="" width="32" class="d-inline-block mr-2" />中文
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/ru/engines/database-engines/sqlite/">
+                                <img src="/docs/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />Русский
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/ja/engines/database-engines/sqlite/">
+                                <img src="/docs/images/flags/ja.svg" alt="" title="" width="32" class="d-inline-block mr-2" />日本語
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <form id="search-form" class="form-inline m-0">
+            <div class="input-group">
+                <div class="input-group-prepend w-100">
+                    <span class="input-group-text bg-secondary-alt text-muted border-0 mr-n1" id="search-icon">
+                        <img src="/docs/images/mkdocs/search.svg" />
+                    </span>
+                    <input id="docsearch-input" class="form-control bg-secondary-alt text-muted border-0 pl-1" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+        </form>
+
+        <button id="navbar-toggler" class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+        <div class="docs container-fluid mt-3">
+            <div class="row justify-content-end justify-content-xl-center">
+                <div id="sidebar" class="col-xl-2 col-md-4 bg-secondary-alt p-3 d-print-none min-vh-100 overflow-auto">
+    <div class="overflow-auto">
+        <div id="single-page-switch" class="btn-group mb-2 float-right" role="group" aria-label="Multi-page or single-page">
+            <a href="../../.." role="button" class="btn btn-dark active" aria-pressed="true">
+                <img src="/docs/images/mkdocs/multi.svg" alt="Multi-page version" title="Multi-page version" />
+            </a>
+            <a href="../../../single/" role="button" class="btn btn-dark-alt active" aria-pressed="true">
+                <img src="/docs/images/mkdocs/single.svg" alt="Single-page version" title="Single-page version" />
+            </a>
+        </div>
+        
+        <nav id="sidebar-nav" class="nav flex-column mb-5">
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-1" title="Introduction" class="nav-link text-light dropdown-toggle px-0">Introduction</a>
+<div id="sidebar-sidebar-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/distinctive-features/" title="Distinctive Features" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Distinctive Features</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/performance/" title="Performance" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Performance</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/history/" title="History" class="nav-link text-light text-wrap d-inline-block w-100 px-0">History</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/adopters/" title="Adopters" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Adopters</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2" title="Getting Started" class="nav-link text-light dropdown-toggle px-0">Getting Started</a>
+<div id="sidebar-sidebar-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2-2" title="Example Datasets" class="nav-link text-light dropdown-toggle px-0">Example Datasets</a>
+<div id="sidebar-sidebar-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/github-events/" title="GitHub Events" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GitHub Events</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/metrica/" title="Web Analytics Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Web Analytics Data</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/recipes/" title="Recipes Dataset" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Recipes Dataset</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/star-schema/" title="Star Schema Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Star Schema Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/wikistat/" title="WikiStat" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WikiStat</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/criteo/" title="Terabyte Click Logs from Criteo" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Terabyte Click Logs from Criteo</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/amplab-benchmark/" title="AMPLab Big Data Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AMPLab Big Data Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/brown-benchmark/" title="Brown University Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Brown University Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/nyc-taxi/" title="New York Taxi Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">New York Taxi Data</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/opensky/" title="OpenSky" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OpenSky</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/uk-price-paid/" title="UK Property Price Paid" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UK Property Price Paid</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/cell-towers/" title="Cell Towers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Cell Towers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/menus/" title="Menus" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Menus</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/ontime/" title="OnTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OnTime</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/install/" title="Installation" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Installation</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/tutorial/" title="Tutorial" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tutorial</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/playground/" title="Playground" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Playground</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3" title="Interfaces" class="nav-link text-light dropdown-toggle px-0">Interfaces</a>
+<div id="sidebar-sidebar-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/cli/" title="Command-Line Client" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Command-Line Client</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/tcp/" title="Native Interface (TCP)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Native Interface (TCP)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/http/" title="HTTP Interface" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HTTP Interface</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/grpc/" title="gRPC Interface" class="nav-link text-light text-wrap d-inline-block w-100 px-0">gRPC Interface</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/mysql/" title="MySQL Interface" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL Interface</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/formats/" title="Input and Output Formats" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Input and Output Formats</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/jdbc/" title="JDBC Driver" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBC Driver</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/odbc/" title="ODBC Driver" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBC Driver</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/cpp/" title="C++ Client Library" class="nav-link text-light text-wrap d-inline-block w-100 px-0">C++ Client Library</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-11" title="Third-Party" class="nav-link text-light dropdown-toggle px-0">Third-Party</a>
+<div id="sidebar-sidebar-3-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/" title="Third-Party Interfaces" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Third-Party Interfaces</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/client-libraries/" title="Client Libraries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Client Libraries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/integrations/" title="Integrations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Integrations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/gui/" title="Visual Interfaces" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Visual Interfaces</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/proxy/" title="Proxies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Proxies</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4" title="Engines" class="nav-link text-light dropdown-toggle px-0">Engines</a>
+<div id="sidebar-sidebar-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2" title="Table Engines" class="nav-link text-light dropdown-toggle px-0">Table Engines</a>
+<div id="sidebar-sidebar-4-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-1" title="Integrations" class="nav-link text-light dropdown-toggle px-0">Integrations</a>
+<div id="sidebar-sidebar-4-2-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/" title="Table Engines for Integrations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Table Engines for Integrations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/odbc/" title="ODBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/jdbc/" title="JDBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/hive/" title="Hive" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Hive</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/mongodb/" title="MongoDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MongoDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/hdfs/" title="HDFS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HDFS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/s3/" title="S3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">S3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/kafka/" title="Kafka" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Kafka</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/embedded-rocksdb/" title="EmbeddedRocksDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EmbeddedRocksDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/rabbitmq/" title="RabbitMQ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RabbitMQ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/ExternalDistributed/" title="ExternalDistributed" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ExternalDistributed</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-3" title="MergeTree Family" class="nav-link text-light dropdown-toggle px-0">MergeTree Family</a>
+<div id="sidebar-sidebar-4-2-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/mergetree/" title="MergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/replication/" title="Data Replication" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Data Replication</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/custom-partitioning-key/" title="Custom Partitioning Key" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Custom Partitioning Key</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/replacingmergetree/" title="ReplacingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ReplacingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/summingmergetree/" title="SummingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SummingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/aggregatingmergetree/" title="AggregatingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregatingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/collapsingmergetree/" title="CollapsingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CollapsingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/versionedcollapsingmergetree/" title="VersionedCollapsingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">VersionedCollapsingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/graphitemergetree/" title="GraphiteMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GraphiteMergeTree</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-4" title="Log Family" class="nav-link text-light dropdown-toggle px-0">Log Family</a>
+<div id="sidebar-sidebar-4-2-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/stripelog/" title="StripeLog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">StripeLog</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/log/" title="Log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/tinylog/" title="TinyLog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TinyLog</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2-5" title="Special" class="nav-link text-light dropdown-toggle px-0">Special</a>
+<div id="sidebar-sidebar-4-2-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/" title="Special Table Engines" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Special Table Engines</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/distributed/" title="Distributed" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Distributed</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/dictionary/" title="Dictionary" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Dictionary</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/merge/" title="Merge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Merge</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/file/" title="File" class="nav-link text-light text-wrap d-inline-block w-100 px-0">File</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/null/" title="Null" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/set/" title="Set" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Set</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/join/" title="Join" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Join</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/url/" title="URL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">URL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/view/" title="View" class="nav-link text-light text-wrap d-inline-block w-100 px-0">View</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/materializedview/" title="MaterializedView" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedView</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/memory/" title="Memory" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Memory</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/buffer/" title="Buffer" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Buffer</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/external-data/" title="External Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">External Data</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/generate/" title="GenerateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GenerateRandom</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-3" title="Database Engines" class="nav-link text-light dropdown-toggle px-0">Database Engines</a>
+<div id="sidebar-sidebar-4-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/materialized-mysql/" title="MaterializedMySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedMySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/lazy/" title="Lazy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Lazy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/atomic/" title="Atomic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Atomic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/sqlite/" title="SQLite" class="nav-link text-white active text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/replicated/" title="Replicated" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Replicated</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5" title="SQL Reference" class="nav-link text-light dropdown-toggle px-0">SQL Reference</a>
+<div id="sidebar-sidebar-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2" title="Statements" class="nav-link text-light dropdown-toggle px-0">Statements</a>
+<div id="sidebar-sidebar-5-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2-2" title="SELECT" class="nav-link text-light dropdown-toggle px-0">SELECT</a>
+<div id="sidebar-sidebar-5-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/all/" title="ALL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/array-join/" title="ARRAY JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ARRAY JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/distinct/" title="DISTINCT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DISTINCT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/except/" title="EXCEPT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXCEPT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/format/" title="FORMAT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FORMAT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/from/" title="FROM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FROM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/group-by/" title="GROUP BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GROUP BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/having/" title="HAVING" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HAVING</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/intersect/" title="INTERSECT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INTERSECT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/into-outfile/" title="INTO OUTFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INTO OUTFILE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/join/" title="JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/limit/" title="LIMIT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/limit-by/" title="LIMIT BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/offset/" title="OFFSET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OFFSET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/order-by/" title="ORDER BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ORDER BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/prewhere/" title="PREWHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PREWHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/sample/" title="SAMPLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SAMPLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/union/" title="UNION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UNION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/where/" title="WHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/with/" title="WITH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WITH</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/insert-into/" title="INSERT INTO" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INSERT INTO</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2-4" title="CREATE" class="nav-link text-light dropdown-toggle px-0">CREATE</a>
+<div id="sidebar-sidebar-5-2-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/database/" title="DATABASE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DATABASE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/table/" title="TABLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TABLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/view/" title="VIEW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">VIEW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/dictionary/" title="DICTIONARY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DICTIONARY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/function/" title="FUNCTION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FUNCTION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/user/" title="USER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/role/" title="ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/row-policy/" title="ROW POLICY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ROW POLICY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/quota/" title="QUOTA" class="nav-link text-light text-wrap d-inline-block w-100 px-0">QUOTA</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/settings-profile/" title="SETTINGS PROFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SETTINGS PROFILE</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2-5" title="ALTER" class="nav-link text-light dropdown-toggle px-0">ALTER</a>
+<div id="sidebar-sidebar-5-2-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/" title="ALTER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALTER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/column/" title="COLUMN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">COLUMN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/partition/" title="PARTITION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PARTITION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/setting/" title="SETTING" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SETTING</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/delete/" title="DELETE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DELETE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/update/" title="UPDATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UPDATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/order-by/" title="ORDER BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ORDER BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/sample-by/" title="SAMPLE BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SAMPLE BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/index/" title="INDEX" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INDEX</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/constraint/" title="CONSTRAINT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CONSTRAINT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/ttl/" title="TTL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TTL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/user/" title="USER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/quota/" title="QUOTA" class="nav-link text-light text-wrap d-inline-block w-100 px-0">QUOTA</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/role/" title="ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/row-policy/" title="ROW POLICY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ROW POLICY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/settings-profile/" title="SETTINGS PROFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SETTINGS PROFILE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/projection/" title="PROJECTION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PROJECTION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/view/" title="VIEW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">VIEW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/comment/" title="COMMENT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">COMMENT</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/system/" title="SYSTEM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SYSTEM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/show/" title="SHOW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SHOW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/grant/" title="GRANT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GRANT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/explain/" title="EXPLAIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXPLAIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/revoke/" title="REVOKE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">REVOKE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/attach/" title="ATTACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ATTACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/check-table/" title="CHECK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CHECK</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/describe-table/" title="DESCRIBE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DESCRIBE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/detach/" title="DETACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DETACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/drop/" title="DROP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DROP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/exists/" title="EXISTS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXISTS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/kill/" title="KILL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">KILL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/optimize/" title="OPTIMIZE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OPTIMIZE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/rename/" title="RENAME" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RENAME</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/exchange/" title="EXCHANGE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXCHANGE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/set/" title="SET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/set-role/" title="SET ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/truncate/" title="TRUNCATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TRUNCATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/use/" title="USE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/watch/" title="WATCH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WATCH</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/syntax/" title="Syntax" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Syntax</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/distributed-ddl/" title="Distributed DDL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Distributed DDL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-5" title="Functions" class="nav-link text-light dropdown-toggle px-0">Functions</a>
+<div id="sidebar-sidebar-5-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/arithmetic-functions/" title="Arithmetic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Arithmetic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/array-functions/" title="Arrays" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Arrays</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/comparison-functions/" title="Comparison" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Comparison</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/logical-functions/" title="Logical" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Logical</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/type-conversion-functions/" title="Type Conversion" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Type Conversion</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/date-time-functions/" title="Dates and Times" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Dates and Times</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-functions/" title="Strings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Strings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-search-functions/" title="For Searching in Strings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">For Searching in Strings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-replace-functions/" title="For Replacing in Strings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">For Replacing in Strings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/conditional-functions/" title="Conditional" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Conditional</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/files/" title="Files" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Files</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/math-functions/" title="Mathematical" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Mathematical</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/rounding-functions/" title="Rounding" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Rounding</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/tuple-map-functions/" title="Working with maps" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Working with maps</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/splitting-merging-functions/" title="Splitting and Merging Strings and Arrays" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Splitting and Merging Strings and Arrays</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/bit-functions/" title="Bit" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Bit</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/bitmap-functions/" title="Bitmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Bitmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/hash-functions/" title="Hash" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Hash</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/random-functions/" title="Pseudo-Random Numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Pseudo-Random Numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/encoding-functions/" title="Encoding" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Encoding</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/uuid-functions/" title="UUID" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUID</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/url-functions/" title="URLs" class="nav-link text-light text-wrap d-inline-block w-100 px-0">URLs</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ip-address-functions/" title="IP Addresses" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IP Addresses</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/json-functions/" title="JSON" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JSON</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ext-dict-functions/" title="External Dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">External Dictionaries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ym-dict-functions/" title="Embedded Dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Embedded Dictionaries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/in-functions/" title="IN Operator" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IN Operator</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/array-join/" title="arrayJoin" class="nav-link text-light text-wrap d-inline-block w-100 px-0">arrayJoin</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-5-30" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-5-30" title="Geo" class="nav-link text-light dropdown-toggle px-0">Geo</a>
+<div id="sidebar-sidebar-5-5-30" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/coordinates/" title="Geographical Coordinates" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geographical Coordinates</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/geohash/" title="Geohash" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geohash</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/h3/" title="H3 Indexes" class="nav-link text-light text-wrap d-inline-block w-100 px-0">H3 Indexes</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/s2/" title="S2 Geometry" class="nav-link text-light text-wrap d-inline-block w-100 px-0">S2 Geometry</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/functions-for-nulls/" title="Nullable" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nullable</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/machine-learning-functions/" title="Machine Learning" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Machine Learning</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/introspection/" title="Introspection" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introspection</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/tuple-functions/" title="Tuples" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuples</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/encryption-functions/" title="Encryption" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Encryption</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/nlp-functions/" title="NLP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">NLP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/other-functions/" title="Other" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Other</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/time-window-functions/" title="Time Window" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Time Window</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/statistics/" title="Statistics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Statistics</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-6" title="Aggregate Functions" class="nav-link text-light dropdown-toggle px-0">Aggregate Functions</a>
+<div id="sidebar-sidebar-5-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-6-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-6-2" title="Reference" class="nav-link text-light dropdown-toggle px-0">Reference</a>
+<div id="sidebar-sidebar-5-6-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/count/" title="count" class="nav-link text-light text-wrap d-inline-block w-100 px-0">count</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/min/" title="min" class="nav-link text-light text-wrap d-inline-block w-100 px-0">min</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/max/" title="max" class="nav-link text-light text-wrap d-inline-block w-100 px-0">max</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sum/" title="sum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/avg/" title="avg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/any/" title="any" class="nav-link text-light text-wrap d-inline-block w-100 px-0">any</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stddevpop/" title="stddevPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stddevsamp/" title="stddevSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/varpop/" title="varPop(x)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varPop(x)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/varsamp/" title="varSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/covarpop/" title="covarPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarPop</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/covarsamp/" title="covarSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/anyheavy/" title="anyHeavy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyHeavy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/anylast/" title="anyLast" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyLast</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/argmin/" title="argMin" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMin</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/argmax/" title="argMax" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMax</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/avgweighted/" title="avgWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avgWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/corr/" title="corr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">corr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/exponentialmovingaverage/" title="exponentialMovingAverage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">exponentialMovingAverage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraysorted/" title="groupArraySorted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArraySorted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/topk/" title="topK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topK</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/topkweighted/" title="topKWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topKWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparray/" title="groupArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupuniqarray/" title="groupUniqArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupUniqArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparrayinsertat/" title="groupArrayInsertAt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayInsertAt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraymovingsum/" title="groupArrayMovingSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraymovingavg/" title="groupArrayMovingAvg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingAvg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraysample/" title="groupArraySample" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArraySample</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitand/" title="groupBitAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitor/" title="groupBitOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitxor/" title="groupBitXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmap/" title="groupBitmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapand/" title="groupBitmapAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapor/" title="groupBitmapOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapxor/" title="groupBitmapXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumwithoverflow/" title="sumWithOverflow" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumWithOverflow</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/deltasum/" title="deltaSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/deltasumtimestamp/" title="deltaSumTimestamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSumTimestamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/summap/" title="sumMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/minmap/" title="minMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">minMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/maxmap/" title="maxMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">maxMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumcount/" title="sumCount" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumCount</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/rankCorr/" title="rankCorr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">rankCorr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumkahan/" title="sumKahan" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumKahan</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/intervalLengthSum/" title="intervalLengthSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">intervalLengthSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/skewpop/" title="skewPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/skewsamp/" title="skewSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/kurtpop/" title="kurtPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/kurtsamp/" title="kurtSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniq/" title="uniq" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniq</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqexact/" title="uniqExact" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqExact</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqcombined/" title="uniqCombined" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqcombined64/" title="uniqCombined64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqhll12/" title="uniqHLL12" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqHLL12</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqthetasketch/" title="uniqTheta" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqTheta</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantile/" title="quantile" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantile</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiles/" title="quantiles Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantiles Functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantileexact/" title="quantileExact Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExact Functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantileexactweighted/" title="quantileExactWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExactWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletiming/" title="quantileTiming" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTiming</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletimingweighted/" title="quantileTimingWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTimingWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiledeterministic/" title="quantileDeterministic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileDeterministic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletdigest/" title="quantileTDigest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletdigestweighted/" title="quantileTDigestWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigestWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantilebfloat16/" title="quantileBFloat16" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileBFloat16</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/median/" title="median" class="nav-link text-light text-wrap d-inline-block w-100 px-0">median</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/simplelinearregression/" title="simpleLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">simpleLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stochasticlinearregression/" title="stochasticLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stochasticlogisticregression/" title="stochasticLogisticRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLogisticRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/categoricalinformationvalue/" title="categoricalInformationValue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">categoricalInformationValue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/studentttest/" title="studentTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">studentTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/welchttest/" title="welchTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">welchTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/entropy/" title="entropy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">entropy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/meanztest/" title="meanZTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">meanZTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/mannwhitneyutest/" title="mannWhitneyUTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mannWhitneyUTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sparkbar/" title="sparkbar" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sparkbar</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/combinators/" title="Combinators" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Combinators</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/parametric-functions/" title="Parametric" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Parametric</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-7" title="Table Functions" class="nav-link text-light dropdown-toggle px-0">Table Functions</a>
+<div id="sidebar-sidebar-5-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/file/" title="file" class="nav-link text-light text-wrap d-inline-block w-100 px-0">file</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/merge/" title="merge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">merge</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/numbers/" title="numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/remote/" title="remote" class="nav-link text-light text-wrap d-inline-block w-100 px-0">remote</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/url/" title="url" class="nav-link text-light text-wrap d-inline-block w-100 px-0">url</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/mysql/" title="mysql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mysql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/postgresql/" title="postgresql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">postgresql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/jdbc/" title="jdbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">jdbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/odbc/" title="odbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">odbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/hdfs/" title="hdfs" class="nav-link text-light text-wrap d-inline-block w-100 px-0">hdfs</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/s3/" title="s3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/input/" title="input" class="nav-link text-light text-wrap d-inline-block w-100 px-0">input</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/generate/" title="generateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">generateRandom</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/cluster/" title="cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/view/" title="view" class="nav-link text-light text-wrap d-inline-block w-100 px-0">view</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/null/" title="null function" class="nav-link text-light text-wrap d-inline-block w-100 px-0">null function</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/dictionary/" title="dictionary function" class="nav-link text-light text-wrap d-inline-block w-100 px-0">dictionary function</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/hdfsCluster/" title="hdfsCluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">hdfsCluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/s3Cluster/" title="s3Cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3Cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/sqlite/" title="sqlite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sqlite</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-8" title="Dictionaries" class="nav-link text-light dropdown-toggle px-0">Dictionaries</a>
+<div id="sidebar-sidebar-5-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-8-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-8-2" title="External Dictionaries" class="nav-link text-light dropdown-toggle px-0">External Dictionaries</a>
+<div id="sidebar-sidebar-5-8-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts/" title="General Description" class="nav-link text-light text-wrap d-inline-block w-100 px-0">General Description</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict/" title="Configuring an External Dictionary" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Configuring an External Dictionary</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-layout/" title="Storing Dictionaries in Memory" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Storing Dictionaries in Memory</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-lifetime/" title="Dictionary Updates" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Dictionary Updates</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources/" title="Sources of External Dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Sources of External Dictionaries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-structure/" title="Dictionary Key and Fields" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Dictionary Key and Fields</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-hierarchical/" title="Hierarchical dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Hierarchical dictionaries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-polygon/" title="Polygon Dictionaries With Grids" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Polygon Dictionaries With Grids</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/internal-dicts/" title="Internal Dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Internal Dictionaries</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9" title="Data Types" class="nav-link text-light dropdown-toggle px-0">Data Types</a>
+<div id="sidebar-sidebar-5-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/int-uint/" title="UInt8, UInt16, UInt32, UInt64, UInt128, UInt256, Int8, Int16, Int32, Int64, Int128, Int256" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UInt8, UInt16, UInt32, UInt64, UInt128, UInt256, Int8, Int16, Int32, Int64, Int128, Int256</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/float/" title="Float32, Float64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Float32, Float64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/decimal/" title="Decimal" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Decimal</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/boolean/" title="Boolean" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Boolean</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/string/" title="String" class="nav-link text-light text-wrap d-inline-block w-100 px-0">String</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/fixedstring/" title="FixedString(N)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FixedString(N)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/uuid/" title="UUID" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUID</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/date/" title="Date" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Date</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/date32/" title="Date32" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Date32</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/datetime/" title="DateTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/datetime64/" title="DateTime64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/enum/" title="Enum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Enum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/lowcardinality/" title="LowCardinality" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LowCardinality</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/array/" title="Array(T)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Array(T)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/aggregatefunction/" title="AggregateFunction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregateFunction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-17" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-17" title="Nested Data Structures" class="nav-link text-light dropdown-toggle px-0">Nested Data Structures</a>
+<div id="sidebar-sidebar-5-9-17" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/nested-data-structures/nested/" title="Nested(Name1 Type1, Name2 Type2, ...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nested(Name1 Type1, Name2 Type2, ...)</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/tuple/" title="Tuple(T1, T2, ...)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuple(T1, T2, ...)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/nullable/" title="Nullable" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nullable</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-20" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-20" title="Special Data Types" class="nav-link text-light dropdown-toggle px-0">Special Data Types</a>
+<div id="sidebar-sidebar-5-9-20" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/expression/" title="Expression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Expression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/set/" title="Set" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Set</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/nothing/" title="Nothing" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nothing</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/interval/" title="Interval" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Interval</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-21" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-21" title="Domains" class="nav-link text-light dropdown-toggle px-0">Domains</a>
+<div id="sidebar-sidebar-5-9-21" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/ipv4/" title="IPv4" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv4</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/ipv6/" title="IPv6" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv6</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/multiword-types/" title="Multiword Type Names" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Multiword Type Names</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/geo/" title="Geo" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geo</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/map/" title="Map(key, value)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Map(key, value)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/simpleaggregatefunction/" title="SimpleAggregateFunction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SimpleAggregateFunction</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-10" title="Operators" class="nav-link text-light dropdown-toggle px-0">Operators</a>
+<div id="sidebar-sidebar-5-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/operators/" title="Operators" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Operators</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/operators/exists/" title="EXISTS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXISTS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/operators/in/" title="IN Operators" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IN Operators</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/ansi/" title="ANSI Compatibility" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ANSI Compatibility</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-12" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-12" title="Window Functions" class="nav-link text-light dropdown-toggle px-0">Window Functions</a>
+<div id="sidebar-sidebar-5-12" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/window-functions/" title="Window Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Window Functions</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6" title="Guides" class="nav-link text-light dropdown-toggle px-0">Guides</a>
+<div id="sidebar-sidebar-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../guides/" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../guides/apply-catboost-model/" title="Applying CatBoost Models" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Applying CatBoost Models</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7" title="Operations" class="nav-link text-light dropdown-toggle px-0">Operations</a>
+<div id="sidebar-sidebar-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/requirements/" title="Requirements" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Requirements</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/monitoring/" title="Monitoring" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Monitoring</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/ssl-zookeeper/" title="Secured communication with Zookeeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Secured communication with Zookeeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/troubleshooting/" title="Troubleshooting" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Troubleshooting</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/update/" title="ClickHouse Upgrade" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse Upgrade</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/access-rights/" title="Access Control and Account Management" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Access Control and Account Management</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-8" title="External User Authenticators and Directories" class="nav-link text-light dropdown-toggle px-0">External User Authenticators and Directories</a>
+<div id="sidebar-sidebar-7-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/kerberos/" title="Kerberos" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Kerberos</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/ldap/" title="LDAP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LDAP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/ssl-x509/" title="SSL X.509 certificate authentication" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SSL X.509 certificate authentication</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/backup/" title="Data Backup" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Data Backup</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/configuration-files/" title="Configuration Files" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Configuration Files</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/quotas/" title="Quotas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Quotas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-12" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-12" title="Optimizing Performance" class="nav-link text-light dropdown-toggle px-0">Optimizing Performance</a>
+<div id="sidebar-sidebar-7-12" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/optimizing-performance/sampling-query-profiler/" title="Query Profiling" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Query Profiling</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-13" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-13" title="System Tables" class="nav-link text-light dropdown-toggle px-0">System Tables</a>
+<div id="sidebar-sidebar-7-13" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/" title="System Tables" class="nav-link text-light text-wrap d-inline-block w-100 px-0">System Tables</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/information_schema/" title="INFORMATION_SCHEMA" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INFORMATION_SCHEMA</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/asynchronous_metric_log/" title="system.asynchronous_metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/asynchronous_metrics/" title="system.asynchronous_metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/clusters/" title="system.clusters" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.clusters</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/columns/" title="system.columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/contributors/" title="system.contributors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.contributors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/crash-log/" title="system.crash_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.crash_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/current-roles/" title="system.current_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.current_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/data_skipping_indices/" title="system.data_skipping_indices" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_skipping_indices</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/data_type_families/" title="system.data_type_families" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_type_families</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/databases/" title="system.databases" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.databases</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/detached_parts/" title="system.detached_parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.detached_parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/dictionaries/" title="system.dictionaries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.dictionaries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/disks/" title="system.disks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.disks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/distributed_ddl_queue/" title="system.distributed_ddl_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distributed_ddl_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/distribution_queue/" title="system.distribution_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distribution_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/enabled-roles/" title="system.enabled_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.enabled_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/errors/" title="system.errors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.errors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/events/" title="system.events" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.events</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/functions/" title="system.functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/grants/" title="system.grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/graphite_retentions/" title="system.graphite_retentions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.graphite_retentions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/licenses/" title="system.licenses" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.licenses</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/merge_tree_settings/" title="system.merge_tree_settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merge_tree_settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/merges/" title="system.merges" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merges</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/metric_log/" title="system.metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/metrics/" title="system.metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/mutations/" title="system.mutations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.mutations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/numbers/" title="system.numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/numbers_mt/" title="system.numbers_mt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers_mt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/one/" title="system.one" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.one</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/opentelemetry_span_log/" title="system.opentelemetry_span_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.opentelemetry_span_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/part_log/" title="system.part_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.part_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/parts/" title="system.parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/parts_columns/" title="system.parts_columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts_columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/processes/" title="system.processes" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.processes</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_log/" title="system.query_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_thread_log/" title="system.query_thread_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_thread_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_views_log/" title="system.query_views_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_views_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quota_limits/" title="system.quota_limits" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_limits</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quota_usage/" title="system.quota_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quotas/" title="system.quotas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quotas_usage/" title="system.quotas_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replicas/" title="system.replicas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replicated_fetches/" title="system.replicated_fetches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicated_fetches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replication_queue/" title="system.replication_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replication_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/role-grants/" title="system.role_grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.role_grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/roles/" title="system.roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/row_policies/" title="system.row_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.row_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/session_log/" title="system.session_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.session_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings/" title="system.settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings_profile_elements/" title="system.settings_profile_elements" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profile_elements</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings_profiles/" title="system.settings_profiles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profiles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/stack_trace/" title="system.stack_trace" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.stack_trace</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/storage_policies/" title="system.storage_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.storage_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/table_engines/" title="system.table_engines" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.table_engines</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/tables/" title="system.tables" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.tables</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/text_log/" title="system.text_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.text_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/time_zones/" title="system.time_zones" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.time_zones</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/trace_log/" title="system.trace_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.trace_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/users/" title="system.users" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.users</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/zookeeper/" title="system.zookeeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/zookeeper_log/" title="system.zookeeper_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper_log</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-14" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-14" title="Server Configuration Parameters" class="nav-link text-light dropdown-toggle px-0">Server Configuration Parameters</a>
+<div id="sidebar-sidebar-7-14" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/server-configuration-parameters/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/server-configuration-parameters/settings/" title="Server Settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Server Settings</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/performance-test/" title="Testing Hardware" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Testing Hardware</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-16" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-16" title="Settings" class="nav-link text-light dropdown-toggle px-0">Settings</a>
+<div id="sidebar-sidebar-7-16" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/permissions-for-queries/" title="Permissions for Queries" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Permissions for Queries</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/query-complexity/" title="Restrictions on Query Complexity" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Restrictions on Query Complexity</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/settings-profiles/" title="Settings Profiles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Settings Profiles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/constraints-on-settings/" title="Constraints on Settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Constraints on Settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/settings-users/" title="User Settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">User Settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/memory-overcommit/" title="Memory overcommit" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Memory overcommit</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/merge-tree-settings/" title="MergeTree tables settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MergeTree tables settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/settings/" title="Settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Settings</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-17" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-17" title="Utilities" class="nav-link text-light dropdown-toggle px-0">Utilities</a>
+<div id="sidebar-sidebar-7-17" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-copier/" title="clickhouse-copier" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-copier</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-local/" title="clickhouse-local" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-local</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-benchmark/" title="clickhouse-benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-format/" title="clickhouse-format" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-format</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-compressor/" title="ClickHouse compressor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse compressor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-obfuscator/" title="ClickHouse obfuscator" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse obfuscator</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/odbc-bridge/" title="clickhouse-odbc-bridge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-odbc-bridge</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/tips/" title="Usage Recommendations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Usage Recommendations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/opentelemetry/" title="OpenTelemetry Support" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OpenTelemetry Support</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/caches/" title="Caches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Caches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/clickhouse-keeper/" title="ClickHouse Keeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse Keeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/storing-data/" title="External Disks for Storing Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">External Disks for Storing Data</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/named-collections/" title="Named connections" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Named connections</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-8" title="Development" class="nav-link text-light dropdown-toggle px-0">Development</a>
+<div id="sidebar-sidebar-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../development/developer-instruction/" title="For Beginners" class="nav-link text-light text-wrap d-inline-block w-100 px-0">For Beginners</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/architecture/" title="Architecture Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Architecture Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/continuous-integration/" title="Continuous Integration Checks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Continuous Integration Checks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build/" title="Build on Linux" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Linux</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-osx/" title="Build on Mac OS X" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Mac OS X</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-cross-osx/" title="Build on Linux for Mac OS X" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Linux for Mac OS X</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-cross-arm/" title="Build on Linux for AARCH64 (ARM64)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Linux for AARCH64 (ARM64)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-cross-riscv/" title="Build on Linux for RISC-V 64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Build on Linux for RISC-V 64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/style/" title="C++ Guide" class="nav-link text-light text-wrap d-inline-block w-100 px-0">C++ Guide</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/tests/" title="Testing" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Testing</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/contrib/" title="Third-Party Libraries Used" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Third-Party Libraries Used</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/browse-code/" title="Source Code Browser" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Source Code Browser</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/cmake-in-clickhouse/" title="CMake in ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CMake in ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/adding_test_queries/" title="How to add test queries to ClickHouse CI" class="nav-link text-light text-wrap d-inline-block w-100 px-0">How to add test queries to ClickHouse CI</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-9" title="Commercial" class="nav-link text-light dropdown-toggle px-0">Commercial</a>
+<div id="sidebar-sidebar-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../commercial/cloud/" title="Cloud" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Cloud</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../commercial/support/" title="Support" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Support</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../commercial/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-10" title="F.A.Q." class="nav-link text-light dropdown-toggle px-0">F.A.Q.</a>
+<div id="sidebar-sidebar-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../faq/general/" title="General" class="nav-link text-light text-wrap d-inline-block w-100 px-0">General</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/use-cases/" title="Use Cases" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Use Cases</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/operations/" title="Operations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Operations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/integration/" title="Integration" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Integration</a>
+
+
+    
+        
+        
+        
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-11" title="What's New" class="nav-link text-light dropdown-toggle px-0">What's New</a>
+<div id="sidebar-sidebar-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-11-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-11-1" title="Changelog" class="nav-link text-light dropdown-toggle px-0">Changelog</a>
+<div id="sidebar-sidebar-11-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/" title="2022" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2022</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2021/" title="2021" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2021</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2020/" title="2020" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2020</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2019/" title="2019" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2019</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2018/" title="2018" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2018</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2017/" title="2017" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2017</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/roadmap/" title="Roadmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Roadmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/security-changelog/" title="Security Changelog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Security Changelog</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/" title="What’s New in ClickHouse?" class="nav-link text-light text-wrap d-inline-block w-100 px-0">What’s New in ClickHouse?</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+        </nav>
+        
+    </div>
+</div>
+                <div id="content-wrapper" class="anchor-fixer col-md-8 mt-5 p-2 p-md-4">
+    <div id="content">
+        
+            
+            
+            
+                
+                <nav class="text-muted" aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent p-0">
+                        
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../../" class="text-reset">Engines</a>
+                            
+                        </li>
+                       
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../" class="text-reset">Database Engines</a>
+                            
+                        </li>
+                       
+                    </ol>
+                </nav>
+            
+
+            
+            <h1 id="sqlite">SQLite<a class="headerlink" href="#sqlite" title="Permanent link"> </a></h1>
+<p>Allows to connect to <a href="https://www.sqlite.org/index.html" rel="external nofollow noreferrer" target="_blank">SQLite</a> database and perform <code class="syntax">INSERT</code> and <code class="syntax">SELECT</code> queries to exchange data between ClickHouse and SQLite. </p>
+<h2 id="creating-a-database">Creating a Database<a class="headerlink" href="#creating-a-database" title="Permanent link"> </a></h2>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">sqlite_database</span><span class="w"> </span>
+<span class="w">    </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SQLite</span><span class="p">(</span><span class="s1">'db_path'</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Engine Parameters</strong></p>
+<ul>
+<li><code class="syntax">db_path</code> — Path to a file with SQLite database.</li>
+</ul>
+<h2 id="data_types-support">Data Types Support<a class="headerlink" href="#data_types-support" title="Permanent link"> </a></h2>
+<table>
+<thead>
+<tr>
+<th>SQLite</th>
+<th>ClickHouse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INTEGER</td>
+<td><a href="../../../sql-reference/data-types/int-uint/">Int32</a></td>
+</tr>
+<tr>
+<td>REAL</td>
+<td><a href="../../../sql-reference/data-types/float/">Float32</a></td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td><a href="../../../sql-reference/data-types/string/">String</a></td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td><a href="../../../sql-reference/data-types/string/">String</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="specifics-and-recommendations">Specifics and Recommendations<a class="headerlink" href="#specifics-and-recommendations" title="Permanent link"> </a></h2>
+<p>SQLite stores the entire database (definitions, tables, indices, and the data itself) as a single cross-platform file on a host machine. During writing SQLite locks the entire database file, therefore write operations are performed sequentially. Read operations can be multitasked.<br/>
+SQLite does not require service management (such as startup scripts) or access control based on <code class="syntax">GRANT</code> and passwords. Access control is handled by means of file-system permissions given to the database file itself.</p>
+<h2 id="usage-example">Usage Example<a class="headerlink" href="#usage-example" title="Permanent link"> </a></h2>
+<p>Database in ClickHouse, connected to the SQLite:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">sqlite_db</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SQLite</span><span class="p">(</span><span class="s1">'sqlite.db'</span><span class="p">);</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sqlite_db</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌──name───┐
+│ table1  │
+│ table2  │  
+└─────────┘
+</code></pre></div>
+<p>Shows the tables:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sqlite_db</span><span class="p">.</span><span class="n">table1</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─col1──┬─col2─┐
+│ line1 │    1 │
+│ line2 │    2 │
+│ line3 │    3 │
+└───────┴──────┘
+</code></pre></div>
+<p>Inserting data into SQLite table from ClickHouse table:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">clickhouse_table</span><span class="p">(</span><span class="o">`</span><span class="n">col1</span><span class="o">`</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="o">`</span><span class="n">col2</span><span class="o">`</span><span class="w"> </span><span class="n">Int16</span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MergeTree</span><span class="p">()</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">col2</span><span class="p">;</span><span class="w"></span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">clickhouse_table</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">'text'</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">sqlite_db</span><span class="p">.</span><span class="n">table1</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">clickhouse_table</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sqlite_db</span><span class="p">.</span><span class="n">table1</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─col1──┬─col2─┐
+│ line1 │    1 │
+│ line2 │    2 │
+│ line3 │    3 │
+│ text  │   10 │
+└───────┴──────┘
+</code></pre></div>
+        
+
+        
+    </div>
+
+    
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Was this content helpful?</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+     data-titles="['Unusable', 'Poor', 'OK', 'Good', 'Excellent']"
+     data-documentation="documentation"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/38993f215f9186c1ac3505b1e09697cd9a468b5d" rel="external nofollow noreferrer" target="_blank" class="text-reset">38993f21</a>
+    
+    </div>
+</div>
+
+</div>
+
+                
+                    <div id="toc" class="col-xl-2 d-none d-xl-block d-print-none p-3 overflow-auto toc-right mb-5">
+    
+    
+        
+    
+    <nav class="nav flex-column text-wrap">
+    
+        <label for="toc">Table of Contents</label>
+    
+    
+        
+        
+        <a href="#creating-a-database" title="Creating a Database" class="nav-link text-wrap d-inline-block w-100">
+    Creating a Database
+</a>
+
+    
+        
+        
+        <a href="#data_types-support" title="Data Types Support" class="nav-link text-wrap d-inline-block w-100">
+    Data Types Support
+</a>
+
+    
+        
+        
+        <a href="#specifics-and-recommendations" title="Specifics and Recommendations" class="nav-link text-wrap d-inline-block w-100">
+    Specifics and Recommendations
+</a>
+
+    
+        
+        
+        <a href="#usage-example" title="Usage Example" class="nav-link text-wrap d-inline-block w-100">
+    Usage Example
+</a>
+
+    
+    </nav>
+</div>
+                
+            </div>
+        </div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/docs/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

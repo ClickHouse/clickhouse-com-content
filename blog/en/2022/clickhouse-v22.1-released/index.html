@@ -1,0 +1,415 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>What's New in ClickHouse 22.1</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/images/logo-180x180.png" />
+
+<meta property="og:title" content="What's New in ClickHouse 22.1"/>
+<meta property="og:description" content="22.1 is our first release in the new year. It includes 2,599 new commits from 133 contributors, including 44 new contrib" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2022/clickhouse-v22-1/featured.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2022/clickhouse-v22.1-released/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2022/clickhouse-v22.1-released/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "What's New in ClickHouse 22.1",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2022/clickhouse-v22.1-released/",
+
+"datePublished": "2022-01-26",
+"dateModified": "2022-01-26",
+
+"image": "https://blog-images.clickhouse.com/en/2022/clickhouse-v22-1/featured.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="22.1 is our first release in the new year. It includes 2,599 new commits from 133 contributors, including 44 new contrib" />
+
+<meta name="keywords"
+      content="company, community" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/docs/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2022/clickhouse-v22-1/featured.jpg" alt="What's New in ClickHouse 22.1" title="What's New in ClickHouse 22.1" />
+            
+            <h1 class="display-2 mt-3 mb-5">What's New in ClickHouse 22.1</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>22.1 is our first release in the new year. It includes 2,599 new commits from 133 contributors, including 44 new contributors:</p>
+<blockquote>
+<p>13DaGGeR, Adri Fernandez, Alexey Gusev, Anselmo D. Adams, Antonio Andelic, Ben, Boris Kuschel, Christoph Wurm, Chun-Sheng, Li, Dao, DimaAmega, Dmitrii Mokhnatkin, Harry-Lee, Justin Hilliard, MaxTheHuman, Meena-Renganathan, Mojtaba Yaghoobzadeh, N. Kolotov, Niek, Orkhan Zeynalli, Rajkumar, Ryad ZENINE, Sergei Trifonov, Suzy Wang, TABLUM.IO, Vitaly Artemyev, Xin Wang, Yatian Xu, Youenn Lebras, dalei2019, fanzhou, gulige, lgbo-ustc, minhthucdao, mreddy017, msirm, olevino, peter279k, save-my-heart, tekeri, usurai, zhoubintao, 李扬.</p>
+</blockquote>
+<p>Don't forget to run <code class="syntax">SELECT * FROM system.contributors</code> on your production server!</p>
+<p>Let's describe the most important new features in 22.1.</p>
+<h2 id="schema-inference">Schema Inference<a class="headerlink" href="#schema-inference" title="Permanent link"> </a></h2>
+<p>Let's look at the following query as an example:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">url</span><span class="p">(</span><span class="s1">'https://datasets.clickhouse.com/github_events_v2.native.xz'</span><span class="p">,</span><span class="w"> </span><span class="n">Native</span><span class="p">,</span><span class="w"></span>
+<span class="o">$$</span><span class="w"></span>
+<span class="w">    </span><span class="n">file_time</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">event_type</span><span class="w"> </span><span class="n">Enum</span><span class="p">(</span><span class="s1">'CommitCommentEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'CreateEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'DeleteEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">'ForkEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="s1">'GollumEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">'IssueCommentEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s1">'IssuesEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="s1">'MemberEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="s1">'PublicEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="s1">'PullRequestEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s1">'PullRequestReviewCommentEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="s1">'PushEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s1">'ReleaseEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="s1">'SponsorshipEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="s1">'WatchEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="s1">'GistEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="s1">'FollowEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="s1">'DownloadEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="s1">'PullRequestReviewEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="s1">'ForkApplyEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="s1">'Event'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="s1">'TeamAddEvent'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">22</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">actor_login</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">repo_name</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">action</span><span class="w"> </span><span class="n">Enum</span><span class="p">(</span><span class="s1">'none'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'created'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'added'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'edited'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">'deleted'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">'opened'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">'closed'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s1">'reopened'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="s1">'assigned'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="s1">'unassigned'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="s1">'labeled'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s1">'unlabeled'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="s1">'review_requested'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s1">'review_request_removed'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="s1">'synchronize'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="s1">'started'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s1">'published'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="s1">'update'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="s1">'create'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="s1">'fork'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="s1">'merged'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">comment_id</span><span class="w"> </span><span class="n">UInt64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">body</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">position</span><span class="w"> </span><span class="n">Int32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">line</span><span class="w"> </span><span class="n">Int32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ref</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">ref_type</span><span class="w"> </span><span class="n">Enum</span><span class="p">(</span><span class="s1">'none'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'branch'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'tag'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'repository'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">'unknown'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">creator_user_login</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">number</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">labels</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">(</span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="n">Enum</span><span class="p">(</span><span class="s1">'none'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'open'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'closed'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">locked</span><span class="w"> </span><span class="n">UInt8</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">assignee</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">assignees</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">(</span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="n">comments</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">author_association</span><span class="w"> </span><span class="n">Enum</span><span class="p">(</span><span class="s1">'NONE'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'CONTRIBUTOR'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'OWNER'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'COLLABORATOR'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">'MEMBER'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">'MANNEQUIN'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">closed_at</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">merged_at</span><span class="w"> </span><span class="n">DateTime</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">merge_commit_sha</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">requested_reviewers</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">(</span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="n">requested_teams</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">(</span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="n">head_ref</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">head_sha</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">base_ref</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">base_sha</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">merged</span><span class="w"> </span><span class="n">UInt8</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">mergeable</span><span class="w"> </span><span class="n">UInt8</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">rebaseable</span><span class="w"> </span><span class="n">UInt8</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">mergeable_state</span><span class="w"> </span><span class="n">Enum</span><span class="p">(</span><span class="s1">'unknown'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'dirty'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'clean'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'unstable'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">'draft'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">merged_by</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">review_comments</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">maintainer_can_modify</span><span class="w"> </span><span class="n">UInt8</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">commits</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">additions</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">deletions</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">changed_files</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">diff_hunk</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">original_position</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">commit_id</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">original_commit_id</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">push_size</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">push_distinct_size</span><span class="w"> </span><span class="n">UInt32</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">member_login</span><span class="w"> </span><span class="n">LowCardinality</span><span class="p">(</span><span class="nb nb-Type">String</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">release_tag_name</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">release_name</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">review_state</span><span class="w"> </span><span class="n">Enum</span><span class="p">(</span><span class="s1">'none'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">'approved'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'changes_requested'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">'commented'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">'dismissed'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">'pending'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
+<span class="o">$$</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>In this query we are importing data with the <code class="syntax">url</code> table function. Data is posted on an HTTP server in a <code class="syntax">.native.xz</code> file. The most annoying part of this query is that we have to specify the data structure and the format of this file.</p>
+<p>In the new ClickHouse release 22.1 it becomes much easier:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT * FROM url('https://datasets.clickhouse.com/github_events_v2.native.xz')
+</code></pre></div>
+<p>Cannot be more easy! How is that possible?</p>
+<p>Firstly, we detect the data format automatically from the file extension. Here it is <code class="syntax">.native.xz</code>, so we know that the data is compressed by <code class="syntax">xz</code> (LZMA2) compression and is represented in <code class="syntax">Native</code> format. The <code class="syntax">Native</code> format already contains all information about the types and names of the columns, and we just read and use it.</p>
+<p>It works for every format that contains information about the data types: <code class="syntax">Native</code>, <code class="syntax">Avro</code>, <code class="syntax">Parquet</code>, <code class="syntax">ORC</code>, <code class="syntax">Arrow</code> as well as <code class="syntax">CSVWithNamesAndTypes</code>, <code class="syntax">TSVWithNamesAndTypes</code>.</p>
+<p>And it works for every table function that reads files: <code class="syntax">s3</code>, <code class="syntax">file</code>, <code class="syntax">hdfs</code>, <code class="syntax">url</code>, <code class="syntax">s3Cluster</code>, <code class="syntax">hdfsCluster</code>.</p>
+<p>A lot of magic happens under the hood. It does not require reading the whole file in memory. For example, Parquet format has metadata at the end of file. So, we read the header first to find where the metadata is located, then do a range request to read the metadata about columns and their types, then continue to read the requested columns. And if the file is small, it will be read with a single request.</p>
+<p>If you want to extract the structure from the file without data processing, the DESCRIBE query is available:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">DESCRIBE url('https://datasets.clickhouse.com/github_events_v2.native.xz')
+</code></pre></div>
+<p>Data structure can be also automatically inferred from <code class="syntax">JSONEachRow</code>, <code class="syntax">CSV</code>, <code class="syntax">TSV</code>, <code class="syntax">CSVWithNames</code>, <code class="syntax">TSVWithNames</code>, <code class="syntax">MsgPack</code>, <code class="syntax">Values</code> and <code class="syntax">Regexp</code> formats.</p>
+<p>For <code class="syntax">CSV</code>, either Float64 or String is inferred. For <code class="syntax">JSONEachRow</code> the inference of array types is supported, including multidimensional arrays. Arrays of non-uniform types are mapped to Tuples. And objects are mapped to the <code class="syntax">Map</code> data type.</p>
+<p>If a format does not have column names (like <code class="syntax">CSV</code> without a header), the names <code class="syntax">c1</code>, <code class="syntax">c2</code>, ... are used.</p>
+<p>File format is detected from the file extension: <code class="syntax">csv</code>, <code class="syntax">tsv</code>, <code class="syntax">native</code>, <code class="syntax">parquet</code>, <code class="syntax">pb</code>, <code class="syntax">ndjson</code>, <code class="syntax">orc</code>... For example, <code class="syntax">.ndjson</code> file is recognized as <code class="syntax">JSONEachRow</code> format and <code class="syntax">.csv</code> is recognized as header-less <code class="syntax">CSV</code> format in ClickHouse, and if you want <code class="syntax">CSVWithNames</code> you can specify the format explicitly.</p>
+<p>We support "schema on demand" queries. For example, the autodetected data types for <code class="syntax">TSV</code> format are Strings, but you can refine the types in your query with the <code class="syntax">::</code> operator:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">SELECT c1 AS domain, uniq(c2::UInt64), count() AS cnt
+  FROM file('hits.tsv')
+  GROUP BY domain ORDER BY cnt DESC LIMIT 10
+</code></pre></div>
+<p>As a bonus, <code class="syntax">LineAsString</code> and <code class="syntax">RawBLOB</code> formats also get type inference. Try this query to see how I prefer to read my favorite website:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="nt">SELECT</span><span class="w"> </span><span class="nt">extractTextFromHTML</span><span class="o">(*)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">FROM</span><span class="w"> </span><span class="nt">url</span><span class="o">(</span><span class="s1">'https://news.ycombinator.com/'</span><span class="o">,</span><span class="w"> </span><span class="nt">LineAsString</span><span class="o">);</span><span class="w"></span>
+</code></pre></div>
+<p>Schema autodetection also works while creating <code class="syntax">Merge</code>, <code class="syntax">Distributed</code> and <code class="syntax">ReplicatedMegreTree</code> tables. When you create the first replica, you have to specify the table structure. But when creating all the subsequent replicas, you only need <code class="syntax">CREATE TABLE hits
+ENGINE = ReplicatedMegreTree(...)</code> without listing the columns - the definition will be copied from another replica.</p>
+<p>This feature is implemented by <strong>Pavel Kruglov</strong> with the inspiration of initial work by <strong>Igor Baliuk</strong> and with additions by <strong>ZhongYuanKai</strong>.</p>
+<h2 id="realtime-resource-usage-in-clickhouse-client">Realtime Resource Usage In clickhouse-client<a class="headerlink" href="#realtime-resource-usage-in-clickhouse-client" title="Permanent link"> </a></h2>
+<p><code class="syntax">clickhouse-client</code> is my favorite user interface for ClickHouse. It is an example of how friendly every command line application should be.</p>
+<p>Now it shows realtime CPU and memory usage for the query directly in the progress bar:</p>
+<p><img alt="resource usage" class="img-fluid" src="https://blog-images.clickhouse.com/en/2022/clickhouse-v22-1/progress.png"/></p>
+<p>For distributed queries, we show both total memory usage and max memory usage per host.</p>
+<p>This feature was made possible by implementation of distributed metrics forwarding by <strong>Dmitry Novik</strong>. I have added this small visualization to clickhouse-client, and now it is possible to add similar info in every client using native ClickHouse protocol. </p>
+<h2 id="parallel-query-processing-on-replicas">Parallel Query Processing On Replicas<a class="headerlink" href="#parallel-query-processing-on-replicas" title="Permanent link"> </a></h2>
+<p>ClickHouse is a distributed MPP DBMS. It can scale up to use all CPU cores on one server and scale out to use computation resources of multiple shards in a cluster.</p>
+<p>But each shard usually contains more than one replica. And by default ClickHouse is using the resources of only one replica on every shard. E.g. if you have a cluster of 6 servers with 3 shards and two replicas on each, a query will use just three servers instead of all six.</p>
+<p>There was an option to enable <code class="syntax">max_parallel_replicas</code>, but that option required specifying a "sampling key", it was inconvenient to use and did not scale well.</p>
+<p>Now we have a setting to enable the new parallel processing algorithm: <code class="syntax">allow_experimental_parallel_reading_from_replicas</code>. If it is enabled, replicas will <em>dynamically</em> select and distribute the work across them.</p>
+<p>It works perfectly even if replicas have lower or higher amounts of computation resources. And it gives a complete result even if some replicas are stale.</p>
+<p>This feature was implemented by <strong>Nikita Mikhaylov</strong></p>
+<h2 id="service-discovery">Service Discovery<a class="headerlink" href="#service-discovery" title="Permanent link"> </a></h2>
+<p>When adding or removing nodes in a cluster, now you don't have to edit the config on every server. Just use automatic cluster and servers will register itself: </p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="nt">&lt;allow_experimental_cluster_discovery&gt;</span>1
+<span class="nt">&lt;/allow_experimental_cluster_discovery&gt;</span>
+
+<span class="nt">&lt;remote_servers&gt;</span>
+    <span class="nt">&lt;auto_cluster&gt;</span>
+        <span class="nt">&lt;discovery&gt;</span>
+            <span class="nt">&lt;path&gt;</span>/clickhouse/discovery/auto_cluster<span class="nt">&lt;/path&gt;</span>
+            <span class="nt">&lt;shard&gt;</span>1<span class="nt">&lt;/shard&gt;</span>
+        <span class="nt">&lt;/discovery&gt;</span>
+    <span class="nt">&lt;/auto_cluster&gt;</span>
+<span class="nt">&lt;/remote_servers&gt;</span>
+</code></pre></div>
+<p>There is no need to edit the config when adding new replicas!</p>
+<p>This feature was implemented by <strong>Vladimir Cherkasov</strong>.</p>
+<h2 id="sparse-encoding-for-columns">Sparse Encoding For Columns<a class="headerlink" href="#sparse-encoding-for-columns" title="Permanent link"> </a></h2>
+<p>If a column contains mostly zeros, we can encode it in sparse format<br/>
+and automatically optimize calculations!</p>
+<p>It is a special column encoding, similar to <code class="syntax">LowCardinality</code>, but it's completely transparent and works automatically.</p>
+<div class="codehilite"><pre><span></span><code class="syntax">CREATE TABLE test.hits ...
+ENGINE = MergeTree ORDER BY ...
+SETTINGS ratio_of_defaults_for_sparse_serialization = 0.9
+</code></pre></div>
+<p>It allows compressing data better and optimizes computations, because data in sparse columns will be processed directly in sparse format in memory.</p>
+<p>Sparse or full format is selected based on column statistics that is calculated on insert and updated on background merges.</p>
+<p>Developed by <strong>Anton Popov</strong>.</p>
+<p>We also want to make LowCardinality encoding automatic, stay tuned!</p>
+<h2 id="diagnostic-tool-for-clickhouse">Diagnostic Tool For ClickHouse<a class="headerlink" href="#diagnostic-tool-for-clickhouse" title="Permanent link"> </a></h2>
+<p>It is a gift from the Yandex Cloud team. They have a tool to collect a report about ClickHouse instances to provide all the needed information for support. They decided to contribute this tool to open-source!</p>
+<p>You can find the tool here: <a href="https://github.com/ClickHouse/ClickHouse/tree/master/
+utils/clickhouse-diagnostics" rel="external nofollow noreferrer" target="_blank">utils/clickhouse-diagnostics</a></p>
+<p>Developed by <strong>Alexander Burmak</strong>. </p>
+<h2 id="integrations">Integrations<a class="headerlink" href="#integrations" title="Permanent link"> </a></h2>
+<p>Plenty of new integrations were added in 22.1:</p>
+<p>Integration with <strong>Hive</strong> as a foreign table engine for SELECT queries, contributed by <strong>Taiyang Li</strong> and reviewed by <strong>Ksenia Sumarokova</strong>.</p>
+<p>Integration with <strong>Azure Blob Storage</strong> similar to S3, contributed by <strong>Jakub Kuklis</strong> and reviewed by <strong>Ksenia Sumarokova</strong>.</p>
+<p>Support for <strong>hdfsCluster</strong> table function similar to <strong>s3Cluster</strong>, contributed by <strong>Zhichang Yu</strong> and reviewed by <strong>Nikita Mikhailov</strong>.</p>
+<h2 id="statistical-functions">Statistical Functions<a class="headerlink" href="#statistical-functions" title="Permanent link"> </a></h2>
+<p>I hope you have always dreamed of calculating the Cramer's V and Theil's U coefficients in ClickHouse, because now we have these functions for you and you have to deal with it.</p>
+<div class="codehilite"><pre><span></span><code class="syntax">:) SELECT cramersV(URL, URLDomain) FROM test.hits
+
+0.98
+
+:) SELECT cramersV(URLDomain, ResolutionWidth) FROM test.hits
+
+0.27
+</code></pre></div>
+<p>It can calculate some sort of dependency between categorical (discrete) values. You can imagine it like this: there is a correlation function <code class="syntax">corr</code> but it is only applicable for linear dependencies; there is a rank correlation function <code class="syntax">rankCorr</code> but it is only applicable for ordered values. And now there are a few functions to calculate <em>something</em> for discrete values.</p>
+<p>Developers: <strong>Artem Tsyganov</strong>, <strong>Ivan Belyaev</strong>, <strong>Alexey Milovidov</strong>.</p>
+<h2 id="and-many-more">... And Many More<a class="headerlink" href="#and-many-more" title="Permanent link"> </a></h2>
+<p>Read the <a href="https://github.com/ClickHouse/ClickHouse/blob/master/CHANGELOG.md" rel="external nofollow noreferrer" target="_blank">full changelog</a> for the 22.1 release and follow <a href="https://github.com/ClickHouse/ClickHouse/issues/32513" rel="external nofollow noreferrer" target="_blank">the roadmap</a>.</p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=What%27s%20New%20in%20ClickHouse%2022.1+https%3A//clickhouse.com/blog/en/2022/clickhouse-v22.1-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=What%27s%20New%20in%20ClickHouse%2022.1&u=https%3A//clickhouse.com/blog/en/2022/clickhouse-v22.1-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=What%27s%20New%20in%20ClickHouse%2022.1&url=https%3A//clickhouse.com/blog/en/2022/clickhouse-v22.1-released/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Alexey Milovidov</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2022-01-26</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        company
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        community
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/docs/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>

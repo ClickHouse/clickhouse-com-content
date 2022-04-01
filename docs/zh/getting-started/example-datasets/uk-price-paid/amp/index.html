@@ -1,0 +1,603 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>UK Property Price Paid | ClickHouse文档</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/en/getting-started/example-datasets/uk-price-paid/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "UK Property Price Paid | ClickHouse文档",
+"mainEntityOfPage": "https://clickhouse.com/docs/zh/getting-started/example-datasets/uk-price-paid/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "UK Property Price Paid | ClickHouse文档",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}b{font-weight:bolder}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}pre{margin-top:0;margin-bottom:1rem;overflow:auto}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}table{border-collapse:collapse}input,select{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}input{overflow:visible}select{text-transform:none}select{word-wrap:normal}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=date],input[type=datetime-local],input[type=month],input[type=time]{-webkit-appearance:listbox}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}summary{display:list-item;cursor:pointer}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}pre{display:block;font-size:87.5%;color:#495057}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}.order-0{order:0}.order-1{order:1}.order-2{order:2}.order-3{order:3}.order-4{order:4}.order-5{order:5}.order-6{order:6}.order-7{order:7}.order-8{order:8}.order-9{order:9}.order-10{order:10}.order-11{order:11}.order-12{order:12}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}.order-md-0{order:0}.order-md-1{order:1}.order-md-2{order:2}.order-md-3{order:3}.order-md-4{order:4}.order-md-5{order:5}.order-md-6{order:6}.order-md-7{order:7}.order-md-8{order:8}.order-md-9{order:9}.order-md-10{order:10}.order-md-11{order:11}.order-md-12{order:12}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}.order-lg-0{order:0}.order-lg-1{order:1}.order-lg-2{order:2}.order-lg-3{order:3}.order-lg-4{order:4}.order-lg-5{order:5}.order-lg-6{order:6}.order-lg-7{order:7}.order-lg-8{order:8}.order-lg-9{order:9}.order-lg-10{order:10}.order-lg-11{order:11}.order-lg-12{order:12}}.table{width:100%;margin-bottom:8px;color:#212529}.table-light{background-color:#fbfcfd}.table-dark{background-color:#ccced0}.table-white{background-color:#fff}.table-black{background-color:#c1c2c3}.table-orange{background-color:#ffdfb8}.table-light-orange{background-color:#fff7ea}.table-dark{color:#fff;background-color:#343a40}.form-group{margin-bottom:1rem}.form-text{display:block;margin-top:.25rem}.form-row{display:flex;flex-wrap:wrap;margin-right:-5px;margin-left:-5px}.form-row>.col,.form-row>[class*=col-]{padding-right:5px;padding-left:5px}.form-check{position:relative;display:block;padding-left:1.25rem}.form-check-input{position:absolute;margin-top:.3rem;margin-left:-1.25rem}.form-check-inline{display:inline-flex;align-items:center;padding-left:0;margin-right:.75rem}.form-check-inline .form-check-input{position:static;margin-top:0;margin-right:.3125rem;margin-left:0}.form-inline{display:flex;flex-flow:row wrap;align-items:center}.form-inline .form-check{width:100%}@media(min-width:616px){.form-inline .form-group{display:flex;align-items:center;margin-bottom:0}.form-inline .form-group{flex:0 0 auto;flex-flow:row wrap}.form-inline .custom-select,.form-inline .input-group{width:auto}.form-inline .form-check{display:flex;align-items:center;justify-content:center;width:auto;padding-left:0}.form-inline .form-check-input{position:relative;flex-shrink:0;margin-top:0;margin-right:.25rem;margin-left:0}}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:none}.btn:disabled{opacity:.65}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-group-lg>.btn,.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-block{width:100%}.btn-group{position:relative;display:inline-flex;vertical-align:middle}.btn-group>.btn{position:relative;flex:1 1 auto}.btn-group>.btn:active,.btn-group>.btn:focus,.btn-group>.btn:hover{z-index:1}.btn-group>.btn-group:not(:first-child),.btn-group>.btn:not(:first-child){margin-left:-1px}.btn-group>.btn-group:not(:last-child)>.btn{border-top-right-radius:0;border-bottom-right-radius:0}.btn-group>.btn-group:not(:first-child)>.btn,.btn-group>.btn:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.input-group{position:relative;display:flex;flex-wrap:wrap;align-items:stretch;width:100%}.input-group>.custom-file,.input-group>.custom-select{position:relative;flex:1 1 0;min-width:0;margin-bottom:0}.input-group>.custom-file+.custom-file,.input-group>.custom-file+.custom-select,.input-group>.custom-select+.custom-file,.input-group>.custom-select+.custom-select{margin-left:-1px}.input-group>.custom-select:focus{z-index:3}.input-group>.custom-file .custom-file-input:focus{z-index:4}.input-group>.custom-select:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.input-group>.custom-select:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.input-group>.custom-file{display:flex;align-items:center}.input-group-text{display:flex;align-items:center;padding:.375rem .75rem;margin-bottom:0;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;text-align:center;white-space:nowrap;background-color:#e9ecef;border:1px solid #ced4da;border-radius:8px}.input-group-text input[type=checkbox],.input-group-text input[type=radio]{margin-top:0}.input-group-lg>.custom-select{height:calc(1.5em+1rem+2px)}.input-group-lg>.custom-select{padding:.5rem 1rem;font-size:1.125rem;line-height:1.5;border-radius:8px}.input-group-lg>.custom-select{padding-right:1.75rem}.custom-select{display:inline-block;width:100%;height:calc(1.5em+.75rem+2px);padding:.375rem 1.75rem .375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;border:1px solid #ced4da;border-radius:8px;-webkit-appearance:none;-moz-appearance:none;appearance:none}.custom-select:focus{border-color:#ffe680;outline:0;box-shadow:0 0 0 .2rem rgba(255,204,0,.25)}.custom-select:focus::-ms-value{color:#6c757d;background-color:#fff}.custom-select[multiple],.custom-select[size]:not([size="1"]){height:auto;padding-right:.75rem;background-image:none}.custom-select:disabled{color:#6c757d;background-color:#e9ecef}.custom-select::-ms-expand{display:none}.custom-select:-moz-focusring{color:transparent;text-shadow:0 0 0 #6c757d}.custom-select-lg{height:calc(1.5em+1rem+2px);padding-top:.5rem;padding-bottom:.5rem;padding-left:1rem;font-size:1.125rem}.custom-file{display:inline-block;margin-bottom:0}.custom-file,.custom-file-input{position:relative;width:100%;height:calc(1.5em+.75rem+2px)}.custom-file-input{z-index:2;margin:0;opacity:0}.custom-select{transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.custom-select{transition:none}}pre{white-space:pre-wrap}pre{border:1px solid #d6dbdf;page-break-inside:avoid}img{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}.table{border-collapse:collapse}.table-dark{color:inherit}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/docs/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/docs/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+          <h1 id=uk-property-price-paid>UK Property Price Paid<a class=headerlink href=../amp/#uk-property-price-paid title="Permanent link"> </a></h1> <p>The dataset contains data about prices paid for real-estate property in England and Wales. The data is available since year 1995.<br> The size of the dataset in uncompressed form is about 4 GiB and it will take about 278 MiB in ClickHouse.</p> <p>Source: <a href=https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads target=_blank>https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads</a><br> Description of the fields: <a href=https://www.gov.uk/guidance/about-the-price-paid-data target=_blank>https://www.gov.uk/guidance/about-the-price-paid-data</a></p> <p>Contains HM Land Registry data © Crown copyright and database right 2021. This data is licensed under the Open Government Licence v3.0.</p> <h2 id=download-dataset>Download the Dataset<a class=headerlink href=../amp/#download-dataset title="Permanent link"> </a></h2> <p>Run the command:</p> <div class=codehilite><pre><span></span><code class=syntax>wget http://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com/pp-complete.csv
+</code></pre></div> <p>Download will take about 2 minutes with good internet connection.</p> <h2 id=create-table>Create the Table<a class=headerlink href=../amp/#create-table title="Permanent link"> </a></h2> <div class=codehilite><pre><span></span><code class=syntax><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w></span>
+<span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=n>price</span><span class=w> </span><span class=n>UInt32</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=nb>date</span><span class=w> </span><span class=nb>Date</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>postcode1</span><span class=w> </span><span class=n>LowCardinality</span><span class=p>(</span><span class=n>String</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=n>postcode2</span><span class=w> </span><span class=n>LowCardinality</span><span class=p>(</span><span class=n>String</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=k>type</span><span class=w> </span><span class=n>Enum8</span><span class=p>(</span><span class=s1>'terraced'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>'semi-detached'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=s1>'detached'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>3</span><span class=p>,</span><span class=w> </span><span class=s1>'flat'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>4</span><span class=p>,</span><span class=w> </span><span class=s1>'other'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=n>is_new</span><span class=w> </span><span class=n>UInt8</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>duration</span><span class=w> </span><span class=n>Enum8</span><span class=p>(</span><span class=s1>'freehold'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>'leasehold'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=s1>'unknown'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=n>addr1</span><span class=w> </span><span class=n>String</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>addr2</span><span class=w> </span><span class=n>String</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>street</span><span class=w> </span><span class=n>LowCardinality</span><span class=p>(</span><span class=n>String</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=n>locality</span><span class=w> </span><span class=n>LowCardinality</span><span class=p>(</span><span class=n>String</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=n>town</span><span class=w> </span><span class=n>LowCardinality</span><span class=p>(</span><span class=n>String</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=n>district</span><span class=w> </span><span class=n>LowCardinality</span><span class=p>(</span><span class=n>String</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=n>county</span><span class=w> </span><span class=n>LowCardinality</span><span class=p>(</span><span class=n>String</span><span class=p>),</span><span class=w></span>
+<span class=w>    </span><span class=n>category</span><span class=w> </span><span class=n>UInt8</span><span class=w></span>
+<span class=p>)</span><span class=w> </span><span class=n>ENGINE</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>MergeTree</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=p>(</span><span class=n>postcode1</span><span class=p>,</span><span class=w> </span><span class=n>postcode2</span><span class=p>,</span><span class=w> </span><span class=n>addr1</span><span class=p>,</span><span class=w> </span><span class=n>addr2</span><span class=p>);</span><span class=w></span>
+</code></pre></div> <h2 id=preprocess-import-data>Preprocess and Import Data<a class=headerlink href=../amp/#preprocess-import-data title="Permanent link"> </a></h2> <p>We will use <code class=syntax>clickhouse-local</code> tool for data preprocessing and <code class=syntax>clickhouse-client</code> to upload it.</p> <p>In this example, we define the structure of source data from the CSV file and specify a query to preprocess the data with <code class=syntax>clickhouse-local</code>.</p> <p>The preprocessing is:<br> - splitting the postcode to two different columns <code class=syntax>postcode1</code> and <code class=syntax>postcode2</code> that is better for storage and queries;<br> - coverting the <code class=syntax>time</code> field to date as it only contains 00:00 time;<br> - ignoring the <a href=../../../../sql-reference/data-types/uuid/amp/ >UUid</a> field because we don't need it for analysis;<br> - transforming <code class=syntax>type</code> and <code class=syntax>duration</code> to more readable Enum fields with function <a href=../../../../sql-reference/functions/other-functions/amp/#transform>transform</a>;<br> - transforming <code class=syntax>is_new</code> and <code class=syntax>category</code> fields from single-character string (<code class=syntax>Y</code>/<code class=syntax>N</code> and <code class=syntax>A</code>/<code class=syntax>B</code>) to <a href=../../../../sql-reference/data-types/int-uint/amp/#uint8-uint16-uint32-uint64-uint256-int8-int16-int32-int64-int128-int256>UInt8</a> field with 0 and 1.</p> <p>Preprocessed data is piped directly to <code class=syntax>clickhouse-client</code> to be inserted into ClickHouse table in streaming fashion.</p> <div class=codehilite><pre><span></span><code class=syntax>clickhouse-local --input-format CSV --structure <span class=s1>'</span>
+<span class=s1>    uuid String,</span>
+<span class=s1>    price UInt32,</span>
+<span class=s1>    time DateTime,</span>
+<span class=s1>    postcode String,</span>
+<span class=s1>    a String,</span>
+<span class=s1>    b String,</span>
+<span class=s1>    c String,</span>
+<span class=s1>    addr1 String,</span>
+<span class=s1>    addr2 String,</span>
+<span class=s1>    street String,</span>
+<span class=s1>    locality String,</span>
+<span class=s1>    town String,</span>
+<span class=s1>    district String,</span>
+<span class=s1>    county String,</span>
+<span class=s1>    d String,</span>
+<span class=s1>    e String</span>
+<span class=s1>'</span> --query <span class=s2>"</span>
+<span class=s2>    WITH splitByChar(' ', postcode) AS p</span>
+<span class=s2>    SELECT</span>
+<span class=s2>        price,</span>
+<span class=s2>        toDate(time) AS date,</span>
+<span class=s2>        p[1] AS postcode1,</span>
+<span class=s2>        p[2] AS postcode2,</span>
+<span class=s2>        transform(a, ['T', 'S', 'D', 'F', 'O'], ['terraced', 'semi-detached', 'detached', 'flat', 'other']) AS type,</span>
+<span class=s2>        b = 'Y' AS is_new,</span>
+<span class=s2>        transform(c, ['F', 'L', 'U'], ['freehold', 'leasehold', 'unknown']) AS duration,</span>
+<span class=s2>        addr1,</span>
+<span class=s2>        addr2,</span>
+<span class=s2>        street,</span>
+<span class=s2>        locality,</span>
+<span class=s2>        town,</span>
+<span class=s2>        district,</span>
+<span class=s2>        county,</span>
+<span class=s2>        d = 'B' AS category</span>
+<span class=s2>    FROM table"</span> --date_time_input_format best_effort &lt; pp-complete.csv <span class=p>|</span> clickhouse-client --query <span class=s2>"INSERT INTO uk_price_paid FORMAT TSV"</span>
+</code></pre></div> <p>It will take about 40 seconds.</p> <h2 id=validate-data>Validate the Data<a class=headerlink href=../amp/#validate-data title="Permanent link"> </a></h2> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=k>count</span><span class=p>()</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>uk_price_paid</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌──count()─┐
+│ 26321785 │
+└──────────┘
+</code></pre></div> <p>The size of dataset in ClickHouse is just 278 MiB, check it.</p> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>formatReadableSize</span><span class=p>(</span><span class=n>total_bytes</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=k>system</span><span class=p>.</span><span class=n>tables</span><span class=w> </span><span class=k>WHERE</span><span class=w> </span><span class=n>name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'uk_price_paid'</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─formatReadableSize(total_bytes)─┐
+│ 278.80 MiB                      │
+└─────────────────────────────────┘
+</code></pre></div> <h2 id=run-queries>Run Some Queries<a class=headerlink href=../amp/#run-queries title="Permanent link"> </a></h2> <h3 id=average-price>Query 1. Average Price Per Year<a class=headerlink href=../amp/#average-price title="Permanent link"> </a></h3> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>toYear</span><span class=p>(</span><span class=nb>date</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>year</span><span class=p>,</span><span class=w> </span><span class=n>round</span><span class=p>(</span><span class=k>avg</span><span class=p>(</span><span class=n>price</span><span class=p>))</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>price</span><span class=p>,</span><span class=w> </span><span class=n>bar</span><span class=p>(</span><span class=n>price</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=mi>1000000</span><span class=p>,</span><span class=w> </span><span class=mi>80</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w> </span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>year</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>year</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─year─┬──price─┬─bar(round(avg(price)), 0, 1000000, 80)─┐
+│ 1995 │  67932 │ █████▍                                 │
+│ 1996 │  71505 │ █████▋                                 │
+│ 1997 │  78532 │ ██████▎                                │
+│ 1998 │  85436 │ ██████▋                                │
+│ 1999 │  96037 │ ███████▋                               │
+│ 2000 │ 107479 │ ████████▌                              │
+│ 2001 │ 118885 │ █████████▌                             │
+│ 2002 │ 137941 │ ███████████                            │
+│ 2003 │ 155889 │ ████████████▍                          │
+│ 2004 │ 178885 │ ██████████████▎                        │
+│ 2005 │ 189351 │ ███████████████▏                       │
+│ 2006 │ 203528 │ ████████████████▎                      │
+│ 2007 │ 219378 │ █████████████████▌                     │
+│ 2008 │ 217056 │ █████████████████▎                     │
+│ 2009 │ 213419 │ █████████████████                      │
+│ 2010 │ 236109 │ ██████████████████▊                    │
+│ 2011 │ 232805 │ ██████████████████▌                    │
+│ 2012 │ 238367 │ ███████████████████                    │
+│ 2013 │ 256931 │ ████████████████████▌                  │
+│ 2014 │ 279915 │ ██████████████████████▍                │
+│ 2015 │ 297266 │ ███████████████████████▋               │
+│ 2016 │ 313201 │ █████████████████████████              │
+│ 2017 │ 346097 │ ███████████████████████████▋           │
+│ 2018 │ 350116 │ ████████████████████████████           │
+│ 2019 │ 351013 │ ████████████████████████████           │
+│ 2020 │ 369420 │ █████████████████████████████▌         │
+│ 2021 │ 386903 │ ██████████████████████████████▊        │
+└──────┴────────┴────────────────────────────────────────┘
+</code></pre></div> <h3 id=average-price-london>Query 2. Average Price per Year in London<a class=headerlink href=../amp/#average-price-london title="Permanent link"> </a></h3> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>toYear</span><span class=p>(</span><span class=nb>date</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>year</span><span class=p>,</span><span class=w> </span><span class=n>round</span><span class=p>(</span><span class=k>avg</span><span class=p>(</span><span class=n>price</span><span class=p>))</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>price</span><span class=p>,</span><span class=w> </span><span class=n>bar</span><span class=p>(</span><span class=n>price</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=mi>2000000</span><span class=p>,</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w> </span><span class=k>WHERE</span><span class=w> </span><span class=n>town</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'LONDON'</span><span class=w> </span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>year</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>year</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─year─┬───price─┬─bar(round(avg(price)), 0, 2000000, 100)───────────────┐
+│ 1995 │  109116 │ █████▍                                                │
+│ 1996 │  118667 │ █████▊                                                │
+│ 1997 │  136518 │ ██████▋                                               │
+│ 1998 │  152983 │ ███████▋                                              │
+│ 1999 │  180637 │ █████████                                             │
+│ 2000 │  215838 │ ██████████▋                                           │
+│ 2001 │  232994 │ ███████████▋                                          │
+│ 2002 │  263670 │ █████████████▏                                        │
+│ 2003 │  278394 │ █████████████▊                                        │
+│ 2004 │  304666 │ ███████████████▏                                      │
+│ 2005 │  322875 │ ████████████████▏                                     │
+│ 2006 │  356191 │ █████████████████▋                                    │
+│ 2007 │  404054 │ ████████████████████▏                                 │
+│ 2008 │  420741 │ █████████████████████                                 │
+│ 2009 │  427753 │ █████████████████████▍                                │
+│ 2010 │  480306 │ ████████████████████████                              │
+│ 2011 │  496274 │ ████████████████████████▋                             │
+│ 2012 │  519442 │ █████████████████████████▊                            │
+│ 2013 │  616212 │ ██████████████████████████████▋                       │
+│ 2014 │  724154 │ ████████████████████████████████████▏                 │
+│ 2015 │  792129 │ ███████████████████████████████████████▌              │
+│ 2016 │  843655 │ ██████████████████████████████████████████▏           │
+│ 2017 │  982642 │ █████████████████████████████████████████████████▏    │
+│ 2018 │ 1016835 │ ██████████████████████████████████████████████████▋   │
+│ 2019 │ 1042849 │ ████████████████████████████████████████████████████▏ │
+│ 2020 │ 1011889 │ ██████████████████████████████████████████████████▌   │
+│ 2021 │  960343 │ ████████████████████████████████████████████████      │
+└──────┴─────────┴───────────────────────────────────────────────────────┘
+</code></pre></div> <p>Something happened in 2013. I don't have a clue. Maybe you have a clue what happened in 2020?</p> <h3 id=most-expensive-neighborhoods>Query 3. The Most Expensive Neighborhoods<a class=headerlink href=../amp/#most-expensive-neighborhoods title="Permanent link"> </a></h3> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>town</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>district</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=k>count</span><span class=p>()</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>c</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>round</span><span class=p>(</span><span class=k>avg</span><span class=p>(</span><span class=n>price</span><span class=p>))</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>price</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>bar</span><span class=p>(</span><span class=n>price</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=mi>5000000</span><span class=p>,</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=nb>date</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=s1>'2020-01-01'</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w></span>
+<span class=w>    </span><span class=n>town</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>district</span><span class=w></span>
+<span class=k>HAVING</span><span class=w> </span><span class=k>c</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>100</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>price</span><span class=w> </span><span class=k>DESC</span><span class=w></span>
+<span class=k>LIMIT</span><span class=w> </span><span class=mi>100</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─town─────────────────┬─district───────────────┬────c─┬───price─┬─bar(round(avg(price)), 0, 5000000, 100)────────────────────────────┐
+│ LONDON               │ CITY OF WESTMINSTER    │ 3606 │ 3280239 │ █████████████████████████████████████████████████████████████████▌ │
+│ LONDON               │ CITY OF LONDON         │  274 │ 3160502 │ ███████████████████████████████████████████████████████████████▏   │
+│ LONDON               │ KENSINGTON AND CHELSEA │ 2550 │ 2308478 │ ██████████████████████████████████████████████▏                    │
+│ LEATHERHEAD          │ ELMBRIDGE              │  114 │ 1897407 │ █████████████████████████████████████▊                             │
+│ LONDON               │ CAMDEN                 │ 3033 │ 1805404 │ ████████████████████████████████████                               │
+│ VIRGINIA WATER       │ RUNNYMEDE              │  156 │ 1753247 │ ███████████████████████████████████                                │
+│ WINDLESHAM           │ SURREY HEATH           │  108 │ 1677613 │ █████████████████████████████████▌                                 │
+│ THORNTON HEATH       │ CROYDON                │  546 │ 1671721 │ █████████████████████████████████▍                                 │
+│ BARNET               │ ENFIELD                │  124 │ 1505840 │ ██████████████████████████████                                     │
+│ COBHAM               │ ELMBRIDGE              │  387 │ 1237250 │ ████████████████████████▋                                          │
+│ LONDON               │ ISLINGTON              │ 2668 │ 1236980 │ ████████████████████████▋                                          │
+│ OXFORD               │ SOUTH OXFORDSHIRE      │  321 │ 1220907 │ ████████████████████████▍                                          │
+│ LONDON               │ RICHMOND UPON THAMES   │  704 │ 1215551 │ ████████████████████████▎                                          │
+│ LONDON               │ HOUNSLOW               │  671 │ 1207493 │ ████████████████████████▏                                          │
+│ ASCOT                │ WINDSOR AND MAIDENHEAD │  407 │ 1183299 │ ███████████████████████▋                                           │
+│ BEACONSFIELD         │ BUCKINGHAMSHIRE        │  330 │ 1175615 │ ███████████████████████▌                                           │
+│ RICHMOND             │ RICHMOND UPON THAMES   │  874 │ 1110444 │ ██████████████████████▏                                            │
+│ LONDON               │ HAMMERSMITH AND FULHAM │ 3086 │ 1053983 │ █████████████████████                                              │
+│ SURBITON             │ ELMBRIDGE              │  100 │ 1011800 │ ████████████████████▏                                              │
+│ RADLETT              │ HERTSMERE              │  283 │ 1011712 │ ████████████████████▏                                              │
+│ SALCOMBE             │ SOUTH HAMS             │  127 │ 1011624 │ ████████████████████▏                                              │
+│ WEYBRIDGE            │ ELMBRIDGE              │  655 │ 1007265 │ ████████████████████▏                                              │
+│ ESHER                │ ELMBRIDGE              │  485 │  986581 │ ███████████████████▋                                               │
+│ LEATHERHEAD          │ GUILDFORD              │  202 │  977320 │ ███████████████████▌                                               │
+│ BURFORD              │ WEST OXFORDSHIRE       │  111 │  966893 │ ███████████████████▎                                               │
+│ BROCKENHURST         │ NEW FOREST             │  129 │  956675 │ ███████████████████▏                                               │
+│ HINDHEAD             │ WAVERLEY               │  137 │  953753 │ ███████████████████                                                │
+│ GERRARDS CROSS       │ BUCKINGHAMSHIRE        │  419 │  951121 │ ███████████████████                                                │
+│ EAST MOLESEY         │ ELMBRIDGE              │  192 │  936769 │ ██████████████████▋                                                │
+│ CHALFONT ST GILES    │ BUCKINGHAMSHIRE        │  146 │  925515 │ ██████████████████▌                                                │
+│ LONDON               │ TOWER HAMLETS          │ 4388 │  918304 │ ██████████████████▎                                                │
+│ OLNEY                │ MILTON KEYNES          │  235 │  910646 │ ██████████████████▏                                                │
+│ HENLEY-ON-THAMES     │ SOUTH OXFORDSHIRE      │  540 │  902418 │ ██████████████████                                                 │
+│ LONDON               │ SOUTHWARK              │ 3885 │  892997 │ █████████████████▋                                                 │
+│ KINGSTON UPON THAMES │ KINGSTON UPON THAMES   │  960 │  885969 │ █████████████████▋                                                 │
+│ LONDON               │ EALING                 │ 2658 │  871755 │ █████████████████▍                                                 │
+│ CRANBROOK            │ TUNBRIDGE WELLS        │  431 │  862348 │ █████████████████▏                                                 │
+│ LONDON               │ MERTON                 │ 2099 │  859118 │ █████████████████▏                                                 │
+│ BELVEDERE            │ BEXLEY                 │  346 │  842423 │ ████████████████▋                                                  │
+│ GUILDFORD            │ WAVERLEY               │  143 │  841277 │ ████████████████▋                                                  │
+│ HARPENDEN            │ ST ALBANS              │  657 │  841216 │ ████████████████▋                                                  │
+│ LONDON               │ HACKNEY                │ 3307 │  837090 │ ████████████████▋                                                  │
+│ LONDON               │ WANDSWORTH             │ 6566 │  832663 │ ████████████████▋                                                  │
+│ MAIDENHEAD           │ BUCKINGHAMSHIRE        │  123 │  824299 │ ████████████████▍                                                  │
+│ KINGS LANGLEY        │ DACORUM                │  145 │  821331 │ ████████████████▍                                                  │
+│ BERKHAMSTED          │ DACORUM                │  543 │  818415 │ ████████████████▎                                                  │
+│ GREAT MISSENDEN      │ BUCKINGHAMSHIRE        │  226 │  802807 │ ████████████████                                                   │
+│ BILLINGSHURST        │ CHICHESTER             │  144 │  797829 │ ███████████████▊                                                   │
+│ WOKING               │ GUILDFORD              │  176 │  793494 │ ███████████████▋                                                   │
+│ STOCKBRIDGE          │ TEST VALLEY            │  178 │  793269 │ ███████████████▋                                                   │
+│ EPSOM                │ REIGATE AND BANSTEAD   │  172 │  791862 │ ███████████████▋                                                   │
+│ TONBRIDGE            │ TUNBRIDGE WELLS        │  360 │  787876 │ ███████████████▋                                                   │
+│ TEDDINGTON           │ RICHMOND UPON THAMES   │  595 │  786492 │ ███████████████▋                                                   │
+│ TWICKENHAM           │ RICHMOND UPON THAMES   │ 1155 │  786193 │ ███████████████▋                                                   │
+│ LYNDHURST            │ NEW FOREST             │  102 │  785593 │ ███████████████▋                                                   │
+│ LONDON               │ LAMBETH                │ 5228 │  774574 │ ███████████████▍                                                   │
+│ LONDON               │ BARNET                 │ 3955 │  773259 │ ███████████████▍                                                   │
+│ OXFORD               │ VALE OF WHITE HORSE    │  353 │  772088 │ ███████████████▍                                                   │
+│ TONBRIDGE            │ MAIDSTONE              │  305 │  770740 │ ███████████████▍                                                   │
+│ LUTTERWORTH          │ HARBOROUGH             │  538 │  768634 │ ███████████████▎                                                   │
+│ WOODSTOCK            │ WEST OXFORDSHIRE       │  140 │  766037 │ ███████████████▎                                                   │
+│ MIDHURST             │ CHICHESTER             │  257 │  764815 │ ███████████████▎                                                   │
+│ MARLOW               │ BUCKINGHAMSHIRE        │  327 │  761876 │ ███████████████▏                                                   │
+│ LONDON               │ NEWHAM                 │ 3237 │  761784 │ ███████████████▏                                                   │
+│ ALDERLEY EDGE        │ CHESHIRE EAST          │  178 │  757318 │ ███████████████▏                                                   │
+│ LUTON                │ CENTRAL BEDFORDSHIRE   │  212 │  754283 │ ███████████████                                                    │
+│ PETWORTH             │ CHICHESTER             │  154 │  754220 │ ███████████████                                                    │
+│ ALRESFORD            │ WINCHESTER             │  219 │  752718 │ ███████████████                                                    │
+│ POTTERS BAR          │ WELWYN HATFIELD        │  174 │  748465 │ ██████████████▊                                                    │
+│ HASLEMERE            │ CHICHESTER             │  128 │  746907 │ ██████████████▊                                                    │
+│ TADWORTH             │ REIGATE AND BANSTEAD   │  502 │  743252 │ ██████████████▋                                                    │
+│ THAMES DITTON        │ ELMBRIDGE              │  244 │  741913 │ ██████████████▋                                                    │
+│ REIGATE              │ REIGATE AND BANSTEAD   │  581 │  738198 │ ██████████████▋                                                    │
+│ BOURNE END           │ BUCKINGHAMSHIRE        │  138 │  735190 │ ██████████████▋                                                    │
+│ SEVENOAKS            │ SEVENOAKS              │ 1156 │  730018 │ ██████████████▌                                                    │
+│ OXTED                │ TANDRIDGE              │  336 │  729123 │ ██████████████▌                                                    │
+│ INGATESTONE          │ BRENTWOOD              │  166 │  728103 │ ██████████████▌                                                    │
+│ LONDON               │ BRENT                  │ 2079 │  720605 │ ██████████████▍                                                    │
+│ LONDON               │ HARINGEY               │ 3216 │  717780 │ ██████████████▎                                                    │
+│ PURLEY               │ CROYDON                │  575 │  716108 │ ██████████████▎                                                    │
+│ WELWYN               │ WELWYN HATFIELD        │  222 │  710603 │ ██████████████▏                                                    │
+│ RICKMANSWORTH        │ THREE RIVERS           │  798 │  704571 │ ██████████████                                                     │
+│ BANSTEAD             │ REIGATE AND BANSTEAD   │  401 │  701293 │ ██████████████                                                     │
+│ CHIGWELL             │ EPPING FOREST          │  261 │  701203 │ ██████████████                                                     │
+│ PINNER               │ HARROW                 │  528 │  698885 │ █████████████▊                                                     │
+│ HASLEMERE            │ WAVERLEY               │  280 │  696659 │ █████████████▊                                                     │
+│ SLOUGH               │ BUCKINGHAMSHIRE        │  396 │  694917 │ █████████████▊                                                     │
+│ WALTON-ON-THAMES     │ ELMBRIDGE              │  946 │  692395 │ █████████████▋                                                     │
+│ READING              │ SOUTH OXFORDSHIRE      │  318 │  691988 │ █████████████▋                                                     │
+│ NORTHWOOD            │ HILLINGDON             │  271 │  690643 │ █████████████▋                                                     │
+│ FELTHAM              │ HOUNSLOW               │  763 │  688595 │ █████████████▋                                                     │
+│ ASHTEAD              │ MOLE VALLEY            │  303 │  687923 │ █████████████▋                                                     │
+│ BARNET               │ BARNET                 │  975 │  686980 │ █████████████▋                                                     │
+│ WOKING               │ SURREY HEATH           │  283 │  686669 │ █████████████▋                                                     │
+│ MALMESBURY           │ WILTSHIRE              │  323 │  683324 │ █████████████▋                                                     │
+│ AMERSHAM             │ BUCKINGHAMSHIRE        │  496 │  680962 │ █████████████▌                                                     │
+│ CHISLEHURST          │ BROMLEY                │  430 │  680209 │ █████████████▌                                                     │
+│ HYTHE                │ FOLKESTONE AND HYTHE   │  490 │  676908 │ █████████████▌                                                     │
+│ MAYFIELD             │ WEALDEN                │  101 │  676210 │ █████████████▌                                                     │
+│ ASCOT                │ BRACKNELL FOREST       │  168 │  676004 │ █████████████▌                                                     │
+└──────────────────────┴────────────────────────┴──────┴─────────┴────────────────────────────────────────────────────────────────────┘
+</code></pre></div> <h2 id=speedup-with-projections>Let's Speed Up Queries Using Projections<a class=headerlink href=../amp/#speedup-with-projections title="Permanent link"> </a></h2> <p><a href=../../../../sql-reference/statements/alter/projection/amp/ >Projections</a> allow to improve queries speed by storing pre-aggregated data.</p> <h3 id=build-projection>Build a Projection<a class=headerlink href=../amp/#build-projection title="Permanent link"> </a></h3> <p>Create an aggregate projection by dimensions <code class=syntax>toYear(date)</code>, <code class=syntax>district</code>, <code class=syntax>town</code>:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w></span>
+<span class=w>    </span><span class=k>ADD</span><span class=w> </span><span class=n>PROJECTION</span><span class=w> </span><span class=n>projection_by_year_district_town</span><span class=w></span>
+<span class=w>    </span><span class=p>(</span><span class=w></span>
+<span class=w>        </span><span class=k>SELECT</span><span class=w></span>
+<span class=w>            </span><span class=n>toYear</span><span class=p>(</span><span class=nb>date</span><span class=p>),</span><span class=w></span>
+<span class=w>            </span><span class=n>district</span><span class=p>,</span><span class=w></span>
+<span class=w>            </span><span class=n>town</span><span class=p>,</span><span class=w></span>
+<span class=w>            </span><span class=k>avg</span><span class=p>(</span><span class=n>price</span><span class=p>),</span><span class=w></span>
+<span class=w>            </span><span class=k>sum</span><span class=p>(</span><span class=n>price</span><span class=p>),</span><span class=w></span>
+<span class=w>            </span><span class=k>count</span><span class=p>()</span><span class=w></span>
+<span class=w>        </span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w></span>
+<span class=w>            </span><span class=n>toYear</span><span class=p>(</span><span class=nb>date</span><span class=p>),</span><span class=w></span>
+<span class=w>            </span><span class=n>district</span><span class=p>,</span><span class=w></span>
+<span class=w>            </span><span class=n>town</span><span class=w></span>
+<span class=w>    </span><span class=p>);</span><span class=w></span>
+</code></pre></div> <p>Populate the projection for existing data (without it projection will be created for only newly inserted data):</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w></span>
+<span class=w>    </span><span class=n>MATERIALIZE</span><span class=w> </span><span class=n>PROJECTION</span><span class=w> </span><span class=n>projection_by_year_district_town</span><span class=w></span>
+<span class=n>SETTINGS</span><span class=w> </span><span class=n>mutations_sync</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <h2 id=test-performance>Test Performance<a class=headerlink href=../amp/#test-performance title="Permanent link"> </a></h2> <p>Let's run the same 3 queries.</p> <p><a href=../../../../operations/settings/settings/amp/#allow-experimental-projection-optimization>Enable</a> projections for selects:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SET</span><span class=w> </span><span class=n>allow_experimental_projection_optimization</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <h3 id=average-price-projections>Query 1. Average Price Per Year<a class=headerlink href=../amp/#average-price-projections title="Permanent link"> </a></h3> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>toYear</span><span class=p>(</span><span class=nb>date</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>year</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>round</span><span class=p>(</span><span class=k>avg</span><span class=p>(</span><span class=n>price</span><span class=p>))</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>price</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>bar</span><span class=p>(</span><span class=n>price</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=mi>1000000</span><span class=p>,</span><span class=w> </span><span class=mi>80</span><span class=p>)</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>year</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>year</span><span class=w> </span><span class=k>ASC</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─year─┬──price─┬─bar(round(avg(price)), 0, 1000000, 80)─┐
+│ 1995 │  67932 │ █████▍                                 │
+│ 1996 │  71505 │ █████▋                                 │
+│ 1997 │  78532 │ ██████▎                                │
+│ 1998 │  85436 │ ██████▋                                │
+│ 1999 │  96037 │ ███████▋                               │
+│ 2000 │ 107479 │ ████████▌                              │
+│ 2001 │ 118885 │ █████████▌                             │
+│ 2002 │ 137941 │ ███████████                            │
+│ 2003 │ 155889 │ ████████████▍                          │
+│ 2004 │ 178885 │ ██████████████▎                        │
+│ 2005 │ 189351 │ ███████████████▏                       │
+│ 2006 │ 203528 │ ████████████████▎                      │
+│ 2007 │ 219378 │ █████████████████▌                     │
+│ 2008 │ 217056 │ █████████████████▎                     │
+│ 2009 │ 213419 │ █████████████████                      │
+│ 2010 │ 236109 │ ██████████████████▊                    │
+│ 2011 │ 232805 │ ██████████████████▌                    │
+│ 2012 │ 238367 │ ███████████████████                    │
+│ 2013 │ 256931 │ ████████████████████▌                  │
+│ 2014 │ 279915 │ ██████████████████████▍                │
+│ 2015 │ 297266 │ ███████████████████████▋               │
+│ 2016 │ 313201 │ █████████████████████████              │
+│ 2017 │ 346097 │ ███████████████████████████▋           │
+│ 2018 │ 350116 │ ████████████████████████████           │
+│ 2019 │ 351013 │ ████████████████████████████           │
+│ 2020 │ 369420 │ █████████████████████████████▌         │
+│ 2021 │ 386903 │ ██████████████████████████████▊        │
+└──────┴────────┴────────────────────────────────────────┘
+</code></pre></div> <h3 id=average-price-london-projections>Query 2. Average Price Per Year in London<a class=headerlink href=../amp/#average-price-london-projections title="Permanent link"> </a></h3> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>toYear</span><span class=p>(</span><span class=nb>date</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>year</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>round</span><span class=p>(</span><span class=k>avg</span><span class=p>(</span><span class=n>price</span><span class=p>))</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>price</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>bar</span><span class=p>(</span><span class=n>price</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=mi>2000000</span><span class=p>,</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=n>town</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'LONDON'</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>year</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>year</span><span class=w> </span><span class=k>ASC</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─year─┬───price─┬─bar(round(avg(price)), 0, 2000000, 100)───────────────┐
+│ 1995 │  109116 │ █████▍                                                │
+│ 1996 │  118667 │ █████▊                                                │
+│ 1997 │  136518 │ ██████▋                                               │
+│ 1998 │  152983 │ ███████▋                                              │
+│ 1999 │  180637 │ █████████                                             │
+│ 2000 │  215838 │ ██████████▋                                           │
+│ 2001 │  232994 │ ███████████▋                                          │
+│ 2002 │  263670 │ █████████████▏                                        │
+│ 2003 │  278394 │ █████████████▊                                        │
+│ 2004 │  304666 │ ███████████████▏                                      │
+│ 2005 │  322875 │ ████████████████▏                                     │
+│ 2006 │  356191 │ █████████████████▋                                    │
+│ 2007 │  404054 │ ████████████████████▏                                 │
+│ 2008 │  420741 │ █████████████████████                                 │
+│ 2009 │  427753 │ █████████████████████▍                                │
+│ 2010 │  480306 │ ████████████████████████                              │
+│ 2011 │  496274 │ ████████████████████████▋                             │
+│ 2012 │  519442 │ █████████████████████████▊                            │
+│ 2013 │  616212 │ ██████████████████████████████▋                       │
+│ 2014 │  724154 │ ████████████████████████████████████▏                 │
+│ 2015 │  792129 │ ███████████████████████████████████████▌              │
+│ 2016 │  843655 │ ██████████████████████████████████████████▏           │
+│ 2017 │  982642 │ █████████████████████████████████████████████████▏    │
+│ 2018 │ 1016835 │ ██████████████████████████████████████████████████▋   │
+│ 2019 │ 1042849 │ ████████████████████████████████████████████████████▏ │
+│ 2020 │ 1011889 │ ██████████████████████████████████████████████████▌   │
+│ 2021 │  960343 │ ████████████████████████████████████████████████      │
+└──────┴─────────┴───────────────────────────────────────────────────────┘
+</code></pre></div> <h3 id=most-expensive-neighborhoods-projections>Query 3. The Most Expensive Neighborhoods<a class=headerlink href=../amp/#most-expensive-neighborhoods-projections title="Permanent link"> </a></h3> <p>The condition (date &gt;= '2020-01-01') needs to be modified to match projection dimension (toYear(date) &gt;= 2020).</p> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>town</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>district</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=k>count</span><span class=p>()</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>c</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>round</span><span class=p>(</span><span class=k>avg</span><span class=p>(</span><span class=n>price</span><span class=p>))</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>price</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>bar</span><span class=p>(</span><span class=n>price</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=mi>5000000</span><span class=p>,</span><span class=w> </span><span class=mi>100</span><span class=p>)</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>uk_price_paid</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=n>toYear</span><span class=p>(</span><span class=nb>date</span><span class=p>)</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>2020</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w></span>
+<span class=w>    </span><span class=n>town</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>district</span><span class=w></span>
+<span class=k>HAVING</span><span class=w> </span><span class=k>c</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>100</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>price</span><span class=w> </span><span class=k>DESC</span><span class=w></span>
+<span class=k>LIMIT</span><span class=w> </span><span class=mi>100</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─town─────────────────┬─district───────────────┬────c─┬───price─┬─bar(round(avg(price)), 0, 5000000, 100)────────────────────────────┐
+│ LONDON               │ CITY OF WESTMINSTER    │ 3606 │ 3280239 │ █████████████████████████████████████████████████████████████████▌ │
+│ LONDON               │ CITY OF LONDON         │  274 │ 3160502 │ ███████████████████████████████████████████████████████████████▏   │
+│ LONDON               │ KENSINGTON AND CHELSEA │ 2550 │ 2308478 │ ██████████████████████████████████████████████▏                    │
+│ LEATHERHEAD          │ ELMBRIDGE              │  114 │ 1897407 │ █████████████████████████████████████▊                             │
+│ LONDON               │ CAMDEN                 │ 3033 │ 1805404 │ ████████████████████████████████████                               │
+│ VIRGINIA WATER       │ RUNNYMEDE              │  156 │ 1753247 │ ███████████████████████████████████                                │
+│ WINDLESHAM           │ SURREY HEATH           │  108 │ 1677613 │ █████████████████████████████████▌                                 │
+│ THORNTON HEATH       │ CROYDON                │  546 │ 1671721 │ █████████████████████████████████▍                                 │
+│ BARNET               │ ENFIELD                │  124 │ 1505840 │ ██████████████████████████████                                     │
+│ COBHAM               │ ELMBRIDGE              │  387 │ 1237250 │ ████████████████████████▋                                          │
+│ LONDON               │ ISLINGTON              │ 2668 │ 1236980 │ ████████████████████████▋                                          │
+│ OXFORD               │ SOUTH OXFORDSHIRE      │  321 │ 1220907 │ ████████████████████████▍                                          │
+│ LONDON               │ RICHMOND UPON THAMES   │  704 │ 1215551 │ ████████████████████████▎                                          │
+│ LONDON               │ HOUNSLOW               │  671 │ 1207493 │ ████████████████████████▏                                          │
+│ ASCOT                │ WINDSOR AND MAIDENHEAD │  407 │ 1183299 │ ███████████████████████▋                                           │
+│ BEACONSFIELD         │ BUCKINGHAMSHIRE        │  330 │ 1175615 │ ███████████████████████▌                                           │
+│ RICHMOND             │ RICHMOND UPON THAMES   │  874 │ 1110444 │ ██████████████████████▏                                            │
+│ LONDON               │ HAMMERSMITH AND FULHAM │ 3086 │ 1053983 │ █████████████████████                                              │
+│ SURBITON             │ ELMBRIDGE              │  100 │ 1011800 │ ████████████████████▏                                              │
+│ RADLETT              │ HERTSMERE              │  283 │ 1011712 │ ████████████████████▏                                              │
+│ SALCOMBE             │ SOUTH HAMS             │  127 │ 1011624 │ ████████████████████▏                                              │
+│ WEYBRIDGE            │ ELMBRIDGE              │  655 │ 1007265 │ ████████████████████▏                                              │
+│ ESHER                │ ELMBRIDGE              │  485 │  986581 │ ███████████████████▋                                               │
+│ LEATHERHEAD          │ GUILDFORD              │  202 │  977320 │ ███████████████████▌                                               │
+│ BURFORD              │ WEST OXFORDSHIRE       │  111 │  966893 │ ███████████████████▎                                               │
+│ BROCKENHURST         │ NEW FOREST             │  129 │  956675 │ ███████████████████▏                                               │
+│ HINDHEAD             │ WAVERLEY               │  137 │  953753 │ ███████████████████                                                │
+│ GERRARDS CROSS       │ BUCKINGHAMSHIRE        │  419 │  951121 │ ███████████████████                                                │
+│ EAST MOLESEY         │ ELMBRIDGE              │  192 │  936769 │ ██████████████████▋                                                │
+│ CHALFONT ST GILES    │ BUCKINGHAMSHIRE        │  146 │  925515 │ ██████████████████▌                                                │
+│ LONDON               │ TOWER HAMLETS          │ 4388 │  918304 │ ██████████████████▎                                                │
+│ OLNEY                │ MILTON KEYNES          │  235 │  910646 │ ██████████████████▏                                                │
+│ HENLEY-ON-THAMES     │ SOUTH OXFORDSHIRE      │  540 │  902418 │ ██████████████████                                                 │
+│ LONDON               │ SOUTHWARK              │ 3885 │  892997 │ █████████████████▋                                                 │
+│ KINGSTON UPON THAMES │ KINGSTON UPON THAMES   │  960 │  885969 │ █████████████████▋                                                 │
+│ LONDON               │ EALING                 │ 2658 │  871755 │ █████████████████▍                                                 │
+│ CRANBROOK            │ TUNBRIDGE WELLS        │  431 │  862348 │ █████████████████▏                                                 │
+│ LONDON               │ MERTON                 │ 2099 │  859118 │ █████████████████▏                                                 │
+│ BELVEDERE            │ BEXLEY                 │  346 │  842423 │ ████████████████▋                                                  │
+│ GUILDFORD            │ WAVERLEY               │  143 │  841277 │ ████████████████▋                                                  │
+│ HARPENDEN            │ ST ALBANS              │  657 │  841216 │ ████████████████▋                                                  │
+│ LONDON               │ HACKNEY                │ 3307 │  837090 │ ████████████████▋                                                  │
+│ LONDON               │ WANDSWORTH             │ 6566 │  832663 │ ████████████████▋                                                  │
+│ MAIDENHEAD           │ BUCKINGHAMSHIRE        │  123 │  824299 │ ████████████████▍                                                  │
+│ KINGS LANGLEY        │ DACORUM                │  145 │  821331 │ ████████████████▍                                                  │
+│ BERKHAMSTED          │ DACORUM                │  543 │  818415 │ ████████████████▎                                                  │
+│ GREAT MISSENDEN      │ BUCKINGHAMSHIRE        │  226 │  802807 │ ████████████████                                                   │
+│ BILLINGSHURST        │ CHICHESTER             │  144 │  797829 │ ███████████████▊                                                   │
+│ WOKING               │ GUILDFORD              │  176 │  793494 │ ███████████████▋                                                   │
+│ STOCKBRIDGE          │ TEST VALLEY            │  178 │  793269 │ ███████████████▋                                                   │
+│ EPSOM                │ REIGATE AND BANSTEAD   │  172 │  791862 │ ███████████████▋                                                   │
+│ TONBRIDGE            │ TUNBRIDGE WELLS        │  360 │  787876 │ ███████████████▋                                                   │
+│ TEDDINGTON           │ RICHMOND UPON THAMES   │  595 │  786492 │ ███████████████▋                                                   │
+│ TWICKENHAM           │ RICHMOND UPON THAMES   │ 1155 │  786193 │ ███████████████▋                                                   │
+│ LYNDHURST            │ NEW FOREST             │  102 │  785593 │ ███████████████▋                                                   │
+│ LONDON               │ LAMBETH                │ 5228 │  774574 │ ███████████████▍                                                   │
+│ LONDON               │ BARNET                 │ 3955 │  773259 │ ███████████████▍                                                   │
+│ OXFORD               │ VALE OF WHITE HORSE    │  353 │  772088 │ ███████████████▍                                                   │
+│ TONBRIDGE            │ MAIDSTONE              │  305 │  770740 │ ███████████████▍                                                   │
+│ LUTTERWORTH          │ HARBOROUGH             │  538 │  768634 │ ███████████████▎                                                   │
+│ WOODSTOCK            │ WEST OXFORDSHIRE       │  140 │  766037 │ ███████████████▎                                                   │
+│ MIDHURST             │ CHICHESTER             │  257 │  764815 │ ███████████████▎                                                   │
+│ MARLOW               │ BUCKINGHAMSHIRE        │  327 │  761876 │ ███████████████▏                                                   │
+│ LONDON               │ NEWHAM                 │ 3237 │  761784 │ ███████████████▏                                                   │
+│ ALDERLEY EDGE        │ CHESHIRE EAST          │  178 │  757318 │ ███████████████▏                                                   │
+│ LUTON                │ CENTRAL BEDFORDSHIRE   │  212 │  754283 │ ███████████████                                                    │
+│ PETWORTH             │ CHICHESTER             │  154 │  754220 │ ███████████████                                                    │
+│ ALRESFORD            │ WINCHESTER             │  219 │  752718 │ ███████████████                                                    │
+│ POTTERS BAR          │ WELWYN HATFIELD        │  174 │  748465 │ ██████████████▊                                                    │
+│ HASLEMERE            │ CHICHESTER             │  128 │  746907 │ ██████████████▊                                                    │
+│ TADWORTH             │ REIGATE AND BANSTEAD   │  502 │  743252 │ ██████████████▋                                                    │
+│ THAMES DITTON        │ ELMBRIDGE              │  244 │  741913 │ ██████████████▋                                                    │
+│ REIGATE              │ REIGATE AND BANSTEAD   │  581 │  738198 │ ██████████████▋                                                    │
+│ BOURNE END           │ BUCKINGHAMSHIRE        │  138 │  735190 │ ██████████████▋                                                    │
+│ SEVENOAKS            │ SEVENOAKS              │ 1156 │  730018 │ ██████████████▌                                                    │
+│ OXTED                │ TANDRIDGE              │  336 │  729123 │ ██████████████▌                                                    │
+│ INGATESTONE          │ BRENTWOOD              │  166 │  728103 │ ██████████████▌                                                    │
+│ LONDON               │ BRENT                  │ 2079 │  720605 │ ██████████████▍                                                    │
+│ LONDON               │ HARINGEY               │ 3216 │  717780 │ ██████████████▎                                                    │
+│ PURLEY               │ CROYDON                │  575 │  716108 │ ██████████████▎                                                    │
+│ WELWYN               │ WELWYN HATFIELD        │  222 │  710603 │ ██████████████▏                                                    │
+│ RICKMANSWORTH        │ THREE RIVERS           │  798 │  704571 │ ██████████████                                                     │
+│ BANSTEAD             │ REIGATE AND BANSTEAD   │  401 │  701293 │ ██████████████                                                     │
+│ CHIGWELL             │ EPPING FOREST          │  261 │  701203 │ ██████████████                                                     │
+│ PINNER               │ HARROW                 │  528 │  698885 │ █████████████▊                                                     │
+│ HASLEMERE            │ WAVERLEY               │  280 │  696659 │ █████████████▊                                                     │
+│ SLOUGH               │ BUCKINGHAMSHIRE        │  396 │  694917 │ █████████████▊                                                     │
+│ WALTON-ON-THAMES     │ ELMBRIDGE              │  946 │  692395 │ █████████████▋                                                     │
+│ READING              │ SOUTH OXFORDSHIRE      │  318 │  691988 │ █████████████▋                                                     │
+│ NORTHWOOD            │ HILLINGDON             │  271 │  690643 │ █████████████▋                                                     │
+│ FELTHAM              │ HOUNSLOW               │  763 │  688595 │ █████████████▋                                                     │
+│ ASHTEAD              │ MOLE VALLEY            │  303 │  687923 │ █████████████▋                                                     │
+│ BARNET               │ BARNET                 │  975 │  686980 │ █████████████▋                                                     │
+│ WOKING               │ SURREY HEATH           │  283 │  686669 │ █████████████▋                                                     │
+│ MALMESBURY           │ WILTSHIRE              │  323 │  683324 │ █████████████▋                                                     │
+│ AMERSHAM             │ BUCKINGHAMSHIRE        │  496 │  680962 │ █████████████▌                                                     │
+│ CHISLEHURST          │ BROMLEY                │  430 │  680209 │ █████████████▌                                                     │
+│ HYTHE                │ FOLKESTONE AND HYTHE   │  490 │  676908 │ █████████████▌                                                     │
+│ MAYFIELD             │ WEALDEN                │  101 │  676210 │ █████████████▌                                                     │
+│ ASCOT                │ BRACKNELL FOREST       │  168 │  676004 │ █████████████▌                                                     │
+└──────────────────────┴────────────────────────┴──────┴─────────┴────────────────────────────────────────────────────────────────────┘
+</code></pre></div> <h3 id=summary>Summary<a class=headerlink href=../amp/#summary title="Permanent link"> </a></h3> <p>All 3 queries work much faster and read fewer rows.</p> <div class=codehilite><pre><span></span><code class=syntax>Query 1
+
+no projection: 27 rows in set. Elapsed: 0.158 sec. Processed 26.32 million rows, 157.93 MB (166.57 million rows/s., 999.39 MB/s.)
+   projection: 27 rows in set. Elapsed: 0.007 sec. Processed 105.96 thousand rows, 3.33 MB (14.58 million rows/s., 458.13 MB/s.)
+
+
+Query 2
+
+no projection: 27 rows in set. Elapsed: 0.163 sec. Processed 26.32 million rows, 80.01 MB (161.75 million rows/s., 491.64 MB/s.)
+   projection: 27 rows in set. Elapsed: 0.008 sec. Processed 105.96 thousand rows, 3.67 MB (13.29 million rows/s., 459.89 MB/s.)
+
+Query 3
+
+no projection: 100 rows in set. Elapsed: 0.069 sec. Processed 26.32 million rows, 62.47 MB (382.13 million rows/s., 906.93 MB/s.)
+   projection: 100 rows in set. Elapsed: 0.029 sec. Processed 8.08 thousand rows, 511.08 KB (276.06 thousand rows/s., 17.47 MB/s.)
+</code></pre></div> <h3 id=playground>Test It in Playground<a class=headerlink href=../amp/#playground title="Permanent link"> </a></h3> <p>The dataset is also available in the <a href="https://gh-api.clickhouse.com/play?user=play#U0VMRUNUIHRvd24sIGRpc3RyaWN0LCBjb3VudCgpIEFTIGMsIHJvdW5kKGF2ZyhwcmljZSkpIEFTIHByaWNlLCBiYXIocHJpY2UsIDAsIDUwMDAwMDAsIDEwMCkgRlJPTSB1a19wcmljZV9wYWlkIFdIRVJFIGRhdGUgPj0gJzIwMjAtMDEtMDEnIEdST1VQIEJZIHRvd24sIGRpc3RyaWN0IEhBVklORyBjID49IDEwMCBPUkRFUiBCWSBwcmljZSBERVNDIExJTUlUIDEwMA==" rel="external nofollow noreferrer" target=_blank>Online Playground</a>.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/38993f215f9186c1ac3505b1e09697cd9a468b5d" rel="external nofollow noreferrer" target="_blank" class="text-reset">38993f21</a>
+    
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/zh/getting-started/example-datasets/uk-price-paid/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>

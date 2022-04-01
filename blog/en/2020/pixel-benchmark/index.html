@@ -1,0 +1,312 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+    
+    <!DOCTYPE html>
+<html lang="en" >
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Running ClickHouse on an Android phone</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/images/logo-180x180.png" />
+
+<meta property="og:title" content="Running ClickHouse on an Android phone"/>
+<meta property="og:description" content="This is a brief description of my experiments with building ClickHouse on Android. If this is your first time hearing ab" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://blog-images.clickhouse.com/en/2020/pixel-benchmark/main.jpg" />
+
+<meta property="og:url" content="https://clickhouse.com/blog/en/2020/pixel-benchmark/"/>
+<link rel="canonical" href="https://clickhouse.com/blog/en/2020/pixel-benchmark/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Running ClickHouse on an Android phone",
+"mainEntityOfPage": "https://clickhouse.com/blog/en/2020/pixel-benchmark/",
+
+"datePublished": "2020-07-16",
+"dateModified": "2020-07-16",
+
+"image": "https://blog-images.clickhouse.com/en/2020/pixel-benchmark/main.jpg",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}]</script>
+
+
+<meta name="description" content="This is a brief description of my experiments with building ClickHouse on Android. If this is your first time hearing ab" />
+
+<meta name="keywords"
+      content="Android, benchmark, experiment" />
+
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://clickhouse.com/blog/en/rss.xml" />
+
+    
+    <link href="/docs/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" class="blog">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar navbar-expand-md mb-3">
+    <div class="container justify-content-between">
+        <a class="d-block navbar-brand mr-3 text-reset" href="/">
+            <img id="docs-logo-icon" src="/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h2 class="display-4 text-reset m-0 p-0 d-inline">
+                <a href="/blog/en/" class="text-reset text-decoration-none">
+                    ClickHouse Blog
+                </a>
+            </h2>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse/tree/master/website/blog"
+                        rel="external nofollow noreferral" target="_blank">
+                        New&nbsp;post
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset" href="/docs/en/">
+                        Documentation
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link text-reset"
+                        href="https://github.com/ClickHouse/ClickHouse"
+                        rel="external nofollow noreferrer" target="_blank">
+                        GitHub
+                     </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block text-reset" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/en.svg" alt="English" title="English" width="60" class="d-inline-block" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item text-reset disabled"
+                               href="/blog/en/">
+                                <img src="/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />
+                                English
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div id="content-wrapper" class="col">
+    
+    <div id="content">
+        <header class="text-center">
+            
+                <img class="img-fluid mb-3" src="https://blog-images.clickhouse.com/en/2020/pixel-benchmark/main.jpg" alt="Running ClickHouse on an Android phone" title="Running ClickHouse on an Android phone" />
+            
+            <h1 class="display-2 mt-3 mb-5">Running ClickHouse on an Android phone</h1>
+        </header>
+
+        <div class="row">
+            <article class="col-md-10 offset-1">
+                <p>This is a brief description of my experiments with building ClickHouse on Android. If this is your first time hearing about ClickHouse, it is a suriprisingly fast columnar SQL DBMS for real-time reporting. It's normally used in AdTech and the like, deployed on clusters of hundreds of machines, holding up to petabytes of data. But ClickHouse is straightforward to use on a smaller scale as well — you laptop will do, and don't be surprised if you are able to process several gigabytes of data per second on this hardware. There is another kind of small-scale, though pretty powerful, platforms, that is ubiquitous now — smartphones. The conclusion inevitably follows: you must be able to run ClickHouse on your smartphone as well. It's also that I can't help but chuckle at the idea of setting up a high performance mobile OLAP cluster using a dozen of phones. Or also at the idea of seeing the nostalgic <code class="syntax">Segmentation fault (core dumped)</code> on the lovely OLED screen, but I digress. Let's get it going.</p>
+<h2 id="first-cheap-attempt">First cheap attempt<a class="headerlink" href="#first-cheap-attempt" title="Permanent link"> </a></h2>
+<p>I heard somewhere that Android uses the Linux kernel, and I can already run familiar UNIX-like shell and tools using <a href="https://termux.com/" rel="external nofollow noreferrer" target="_blank">Termux</a>. And ClickHouse already supports ARM platform and even publishes a binary built for 64-bit ARM. This binary also doesn't have a lot of dependencies — only a pretty old version of <code class="syntax">glibc</code>. Maybe I can just download a ClickHouse binary from CI to the phone and run it?</p>
+<p>Turns out it's not that simple.</p>
+<ul>
+<li>
+<p>The first thing we'll see after trying to run is an absurd error message: <code class="syntax">./clickhouse: file is not found</code>. But it's right there! <code class="syntax">strace</code> helps: what cannot be found is <code class="syntax">/lib64/ld-linux-x86-64.so.2</code>, a linker specified in the ClickHouse binary. The linker, in this case, is a system program that initially loads the application binary and its dependencies before passing control to the application. Android uses a different linker located by another path, this is why we get the error. This problem can be overcome if we call the linker explicitly, e.g. <code class="syntax">/system/bin/linker64 $(readlink -f ./clickhouse)</code>.</p>
+</li>
+<li>
+<p>Immediately we encounter another problem: the linker complains that the binary has a wrong type <code class="syntax">ET_EXEC</code>. What does this mean? Android binaries must support dynamic relocation, so that they can be loaded at any address, probably for ASLR purposes. ClickHouse binaries do not normally use position-independent code, because we have measured that it gives a small performance penalty of about 1%. After tweaking compilation and linking flags to include <code class="syntax">-fPIC</code> as much as possible, and battling some really weird linker errors, we finally arrive at a relocatable binary that has a correct type <code class="syntax">ET_DYN</code>.</p>
+</li>
+<li>
+<p>But it only gets worse. Now it complains about TLS section offset being wrong. After reading some mail archives where I could barely understand a word, I concluded that Android uses some different layout of memory for the section of the executable that holds thread-local variables, and <code class="syntax">clang</code> from Android toolchain is patched to account for this. After that, I had to accept I won't be able to use familiar tools, and reluctantly turned to the Android toolchain.</p>
+</li>
+</ul>
+<h2 id="using-the-android-toolchain">Using the Android toolchain<a class="headerlink" href="#using-the-android-toolchain" title="Permanent link"> </a></h2>
+<p>Surprisingly, it's rather simple to set up. Our build system uses CMake and already supports cross-compilation — we have CI configurations that cross-compile for Mac, AArch64 Linux and FreeBSD. Android NDK also has integration with CMake and a <a href="https://developer.android.com/ndk/guides/cmake" rel="external nofollow noreferrer" target="_blank">manual</a> on how to set it up. Download the Android NDK, add some flags to your <code class="syntax">cmake</code> invocation: <code class="syntax">DCMAKE_TOOLCHAIN_FILE=~/android-ndk-r21d/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=28</code>, and you're done. It (almost) builds. What obstacles do we have this time?</p>
+<ul>
+<li>Our <code class="syntax">glibc</code> compatibility layer has a lot of compilation errors. It borrows <code class="syntax">musl</code> code to provide functions that are absent from older versions of <code class="syntax">glibc</code>, so that we can run the same binary on a wide range of distros. Being heavily dependent on system headers, it runs into all kinds of differences between Linux and Android, such as the limited scope of <code class="syntax">pthread</code> support or just subtly different API variants. Thankfully we're building for a particular version of Android, so we can just disable this and use all needed functions straight from the system <code class="syntax">libc</code>.</li>
+<li>Some third-party libraries and our CMake files are broken in various unimaginative ways. Just disable everything we can and fix everything we can't. </li>
+<li>Some of our code uses <code class="syntax">#if defined(__linux__)</code> to check for Linux platform. This doesn't always work, because Android also exports <code class="syntax">__linux__</code> but there are some API differences.</li>
+<li><code class="syntax">std::filesystem</code> is still not fully supported in NDK r21. The support went into r22 that is scheduled for Q3 2020, but I want it right now... Good that we bundle our own forks of <code class="syntax">libcxx</code> and <code class="syntax">libcxxabi</code> to reduce dependencies, and they are fresh enough to fully support C++20. After enabling them, everything works.</li>
+<li>Weird twenty-screens errors in <code class="syntax">std::map&lt;int&gt;</code> or something like that, that are also resolved by using our <code class="syntax">libcxx</code>.</li>
+</ul>
+<h2 id="on-the-device">On the device<a class="headerlink" href="#on-the-device" title="Permanent link"> </a></h2>
+<p>At last, we have a binary we can actually run. Copy it to  the phone, <code class="syntax">chmod +x</code>, <code class="syntax">./clickhouse server --config-path db/config.xml</code>, run some queries, it works!</p>
+<p><img class="img-fluid" src="https://blog-images.clickhouse.com/en/2020/pixel-benchmark/segfault.png" width="40%"/></p>
+<p>Feels so good to see my favorite message.</p>
+<p>It's a full-fledged development environment here in Termux, let's install <code class="syntax">gdb</code> and attach it to see where the segfault happens. Run <code class="syntax">gdb clickhouse --ex run '--config-path ....'</code>, wait for it to lauch for a minute, only to see how Android kills Termux becase it is out of memory. Are 4 GB of RAM not enough, after all? Looking at the <code class="syntax">clickhouse</code> binary, its size is a whoppping 1.1 GB. The major part of the bloat is due to the fact that some of our computational code is heavily specialized for particular data types (mostly via C++ templates), and also the fact that we build and link a lot of third-party libraries statically. A non-essential part of the binary is debug symbols, which help to produce good stack traces in error messages. We can remove them with <code class="syntax">strip -s ./clickhouse</code> right here on the phone, and after that, the size becomes more manageable, about 400 MB. Finally we can run <code class="syntax">gdb</code> and see that the segfault is somewhere in <code class="syntax">unw_backtrace</code>:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">Thread</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="s2">"ConfigReloader"</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="k">signal</span><span class="w"> </span><span class="n">SIGSEGV</span><span class="p">,</span><span class="w"> </span><span class="n">Segmentation</span><span class="w"> </span><span class="n">fault</span><span class="o">.</span><span class="w">                         </span>
+<span class="p">[</span><span class="n">Switching</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">LWP</span><span class="w"> </span><span class="mi">21873</span><span class="p">]</span><span class="w">                        </span>
+<span class="mh">0x000000556a73f740</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="err">??</span><span class="w"> </span><span class="p">()</span><span class="w">          </span>
+
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">whe</span><span class="w"> </span><span class="mi">20</span><span class="w">                                    </span>
+<span class="c1">#0  0x000000556a73f740 in ?? ()                 </span><span class="w"></span>
+<span class="c1">#1  0x000000556a744028 in ?? ()                 </span><span class="w"></span>
+<span class="c1">#2  0x000000556a73e5a0 in ?? ()                 </span><span class="w"></span>
+<span class="c1">#3  0x000000556a73d250 in unw_init_local ()     </span><span class="w"></span>
+<span class="c1">#4  0x000000556a73deb8 in unw_backtrace ()      </span><span class="w"></span>
+<span class="c1">#5  0x0000005562aabb54 in StackTrace::tryCapture() ()                                           </span><span class="w"></span>
+<span class="c1">#6  0x0000005562aabb10 in StackTrace::StackTrace() ()                                           </span><span class="w"></span>
+<span class="c1">#7  0x0000005562a8d73c in MemoryTracker::alloc(long) ()                                         </span><span class="w"></span>
+<span class="c1">#8  0x0000005562a8db38 in MemoryTracker::alloc(long) ()                                         </span><span class="w"></span>
+<span class="c1">#9  0x0000005562a8e8bc in CurrentMemoryTracker::alloc(long) ()                                  </span><span class="w"></span>
+<span class="c1">#10 0x0000005562a8b88c in operator new[](unsigned long) ()                                      </span><span class="w"></span>
+<span class="c1">#11 0x0000005569c35f08 in Poco::XML::NamePool::NamePool(unsigned long) ()                       </span><span class="w"></span>
+<span class="o">...</span><span class="w"></span>
+</code></pre></div>
+<p>What is this function, and why do we need it? In this particular stack trace, we're out of memory, and about to throw an exception for that. <code class="syntax">unw_backtrace</code> is called to produce a backtrace for the exception message. But there is another interesting context where we call it. Believe it or not, ClickHouse has a built-in <code class="syntax">perf</code>-like sampling profiler that can save stack traces for CPU time and real time, and also memory allocations. The data is saved into a <code class="syntax">system.trace_log</code> table, so you can build flame graphs for what your query was doing as simple as piping output of an SQL query into <code class="syntax">flamegraph.pl</code>. This is an interesting feature, but what is relevant now is that it sends signals to all threads of the server to interrupt them at some random time and save their current backtraces, using the same <code class="syntax">unw_backtrace</code> function that we know to segfault. We expect query profiler to be used in production environment, so it is enabled by default. After disabling it, we have a functioning ClickHouse server running on Android.</p>
+<h2 id="is-your-phone-good-enough">Is your phone good enough?<a class="headerlink" href="#is-your-phone-good-enough" title="Permanent link"> </a></h2>
+<p>There is a beaten genre of using data sets and queries of a varying degree of syntheticity to prove that a particular DBMS you work on has performance superior to other, less advanced, DBMSes. We've moved past that, and instead use the DBMS we love as a benchmark of hardware. For this benchmark we use a small 100M rows obfuscated data set from Yandex.Metrica, about 12 GB compressed, and some queries representative of Metrica dashboards. There is <a href="/benchmark/hardware/">this page</a> with crowdsourced results for various cloud and traditional servers and even some laptops, but how do the phones compare? Let's find out. Following <a href="/docs/en/operations/performance-test/">the manual</a> to download the necessary data to the phone and run the benchmark was pretty straightforward. One problem was that some queries can't run because they use too much memory and the server gets killed by Android, so I had to script around that. Also, I'm not sure how to reset a file system cache on Android, so the 'cold run' data is not correct. The results look pretty good:</p>
+<p><img class="img-fluid" src="https://blog-images.clickhouse.com/en/2020/pixel-benchmark/compare.png" width="80%"/></p>
+<p>My phone is Google Pixel 3a, and it is only 5 times slower on average than my Dell XPS 15 work laptop. The queries where the data doesn't fit into memory and has to go to disk (the flash, I mean) are noticeably slower, up to 20 times, but mostly they don't complete because the server gets killed — it only has about 3 GB of memory available. Overall I think the results look pretty good for the phone. High-end models should be even more performant, reaching performance comparable to some smaller laptops.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link"> </a></h2>
+<p>This was a rather enjoyable exercise. Running a server on your phone is a nice way to give a demo, so we should probably publish a Termux package for ClickHouse. For this, we have to debug and fix the <code class="syntax">unw_backtrace</code> segfault (I have my fingers crossed that it will be gone after adding <code class="syntax">-fno-omit-frame-pointer</code>), and also fix some quirks that are just commented out for now. Most of the changes required for the Android build are already merged into our master branch.</p>
+<p>Building for Android turned out to be relatively simple — all these experiments and writing took me about four days, and it was the first time I ever did any Android-related programming. The NDK was simple to use, and our code was cross-platform enough so I only had to make minor modifications. If we didn't routinely build for AArch64 and had a hard dependency on SSE 4.2 or something, it would have been a different story.</p>
+<p>But the most important takeout is that now you don't have to obsess over choosing a new phone — just benchmark it with ClickHouse.</p>
+<p><em>2020-07-16 <a href="https://github.com/akuzm" rel="external nofollow noreferrer" target="_blank">Alexander Kuzmenkov</a></em></p>
+            </article>
+            <section class="d-none d-md-block col-md-1 mh-100">
+                <div class="sticky-top pt-2">
+                    <a class="d-block mb-2" href="https://twitter.com/intent/tweet?url=Running%20ClickHouse%20on%20an%20Android%20phone+https%3A//clickhouse.com/blog/en/2020/pixel-benchmark/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/twitter.svg"
+                             alt="Share on Twitter" title="Share on Twitter" class="social-icon rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="https://news.ycombinator.com/submitlink?t=Running%20ClickHouse%20on%20an%20Android%20phone&u=https%3A//clickhouse.com/blog/en/2020/pixel-benchmark/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/hackernews.svg"
+                             alt="Share on HackerNews" title="Share on Hacker News" class="rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                    <a class="d-block mb-2" href="http://www.reddit.com/submit?title=Running%20ClickHouse%20on%20an%20Android%20phone&url=https%3A//clickhouse.com/blog/en/2020/pixel-benchmark/"
+                       rel="external nofollow noreferrer" target="_blank">
+                        <img src="/images/index/reddit.svg"
+                             alt="Share on Reddit" title="Share on Reddit" class="invert-dark rounded-circle img-fluid w-100 p-1" />
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        
+        <section class="col-md-10 offset-md-1 my-5">Author: <em>Alexander Kuzmenkov</em></section>
+        
+
+        <section class="col-md-10 offset-md-1 my-5">
+            <span title="Published date" class="d-inline-block bg-dark text-white p-2 mr-2">2020-07-16</span>
+            
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        Android
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        benchmark
+                    </div>
+                
+                    <div class="tag d-inline-block bg-light p-2 mr-2">
+                        experiment
+                    </div>
+                
+            
+        </section>
+
+
+    </div>
+    
+</div>
+            </div>
+        </div>
+        
+        <div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="content-footer" class="text-muted pt-3 mb-5">
+                <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/docs/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
+</html>
