@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkclickhouse=self.webpackChunkclickhouse||[]).push([[46173],{37798:function(e){e.exports=JSON.parse('{"title":"User Guides","slug":"/guides","permalink":"/guides","navigation":{"previous":{"title":"Vector","permalink":"/integrations/vector-to-clickhouse"},"next":{"title":"Developer Guides","permalink":"/guides/developer"}}}')}}]);
