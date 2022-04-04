@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkclickhouse=self.webpackChunkclickhouse||[]).push([[76037],{12383:function(e){e.exports=JSON.parse('{"title":"Connect a UI","slug":"/connect-a-ui","permalink":"/connect-a-ui","navigation":{"previous":{"title":"Tutorial","permalink":"/tutorial"},"next":{"title":"Grafana","permalink":"/connect-a-ui/grafana-and-clickhouse"}}}')}}]);
