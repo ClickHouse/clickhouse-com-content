@@ -1,0 +1,399 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>ORDER BY | ClickHouse Documentation</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/en/sql-reference/statements/select/order-by/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "ORDER BY | ClickHouse Documentation",
+"mainEntityOfPage": "https://clickhouse.com/docs/en/sql-reference/statements/select/order-by/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "ORDER BY | ClickHouse Documentation",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer,section{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}ul{margin-bottom:1rem}ul{margin-top:0}ul ul{margin-bottom:0}b{font-weight:bolder}small{font-size:80%}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}pre{margin-top:0;margin-bottom:1rem;overflow:auto}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}table{border-collapse:collapse}input,select{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}input{overflow:visible}select{text-transform:none}select{word-wrap:normal}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=date],input[type=datetime-local],input[type=month],input[type=time]{-webkit-appearance:listbox}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.small,small{font-size:80%;font-weight:400}.list-inline{padding-left:0;list-style:none}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}pre{display:block;font-size:87.5%;color:#495057}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}.order-first{order:-1}.order-last{order:13}.order-0{order:0}.order-1{order:1}.order-2{order:2}.order-3{order:3}.order-4{order:4}.order-5{order:5}.order-6{order:6}.order-7{order:7}.order-8{order:8}.order-9{order:9}.order-10{order:10}.order-11{order:11}.order-12{order:12}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}.order-md-first{order:-1}.order-md-last{order:13}.order-md-0{order:0}.order-md-1{order:1}.order-md-2{order:2}.order-md-3{order:3}.order-md-4{order:4}.order-md-5{order:5}.order-md-6{order:6}.order-md-7{order:7}.order-md-8{order:8}.order-md-9{order:9}.order-md-10{order:10}.order-md-11{order:11}.order-md-12{order:12}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}.order-lg-first{order:-1}.order-lg-last{order:13}.order-lg-0{order:0}.order-lg-1{order:1}.order-lg-2{order:2}.order-lg-3{order:3}.order-lg-4{order:4}.order-lg-5{order:5}.order-lg-6{order:6}.order-lg-7{order:7}.order-lg-8{order:8}.order-lg-9{order:9}.order-lg-10{order:10}.order-lg-11{order:11}.order-lg-12{order:12}}.table{width:100%;margin-bottom:8px;color:#212529}.table-light{background-color:#fbfcfd}.table-dark{background-color:#ccced0}.table-white{background-color:#fff}.table-black{background-color:#c1c2c3}.table-orange{background-color:#ffdfb8}.table-light-orange{background-color:#fff7ea}.table-dark{color:#fff;background-color:#343a40}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:none}.btn.disabled,.btn:disabled{opacity:.65}a.btn.disabled{pointer-events:none}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light.disabled,.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:not(:disabled):not(.disabled):active{color:#495057;background-color:#cddfea;border-color:#c4d9e6}.btn-light:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark.disabled,.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:not(:disabled):not(.disabled):active{color:#fff;background-color:#32373b;border-color:#2c3034}.btn-dark:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white.disabled,.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-white:not(:disabled):not(.disabled):active{color:#495057;background-color:#e6e6e6;border-color:#dfdfdf}.btn-white:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black.disabled,.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-black:not(:disabled):not(.disabled):active{color:#fff;background-color:#0a0c0d;border-color:#050506}.btn-black:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange.disabled,.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:not(:disabled):not(.disabled):active{color:#fff;background-color:#cc7000;border-color:#bf6900}.btn-orange:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange.disabled,.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:not(:disabled):not(.disabled):active{color:#495057;background-color:#ffd182;border-color:#ffcd75}.btn-light-orange:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light.disabled,.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-light:not(:disabled):not(.disabled):active{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark.disabled,.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-dark:not(:disabled):not(.disabled):active{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white.disabled,.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-white:not(:disabled):not(.disabled):active{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black.disabled,.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-black:not(:disabled):not(.disabled):active{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange.disabled,.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-orange:not(:disabled):not(.disabled):active{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange.disabled,.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-outline-light-orange:not(:disabled):not(.disabled):active{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link.disabled,.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-group-lg>.btn,.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-block{width:100%}.btn-group{position:relative;display:inline-flex;vertical-align:middle}.btn-group>.btn{position:relative;flex:1 1 auto}.btn-group>.btn:active,.btn-group>.btn:focus,.btn-group>.btn:hover{z-index:1}.btn-group>.btn-group:not(:first-child),.btn-group>.btn:not(:first-child){margin-left:-1px}.btn-group>.btn-group:not(:last-child)>.btn{border-top-right-radius:0;border-bottom-right-radius:0}.btn-group>.btn-group:not(:first-child)>.btn,.btn-group>.btn:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.input-group{position:relative;display:flex;flex-wrap:wrap;align-items:stretch;width:100%}.input-group>.custom-file,.input-group>.custom-select{position:relative;flex:1 1 0;min-width:0;margin-bottom:0}.input-group>.custom-file+.custom-file,.input-group>.custom-file+.custom-select,.input-group>.custom-select+.custom-file,.input-group>.custom-select+.custom-select{margin-left:-1px}.input-group>.custom-select:focus{z-index:3}.input-group>.custom-file .custom-file-input:focus{z-index:4}.input-group>.custom-select:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.input-group>.custom-select:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.input-group>.custom-file{display:flex;align-items:center}.input-group-text{display:flex;align-items:center;padding:.375rem .75rem;margin-bottom:0;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;text-align:center;white-space:nowrap;background-color:#e9ecef;border:1px solid #ced4da;border-radius:8px}.input-group-text input[type=checkbox],.input-group-text input[type=radio]{margin-top:0}.input-group-lg>.custom-select{height:calc(1.5em+1rem+2px)}.input-group-lg>.custom-select{padding:.5rem 1rem;font-size:1.125rem;line-height:1.5;border-radius:8px}.input-group-lg>.custom-select{padding-right:1.75rem}.custom-select{display:inline-block;width:100%;height:calc(1.5em+.75rem+2px);padding:.375rem 1.75rem .375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;border:1px solid #ced4da;border-radius:8px;-webkit-appearance:none;-moz-appearance:none;appearance:none}.custom-select:focus{border-color:#ffe680;outline:0;box-shadow:0 0 0 .2rem rgba(255,204,0,.25)}.custom-select:focus::-ms-value{color:#6c757d;background-color:#fff}.custom-select[multiple],.custom-select[size]:not([size="1"]){height:auto;padding-right:.75rem;background-image:none}.custom-select:disabled{color:#6c757d;background-color:#e9ecef}.custom-select::-ms-expand{display:none}.custom-select:-moz-focusring{color:transparent;text-shadow:0 0 0 #6c757d}.custom-select-lg{height:calc(1.5em+1rem+2px);padding-top:.5rem;padding-bottom:.5rem;padding-left:1rem;font-size:1.125rem}.custom-file{display:inline-block;margin-bottom:0}.custom-file,.custom-file-input{position:relative;width:100%;height:calc(1.5em+.75rem+2px)}.custom-file-input{z-index:2;margin:0;opacity:0}.custom-select{transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.custom-select{transition:none}}pre{white-space:pre-wrap}pre{border:1px solid #d6dbdf;page-break-inside:avoid}img,tr{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}.table{border-collapse:collapse}.table-dark{color:inherit}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/docs/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/docs/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+          <h1 id=select-order-by>ORDER BY Clause<a class=headerlink href=../amp/#select-order-by title="Permanent link"> </a></h1> <p>The <code class=syntax>ORDER BY</code> clause contains a list of expressions, which can each be attributed with <code class=syntax>DESC</code> (descending) or <code class=syntax>ASC</code> (ascending) modifier which determine the sorting direction. If the direction is not specified, <code class=syntax>ASC</code> is assumed, so it’s usually omitted. The sorting direction applies to a single expression, not to the entire list. Example: <code class=syntax>ORDER BY Visits DESC, SearchPhrase</code>.</p> <p>If you want to sort by column numbers instead of column names, enable the setting <a href=../../../../../operations/settings/settings/amp/#enable-positional-arguments>enable_positional_arguments</a>.</p> <p>Rows that have identical values for the list of sorting expressions are output in an arbitrary order, which can also be non-deterministic (different each time).<br> If the ORDER BY clause is omitted, the order of the rows is also undefined, and may be non-deterministic as well.</p> <h2 id=sorting-of-special-values>Sorting of Special Values<a class=headerlink href=../amp/#sorting-of-special-values title="Permanent link"> </a></h2> <p>There are two approaches to <code class=syntax>NaN</code> and <code class=syntax>NULL</code> sorting order:</p> <ul> <li>By default or with the <code class=syntax>NULLS LAST</code> modifier: first the values, then <code class=syntax>NaN</code>, then <code class=syntax>NULL</code>.</li> <li>With the <code class=syntax>NULLS FIRST</code> modifier: first <code class=syntax>NULL</code>, then <code class=syntax>NaN</code>, then other values.</li> </ul> <h3 id=example>Example<a class=headerlink href=../amp/#example title="Permanent link"> </a></h3> <p>For the table</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬────y─┐
+│ 1 │ ᴺᵁᴸᴸ │
+│ 2 │    2 │
+│ 1 │  nan │
+│ 2 │    2 │
+│ 3 │    4 │
+│ 5 │    6 │
+│ 6 │  nan │
+│ 7 │ ᴺᵁᴸᴸ │
+│ 6 │    7 │
+│ 8 │    9 │
+└───┴──────┘
+</code></pre></div> <p>Run the query <code class=syntax>SELECT * FROM t_null_nan ORDER BY y NULLS FIRST</code> to get:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬────y─┐
+│ 1 │ ᴺᵁᴸᴸ │
+│ 7 │ ᴺᵁᴸᴸ │
+│ 1 │  nan │
+│ 6 │  nan │
+│ 2 │    2 │
+│ 2 │    2 │
+│ 3 │    4 │
+│ 5 │    6 │
+│ 6 │    7 │
+│ 8 │    9 │
+└───┴──────┘
+</code></pre></div> <p>When floating point numbers are sorted, NaNs are separate from the other values. Regardless of the sorting order, NaNs come at the end. In other words, for ascending sorting they are placed as if they are larger than all the other numbers, while for descending sorting they are placed as if they are smaller than the rest.</p> <h2 id=collation-support>Collation Support<a class=headerlink href=../amp/#collation-support title="Permanent link"> </a></h2> <p>For sorting by <a href=../../../../data-types/string/amp/ >String</a> values, you can specify collation (comparison). Example: <code class=syntax>ORDER BY SearchPhrase COLLATE 'tr'</code> - for sorting by keyword in ascending order, using the Turkish alphabet, case insensitive, assuming that strings are UTF-8 encoded. <code class=syntax>COLLATE</code> can be specified or not for each expression in ORDER BY independently. If <code class=syntax>ASC</code> or <code class=syntax>DESC</code> is specified, <code class=syntax>COLLATE</code> is specified after it. When using <code class=syntax>COLLATE</code>, sorting is always case-insensitive.</p> <p>Collate is supported in <a href=../../../../data-types/lowcardinality/amp/ >LowCardinality</a>, <a href=../../../../data-types/nullable/amp/ >Nullable</a>, <a href=../../../../data-types/array/amp/ >Array</a> and <a href=../../../../data-types/tuple/amp/ >Tuple</a>.</p> <p>We only recommend using <code class=syntax>COLLATE</code> for final sorting of a small number of rows, since sorting with <code class=syntax>COLLATE</code> is less efficient than normal sorting by bytes.</p> <h2 id=collation-examples>Collation Examples<a class=headerlink href=../amp/#collation-examples title="Permanent link"> </a></h2> <p>Example only with <a href=../../../../data-types/string/amp/ >String</a> values:</p> <p>Input table:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s────┐
+│ 1 │ bca  │
+│ 2 │ ABC  │
+│ 3 │ 123a │
+│ 4 │ abc  │
+│ 5 │ BCA  │
+└───┴──────┘
+</code></pre></div> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>collate_test</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>s</span><span class=w> </span><span class=k>ASC</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=s1>'en'</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s────┐
+│ 3 │ 123a │
+│ 4 │ abc  │
+│ 2 │ ABC  │
+│ 1 │ bca  │
+│ 5 │ BCA  │
+└───┴──────┘
+</code></pre></div> <p>Example with <a href=../../../../data-types/nullable/amp/ >Nullable</a>:</p> <p>Input table:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s────┐
+│ 1 │ bca  │
+│ 2 │ ᴺᵁᴸᴸ │
+│ 3 │ ABC  │
+│ 4 │ 123a │
+│ 5 │ abc  │
+│ 6 │ ᴺᵁᴸᴸ │
+│ 7 │ BCA  │
+└───┴──────┘
+</code></pre></div> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>collate_test</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>s</span><span class=w> </span><span class=k>ASC</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=s1>'en'</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s────┐
+│ 4 │ 123a │
+│ 5 │ abc  │
+│ 3 │ ABC  │
+│ 1 │ bca  │
+│ 7 │ BCA  │
+│ 6 │ ᴺᵁᴸᴸ │
+│ 2 │ ᴺᵁᴸᴸ │
+└───┴──────┘
+</code></pre></div> <p>Example with <a href=../../../../data-types/array/amp/ >Array</a>:</p> <p>Input table:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s─────────────┐
+│ 1 │ ['Z']         │
+│ 2 │ ['z']         │
+│ 3 │ ['a']         │
+│ 4 │ ['A']         │
+│ 5 │ ['z','a']     │
+│ 6 │ ['z','a','a'] │
+│ 7 │ ['']          │
+└───┴───────────────┘
+</code></pre></div> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>collate_test</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>s</span><span class=w> </span><span class=k>ASC</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=s1>'en'</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s─────────────┐
+│ 7 │ ['']          │
+│ 3 │ ['a']         │
+│ 4 │ ['A']         │
+│ 2 │ ['z']         │
+│ 5 │ ['z','a']     │
+│ 6 │ ['z','a','a'] │
+│ 1 │ ['Z']         │
+└───┴───────────────┘
+</code></pre></div> <p>Example with <a href=../../../../data-types/lowcardinality/amp/ >LowCardinality</a> string:</p> <p>Input table:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s───┐
+│ 1 │ Z   │
+│ 2 │ z   │
+│ 3 │ a   │
+│ 4 │ A   │
+│ 5 │ za  │
+│ 6 │ zaa │
+│ 7 │     │
+└───┴─────┘
+</code></pre></div> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>collate_test</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>s</span><span class=w> </span><span class=k>ASC</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=s1>'en'</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s───┐
+│ 7 │     │
+│ 3 │ a   │
+│ 4 │ A   │
+│ 2 │ z   │
+│ 1 │ Z   │
+│ 5 │ za  │
+│ 6 │ zaa │
+└───┴─────┘
+</code></pre></div> <p>Example with <a href=../../../../data-types/tuple/amp/ >Tuple</a>:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s───────┐
+│ 1 │ (1,'Z') │
+│ 2 │ (1,'z') │
+│ 3 │ (1,'a') │
+│ 4 │ (2,'z') │
+│ 5 │ (1,'A') │
+│ 6 │ (2,'Z') │
+│ 7 │ (2,'A') │
+└───┴─────────┘
+</code></pre></div> <p>Query:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>collate_test</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>s</span><span class=w> </span><span class=k>ASC</span><span class=w> </span><span class=k>COLLATE</span><span class=w> </span><span class=s1>'en'</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┬─s───────┐
+│ 3 │ (1,'a') │
+│ 5 │ (1,'A') │
+│ 2 │ (1,'z') │
+│ 1 │ (1,'Z') │
+│ 7 │ (2,'A') │
+│ 4 │ (2,'z') │
+│ 6 │ (2,'Z') │
+└───┴─────────┘
+</code></pre></div> <h2 id=implementation-details>Implementation Details<a class=headerlink href=../amp/#implementation-details title="Permanent link"> </a></h2> <p>Less RAM is used if a small enough <a href=../../limit/amp/ >LIMIT</a> is specified in addition to <code class=syntax>ORDER BY</code>. Otherwise, the amount of memory spent is proportional to the volume of data for sorting. For distributed query processing, if <a href=../../group-by/amp/ >GROUP BY</a> is omitted, sorting is partially done on remote servers, and the results are merged on the requestor server. This means that for distributed sorting, the volume of data to sort can be greater than the amount of memory on a single server.</p> <p>If there is not enough RAM, it is possible to perform sorting in external memory (creating temporary files on a disk). Use the setting <code class=syntax>max_bytes_before_external_sort</code> for this purpose. If it is set to 0 (the default), external sorting is disabled. If it is enabled, when the volume of data to sort reaches the specified number of bytes, the collected data is sorted and dumped into a temporary file. After all data is read, all the sorted files are merged and the results are output. Files are written to the <code class=syntax>/var/lib/clickhouse/tmp/</code> directory in the config (by default, but you can use the <code class=syntax>tmp_path</code> parameter to change this setting).</p> <p>Running a query may use more memory than <code class=syntax>max_bytes_before_external_sort</code>. For this reason, this setting must have a value significantly smaller than <code class=syntax>max_memory_usage</code>. As an example, if your server has 128 GB of RAM and you need to run a single query, set <code class=syntax>max_memory_usage</code> to 100 GB, and <code class=syntax>max_bytes_before_external_sort</code> to 80 GB.</p> <p>External sorting works much less effectively than sorting in RAM.</p> <h2 id=optimize_read_in_order>Optimization of Data Reading<a class=headerlink href=../amp/#optimize_read_in_order title="Permanent link"> </a></h2> <p>If <code class=syntax>ORDER BY</code> expression has a prefix that coincides with the table sorting key, you can optimize the query by using the <a href=../../../../../operations/settings/settings/amp/#optimize_read_in_order>optimize_read_in_order</a> setting.</p> <p>When the <code class=syntax>optimize_read_in_order</code> setting is enabled, the ClickHouse server uses the table index and reads the data in order of the <code class=syntax>ORDER BY</code> key. This allows to avoid reading all data in case of specified <a href=../../limit/amp/ >LIMIT</a>. So queries on big data with small limit are processed faster.</p> <p>Optimization works with both <code class=syntax>ASC</code> and <code class=syntax>DESC</code> and does not work together with <a href=../../group-by/amp/ >GROUP BY</a> clause and <a href=../../from/amp/#select-from-final>FINAL</a> modifier.</p> <p>When the <code class=syntax>optimize_read_in_order</code> setting is disabled, the ClickHouse server does not use the table index while processing <code class=syntax>SELECT</code> queries.</p> <p>Consider disabling <code class=syntax>optimize_read_in_order</code> manually, when running queries that have <code class=syntax>ORDER BY</code> clause, large <code class=syntax>LIMIT</code> and <a href=../../where/amp/ >WHERE</a> condition that requires to read huge amount of records before queried data is found.</p> <p>Optimization is supported in the following table engines:</p> <ul> <li><a href=../../../../../engines/table-engines/mergetree-family/mergetree/amp/ >MergeTree</a></li> <li><a href=../../../../../engines/table-engines/special/merge/amp/ >Merge</a>, <a href=../../../../../engines/table-engines/special/buffer/amp/ >Buffer</a>, and <a href=../../../../../engines/table-engines/special/materializedview/amp/ >MaterializedView</a> table engines over <code class=syntax>MergeTree</code>-engine tables</li> </ul> <p>In <code class=syntax>MaterializedView</code>-engine tables the optimization works with views like <code class=syntax>SELECT ... FROM merge_tree_table ORDER BY pk</code>. But it is not supported in the queries like <code class=syntax>SELECT ... FROM view ORDER BY pk</code> if the view query does not have the <code class=syntax>ORDER BY</code> clause.</p> <h2 id=orderby-with-fill>ORDER BY Expr WITH FILL Modifier<a class=headerlink href=../amp/#orderby-with-fill title="Permanent link"> </a></h2> <p>This modifier also can be combined with <a href=../../limit/amp/#limit-with-ties>LIMIT … WITH TIES modifier</a>.</p> <p><code class=syntax>WITH FILL</code> modifier can be set after <code class=syntax>ORDER BY expr</code> with optional <code class=syntax>FROM expr</code>, <code class=syntax>TO expr</code> and <code class=syntax>STEP expr</code> parameters.<br> All missed values of <code class=syntax>expr</code> column will be filled sequentially and other columns will be filled as defaults.</p> <p>To fill multiple columns, add <code class=syntax>WITH FILL</code> modifier with optional parameters after each field name in <code class=syntax>ORDER BY</code> section.</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>expr</span><span class=w> </span><span class=p>[</span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=k>FROM</span><span class=w> </span><span class=n>const_expr</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=k>TO</span><span class=w> </span><span class=n>const_expr</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=n>STEP</span><span class=w> </span><span class=n>const_numeric_expr</span><span class=p>],</span><span class=w> </span><span class=p>...</span><span class=w> </span><span class=n>exprN</span><span class=w> </span><span class=p>[</span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=k>FROM</span><span class=w> </span><span class=n>expr</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=k>TO</span><span class=w> </span><span class=n>expr</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=n>STEP</span><span class=w> </span><span class=n>numeric_expr</span><span class=p>]</span><span class=w></span>
+</code></pre></div> <p><code class=syntax>WITH FILL</code> can be applied for fields with Numeric (all kinds of float, decimal, int) or Date/DateTime types. When applied for <code class=syntax>String</code> fields, missed values are filled with empty strings.<br> When <code class=syntax>FROM const_expr</code> not defined sequence of filling use minimal <code class=syntax>expr</code> field value from <code class=syntax>ORDER BY</code>.<br> When <code class=syntax>TO const_expr</code> not defined sequence of filling use maximum <code class=syntax>expr</code> field value from <code class=syntax>ORDER BY</code>.<br> When <code class=syntax>STEP const_numeric_expr</code> defined then <code class=syntax>const_numeric_expr</code> interprets <code class=syntax>as is</code> for numeric types, as <code class=syntax>days</code> for Date type, as <code class=syntax>seconds</code> for DateTime type. It also supports <a href=https://clickhouse.com/docs/en/sql-reference/data-types/special-data-types/interval/ target=_blank>INTERVAL</a> data type representing time and date intervals.<br> When <code class=syntax>STEP const_numeric_expr</code> omitted then sequence of filling use <code class=syntax>1.0</code> for numeric type, <code class=syntax>1 day</code> for Date type and <code class=syntax>1 second</code> for DateTime type.</p> <p>Example of a query without <code class=syntax>WITH FILL</code>:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=k>source</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=p>(</span><span class=w></span>
+<span class=w>   </span><span class=k>SELECT</span><span class=w> </span><span class=n>toFloat32</span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>10</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=s1>'original'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>source</span><span class=w></span>
+<span class=w>   </span><span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span><span class=w> </span><span class=k>WHERE</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>3</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+<span class=p>)</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>n</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─n─┬─source───┐
+│ 1 │ original │
+│ 4 │ original │
+│ 7 │ original │
+└───┴──────────┘
+</code></pre></div> <p>Same query after applying <code class=syntax>WITH FILL</code> modifier:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=k>source</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=p>(</span><span class=w></span>
+<span class=w>   </span><span class=k>SELECT</span><span class=w> </span><span class=n>toFloat32</span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>10</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>n</span><span class=p>,</span><span class=w> </span><span class=s1>'original'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>source</span><span class=w></span>
+<span class=w>   </span><span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span><span class=w> </span><span class=k>WHERE</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>3</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+<span class=p>)</span><span class=w> </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>n</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=k>TO</span><span class=w> </span><span class=mi>5</span><span class=p>.</span><span class=mi>51</span><span class=w> </span><span class=n>STEP</span><span class=w> </span><span class=mi>0</span><span class=p>.</span><span class=mi>5</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌───n─┬─source───┐
+│   0 │          │
+│ 0.5 │          │
+│   1 │ original │
+│ 1.5 │          │
+│   2 │          │
+│ 2.5 │          │
+│   3 │          │
+│ 3.5 │          │
+│   4 │ original │
+│ 4.5 │          │
+│   5 │          │
+│ 5.5 │          │
+│   7 │ original │
+└─────┴──────────┘
+</code></pre></div> <p>For the case with multiple fields <code class=syntax>ORDER BY field2 WITH FILL, field1 WITH FILL</code> order of filling will follow the order of fields in the <code class=syntax>ORDER BY</code> clause.</p> <p>Example:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>toDate</span><span class=p>((</span><span class=nb>number</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>10</span><span class=p>)</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>86400</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>d1</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>toDate</span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>86400</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>d2</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=s1>'original'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>source</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>3</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w></span>
+<span class=w>    </span><span class=n>d2</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>d1</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=w> </span><span class=n>STEP</span><span class=w> </span><span class=mi>5</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌───d1───────┬───d2───────┬─source───┐
+│ 1970-01-11 │ 1970-01-02 │ original │
+│ 1970-01-01 │ 1970-01-03 │          │
+│ 1970-01-01 │ 1970-01-04 │          │
+│ 1970-02-10 │ 1970-01-05 │ original │
+│ 1970-01-01 │ 1970-01-06 │          │
+│ 1970-01-01 │ 1970-01-07 │          │
+│ 1970-03-12 │ 1970-01-08 │ original │
+└────────────┴────────────┴──────────┘
+</code></pre></div> <p>Field <code class=syntax>d1</code> does not fill in and use the default value cause we do not have repeated values for <code class=syntax>d2</code> value, and the sequence for <code class=syntax>d1</code> can’t be properly calculated.</p> <p>The following query with the changed field in <code class=syntax>ORDER BY</code>:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>toDate</span><span class=p>((</span><span class=nb>number</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>10</span><span class=p>)</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>86400</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>d1</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>toDate</span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>86400</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>d2</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=s1>'original'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>source</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>3</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w></span>
+<span class=w>    </span><span class=n>d1</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=w> </span><span class=n>STEP</span><span class=w> </span><span class=mi>5</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>d2</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌───d1───────┬───d2───────┬─source───┐
+│ 1970-01-11 │ 1970-01-02 │ original │
+│ 1970-01-16 │ 1970-01-01 │          │
+│ 1970-01-21 │ 1970-01-01 │          │
+│ 1970-01-26 │ 1970-01-01 │          │
+│ 1970-01-31 │ 1970-01-01 │          │
+│ 1970-02-05 │ 1970-01-01 │          │
+│ 1970-02-10 │ 1970-01-05 │ original │
+│ 1970-02-15 │ 1970-01-01 │          │
+│ 1970-02-20 │ 1970-01-01 │          │
+│ 1970-02-25 │ 1970-01-01 │          │
+│ 1970-03-02 │ 1970-01-01 │          │
+│ 1970-03-07 │ 1970-01-01 │          │
+│ 1970-03-12 │ 1970-01-08 │ original │
+└────────────┴────────────┴──────────┘
+</code></pre></div> <p>The following query uses the <code class=syntax>INTERVAL</code> data type of 1 day for each data filled on column <code class=syntax>d1</code>:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>toDate</span><span class=p>((</span><span class=nb>number</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>10</span><span class=p>)</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>86400</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>d1</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>toDate</span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>86400</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>d2</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=s1>'original'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>source</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>3</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w></span>
+<span class=w>    </span><span class=n>d1</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=w> </span><span class=n>STEP</span><span class=w> </span><span class=nb>INTERVAL</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=k>DAY</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>d2</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>FILL</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>Result:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─────────d1─┬─────────d2─┬─source───┐
+│ 1970-01-11 │ 1970-01-02 │ original │
+│ 1970-01-12 │ 1970-01-01 │          │
+│ 1970-01-13 │ 1970-01-01 │          │
+│ 1970-01-14 │ 1970-01-01 │          │
+│ 1970-01-15 │ 1970-01-01 │          │
+│ 1970-01-16 │ 1970-01-01 │          │
+│ 1970-01-17 │ 1970-01-01 │          │
+│ 1970-01-18 │ 1970-01-01 │          │
+│ 1970-01-19 │ 1970-01-01 │          │
+│ 1970-01-20 │ 1970-01-01 │          │
+│ 1970-01-21 │ 1970-01-01 │          │
+│ 1970-01-22 │ 1970-01-01 │          │
+│ 1970-01-23 │ 1970-01-01 │          │
+│ 1970-01-24 │ 1970-01-01 │          │
+│ 1970-01-25 │ 1970-01-01 │          │
+│ 1970-01-26 │ 1970-01-01 │          │
+│ 1970-01-27 │ 1970-01-01 │          │
+│ 1970-01-28 │ 1970-01-01 │          │
+│ 1970-01-29 │ 1970-01-01 │          │
+│ 1970-01-30 │ 1970-01-01 │          │
+│ 1970-01-31 │ 1970-01-01 │          │
+│ 1970-02-01 │ 1970-01-01 │          │
+│ 1970-02-02 │ 1970-01-01 │          │
+│ 1970-02-03 │ 1970-01-01 │          │
+│ 1970-02-04 │ 1970-01-01 │          │
+│ 1970-02-05 │ 1970-01-01 │          │
+│ 1970-02-06 │ 1970-01-01 │          │
+│ 1970-02-07 │ 1970-01-01 │          │
+│ 1970-02-08 │ 1970-01-01 │          │
+│ 1970-02-09 │ 1970-01-01 │          │
+│ 1970-02-10 │ 1970-01-05 │ original │
+│ 1970-02-11 │ 1970-01-01 │          │
+│ 1970-02-12 │ 1970-01-01 │          │
+│ 1970-02-13 │ 1970-01-01 │          │
+│ 1970-02-14 │ 1970-01-01 │          │
+│ 1970-02-15 │ 1970-01-01 │          │
+│ 1970-02-16 │ 1970-01-01 │          │
+│ 1970-02-17 │ 1970-01-01 │          │
+│ 1970-02-18 │ 1970-01-01 │          │
+│ 1970-02-19 │ 1970-01-01 │          │
+│ 1970-02-20 │ 1970-01-01 │          │
+│ 1970-02-21 │ 1970-01-01 │          │
+│ 1970-02-22 │ 1970-01-01 │          │
+│ 1970-02-23 │ 1970-01-01 │          │
+│ 1970-02-24 │ 1970-01-01 │          │
+│ 1970-02-25 │ 1970-01-01 │          │
+│ 1970-02-26 │ 1970-01-01 │          │
+│ 1970-02-27 │ 1970-01-01 │          │
+│ 1970-02-28 │ 1970-01-01 │          │
+│ 1970-03-01 │ 1970-01-01 │          │
+│ 1970-03-02 │ 1970-01-01 │          │
+│ 1970-03-03 │ 1970-01-01 │          │
+│ 1970-03-04 │ 1970-01-01 │          │
+│ 1970-03-05 │ 1970-01-01 │          │
+│ 1970-03-06 │ 1970-01-01 │          │
+│ 1970-03-07 │ 1970-01-01 │          │
+│ 1970-03-08 │ 1970-01-01 │          │
+│ 1970-03-09 │ 1970-01-01 │          │
+│ 1970-03-10 │ 1970-01-01 │          │
+│ 1970-03-11 │ 1970-01-01 │          │
+│ 1970-03-12 │ 1970-01-08 │ original │
+└────────────┴────────────┴──────────┘
+</code></pre></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/38993f215f9186c1ac3505b1e09697cd9a468b5d" rel="external nofollow noreferrer" target="_blank" class="text-reset">38993f21</a>
+    
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/en/sql-reference/statements/select/order-by/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>

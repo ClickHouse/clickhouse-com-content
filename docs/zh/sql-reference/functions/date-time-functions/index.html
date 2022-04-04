@@ -1,11 +1,6043 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=/docs/en/sql-reference/functions/date-time-functions">
-    <link rel="canonical" href="/docs/en/sql-reference/functions/date-time-functions" />
-  </head>
-  <script>
-    window.location.href = '/docs/en/sql-reference/functions/date-time-functions';
-  </script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    
+        
+        
+    
+    <!DOCTYPE html>
+<html lang="zh" data-version="master" data-single-page="false">
+<head>
+    
+<meta charset="utf-8" />
+<META http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>时间日期函数 | ClickHouse文档</title>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/images/logo-180x180.png" />
+
+<meta property="og:title" content="时间日期函数 | ClickHouse文档"/>
+<meta property="og:description" content="时间日期函数 支持时区。 所有的时间日期函数都可以在第二个可选参数中接受时区参数。示例：Asia / Yekaterinburg。在这种情况下，它们使用指定的时区而不是本地（默认）时区。 SELECT toDateTime('2016-06" />
+<meta property="og:type" content="article" />
+
+<meta property="og:image" content="https://clickhouse.com/docs/images/logo.png" />
+
+<meta property="og:url" content="https://clickhouse.com/docs/zh/sql-reference/functions/date-time-functions/"/>
+<link rel="canonical" href="https://clickhouse.com/docs/zh/sql-reference/functions/date-time-functions/" />
+
+<link rel="amphtml" href="https://clickhouse.com/docs/zh/sql-reference/functions/date-time-functions/amp/" />
+
+<link rel="search" href="/opensearch.xml" title="ClickHouse" type="application/opensearchdescription+xml" />
+
+
+<meta name="description" content="时间日期函数 支持时区。 所有的时间日期函数都可以在第二个可选参数中接受时区参数。示例：Asia / Yekaterinburg。在这种情况下，它们使用指定的时区而不是本地（默认）时区。 SELECT toDateTime('2016-06" />
+
+<meta name="keywords"
+      content="ClickHouse, DBMS, OLAP, SQL, open-source, relational, analytics, analytical, Big Data, web-analytics" />
+
+
+
+
+    
+    <link rel="alternate" hreflang="en" href="https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions/" />
+    
+    <link rel="alternate" hreflang="zh" href="https://clickhouse.com/docs/zh/sql-reference/functions/date-time-functions/" />
+    
+    <link rel="alternate" hreflang="ru" href="https://clickhouse.com/docs/ru/sql-reference/functions/date-time-functions/" />
+    
+    <link rel="alternate" hreflang="ja" href="https://clickhouse.com/docs/ja/sql-reference/functions/date-time-functions/" />
+    
+    <link rel="alternate" hreflang="x-default" href="https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions/" />
+
+
+
+
+
+    
+    <link href="/docs/css/base.css?css_digest" media="all" rel="stylesheet" />
+
+
+</head>
+<body dir="ltr" data-spy="scroll" data-target="#toc" data-offset="80">
+    
+    
+    
+    <div class="page">
+        
+    
+        <nav id="top-nav" class="navbar py-1 navbar-dark navbar-expand-md bg-dark-alt text-white fixed-top">
+    <div class="container-fluid justify-content-between">
+        <a class="d-block navbar-brand mr-3" href="/">
+            <img id="docs-logo-icon" src="/docs/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"/>
+        </a>
+        <div class="w-100 navbar-text text-left d-none d-md-block">
+            <h1 class="h3 m-0 p-0 d-inline">
+                <a href="#" class="text-white text-decoration-none">
+                    
+                        时间日期函数
+                    
+                </a>
+            </h1>
+        </div>
+
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                
+                    
+                
+                
+                <li id="edit-wrapper" class="nav-item">
+                    <a id="edit-link" href="https://github.com/ClickHouse/ClickHouse/edit/master/docs/zh/sql-reference/functions/date-time-functions.md" title="Edit this article" class="nav-link" rel="external nofollow noreferrer" target="_blank"><img src="/docs/images/mkdocs/edit.svg" alt="Edit this article" height="60" /></a>
+                </li>
+                
+                <li class="nav-item">
+                     <a class="nav-link" href="https://github.com/ClickHouse/ClickHouse" rel="external nofollow noreferrer">
+                        <img src="/docs/images/index/github.svg" alt="GitHub repository" title="Go to GitHub" height="72" />
+                    </a>
+                </li>
+                <li id="languages-wrapper" class="nav-item dropdown mr-3">
+                    <div id="languages-dropdown">
+                        <a class="nav-link dropdown-toggle d-inline-block mt-1 text-muted" href="#" id="lang-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/docs/images/flags/zh.svg" alt="中文" title="中文" width="60" class="d-inline-block mt-n1" />
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="lang-dropdown">
+                            
+                            <a class="dropdown-item"
+                               href="/docs/en/sql-reference/functions/date-time-functions/">
+                                <img src="/docs/images/flags/en.svg" alt="" title="" width="32" class="d-inline-block mr-2" />English
+                            </a>
+                            
+                            <a class="dropdown-item disabled"
+                               href="/docs/zh/sql-reference/functions/date-time-functions/">
+                                <img src="/docs/images/flags/zh.svg" alt="" title="" width="32" class="d-inline-block mr-2" />中文
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/ru/sql-reference/functions/date-time-functions/">
+                                <img src="/docs/images/flags/ru.svg" alt="" title="" width="32" class="d-inline-block mr-2" />Русский
+                            </a>
+                            
+                            <a class="dropdown-item"
+                               href="/docs/ja/sql-reference/functions/date-time-functions/">
+                                <img src="/docs/images/flags/ja.svg" alt="" title="" width="32" class="d-inline-block mr-2" />日本語
+                            </a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <form id="search-form" class="form-inline m-0">
+            <div class="input-group">
+                <div class="input-group-prepend w-100">
+                    <span class="input-group-text bg-secondary-alt text-muted border-0 mr-n1" id="search-icon">
+                        <img src="/docs/images/mkdocs/search.svg" />
+                    </span>
+                    <input id="docsearch-input" class="form-control bg-secondary-alt text-muted border-0 pl-1" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+        </form>
+
+        <button id="navbar-toggler" class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+        <div class="docs container-fluid mt-3">
+            <div class="row justify-content-end justify-content-xl-center">
+                <div id="sidebar" class="col-xl-2 col-md-4 bg-secondary-alt p-3 d-print-none min-vh-100 overflow-auto">
+    <div class="overflow-auto">
+        <div id="single-page-switch" class="btn-group mb-2 float-right" role="group" aria-label="Multi-page or single-page">
+            <a href="../../.." role="button" class="btn btn-dark active" aria-pressed="true">
+                <img src="/docs/images/mkdocs/multi.svg" alt="Multi-page version" title="Multi-page version" />
+            </a>
+            <a href="../../../single/" role="button" class="btn btn-dark-alt active" aria-pressed="true">
+                <img src="/docs/images/mkdocs/single.svg" alt="Single-page version" title="Single-page version" />
+            </a>
+        </div>
+        
+        <nav id="sidebar-nav" class="nav flex-column mb-5">
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-1" title="简介" class="nav-link text-light dropdown-toggle px-0">简介</a>
+<div id="sidebar-sidebar-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../" title="什么是ClickHouse？" class="nav-link text-light text-wrap d-inline-block w-100 px-0">什么是ClickHouse？</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/distinctive-features/" title="ClickHouse的特性" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse的特性</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/performance/" title="ClickHouse性能" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse性能</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/history/" title="ClickHouse历史" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse历史</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../introduction/adopters/" title="ClickHouse用户" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse用户</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2" title="快速上手" class="nav-link text-light dropdown-toggle px-0">快速上手</a>
+<div id="sidebar-sidebar-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/" title="入门" class="nav-link text-light text-wrap d-inline-block w-100 px-0">入门</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/install/" title="安装部署" class="nav-link text-light text-wrap d-inline-block w-100 px-0">安装部署</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/tutorial/" title="使用教程" class="nav-link text-light text-wrap d-inline-block w-100 px-0">使用教程</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-2-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-2-4" title="示例数据集" class="nav-link text-light dropdown-toggle px-0">示例数据集</a>
+<div id="sidebar-sidebar-2-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/github-events/" title="GitHub 事件数据集" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GitHub 事件数据集</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/" title="导言" class="nav-link text-light text-wrap d-inline-block w-100 px-0">导言</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/metrica/" title="Yandex.Metrica Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Yandex.Metrica Data</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/recipes/" title="Recipes Dataset" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Recipes Dataset</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/star-schema/" title="Star Schema Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Star Schema Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/wikistat/" title="WikiStat" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WikiStat</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/criteo/" title="Terabyte Click Logs from Criteo" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Terabyte Click Logs from Criteo</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/amplab-benchmark/" title="AMPLab Big Data Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AMPLab Big Data Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/brown-benchmark/" title="Brown University Benchmark" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Brown University Benchmark</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/nyc-taxi/" title="New York Taxi Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">New York Taxi Data</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/opensky/" title="OpenSky" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OpenSky</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/uk-price-paid/" title="UK Property Price Paid" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UK Property Price Paid</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/cell-towers/" title="Cell Towers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Cell Towers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/menus/" title="Menus" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Menus</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/example-datasets/ontime/" title="OnTime" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OnTime</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../getting-started/playground/" title="体验平台" class="nav-link text-light text-wrap d-inline-block w-100 px-0">体验平台</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3" title="接口" class="nav-link text-light dropdown-toggle px-0">接口</a>
+<div id="sidebar-sidebar-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/" title="客户端" class="nav-link text-light text-wrap d-inline-block w-100 px-0">客户端</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/cli/" title="命令行客户端" class="nav-link text-light text-wrap d-inline-block w-100 px-0">命令行客户端</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/tcp/" title="原生接口(TCP)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">原生接口(TCP)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/http/" title="HTTP客户端" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HTTP客户端</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/mysql/" title="MySQL接口" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL接口</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/formats/" title="输入/输出格式" class="nav-link text-light text-wrap d-inline-block w-100 px-0">输入/输出格式</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/jdbc/" title="JDBC驱动" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBC驱动</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/odbc/" title="ODBC驱动" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBC驱动</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/cpp/" title="C++客户端库" class="nav-link text-light text-wrap d-inline-block w-100 px-0">C++客户端库</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-3-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-3-10" title="第三方工具" class="nav-link text-light dropdown-toggle px-0">第三方工具</a>
+<div id="sidebar-sidebar-3-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/" title="第三方工具" class="nav-link text-light text-wrap d-inline-block w-100 px-0">第三方工具</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/client-libraries/" title="客户端开发库" class="nav-link text-light text-wrap d-inline-block w-100 px-0">客户端开发库</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/integrations/" title="第三方集成库" class="nav-link text-light text-wrap d-inline-block w-100 px-0">第三方集成库</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/proxy/" title="第三方代理" class="nav-link text-light text-wrap d-inline-block w-100 px-0">第三方代理</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../interfaces/third-party/gui/" title="第三方开发的可视化界面" class="nav-link text-light text-wrap d-inline-block w-100 px-0">第三方开发的可视化界面</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4" title="引擎" class="nav-link text-light dropdown-toggle px-0">引擎</a>
+<div id="sidebar-sidebar-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-2" title="数据库引擎" class="nav-link text-light dropdown-toggle px-0">数据库引擎</a>
+<div id="sidebar-sidebar-4-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/materialized-mysql/" title="MaterializedMySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedMySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/materialize-mysql/" title="[experimental] MaterializedMySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">[experimental] MaterializedMySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/lazy/" title="Lazy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Lazy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/atomic/" title="Atomic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Atomic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/database-engines/replicated/" title="[experimental] Replicated" class="nav-link text-light text-wrap d-inline-block w-100 px-0">[experimental] Replicated</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-3" title="表引擎" class="nav-link text-light dropdown-toggle px-0">表引擎</a>
+<div id="sidebar-sidebar-4-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-3-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-3-1" title="合并树家族" class="nav-link text-light dropdown-toggle px-0">合并树家族</a>
+<div id="sidebar-sidebar-4-3-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/versionedcollapsingmergetree/" title="版本折叠MergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">版本折叠MergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/graphitemergetree/" title="GraphiteMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GraphiteMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/aggregatingmergetree/" title="AggregatingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregatingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/collapsingmergetree/" title="CollapsingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CollapsingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/mergetree/" title="MergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/replacingmergetree/" title="ReplacingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ReplacingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/summingmergetree/" title="SummingMergeTree" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SummingMergeTree</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/replication/" title="数据副本" class="nav-link text-light text-wrap d-inline-block w-100 px-0">数据副本</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/mergetree-family/custom-partitioning-key/" title="自定义分区键" class="nav-link text-light text-wrap d-inline-block w-100 px-0">自定义分区键</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-3-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-3-2" title="日志系列" class="nav-link text-light dropdown-toggle px-0">日志系列</a>
+<div id="sidebar-sidebar-4-3-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/" title="日志引擎系列" class="nav-link text-light text-wrap d-inline-block w-100 px-0">日志引擎系列</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/log/" title="Log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/stripelog/" title="StripeLog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">StripeLog</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/log-family/tinylog/" title="TinyLog" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TinyLog</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-3-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-3-3" title="集成" class="nav-link text-light dropdown-toggle px-0">集成</a>
+<div id="sidebar-sidebar-4-3-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/hive/" title="Hive" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Hive</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/mongodb/" title="MongoDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MongoDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/s3/" title="S3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">S3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/sqlite/" title="SQLite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQLite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/embedded-rocksdb/" title="EmbeddedRocksDB" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EmbeddedRocksDB</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/rabbitmq/" title="RabbitMQ" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RabbitMQ</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/postgresql/" title="PostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/ExternalDistributed/" title="ExternalDistributed" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ExternalDistributed</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/materialized-postgresql/" title="MaterializedPostgreSQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedPostgreSQL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/" title="集成的表引擎" class="nav-link text-light text-wrap d-inline-block w-100 px-0">集成的表引擎</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/jdbc/" title="JDBC表引擎" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JDBC表引擎</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/odbc/" title="ODBC" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ODBC</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/hdfs/" title="HDFS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HDFS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/kafka/" title="Kafka" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Kafka</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/integrations/mysql/" title="MySQL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MySQL</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-4-3-4" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-4-3-4" title="特别" class="nav-link text-light dropdown-toggle px-0">特别</a>
+<div id="sidebar-sidebar-4-3-4" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/distributed/" title="分布式引擎" class="nav-link text-light text-wrap d-inline-block w-100 px-0">分布式引擎</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/join/" title="关联表引擎" class="nav-link text-light text-wrap d-inline-block w-100 px-0">关联表引擎</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/memory/" title="Memory" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Memory</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/generate/" title="随机数生成" class="nav-link text-light text-wrap d-inline-block w-100 px-0">随机数生成</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/materializedview/" title="MaterializedView" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MaterializedView</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/null/" title="Null" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Null</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/url/" title="URL(URL,格式)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">URL(URL,格式)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/merge/" title="合并" class="nav-link text-light text-wrap d-inline-block w-100 px-0">合并</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/dictionary/" title="字典" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字典</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/file/" title="文件(输入格式)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">文件(输入格式)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/external-data/" title="用于查询处理的外部数据" class="nav-link text-light text-wrap d-inline-block w-100 px-0">用于查询处理的外部数据</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/buffer/" title="缓冲区" class="nav-link text-light text-wrap d-inline-block w-100 px-0">缓冲区</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/view/" title="视图" class="nav-link text-light text-wrap d-inline-block w-100 px-0">视图</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/special/set/" title="集合" class="nav-link text-light text-wrap d-inline-block w-100 px-0">集合</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../engines/table-engines/" title="表引擎" class="nav-link text-light text-wrap d-inline-block w-100 px-0">表引擎</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5" title="SQL参考" class="nav-link text-light dropdown-toggle px-0">SQL参考</a>
+<div id="sidebar-sidebar-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2" title="SQL 语句" class="nav-link text-light dropdown-toggle px-0">SQL 语句</a>
+<div id="sidebar-sidebar-5-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2-2" title="SELECT" class="nav-link text-light dropdown-toggle px-0">SELECT</a>
+<div id="sidebar-sidebar-5-2-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/" title="综述" class="nav-link text-light text-wrap d-inline-block w-100 px-0">综述</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/all/" title="ALL 子句" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALL 子句</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/array-join/" title="ARRAY JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ARRAY JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/distinct/" title="DISTINCT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DISTINCT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/format/" title="FORMAT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FORMAT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/from/" title="FROM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FROM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/group-by/" title="GROUP BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GROUP BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/having/" title="HAVING" class="nav-link text-light text-wrap d-inline-block w-100 px-0">HAVING</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/into-outfile/" title="INTO OUTFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INTO OUTFILE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/join/" title="JOIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JOIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/limit/" title="LIMIT" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/limit-by/" title="LIMIT BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LIMIT BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/offset/" title="OFFSET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OFFSET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/order-by/" title="ORDER BY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ORDER BY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/prewhere/" title="PREWHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">PREWHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/sample/" title="SAMPLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SAMPLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/union/" title="UNION ALL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UNION ALL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/where/" title="WHERE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WHERE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/select/with/" title="WITH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">WITH</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-2-3" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-2-3" title="CREATE" class="nav-link text-light dropdown-toggle px-0">CREATE</a>
+<div id="sidebar-sidebar-5-2-3" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/" title="Overview" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Overview</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/database/" title="DATABASE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DATABASE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/table/" title="TABLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TABLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/view/" title="VIEW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">VIEW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/dictionary/" title="DICTIONARY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DICTIONARY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/function/" title="FUNCTION" class="nav-link text-light text-wrap d-inline-block w-100 px-0">FUNCTION</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/user/" title="USER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/role/" title="ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/row-policy/" title="ROW POLICY" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ROW POLICY</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/quota/" title="QUOTA" class="nav-link text-light text-wrap d-inline-block w-100 px-0">QUOTA</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/settings-profile/" title="SETTINGS PROFILE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SETTINGS PROFILE</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/alter/" title="ALTER" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ALTER</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/system/" title="SYSTEM" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SYSTEM</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/show/" title="SHOW" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SHOW</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/explain/" title="EXPLAIN" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXPLAIN</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/grant/" title="授权操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">授权操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/attach/" title="ATTACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ATTACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/revoke/" title="REVOKE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">REVOKE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/check-table/" title="CHECK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CHECK</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/misc/" title="其他" class="nav-link text-light text-wrap d-inline-block w-100 px-0">其他</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/describe-table/" title="DESCRIBE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DESCRIBE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/detach/" title="DETACH" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DETACH</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/drop/" title="DROP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DROP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/exists/" title="EXISTS" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXISTS</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/kill/" title="KILL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">KILL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/optimize/" title="OPTIMIZE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OPTIMIZE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/rename/" title="RENAME" class="nav-link text-light text-wrap d-inline-block w-100 px-0">RENAME</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/exchange/" title="EXCHANGE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">EXCHANGE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/set/" title="SET" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/set-role/" title="SET ROLE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SET ROLE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/truncate/" title="TRUNCATE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">TRUNCATE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/use/" title="USE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">USE</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/create/" title="CREATE DATABASE" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CREATE DATABASE</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/statements/insert-into/" title="INSERT INTO 语句" class="nav-link text-light text-wrap d-inline-block w-100 px-0">INSERT INTO 语句</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/syntax/" title="SQL语法" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SQL语法</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/distributed-ddl/" title="Distributed DDL" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Distributed DDL</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-5" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-5" title="函数" class="nav-link text-light dropdown-toggle px-0">函数</a>
+<div id="sidebar-sidebar-5-5" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/" title="简介" class="nav-link text-light text-wrap d-inline-block w-100 px-0">简介</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/arithmetic-functions/" title="算术函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">算术函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/comparison-functions/" title="比较函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">比较函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/logical-functions/" title="逻辑函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">逻辑函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/type-conversion-functions/" title="类型转换函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">类型转换函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/files/" title="Files" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Files</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/tuple-map-functions/" title="Working with maps" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Working with maps</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/in-functions/" title="IN 运算符" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IN 运算符</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-5-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-5-9" title="Geo" class="nav-link text-light dropdown-toggle px-0">Geo</a>
+<div id="sidebar-sidebar-5-5-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/coordinates/" title="Geographical Coordinates" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geographical Coordinates</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/geohash/" title="Geohash" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geohash</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/h3/" title="H3 Indexes" class="nav-link text-light text-wrap d-inline-block w-100 px-0">H3 Indexes</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/introspection/" title="自省" class="nav-link text-light text-wrap d-inline-block w-100 px-0">自省</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/tuple-functions/" title="Tuples" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuples</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/encryption-functions/" title="Encryption" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Encryption</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/nlp-functions/" title="NLP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">NLP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/time-window-functions/" title="时间窗口" class="nav-link text-light text-wrap d-inline-block w-100 px-0">时间窗口</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/geo/" title="GEO函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">GEO函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/hash-functions/" title="Hash函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Hash函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ip-address-functions/" title="IP函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IP函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/json-functions/" title="JSON函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">JSON函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/functions-for-nulls/" title="Nullable处理函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nullable处理函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/url-functions/" title="URL函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">URL函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/uuid-functions/" title="UUID函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUID函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/array-join/" title="arrayJoin函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">arrayJoin函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/bitmap-functions/" title="位图函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">位图函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/bit-functions/" title="位操作函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">位操作函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ym-dict-functions/" title="使用 Yandex.Metrica 字典函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">使用 Yandex.Metrica 字典函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/other-functions/" title="其他函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">其他函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/rounding-functions/" title="取整函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">取整函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/ext-dict-functions/" title="字典函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字典函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-functions/" title="字符串函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字符串函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/splitting-merging-functions/" title="字符串拆分合并函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字符串拆分合并函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-search-functions/" title="字符串搜索函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字符串搜索函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/string-replace-functions/" title="字符串替换函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字符串替换函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/math-functions/" title="数学函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">数学函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/array-functions/" title="数组函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">数组函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/date-time-functions/" title="时间日期函数" class="nav-link text-white active text-wrap d-inline-block w-100 px-0">时间日期函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/machine-learning-functions/" title="机器学习函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">机器学习函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/conditional-functions/" title="条件函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">条件函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/encoding-functions/" title="编码函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">编码函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/random-functions/" title="随机函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">随机函数</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/functions/higher-order-functions/" title="高阶函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">高阶函数</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-6" title="聚合函数" class="nav-link text-light dropdown-toggle px-0">聚合函数</a>
+<div id="sidebar-sidebar-5-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/" title="简介" class="nav-link text-light text-wrap d-inline-block w-100 px-0">简介</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-6-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-6-2" title="Reference" class="nav-link text-light dropdown-toggle px-0">Reference</a>
+<div id="sidebar-sidebar-5-6-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/count/" title="count" class="nav-link text-light text-wrap d-inline-block w-100 px-0">count</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/min/" title="min" class="nav-link text-light text-wrap d-inline-block w-100 px-0">min</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/max/" title="max" class="nav-link text-light text-wrap d-inline-block w-100 px-0">max</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sum/" title="sum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/avg/" title="avg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/any/" title="any" class="nav-link text-light text-wrap d-inline-block w-100 px-0">any</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stddevpop/" title="stddevPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stddevsamp/" title="stddevSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stddevSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/varpop/" title="varPop(x)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varPop(x)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/varsamp/" title="varSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">varSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/covarpop/" title="covarPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarPop</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/covarsamp/" title="covarSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">covarSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/anyheavy/" title="anyHeavy" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyHeavy</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/anylast/" title="anyLast" class="nav-link text-light text-wrap d-inline-block w-100 px-0">anyLast</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/argmin/" title="argMin" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMin</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/argmax/" title="argMax" class="nav-link text-light text-wrap d-inline-block w-100 px-0">argMax</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/avgweighted/" title="avgWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">avgWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/corr/" title="corr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">corr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/topk/" title="topK" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topK</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/topkweighted/" title="topKWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">topKWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparray/" title="groupArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupuniqarray/" title="groupUniqArray" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupUniqArray</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparrayinsertat/" title="groupArrayInsertAt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayInsertAt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraymovingsum/" title="groupArrayMovingSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraymovingavg/" title="groupArrayMovingAvg" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArrayMovingAvg</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/grouparraysample/" title="groupArraySample" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupArraySample</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitand/" title="groupBitAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitor/" title="groupBitOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitxor/" title="groupBitXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmap/" title="groupBitmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapand/" title="groupBitmapAnd" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapAnd</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapor/" title="groupBitmapOr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapOr</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/groupbitmapxor/" title="groupBitmapXor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">groupBitmapXor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumwithoverflow/" title="sumWithOverflow" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumWithOverflow</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/deltasum/" title="deltaSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/deltasumtimestamp/" title="deltaSumTimestamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">deltaSumTimestamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/summap/" title="sumMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/minmap/" title="minMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">minMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/maxmap/" title="maxMap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">maxMap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumcount/" title="sumCount" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumCount</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/sumkahan/" title="sumKahan" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sumKahan</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/intervalLengthSum/" title="intervalLengthSum" class="nav-link text-light text-wrap d-inline-block w-100 px-0">intervalLengthSum</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/initializeAggregation/" title="initializeAggregation" class="nav-link text-light text-wrap d-inline-block w-100 px-0">initializeAggregation</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/skewpop/" title="skewPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/skewsamp/" title="skewSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">skewSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/kurtpop/" title="kurtPop" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtPop</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/kurtsamp/" title="kurtSamp" class="nav-link text-light text-wrap d-inline-block w-100 px-0">kurtSamp</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniq/" title="uniq" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniq</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqexact/" title="uniqExact" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqExact</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqcombined/" title="uniqCombined" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqcombined64/" title="uniqCombined64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqCombined64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqhll12/" title="uniqHLL12" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqHLL12</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/uniqthetasketch/" title="uniqTheta" class="nav-link text-light text-wrap d-inline-block w-100 px-0">uniqTheta</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantile/" title="quantile" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantile</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiles/" title="quantiles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantiles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantileexact/" title="quantileExact" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExact</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantileexactweighted/" title="quantileExactWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileExactWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletiming/" title="quantileTiming" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTiming</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletimingweighted/" title="quantileTimingWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTimingWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiledeterministic/" title="quantileDeterministic" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileDeterministic</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletdigest/" title="quantileTDigest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantiletdigestweighted/" title="quantileTDigestWeighted" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileTDigestWeighted</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/quantilebfloat16/" title="quantileBFloat16" class="nav-link text-light text-wrap d-inline-block w-100 px-0">quantileBFloat16</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/simplelinearregression/" title="simpleLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">simpleLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stochasticlinearregression/" title="stochasticLinearRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLinearRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/stochasticlogisticregression/" title="stochasticLogisticRegression" class="nav-link text-light text-wrap d-inline-block w-100 px-0">stochasticLogisticRegression</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/categoricalinformationvalue/" title="categoricalInformationValue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">categoricalInformationValue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/studentttest/" title="studentTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">studentTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/welchttest/" title="welchTTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">welchTTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/mannwhitneyutest/" title="mannWhitneyUTest" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mannWhitneyUTest</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/median/" title="median" class="nav-link text-light text-wrap d-inline-block w-100 px-0">median</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/reference/rankCorr/" title="rankCorr" class="nav-link text-light text-wrap d-inline-block w-100 px-0">rankCorr</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/combinators/" title="聚合函数组合器" class="nav-link text-light text-wrap d-inline-block w-100 px-0">聚合函数组合器</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/aggregate-functions/parametric-functions/" title="参数聚合函数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">参数聚合函数</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-7" title="表函数" class="nav-link text-light dropdown-toggle px-0">表函数</a>
+<div id="sidebar-sidebar-5-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/" title="导言" class="nav-link text-light text-wrap d-inline-block w-100 px-0">导言</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/file/" title="file" class="nav-link text-light text-wrap d-inline-block w-100 px-0">file</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/merge/" title="merge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">merge</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/numbers/" title="numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/url/" title="url" class="nav-link text-light text-wrap d-inline-block w-100 px-0">url</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/postgresql/" title="postgresql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">postgresql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/jdbc/" title="jdbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">jdbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/odbc/" title="odbc" class="nav-link text-light text-wrap d-inline-block w-100 px-0">odbc</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/hdfs/" title="hdfs" class="nav-link text-light text-wrap d-inline-block w-100 px-0">hdfs</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/s3/" title="s3" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/input/" title="input" class="nav-link text-light text-wrap d-inline-block w-100 px-0">input</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/generate/" title="generateRandom" class="nav-link text-light text-wrap d-inline-block w-100 px-0">generateRandom</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/cluster/" title="cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/view/" title="view" class="nav-link text-light text-wrap d-inline-block w-100 px-0">view</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/null/" title="null function" class="nav-link text-light text-wrap d-inline-block w-100 px-0">null function</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/dictionary/" title="dictionary function" class="nav-link text-light text-wrap d-inline-block w-100 px-0">dictionary function</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/s3Cluster/" title="s3Cluster" class="nav-link text-light text-wrap d-inline-block w-100 px-0">s3Cluster</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/sqlite/" title="sqlite" class="nav-link text-light text-wrap d-inline-block w-100 px-0">sqlite</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/mysql/" title="mysql" class="nav-link text-light text-wrap d-inline-block w-100 px-0">mysql</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/table-functions/remote/" title="remote, remoteSecure" class="nav-link text-light text-wrap d-inline-block w-100 px-0">remote, remoteSecure</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-8" title="字典" class="nav-link text-light dropdown-toggle px-0">字典</a>
+<div id="sidebar-sidebar-5-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/" title="导言" class="nav-link text-light text-wrap d-inline-block w-100 px-0">导言</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-8-2" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-8-2" title="外部字典" class="nav-link text-light dropdown-toggle px-0">外部字典</a>
+<div id="sidebar-sidebar-5-8-2" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts/" title="概述" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概述</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict/" title="配置外部字典" class="nav-link text-light text-wrap d-inline-block w-100 px-0">配置外部字典</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-layout/" title="在内存中存储字典" class="nav-link text-light text-wrap d-inline-block w-100 px-0">在内存中存储字典</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-lifetime/" title="字典更新" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字典更新</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources/" title="外部字典的来源" class="nav-link text-light text-wrap d-inline-block w-100 px-0">外部字典的来源</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-structure/" title="字典键和字段" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字典键和字段</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-hierarchical/" title="分层字典" class="nav-link text-light text-wrap d-inline-block w-100 px-0">分层字典</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/external-dictionaries/external-dicts-dict-polygon/" title="Polygon Dictionaries With Grids" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Polygon Dictionaries With Grids</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/dictionaries/internal-dicts/" title="内部字典" class="nav-link text-light text-wrap d-inline-block w-100 px-0">内部字典</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9" title="数据类型" class="nav-link text-light dropdown-toggle px-0">数据类型</a>
+<div id="sidebar-sidebar-5-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/" title="简介" class="nav-link text-light text-wrap d-inline-block w-100 px-0">简介</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/int-uint/" title="UInt8, UInt16, UInt32, UInt64, UInt128, UInt256, Int8, Int16, Int32, Int64, Int128, Int256" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UInt8, UInt16, UInt32, UInt64, UInt128, UInt256, Int8, Int16, Int32, Int64, Int128, Int256</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/uuid/" title="UUID" class="nav-link text-light text-wrap d-inline-block w-100 px-0">UUID</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/date32/" title="Date32" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Date32</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/datetime64/" title="DateTime64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">DateTime64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/lowcardinality/" title="低基数类型" class="nav-link text-light text-wrap d-inline-block w-100 px-0">低基数类型</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-7" title="域" class="nav-link text-light dropdown-toggle px-0">域</a>
+<div id="sidebar-sidebar-5-9-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/" title="域" class="nav-link text-light text-wrap d-inline-block w-100 px-0">域</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/ipv4/" title="IPv4" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv4</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/domains/ipv6/" title="IPv6" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IPv6</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/multiword-types/" title="Multiword Type Names" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Multiword Type Names</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/geo/" title="Geo" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Geo</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/map/" title="Map(key, value)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Map(key, value)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/aggregatefunction/" title="AggregateFunction(name, types_of_arguments…)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">AggregateFunction(name, types_of_arguments…)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/decimal/" title="Decimal(P,S),Decimal32(S),Decimal64(S),Decimal128(S)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Decimal(P,S),Decimal32(S),Decimal64(S),Decimal128(S)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/enum/" title="Enum8,Enum16" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Enum8,Enum16</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/float/" title="Float32,Float64" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Float32,Float64</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/simpleaggregatefunction/" title="SimpleAggregateFunction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SimpleAggregateFunction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/tuple/" title="Tuple(T1, T2, …)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Tuple(T1, T2, …)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/nullable/" title="可为空（类型名称)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">可为空（类型名称)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/fixedstring/" title="固定字符串" class="nav-link text-light text-wrap d-inline-block w-100 px-0">固定字符串</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/string/" title="字符串" class="nav-link text-light text-wrap d-inline-block w-100 px-0">字符串</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/boolean/" title="布尔值" class="nav-link text-light text-wrap d-inline-block w-100 px-0">布尔值</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/date/" title="日期" class="nav-link text-light text-wrap d-inline-block w-100 px-0">日期</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/datetime/" title="日期时间" class="nav-link text-light text-wrap d-inline-block w-100 px-0">日期时间</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/array/" title="阵列(T)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">阵列(T)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-24" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-24" title="嵌套数据结构" class="nav-link text-light dropdown-toggle px-0">嵌套数据结构</a>
+<div id="sidebar-sidebar-5-9-24" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/nested-data-structures/nested/" title="Nested(Name1 Type1, Name2 Type2, …)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Nested(Name1 Type1, Name2 Type2, …)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/nested-data-structures/" title="嵌套数据结构" class="nav-link text-light text-wrap d-inline-block w-100 px-0">嵌套数据结构</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-9-25" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-9-25" title="特殊数据类型" class="nav-link text-light dropdown-toggle px-0">特殊数据类型</a>
+<div id="sidebar-sidebar-5-9-25" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/interval/" title="间隔" class="nav-link text-light text-wrap d-inline-block w-100 px-0">间隔</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/nothing/" title="没什么" class="nav-link text-light text-wrap d-inline-block w-100 px-0">没什么</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/" title="特殊数据类型" class="nav-link text-light text-wrap d-inline-block w-100 px-0">特殊数据类型</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/expression/" title="表达式" class="nav-link text-light text-wrap d-inline-block w-100 px-0">表达式</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/data-types/special-data-types/set/" title="集合" class="nav-link text-light text-wrap d-inline-block w-100 px-0">集合</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/ansi/" title="ANSI兼容性" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ANSI兼容性</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-11" title="Window Functions" class="nav-link text-light dropdown-toggle px-0">Window Functions</a>
+<div id="sidebar-sidebar-5-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/window-functions/" title="Window Functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Window Functions</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-5-12" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-5-12" title="操作符" class="nav-link text-light dropdown-toggle px-0">操作符</a>
+<div id="sidebar-sidebar-5-12" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/operators/in/" title="IN 操作符" class="nav-link text-light text-wrap d-inline-block w-100 px-0">IN 操作符</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../sql-reference/operators/" title="操作符" class="nav-link text-light text-wrap d-inline-block w-100 px-0">操作符</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-6" title="指南" class="nav-link text-light dropdown-toggle px-0">指南</a>
+<div id="sidebar-sidebar-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../guides/" title="概述" class="nav-link text-light text-wrap d-inline-block w-100 px-0">概述</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../guides/apply-catboost-model/" title="应用CatBoost模型" class="nav-link text-light text-wrap d-inline-block w-100 px-0">应用CatBoost模型</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-7" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7" title="操作" class="nav-link text-light dropdown-toggle px-0">操作</a>
+<div id="sidebar-sidebar-7" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/" title="操作" class="nav-link text-light text-wrap d-inline-block w-100 px-0">操作</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/requirements/" title="必备条件" class="nav-link text-light text-wrap d-inline-block w-100 px-0">必备条件</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/monitoring/" title="监控" class="nav-link text-light text-wrap d-inline-block w-100 px-0">监控</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/troubleshooting/" title="常见问题" class="nav-link text-light text-wrap d-inline-block w-100 px-0">常见问题</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/update/" title="更新" class="nav-link text-light text-wrap d-inline-block w-100 px-0">更新</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-6" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-6" title="External User Authenticators and Directories" class="nav-link text-light dropdown-toggle px-0">External User Authenticators and Directories</a>
+<div id="sidebar-sidebar-7-6" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/" title="Introduction" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Introduction</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/kerberos/" title="Kerberos认证" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Kerberos认证</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/ldap/" title="LDAP" class="nav-link text-light text-wrap d-inline-block w-100 px-0">LDAP</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/external-authenticators/ssl-x509/" title="SSL X.509 certificate authentication" class="nav-link text-light text-wrap d-inline-block w-100 px-0">SSL X.509 certificate authentication</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/access-rights/" title="访问权限和账户管理" class="nav-link text-light text-wrap d-inline-block w-100 px-0">访问权限和账户管理</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/backup/" title="数据备份" class="nav-link text-light text-wrap d-inline-block w-100 px-0">数据备份</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-9" title="优化性能" class="nav-link text-light dropdown-toggle px-0">优化性能</a>
+<div id="sidebar-sidebar-7-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/optimizing-performance/sampling-query-profiler/" title="查询分析" class="nav-link text-light text-wrap d-inline-block w-100 px-0">查询分析</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-10" title="系统表" class="nav-link text-light dropdown-toggle px-0">系统表</a>
+<div id="sidebar-sidebar-7-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/" title="系统表" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统表</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/asynchronous_metric_log/" title="system.asynchronous_metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/asynchronous_metrics/" title="system.asynchronous_metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.asynchronous_metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/clusters/" title="system.clusters" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.clusters</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/columns/" title="system.columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/contributors/" title="system.contributors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.contributors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/crash-log/" title="system.crash_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.crash_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/current-roles/" title="system.current_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.current_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/data_skipping_indices/" title="system.data_skipping_indices" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_skipping_indices</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/data_type_families/" title="system.data_type_families" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.data_type_families</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/databases/" title="system.databases" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.databases</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/detached_parts/" title="system.detached_parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.detached_parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/disks/" title="system.disks" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.disks</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/distributed_ddl_queue/" title="system.distributed_ddl_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distributed_ddl_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/distribution_queue/" title="system.distribution_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.distribution_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/enabled-roles/" title="system.enabled_roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.enabled_roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/errors/" title="system.errors" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.errors</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/functions/" title="system.functions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.functions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/grants/" title="system.grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/licenses/" title="system.licenses" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.licenses</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/merge_tree_settings/" title="system.merge_tree_settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.merge_tree_settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/metrics/" title="system.metrics" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.metrics</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/mutations/" title="system.mutations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.mutations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/numbers/" title="system.numbers" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/numbers_mt/" title="system.numbers_mt" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.numbers_mt</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/one/" title="system.one" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.one</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/opentelemetry_span_log/" title="system.opentelemetry_span_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.opentelemetry_span_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/parts/" title="system.parts" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/parts_columns/" title="system.parts_columns" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.parts_columns</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_log/" title="system.query_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_views_log/" title="system.query_views_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.query_views_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quota_limits/" title="system.quota_limits" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_limits</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quota_usage/" title="system.quota_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quota_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quotas/" title="system.quotas" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/quotas_usage/" title="system.quotas_usage" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.quotas_usage</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replicated_fetches/" title="system.replicated_fetches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replicated_fetches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replication_queue/" title="system.replication_queue" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.replication_queue</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/role-grants/" title="system.role_grants" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.role_grants</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/roles/" title="system.roles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.roles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/row_policies/" title="system.row_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.row_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings/" title="system.settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings_profile_elements/" title="system.settings_profile_elements" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profile_elements</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/settings_profiles/" title="system.settings_profiles" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.settings_profiles</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/stack_trace/" title="system.stack_trace" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.stack_trace</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/storage_policies/" title="system.storage_policies" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.storage_policies</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/tables/" title="system.tables" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.tables</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/time_zones/" title="system.time_zones" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.time_zones</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/users/" title="system.users" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.users</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/zookeeper/" title="system.zookeeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/zookeeper_log/" title="system.zookeeper_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">system.zookeeper_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/graphite_retentions/" title="系统。graphite_retentions" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。graphite_retentions</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/metric_log/" title="系统。metric_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。metric_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/part_log/" title="系统。part_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。part_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/query_thread_log/" title="系统。query_thread_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。query_thread_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/text_log/" title="系统。text_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。text_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/trace_log/" title="系统。trace_log" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。trace_log</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/replicas/" title="系统。副本" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。副本</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/merges/" title="系统。合并" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。合并</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/dictionaries/" title="系统。字典" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。字典</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/events/" title="系统。活动" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。活动</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/processes/" title="系统。流程" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。流程</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/system-tables/table_engines/" title="系统。表_engines" class="nav-link text-light text-wrap d-inline-block w-100 px-0">系统。表_engines</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/performance-test/" title="测试硬件" class="nav-link text-light text-wrap d-inline-block w-100 px-0">测试硬件</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/opentelemetry/" title="OpenTelemetry Support" class="nav-link text-light text-wrap d-inline-block w-100 px-0">OpenTelemetry Support</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/caches/" title="Caches" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Caches</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/clickhouse-keeper/" title="ClickHouse Keeper" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse Keeper</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/storing-data/" title="External Disks for Storing Data" class="nav-link text-light text-wrap d-inline-block w-100 px-0">External Disks for Storing Data</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/tips/" title="使用建议" class="nav-link text-light text-wrap d-inline-block w-100 px-0">使用建议</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/configuration-files/" title="配置文件" class="nav-link text-light text-wrap d-inline-block w-100 px-0">配置文件</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/quotas/" title="配额" class="nav-link text-light text-wrap d-inline-block w-100 px-0">配额</a>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-19" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-19" title="实用工具" class="nav-link text-light dropdown-toggle px-0">实用工具</a>
+<div id="sidebar-sidebar-7-19" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-local/" title="clickhouse-local" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-local</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-benchmark/" title="性能测试" class="nav-link text-light text-wrap d-inline-block w-100 px-0">性能测试</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-format/" title="clickhouse-format" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-format</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-compressor/" title="ClickHouse compressor" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse compressor</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-obfuscator/" title="ClickHouse obfuscator" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse obfuscator</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/clickhouse-copier/" title="clickhouse-copier" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-copier</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/odbc-bridge/" title="clickhouse-odbc-bridge" class="nav-link text-light text-wrap d-inline-block w-100 px-0">clickhouse-odbc-bridge</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/utilities/" title="实用工具" class="nav-link text-light text-wrap d-inline-block w-100 px-0">实用工具</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-20" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-20" title="服务器配置参数" class="nav-link text-light dropdown-toggle px-0">服务器配置参数</a>
+<div id="sidebar-sidebar-7-20" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/server-configuration-parameters/settings/" title="服务器设置" class="nav-link text-light text-wrap d-inline-block w-100 px-0">服务器设置</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/server-configuration-parameters/" title="服务器配置参数" class="nav-link text-light text-wrap d-inline-block w-100 px-0">服务器配置参数</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-7-21" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-7-21" title="设置" class="nav-link text-light dropdown-toggle px-0">设置</a>
+<div id="sidebar-sidebar-7-21" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/permissions-for-queries/" title="查询权限" class="nav-link text-light text-wrap d-inline-block w-100 px-0">查询权限</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/settings-profiles/" title="设置配置" class="nav-link text-light text-wrap d-inline-block w-100 px-0">设置配置</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/constraints-on-settings/" title="对设置的限制" class="nav-link text-light text-wrap d-inline-block w-100 px-0">对设置的限制</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/settings-users/" title="用户设置" class="nav-link text-light text-wrap d-inline-block w-100 px-0">用户设置</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/merge-tree-settings/" title="MergeTree tables settings" class="nav-link text-light text-wrap d-inline-block w-100 px-0">MergeTree tables settings</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/query-complexity/" title="查询复杂性的限制" class="nav-link text-light text-wrap d-inline-block w-100 px-0">查询复杂性的限制</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../operations/settings/" title="设置" class="nav-link text-light text-wrap d-inline-block w-100 px-0">设置</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-8" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-8" title="商业支持" class="nav-link text-light dropdown-toggle px-0">商业支持</a>
+<div id="sidebar-sidebar-8" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../commercial/cloud/" title="云" class="nav-link text-light text-wrap d-inline-block w-100 px-0">云</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../commercial/support/" title="支持" class="nav-link text-light text-wrap d-inline-block w-100 px-0">支持</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../commercial/" title="简介" class="nav-link text-light text-wrap d-inline-block w-100 px-0">简介</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-9" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-9" title="F.A.Q." class="nav-link text-light dropdown-toggle px-0">F.A.Q.</a>
+<div id="sidebar-sidebar-9" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../faq/general/" title="General" class="nav-link text-light text-wrap d-inline-block w-100 px-0">General</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/use-cases/" title="使用案例" class="nav-link text-light text-wrap d-inline-block w-100 px-0">使用案例</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/operations/" title="Operations" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Operations</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/integration/" title="Integration" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Integration</a>
+
+
+    
+        
+        
+        
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/general/" title="常见问题" class="nav-link text-light text-wrap d-inline-block w-100 px-0">常见问题</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../faq/terms_translation_zh/" title="术语翻译约定" class="nav-link text-light text-wrap d-inline-block w-100 px-0">术语翻译约定</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-10" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-10" title="ClickHouse事迹" class="nav-link text-light dropdown-toggle px-0">ClickHouse事迹</a>
+<div id="sidebar-sidebar-10" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="#sidebar-sidebar-10-1" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-10-1" title="Changelog" class="nav-link text-light dropdown-toggle px-0">Changelog</a>
+<div id="sidebar-sidebar-10-1" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/" title="2022" class="nav-link text-light text-wrap d-inline-block w-100 px-0">2022</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2017/" title="ClickHouse 版本 1.1.54327, 2017-12-21" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse 版本 1.1.54327, 2017-12-21</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2018/" title="ClickHouse 版本 18.16" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse 版本 18.16</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2019/" title="ClickHouse 版本 19.17" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse 版本 19.17</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/changelog/2020/" title="ClickHouse 版本 20.12" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse 版本 20.12</a>
+
+
+    
+    </nav>
+</div>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/roadmap/" title="Roadmap" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Roadmap</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/security-changelog/" title="安全更新日志" class="nav-link text-light text-wrap d-inline-block w-100 px-0">安全更新日志</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../whats-new/" title="ClickHouse变更及改动?" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse变更及改动?</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-11" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-11" title="ClickHouse 开发" class="nav-link text-light dropdown-toggle px-0">ClickHouse 开发</a>
+<div id="sidebar-sidebar-11" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../development/browse-code/" title="浏览源代码" class="nav-link text-light text-wrap d-inline-block w-100 px-0">浏览源代码</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-cross-arm/" title="如何在Linux上构建ClickHouse for AARCH64（ARM64)" class="nav-link text-light text-wrap d-inline-block w-100 px-0">如何在Linux上构建ClickHouse for AARCH64（ARM64)</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/cmake-in-clickhouse/" title="CMake in ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">CMake in ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/" title="ClickHouse 开发" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse 开发</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/architecture/" title="ClickHouse 架构概述" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse 架构概述</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/tests/" title="ClickHouse 测试" class="nav-link text-light text-wrap d-inline-block w-100 px-0">ClickHouse 测试</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/developer-instruction/" title="Windows使用指引" class="nav-link text-light text-wrap d-inline-block w-100 px-0">Windows使用指引</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/contrib/" title="使用的三方库" class="nav-link text-light text-wrap d-inline-block w-100 px-0">使用的三方库</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-osx/" title="在 Mac OS X 中编译 ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">在 Mac OS X 中编译 ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build-cross-osx/" title="如何在Linux中编译Mac OS X ClickHouse" class="nav-link text-light text-wrap d-inline-block w-100 px-0">如何在Linux中编译Mac OS X ClickHouse</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/adding_test_queries/" title="如何将测试查询添加到 ClickHouse CI" class="nav-link text-light text-wrap d-inline-block w-100 px-0">如何将测试查询添加到 ClickHouse CI</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/build/" title="如何构建 ClickHouse 发布包" class="nav-link text-light text-wrap d-inline-block w-100 px-0">如何构建 ClickHouse 发布包</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/style/" title="如何编写 C++ 代码" class="nav-link text-light text-wrap d-inline-block w-100 px-0">如何编写 C++ 代码</a>
+
+
+    
+        
+        
+        
+
+
+<a href="../../../development/continuous-integration/" title="持续集成检查" class="nav-link text-light text-wrap d-inline-block w-100 px-0">持续集成检查</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+                
+                
+                
+
+
+<a href="#sidebar-sidebar-12" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-sidebar-12" title="变更日志" class="nav-link text-light dropdown-toggle px-0">变更日志</a>
+<div id="sidebar-sidebar-12" class="nav flex-column collapse" style="transition-duration: unset;">
+    <nav class="nav flex-column pl-2">
+    
+    
+        
+        
+        
+
+
+<a href="../../../changelog/" title="变更日志" class="nav-link text-light text-wrap d-inline-block w-100 px-0">变更日志</a>
+
+
+    
+    </nav>
+</div>
+
+
+            
+        </nav>
+        
+    </div>
+</div>
+                <div id="content-wrapper" class="anchor-fixer col-md-8 mt-5 p-2 p-md-4">
+    <div id="content">
+        
+            
+            
+            
+                
+                <nav class="text-muted" aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent p-0">
+                        
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../../" class="text-reset">SQL参考</a>
+                            
+                        </li>
+                       
+                        
+                        
+                        <li class="breadcrumb-item"><a href="../" class="text-reset">函数</a>
+                            
+                        </li>
+                       
+                    </ol>
+                </nav>
+            
+
+            
+            <h1 id="shi-jian-ri-qi-han-shu">时间日期函数<a class="headerlink" href="#shi-jian-ri-qi-han-shu" title="Permanent link"> </a></h1>
+<p>支持时区。</p>
+<p>所有的时间日期函数都可以在第二个可选参数中接受时区参数。示例：Asia / Yekaterinburg。在这种情况下，它们使用指定的时区而不是本地（默认）时区。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">toDateTime</span><span class="p">(</span><span class="s1">'2016-06-15 23:00:00'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">time</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toDate</span><span class="p">(</span><span class="k">time</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">date_local</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toDate</span><span class="p">(</span><span class="k">time</span><span class="p">,</span><span class="w"> </span><span class="s1">'Asia/Yekaterinburg'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">date_yekat</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toString</span><span class="p">(</span><span class="k">time</span><span class="p">,</span><span class="w"> </span><span class="s1">'US/Samoa'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">time_samoa</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌────────────────time─┬─date_local─┬─date_yekat─┬─time_samoa──────────┐
+│ 2016-06-15 23:00:00 │ 2016-06-15 │ 2016-06-16 │ 2016-06-15 09:00:00 │
+└─────────────────────┴────────────┴────────────┴─────────────────────┘
+</code></pre></div>
+<p>仅支持与UTC相差一整小时的时区。</p>
+<h2 id="totimezone">toTimeZone<a class="headerlink" href="#totimezone" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为指定的时区。 时区是Date/DateTime类型的属性。 表字段或结果集的列的内部值（秒数）不会更改，列的类型会更改，并且其字符串表示形式也会相应更改。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">toDateTime</span><span class="p">(</span><span class="s1">'2019-01-01 00:00:00'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UTC'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">time_utc</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toTypeName</span><span class="p">(</span><span class="n">time_utc</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">type_utc</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toInt32</span><span class="p">(</span><span class="n">time_utc</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">int32utc</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toTimeZone</span><span class="p">(</span><span class="n">time_utc</span><span class="p">,</span><span class="w"> </span><span class="s1">'Asia/Yekaterinburg'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">time_yekat</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toTypeName</span><span class="p">(</span><span class="n">time_yekat</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">type_yekat</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toInt32</span><span class="p">(</span><span class="n">time_yekat</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">int32yekat</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toTimeZone</span><span class="p">(</span><span class="n">time_utc</span><span class="p">,</span><span class="w"> </span><span class="s1">'US/Samoa'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">time_samoa</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toTypeName</span><span class="p">(</span><span class="n">time_samoa</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">type_samoa</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toInt32</span><span class="p">(</span><span class="n">time_samoa</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">int32samoa</span><span class="w"></span>
+<span class="n">FORMAT</span><span class="w"> </span><span class="n">Vertical</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">Row 1:
+──────
+time_utc:   2019-01-01 00:00:00
+type_utc:   DateTime('UTC')
+int32utc:   1546300800
+time_yekat: 2019-01-01 05:00:00
+type_yekat: DateTime('Asia/Yekaterinburg')
+int32yekat: 1546300800
+time_samoa: 2018-12-31 13:00:00
+type_samoa: DateTime('US/Samoa')
+int32samoa: 1546300800
+</code></pre></div>
+<p><code class="syntax">toTimeZone(time_utc, 'Asia/Yekaterinburg')</code> 把 <code class="syntax">DateTime('UTC')</code> 类型转换为 <code class="syntax">DateTime('Asia/Yekaterinburg')</code>. 内部值 (Unixtimestamp) 1546300800 保持不变, 但是字符串表示(toString() 函数的结果值) 由 <code class="syntax">time_utc:   2019-01-01 00:00:00</code> 转换为o <code class="syntax">time_yekat: 2019-01-01 05:00:00</code>.</p>
+<h2 id="toyear">toYear<a class="headerlink" href="#toyear" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含年份编号（AD）的UInt16类型的数字。</p>
+<h2 id="toquarter">toQuarter<a class="headerlink" href="#toquarter" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含季度编号的UInt8类型的数字。</p>
+<h2 id="tomonth">toMonth<a class="headerlink" href="#tomonth" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含月份编号（1-12）的UInt8类型的数字。</p>
+<h2 id="todayofyear">toDayOfYear<a class="headerlink" href="#todayofyear" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含一年中的某一天的编号的UInt16（1-366）类型的数字。</p>
+<h2 id="todayofmonth">toDayOfMonth<a class="headerlink" href="#todayofmonth" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含一月中的某一天的编号的UInt8（1-31）类型的数字。</p>
+<h2 id="todayofweek">toDayOfWeek<a class="headerlink" href="#todayofweek" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含一周中的某一天的编号的UInt8（周一是1, 周日是7）类型的数字。</p>
+<h2 id="tohour">toHour<a class="headerlink" href="#tohour" title="Permanent link"> </a></h2>
+<p>将DateTime转换为包含24小时制（0-23）小时数的UInt8数字。<br/>
+这个函数假设如果时钟向前移动，它是一个小时，发生在凌晨2点，如果时钟被移回，它是一个小时，发生在凌晨3点（这并非总是如此 - 即使在莫斯科时钟在不同的时间两次改变）。</p>
+<h2 id="tominute">toMinute<a class="headerlink" href="#tominute" title="Permanent link"> </a></h2>
+<p>将DateTime转换为包含一小时中分钟数（0-59）的UInt8数字。</p>
+<h2 id="tosecond">toSecond<a class="headerlink" href="#tosecond" title="Permanent link"> </a></h2>
+<p>将DateTime转换为包含一分钟中秒数（0-59）的UInt8数字。<br/>
+闰秒不计算在内。</p>
+<h2 id="to-unix-timestamp">toUnixTimestamp<a class="headerlink" href="#to-unix-timestamp" title="Permanent link"> </a></h2>
+<p>对于DateTime参数：将值转换为UInt32类型的数字-Unix时间戳（<a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">https://en.wikipedia.org/wiki/Unix_time</a>）。<br/>
+对于String参数：根据时区将输入字符串转换为日期时间（可选的第二个参数，默认使用服务器时区），并返回相应的unix时间戳。</p>
+<p><strong>语法</strong></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">toUnixTimestamp</span><span class="p">(</span><span class="n">datetime</span><span class="p">)</span><span class="w"></span>
+<span class="n">toUnixTimestamp</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">timezone</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回 unix timestamp.</li>
+</ul>
+<p>类型: <code class="syntax">UInt32</code>.</p>
+<p><strong>示例</strong></p>
+<p>查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">toUnixTimestamp</span><span class="p">(</span><span class="s1">'2017-11-05 08:07:47'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Asia/Tokyo'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">unix_timestamp</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─unix_timestamp─┐
+│     1509836867 │
+└────────────────┘
+</code></pre></div>
+<h2 id="tostartofyear">toStartOfYear<a class="headerlink" href="#tostartofyear" title="Permanent link"> </a></h2>
+<p>将Date或DateTime向前取整到本年的第一天。<br/>
+返回Date类型。</p>
+<h2 id="tostartofisoyear">toStartOfISOYear<a class="headerlink" href="#tostartofisoyear" title="Permanent link"> </a></h2>
+<p>将Date或DateTime向前取整到ISO本年的第一天。<br/>
+返回Date类型。</p>
+<h2 id="tostartofquarter">toStartOfQuarter<a class="headerlink" href="#tostartofquarter" title="Permanent link"> </a></h2>
+<p>将Date或DateTime向前取整到本季度的第一天。<br/>
+返回Date类型。</p>
+<h2 id="tostartofmonth">toStartOfMonth<a class="headerlink" href="#tostartofmonth" title="Permanent link"> </a></h2>
+<p>将Date或DateTime向前取整到本月的第一天。<br/>
+返回Date类型。</p>
+<div class="admonition 注意 alert pb-0 mb-4 alert-secondary" role="alert">
+<p class="admonition-title alert-heading display-4 text-reset mb-2">注意</p>
+<p>解析不正确日期的行为是特定于实现的。 ClickHouse可能会返回零日期，抛出异常或执行«natural»溢出。</p>
+</div>
+<h2 id="tomonday">toMonday<a class="headerlink" href="#tomonday" title="Permanent link"> </a></h2>
+<p>将Date或DateTime向前取整到本周的星期一。<br/>
+返回Date类型。</p>
+<h2 id="tostartofweek">toStartOfWeek(t[,mode])<a class="headerlink" href="#tostartofweek" title="Permanent link"> </a></h2>
+<p>按mode将Date或DateTime向前取整到最近的星期日或星期一。<br/>
+返回Date类型。<br/>
+mode参数的工作方式与toWeek()的mode参数完全相同。 对于单参数语法，mode使用默认值0。</p>
+<h2 id="tostartofday">toStartOfDay<a class="headerlink" href="#tostartofday" title="Permanent link"> </a></h2>
+<p>将DateTime向前取整到今天的开始。</p>
+<h2 id="tostartofhour">toStartOfHour<a class="headerlink" href="#tostartofhour" title="Permanent link"> </a></h2>
+<p>将DateTime向前取整到当前小时的开始。</p>
+<h2 id="tostartofminute">toStartOfMinute<a class="headerlink" href="#tostartofminute" title="Permanent link"> </a></h2>
+<p>将DateTime向前取整到当前分钟的开始。</p>
+<h2 id="tostartofsecond">toStartOfSecond<a class="headerlink" href="#tostartofsecond" title="Permanent link"> </a></h2>
+<p>将DateTime向前取整到当前秒数的开始。</p>
+<p><strong>语法</strong></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">toStartOfSecond</span><span class="p">(</span><span class="n">value</span><span class="p">[,</span><span class="w"> </span><span class="n">timezone</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<p><strong>参数</strong></p>
+<ul>
+<li><code class="syntax">value</code> — 时间和日期<a href="../../data-types/datetime64/">DateTime64</a>.</li>
+<li><code class="syntax">timezone</code> — 返回值的<a href="../../../operations/server-configuration-parameters/settings/#server_configuration_parameters-timezone">Timezone</a> (可选参数)。 如果未指定将使用 <code class="syntax">value</code> 参数的时区。 <a href="../../data-types/string/">String</a>。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>输入值毫秒部分为零。</li>
+</ul>
+<p>类型: <a href="../../data-types/datetime64/">DateTime64</a>.</p>
+<p><strong>示例</strong></p>
+<p>不指定时区查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">WITH</span><span class="w"> </span><span class="n">toDateTime64</span><span class="p">(</span><span class="s1">'2020-01-01 10:20:30.999'</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">dt64</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">toStartOfSecond</span><span class="p">(</span><span class="n">dt64</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌───toStartOfSecond(dt64)─┐
+│ 2020-01-01 10:20:30.000 │
+└─────────────────────────┘
+</code></pre></div>
+<p>指定时区查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">WITH</span><span class="w"> </span><span class="n">toDateTime64</span><span class="p">(</span><span class="s1">'2020-01-01 10:20:30.999'</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">dt64</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">toStartOfSecond</span><span class="p">(</span><span class="n">dt64</span><span class="p">,</span><span class="w"> </span><span class="s1">'Asia/Istanbul'</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─toStartOfSecond(dt64, 'Asia/Istanbul')─┐
+│                2020-01-01 13:20:30.000 │
+└────────────────────────────────────────┘
+</code></pre></div>
+<p><strong>参考</strong></p>
+<ul>
+<li><a href="../../../operations/server-configuration-parameters/settings/#server_configuration_parameters-timezone">Timezone</a> 服务器配置选项。</li>
+</ul>
+<h2 id="tostartoffiveminute">toStartOfFiveMinute<a class="headerlink" href="#tostartoffiveminute" title="Permanent link"> </a></h2>
+<p>将DateTime以五分钟为单位向前取整到最接近的时间点。</p>
+<h2 id="tostartoftenminutes">toStartOfTenMinutes<a class="headerlink" href="#tostartoftenminutes" title="Permanent link"> </a></h2>
+<p>将DateTime以十分钟为单位向前取整到最接近的时间点。</p>
+<h2 id="tostartoffifteenminutes">toStartOfFifteenMinutes<a class="headerlink" href="#tostartoffifteenminutes" title="Permanent link"> </a></h2>
+<p>将DateTime以十五分钟为单位向前取整到最接近的时间点。</p>
+<h2 id="tostartofintervaltime-or-data-interval-x-unit-time-zone">toStartOfInterval(time_or_data,间隔x单位[,time_zone])<a class="headerlink" href="#tostartofintervaltime-or-data-interval-x-unit-time-zone" title="Permanent link"> </a></h2>
+<p>这是名为<code class="syntax">toStartOf*</code>的所有函数的通用函数。例如，<br/>
+<code class="syntax">toStartOfInterval（t，INTERVAL 1 year）</code>返回与<code class="syntax">toStartOfYear（t）</code>相同的结果，<br/>
+<code class="syntax">toStartOfInterval（t，INTERVAL 1 month）</code>返回与<code class="syntax">toStartOfMonth（t）</code>相同的结果，<br/>
+<code class="syntax">toStartOfInterval（t，INTERVAL 1 day）</code>返回与<code class="syntax">toStartOfDay（t）</code>相同的结果，<br/>
+<code class="syntax">toStartOfInterval（t，INTERVAL 15 minute）</code>返回与<code class="syntax">toStartOfFifteenMinutes（t）</code>相同的结果。</p>
+<h2 id="totime">toTime<a class="headerlink" href="#totime" title="Permanent link"> </a></h2>
+<p>将DateTime中的日期转换为一个固定的日期，同时保留时间部分。</p>
+<h2 id="torelativeyearnum">toRelativeYearNum<a class="headerlink" href="#torelativeyearnum" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为年份的编号，从过去的某个固定时间点开始。</p>
+<h2 id="torelativequarternum">toRelativeQuarterNum<a class="headerlink" href="#torelativequarternum" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为季度的数字，从过去的某个固定时间点开始。</p>
+<h2 id="torelativemonthnum">toRelativeMonthNum<a class="headerlink" href="#torelativemonthnum" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为月份的编号，从过去的某个固定时间点开始。</p>
+<h2 id="torelativeweeknum">toRelativeWeekNum<a class="headerlink" href="#torelativeweeknum" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为星期数，从过去的某个固定时间点开始。</p>
+<h2 id="torelativedaynum">toRelativeDayNum<a class="headerlink" href="#torelativedaynum" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为当天的编号，从过去的某个固定时间点开始。</p>
+<h2 id="torelativehournum">toRelativeHourNum<a class="headerlink" href="#torelativehournum" title="Permanent link"> </a></h2>
+<p>将DateTime转换为小时数，从过去的某个固定时间点开始。</p>
+<h2 id="torelativeminutenum">toRelativeMinuteNum<a class="headerlink" href="#torelativeminutenum" title="Permanent link"> </a></h2>
+<p>将DateTime转换为分钟数，从过去的某个固定时间点开始。</p>
+<h2 id="torelativesecondnum">toRelativeSecondNum<a class="headerlink" href="#torelativesecondnum" title="Permanent link"> </a></h2>
+<p>将DateTime转换为秒数，从过去的某个固定时间点开始。</p>
+<h2 id="toisoyear">toISOYear<a class="headerlink" href="#toisoyear" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含ISO年份的UInt16类型的编号。</p>
+<h2 id="toisoweek">toISOWeek<a class="headerlink" href="#toisoweek" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含ISO周数的UInt8类型的编号。</p>
+<h2 id="toweekdatemode">toWeek(date[,mode])<a class="headerlink" href="#toweekdatemode" title="Permanent link"> </a></h2>
+<p>返回Date或DateTime的周数。两个参数形式可以指定星期是从星期日还是星期一开始，以及返回值应在0到53还是从1到53的范围内。如果省略了mode参数，则默认 模式为0。<br/>
+<code class="syntax">toISOWeek()</code>是一个兼容函数，等效于<code class="syntax">toWeek(date,3)</code>。<br/>
+下表描述了mode参数的工作方式。</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>First day of week</th>
+<th>Range</th>
+<th>Week 1 is the first week …</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Sunday</td>
+<td>0-53</td>
+<td>with a Sunday in this year</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Monday</td>
+<td>0-53</td>
+<td>with 4 or more days this year</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Sunday</td>
+<td>1-53</td>
+<td>with a Sunday in this year</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Monday</td>
+<td>1-53</td>
+<td>with 4 or more days this year</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Sunday</td>
+<td>0-53</td>
+<td>with 4 or more days this year</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Monday</td>
+<td>0-53</td>
+<td>with a Monday in this year</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Sunday</td>
+<td>1-53</td>
+<td>with 4 or more days this year</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Monday</td>
+<td>1-53</td>
+<td>with a Monday in this year</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Sunday</td>
+<td>1-53</td>
+<td>contains January 1</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Monday</td>
+<td>1-53</td>
+<td>contains January 1</td>
+</tr>
+</tbody>
+</table>
+<p>对于象“with 4 or more days this year,”的mode值，根据ISO 8601：1988对周进行编号：</p>
+<ul>
+<li>
+<p>如果包含1月1日的一周在后一年度中有4天或更多天，则为第1周。</p>
+</li>
+<li>
+<p>否则，它是上一年的最后一周，下周是第1周。</p>
+</li>
+</ul>
+<p>对于像“contains January 1”的mode值, 包含1月1日的那周为本年度的第1周。</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">toWeek</span><span class="p">(</span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">mode</span><span class="p">][,</span><span class="w"> </span><span class="n">Timezone</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<p><strong>参数</strong></p>
+<ul>
+<li><code class="syntax">date</code> – Date 或 DateTime.</li>
+<li><code class="syntax">mode</code> – 可选参数, 取值范围 [0,9]， 默认0。</li>
+<li><code class="syntax">Timezone</code> – 可选参数， 可其他时间日期转换参数的行为一致。</li>
+</ul>
+<p><strong>示例</strong></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">toDate</span><span class="p">(</span><span class="s1">'2016-12-27'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="n">toWeek</span><span class="p">(</span><span class="nb">date</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">week0</span><span class="p">,</span><span class="w"> </span><span class="n">toWeek</span><span class="p">(</span><span class="nb">date</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">week1</span><span class="p">,</span><span class="w"> </span><span class="n">toWeek</span><span class="p">(</span><span class="nb">date</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">week9</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌───────date─┬─week0─┬─week1─┬─week9─┐
+│ 2016-12-27 │    52 │    52 │     1 │
+└────────────┴───────┴───────┴───────┘
+</code></pre></div>
+<h2 id="toyearweekdatemode">toYearWeek(date[,mode])<a class="headerlink" href="#toyearweekdatemode" title="Permanent link"> </a></h2>
+<p>返回Date的年和周。 结果中的年份可能因为Date为该年份的第一周和最后一周而于Date的年份不同。</p>
+<p>mode参数的工作方式与toWeek()的mode参数完全相同。 对于单参数语法，mode使用默认值0。</p>
+<p><code class="syntax">toISOYear()</code>是一个兼容函数，等效于<code class="syntax">intDiv(toYearWeek(date,3),100)</code>.</p>
+<p><strong>示例</strong></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">toDate</span><span class="p">(</span><span class="s1">'2016-12-27'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="n">toYearWeek</span><span class="p">(</span><span class="nb">date</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">yearWeek0</span><span class="p">,</span><span class="w"> </span><span class="n">toYearWeek</span><span class="p">(</span><span class="nb">date</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">yearWeek1</span><span class="p">,</span><span class="w"> </span><span class="n">toYearWeek</span><span class="p">(</span><span class="nb">date</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">yearWeek9</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌───────date─┬─yearWeek0─┬─yearWeek1─┬─yearWeek9─┐
+│ 2016-12-27 │    201652 │    201652 │    201701 │
+└────────────┴───────────┴───────────┴───────────┘
+</code></pre></div>
+<h2 id="date_trunc">date_trunc<a class="headerlink" href="#date_trunc" title="Permanent link"> </a></h2>
+<p>将Date或DateTime按指定的单位向前取整到最接近的时间点。</p>
+<p><strong>语法</strong></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">date_trunc</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">[,</span><span class="w"> </span><span class="n">timezone</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<p>别名: <code class="syntax">dateTrunc</code>.</p>
+<p><strong>参数</strong></p>
+<ul>
+<li>
+<p><code class="syntax">unit</code> — 单位. <a href="../../syntax/#syntax-string-literal">String</a>.<br/>
+    可选值:</p>
+<ul>
+<li><code class="syntax">second</code></li>
+<li><code class="syntax">minute</code></li>
+<li><code class="syntax">hour</code></li>
+<li><code class="syntax">day</code></li>
+<li><code class="syntax">week</code></li>
+<li><code class="syntax">month</code></li>
+<li><code class="syntax">quarter</code></li>
+<li><code class="syntax">year</code></li>
+</ul>
+</li>
+<li>
+<p><code class="syntax">value</code> — <a href="../../data-types/datetime/">DateTime</a> 或者 <a href="../../data-types/datetime64/">DateTime64</a>.</p>
+</li>
+<li><code class="syntax">timezone</code> — <a href="../../../operations/server-configuration-parameters/settings/#server_configuration_parameters-timezone">Timezone name</a> 返回值的时区(可选值)。如果未指定将使用<code class="syntax">value</code>的时区。 <a href="../../data-types/string/">String</a>.</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>按指定的单位向前取整后的DateTime。</li>
+</ul>
+<p>类型: <a href="../../data-types/datetime/">Datetime</a>.</p>
+<p><strong>示例</strong></p>
+<p>不指定时区查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span><span class="w"> </span><span class="n">date_trunc</span><span class="p">(</span><span class="s1">'hour'</span><span class="p">,</span><span class="w"> </span><span class="n">now</span><span class="p">());</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌───────────────now()─┬─date_trunc('hour', now())─┐
+│ 2020-09-28 10:40:45 │       2020-09-28 10:00:00 │
+└─────────────────────┴───────────────────────────┘
+</code></pre></div>
+<p>指定时区查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span><span class="w"> </span><span class="n">date_trunc</span><span class="p">(</span><span class="s1">'hour'</span><span class="p">,</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span><span class="w"> </span><span class="s1">'Asia/Istanbul'</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌───────────────now()─┬─date_trunc('hour', now(), 'Asia/Istanbul')─┐
+│ 2020-09-28 10:46:26 │                        2020-09-28 13:00:00 │
+└─────────────────────┴────────────────────────────────────────────┘
+</code></pre></div>
+<p><strong>参考</strong></p>
+<ul>
+<li><a href="#tostartofintervaltime-or-data-interval-x-unit-time-zone">toStartOfInterval</a></li>
+</ul>
+<h1 id="now">now<a class="headerlink" href="#now" title="Permanent link"> </a></h1>
+<p>返回当前日期和时间。</p>
+<p><strong>语法</strong></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">now</span><span class="p">([</span><span class="n">timezone</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<p><strong>参数</strong></p>
+<ul>
+<li><code class="syntax">timezone</code> — <a href="../../../operations/server-configuration-parameters/settings/#server_configuration_parameters-timezone">Timezone name</a> 返回结果的时区(可先参数). <a href="../../data-types/string/">String</a>.</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>当前日期和时间。</li>
+</ul>
+<p>类型: <a href="../../data-types/datetime/">Datetime</a>.</p>
+<p><strong>示例</strong></p>
+<p>不指定时区查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">now</span><span class="p">();</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌───────────────now()─┐
+│ 2020-10-17 07:42:09 │
+└─────────────────────┘
+</code></pre></div>
+<p>指定时区查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">now</span><span class="p">(</span><span class="s1">'Asia/Istanbul'</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─now('Asia/Istanbul')─┐
+│  2020-10-17 10:42:23 │
+└──────────────────────┘
+</code></pre></div>
+<h2 id="today">today<a class="headerlink" href="#today" title="Permanent link"> </a></h2>
+<p>不接受任何参数并在请求执行时的某一刻返回当前日期(Date)。<br/>
+其功能与’toDate（now()）’相同。</p>
+<h2 id="yesterday">yesterday<a class="headerlink" href="#yesterday" title="Permanent link"> </a></h2>
+<p>不接受任何参数并在请求执行时的某一刻返回昨天的日期(Date)。<br/>
+其功能与’today() - 1’相同。</p>
+<h2 id="timeslot">timeSlot<a class="headerlink" href="#timeslot" title="Permanent link"> </a></h2>
+<p>将时间向前取整半小时。<br/>
+此功能用于Yandex.Metrica，因为如果跟踪标记显示单个用户的连续综合浏览量在时间上严格超过此数量，则半小时是将会话分成两个会话的最短时间。这意味着（tag id，user id，time slot）可用于搜索相应会话中包含的综合浏览量。</p>
+<h2 id="toyyyymm">toYYYYMM<a class="headerlink" href="#toyyyymm" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含年份和月份编号的UInt32类型的数字（YYYY * 100 + MM）。</p>
+<h2 id="toyyyymmdd">toYYYYMMDD<a class="headerlink" href="#toyyyymmdd" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含年份和月份编号的UInt32类型的数字（YYYY * 10000 + MM * 100 + DD）。</p>
+<h2 id="toyyyymmddhhmmss">toYYYYMMDDhhmmss<a class="headerlink" href="#toyyyymmddhhmmss" title="Permanent link"> </a></h2>
+<p>将Date或DateTime转换为包含年份和月份编号的UInt64类型的数字（YYYY * 10000000000 + MM * 100000000 + DD * 1000000 + hh * 10000 + mm * 100 + ss）。</p>
+<h2 id="addyears-addmonths-addweeks-adddays-addhours-addminutes-addseconds-addquarters">addYears, addMonths, addWeeks, addDays, addHours, addMinutes, addSeconds, addQuarters<a class="headerlink" href="#addyears-addmonths-addweeks-adddays-addhours-addminutes-addseconds-addquarters" title="Permanent link"> </a></h2>
+<p>函数将一段时间间隔添加到Date/DateTime，然后返回Date/DateTime。例如：</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">WITH</span><span class="w"></span>
+<span class="w">    </span><span class="n">toDate</span><span class="p">(</span><span class="s1">'2018-01-01'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toDateTime</span><span class="p">(</span><span class="s1">'2018-01-01 00:00:00'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">date_time</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">addYears</span><span class="p">(</span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">add_years_with_date</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">addYears</span><span class="p">(</span><span class="n">date_time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">add_years_with_date_time</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─add_years_with_date─┬─add_years_with_date_time─┐
+│          2019-01-01 │      2019-01-01 00:00:00 │
+└─────────────────────┴──────────────────────────┘
+</code></pre></div>
+<h2 id="subtractyears-subtractmonths-subtractweeks-subtractdays-subtracthours-subtractminutes-subtractseconds-subtractquarters">subtractYears,subtractMonths,subtractWeeks,subtractDays,subtractours,subtractMinutes,subtractSeconds,subtractQuarters<a class="headerlink" href="#subtractyears-subtractmonths-subtractweeks-subtractdays-subtracthours-subtractminutes-subtractseconds-subtractquarters" title="Permanent link"> </a></h2>
+<p>函数将Date/DateTime减去一段时间间隔，然后返回Date/DateTime。例如：</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">WITH</span><span class="w"></span>
+<span class="w">    </span><span class="n">toDate</span><span class="p">(</span><span class="s1">'2019-01-01'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">toDateTime</span><span class="p">(</span><span class="s1">'2019-01-01 00:00:00'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">date_time</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">subtractYears</span><span class="p">(</span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">subtract_years_with_date</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">subtractYears</span><span class="p">(</span><span class="n">date_time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">subtract_years_with_date_time</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─subtract_years_with_date─┬─subtract_years_with_date_time─┐
+│               2018-01-01 │           2018-01-01 00:00:00 │
+└──────────────────────────┴───────────────────────────────┘
+</code></pre></div>
+<h2 id="datediff">dateDiff<a class="headerlink" href="#datediff" title="Permanent link"> </a></h2>
+<p>返回两个Date或DateTime类型之间的时差。</p>
+<p><strong>语法</strong></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">dateDiff</span><span class="p">(</span><span class="s1">'unit'</span><span class="p">,</span><span class="w"> </span><span class="n">startdate</span><span class="p">,</span><span class="w"> </span><span class="n">enddate</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">timezone</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<p><strong>参数</strong></p>
+<ul>
+<li>
+<p><code class="syntax">unit</code> — 返回结果的时间单位。 <a href="../../syntax/#syntax-string-literal">String</a>.</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="err">支持的时间单位</span><span class="o">:</span><span class="w"> </span><span class="n">second</span><span class="o">,</span><span class="w"> </span><span class="n">minute</span><span class="o">,</span><span class="w"> </span><span class="n">hour</span><span class="o">,</span><span class="w"> </span><span class="n">day</span><span class="o">,</span><span class="w"> </span><span class="n">week</span><span class="o">,</span><span class="w"> </span><span class="n">month</span><span class="o">,</span><span class="w"> </span><span class="n">quarter</span><span class="o">,</span><span class="w"> </span><span class="n">year</span><span class="o">.</span><span class="w"></span>
+</code></pre></div>
+</li>
+<li>
+<p><code class="syntax">startdate</code> — 第一个待比较值。 <a href="../../data-types/date/">Date</a> 或 <a href="../../data-types/datetime/">DateTime</a>.</p>
+</li>
+<li>
+<p><code class="syntax">enddate</code> — 第二个待比较值。 <a href="../../data-types/date/">Date</a> 或 <a href="../../data-types/datetime/">DateTime</a>.</p>
+</li>
+<li>
+<p><code class="syntax">timezone</code> — 可选参数。 如果指定了，则同时适用于<code class="syntax">startdate</code>和<code class="syntax">enddate</code>。如果不指定，则使用<code class="syntax">startdate</code>和<code class="syntax">enddate</code>的时区。如果两个时区不一致，则结果不可预料。</p>
+</li>
+</ul>
+<p><strong>返回值</strong></p>
+<p>以<code class="syntax">unit</code>为单位的<code class="syntax">startdate</code>和<code class="syntax">enddate</code>之间的时差。</p>
+<p>类型: <code class="syntax">int</code>.</p>
+<p><strong>示例</strong></p>
+<p>查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">dateDiff</span><span class="p">(</span><span class="s1">'hour'</span><span class="p">,</span><span class="w"> </span><span class="n">toDateTime</span><span class="p">(</span><span class="s1">'2018-01-01 22:00:00'</span><span class="p">),</span><span class="w"> </span><span class="n">toDateTime</span><span class="p">(</span><span class="s1">'2018-01-02 23:00:00'</span><span class="p">));</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─dateDiff('hour', toDateTime('2018-01-01 22:00:00'), toDateTime('2018-01-02 23:00:00'))─┐
+│                                                                                     25 │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h2 id="timeslotsstarttime-duration-size">timeSlots(StartTime, Duration,[, Size])<a class="headerlink" href="#timeslotsstarttime-duration-size" title="Permanent link"> </a></h2>
+<p>它返回一个时间数组，其中包括从从«StartTime»开始到«StartTime + Duration 秒»内的所有符合«size»（以秒为单位）步长的时间点。其中«size»是一个可选参数，默认为1800。<br/>
+例如，<code class="syntax">timeSlots(toDateTime('2012-01-01 12:20:00')，600) = [toDateTime（'2012-01-01 12:00:00'），toDateTime（'2012-01-01 12:30:00' ）]</code>。<br/>
+这对于搜索在相应会话中综合浏览量是非常有用的。</p>
+<h2 id="formatdatetime">formatDateTime<a class="headerlink" href="#formatdatetime" title="Permanent link"> </a></h2>
+<p>函数根据给定的格式字符串来格式化时间。请注意：格式字符串必须是常量表达式，例如：单个结果列不能有多种格式字符串。</p>
+<p><strong>语法</strong></p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="n">formatDateTime</span><span class="p">(</span><span class="k">Time</span><span class="p">,</span><span class="w"> </span><span class="n">Format</span><span class="err">\</span><span class="p">[,</span><span class="w"> </span><span class="n">Timezone</span><span class="err">\</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<p><strong>返回值</strong></p>
+<p>根据指定格式返回的日期和时间。</p>
+<p><strong>支持的格式修饰符</strong></p>
+<p>使用格式修饰符来指定结果字符串的样式。«Example» 列是对<code class="syntax">2018-01-02 22:33:44</code>的格式化结果。</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%C</td>
+<td>年除以100并截断为整数(00-99)</td>
+<td>20</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>月中的一天，零填充（01-31)</td>
+<td>02</td>
+</tr>
+<tr>
+<td>%D</td>
+<td>短MM/DD/YY日期，相当于%m/%d/%y</td>
+<td>01/02/2018</td>
+</tr>
+<tr>
+<td>%e</td>
+<td>月中的一天，空格填充（ 1-31)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>%F</td>
+<td>短YYYY-MM-DD日期，相当于%Y-%m-%d</td>
+<td>2018-01-02</td>
+</tr>
+<tr>
+<td>%G</td>
+<td>ISO周号的四位数年份格式， 从基于周的年份<a href="https://en.wikipedia.org/wiki/ISO_8601#Week_dates" rel="external nofollow noreferrer" target="_blank">由ISO 8601定义</a> 标准计算得出，通常仅对％V有用</td>
+<td>2018</td>
+</tr>
+<tr>
+<td>%g</td>
+<td>两位数的年份格式，与ISO 8601一致，四位数表示法的缩写</td>
+<td>18</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>24小时格式（00-23)</td>
+<td>22</td>
+</tr>
+<tr>
+<td>%I</td>
+<td>12小时格式（01-12)</td>
+<td>10</td>
+</tr>
+<tr>
+<td>%j</td>
+<td>一年中的一天 (001-366)</td>
+<td>002</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月份为十进制数（01-12)</td>
+<td>01</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>分钟(00-59)</td>
+<td>33</td>
+</tr>
+<tr>
+<td>%n</td>
+<td>换行符(")</td>
+<td></td>
+</tr>
+<tr>
+<td>%p</td>
+<td>AM或PM指定</td>
+<td>PM</td>
+</tr>
+<tr>
+<td>%Q</td>
+<td>季度（1-4)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>%R</td>
+<td>24小时HH:MM时间，相当于%H:%M</td>
+<td>22:33</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>秒 (00-59)</td>
+<td>44</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>水平制表符(’)</td>
+<td></td>
+</tr>
+<tr>
+<td>%T</td>
+<td>ISO8601时间格式(HH:MM:SS)，相当于%H:%M:%S</td>
+<td>22:33:44</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>ISO8601工作日为数字，星期一为1(1-7)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>%V</td>
+<td>ISO8601周编号(01-53)</td>
+<td>01</td>
+</tr>
+<tr>
+<td>%w</td>
+<td>工作日为十进制数，周日为0(0-6)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>%y</td>
+<td>年份，最后两位数字（00-99)</td>
+<td>18</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>年</td>
+<td>2018</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>%符号</td>
+<td>%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例</strong></p>
+<p>查询:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">formatDateTime</span><span class="p">(</span><span class="n">toDate</span><span class="p">(</span><span class="s1">'2010-01-04'</span><span class="p">),</span><span class="w"> </span><span class="s1">'%g'</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>结果:</p>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─formatDateTime(toDate('2010-01-04'), '%g')─┐
+│ 10                                         │
+└────────────────────────────────────────────┘
+</code></pre></div>
+<h2 id="from-unixtime">FROM_UNIXTIME<a class="headerlink" href="#from-unixtime" title="Permanent link"> </a></h2>
+<p>当只有单个整数类型的参数时，它的作用与<code class="syntax">toDateTime</code>相同，并返回<a href="../../data-types/datetime/">DateTime</a>类型。</p>
+<p>例如:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="mi">423543535</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─FROM_UNIXTIME(423543535)─┐
+│      1983-06-04 10:58:55 │
+└──────────────────────────┘
+</code></pre></div>
+<p>当有两个参数时，第一个是整型或DateTime，第二个是常量格式字符串，它的作用与<code class="syntax">formatDateTime</code>相同，并返回<code class="syntax">String</code>类型。</p>
+<p>例如:</p>
+<div class="codehilite"><pre><span></span><code class="syntax"><span class="k">SELECT</span><span class="w"> </span><span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="mi">1234334543</span><span class="p">,</span><span class="w"> </span><span class="s1">'%Y-%m-%d %R:%S'</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">DateTime</span><span class="w"></span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code class="syntax">┌─DateTime────────────┐
+│ 2009-02-11 14:42:23 │
+└─────────────────────┘
+</code></pre></div>
+        
+
+        
+    </div>
+
+    
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Was this content helpful?</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+     data-titles="['Unusable', 'Poor', 'OK', 'Good', 'Excellent']"
+     data-documentation="documentation"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/38993f215f9186c1ac3505b1e09697cd9a468b5d" rel="external nofollow noreferrer" target="_blank" class="text-reset">38993f21</a>
+    </div>
+</div>
+
+</div>
+
+                
+                    <div id="toc" class="col-xl-2 d-none d-xl-block d-print-none p-3 overflow-auto toc-right mb-5">
+    
+    
+        
+    
+    <nav class="nav flex-column text-wrap">
+    
+        <label for="toc">Table of Contents</label>
+    
+    
+        
+        
+        <a href="#totimezone" title="toTimeZone" class="nav-link text-wrap d-inline-block w-100">
+    toTimeZone
+</a>
+
+    
+        
+        
+        <a href="#toyear" title="toYear" class="nav-link text-wrap d-inline-block w-100">
+    toYear
+</a>
+
+    
+        
+        
+        <a href="#toquarter" title="toQuarter" class="nav-link text-wrap d-inline-block w-100">
+    toQuarter
+</a>
+
+    
+        
+        
+        <a href="#tomonth" title="toMonth" class="nav-link text-wrap d-inline-block w-100">
+    toMonth
+</a>
+
+    
+        
+        
+        <a href="#todayofyear" title="toDayOfYear" class="nav-link text-wrap d-inline-block w-100">
+    toDayOfYear
+</a>
+
+    
+        
+        
+        <a href="#todayofmonth" title="toDayOfMonth" class="nav-link text-wrap d-inline-block w-100">
+    toDayOfMonth
+</a>
+
+    
+        
+        
+        <a href="#todayofweek" title="toDayOfWeek" class="nav-link text-wrap d-inline-block w-100">
+    toDayOfWeek
+</a>
+
+    
+        
+        
+        <a href="#tohour" title="toHour" class="nav-link text-wrap d-inline-block w-100">
+    toHour
+</a>
+
+    
+        
+        
+        <a href="#tominute" title="toMinute" class="nav-link text-wrap d-inline-block w-100">
+    toMinute
+</a>
+
+    
+        
+        
+        <a href="#tosecond" title="toSecond" class="nav-link text-wrap d-inline-block w-100">
+    toSecond
+</a>
+
+    
+        
+        
+        <a href="#to-unix-timestamp" title="toUnixTimestamp" class="nav-link text-wrap d-inline-block w-100">
+    toUnixTimestamp
+</a>
+
+    
+        
+        
+        <a href="#tostartofyear" title="toStartOfYear" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfYear
+</a>
+
+    
+        
+        
+        <a href="#tostartofisoyear" title="toStartOfISOYear" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfISOYear
+</a>
+
+    
+        
+        
+        <a href="#tostartofquarter" title="toStartOfQuarter" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfQuarter
+</a>
+
+    
+        
+        
+        <a href="#tostartofmonth" title="toStartOfMonth" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfMonth
+</a>
+
+    
+        
+        
+        <a href="#tomonday" title="toMonday" class="nav-link text-wrap d-inline-block w-100">
+    toMonday
+</a>
+
+    
+        
+        
+        <a href="#tostartofweek" title="toStartOfWeek(t[,mode])" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfWeek(t[,mode])
+</a>
+
+    
+        
+        
+        <a href="#tostartofday" title="toStartOfDay" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfDay
+</a>
+
+    
+        
+        
+        <a href="#tostartofhour" title="toStartOfHour" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfHour
+</a>
+
+    
+        
+        
+        <a href="#tostartofminute" title="toStartOfMinute" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfMinute
+</a>
+
+    
+        
+        
+        <a href="#tostartofsecond" title="toStartOfSecond" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfSecond
+</a>
+
+    
+        
+        
+        <a href="#tostartoffiveminute" title="toStartOfFiveMinute" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfFiveMinute
+</a>
+
+    
+        
+        
+        <a href="#tostartoftenminutes" title="toStartOfTenMinutes" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfTenMinutes
+</a>
+
+    
+        
+        
+        <a href="#tostartoffifteenminutes" title="toStartOfFifteenMinutes" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfFifteenMinutes
+</a>
+
+    
+        
+        
+        <a href="#tostartofintervaltime-or-data-interval-x-unit-time-zone" title="toStartOfInterval(time_or_data,间隔x单位[,time_zone])" class="nav-link text-wrap d-inline-block w-100">
+    toStartOfInterval(time_or_data,间隔x单位[,time_zone])
+</a>
+
+    
+        
+        
+        <a href="#totime" title="toTime" class="nav-link text-wrap d-inline-block w-100">
+    toTime
+</a>
+
+    
+        
+        
+        <a href="#torelativeyearnum" title="toRelativeYearNum" class="nav-link text-wrap d-inline-block w-100">
+    toRelativeYearNum
+</a>
+
+    
+        
+        
+        <a href="#torelativequarternum" title="toRelativeQuarterNum" class="nav-link text-wrap d-inline-block w-100">
+    toRelativeQuarterNum
+</a>
+
+    
+        
+        
+        <a href="#torelativemonthnum" title="toRelativeMonthNum" class="nav-link text-wrap d-inline-block w-100">
+    toRelativeMonthNum
+</a>
+
+    
+        
+        
+        <a href="#torelativeweeknum" title="toRelativeWeekNum" class="nav-link text-wrap d-inline-block w-100">
+    toRelativeWeekNum
+</a>
+
+    
+        
+        
+        <a href="#torelativedaynum" title="toRelativeDayNum" class="nav-link text-wrap d-inline-block w-100">
+    toRelativeDayNum
+</a>
+
+    
+        
+        
+        <a href="#torelativehournum" title="toRelativeHourNum" class="nav-link text-wrap d-inline-block w-100">
+    toRelativeHourNum
+</a>
+
+    
+        
+        
+        <a href="#torelativeminutenum" title="toRelativeMinuteNum" class="nav-link text-wrap d-inline-block w-100">
+    toRelativeMinuteNum
+</a>
+
+    
+        
+        
+        <a href="#torelativesecondnum" title="toRelativeSecondNum" class="nav-link text-wrap d-inline-block w-100">
+    toRelativeSecondNum
+</a>
+
+    
+        
+        
+        <a href="#toisoyear" title="toISOYear" class="nav-link text-wrap d-inline-block w-100">
+    toISOYear
+</a>
+
+    
+        
+        
+        <a href="#toisoweek" title="toISOWeek" class="nav-link text-wrap d-inline-block w-100">
+    toISOWeek
+</a>
+
+    
+        
+        
+        <a href="#toweekdatemode" title="toWeek(date[,mode])" class="nav-link text-wrap d-inline-block w-100">
+    toWeek(date[,mode])
+</a>
+
+    
+        
+        
+        <a href="#toyearweekdatemode" title="toYearWeek(date[,mode])" class="nav-link text-wrap d-inline-block w-100">
+    toYearWeek(date[,mode])
+</a>
+
+    
+        
+        
+        <a href="#date_trunc" title="date_trunc" class="nav-link text-wrap d-inline-block w-100">
+    date_trunc
+</a>
+
+    
+    </nav>
+</div>
+                
+            </div>
+        </div>
+    
+
+    
+        
+        <script async type="text/javascript" src="/docs/js/base.js?js_digest"></script>
+
+
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/18343495" alt="Yandex"/></div>
+</noscript>
+    </div>
+</body>
 </html>

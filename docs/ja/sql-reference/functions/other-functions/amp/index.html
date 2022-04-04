@@ -1,0 +1,461 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>その他 | ClickHouseドキュメント</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/ja/sql-reference/functions/other-functions/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "その他 | ClickHouseドキュメント",
+"mainEntityOfPage": "https://clickhouse.com/docs/ja/sql-reference/functions/other-functions/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "その他 | ClickHouseドキュメント",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer,main{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}ul{margin-bottom:1rem}ul{margin-top:0}ul ul{margin-bottom:0}dd{margin-bottom:.5rem;margin-left:0}b,strong{font-weight:bolder}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}pre{margin-top:0;margin-bottom:1rem;overflow:auto}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}table{border-collapse:collapse}input,select{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}input{overflow:visible}select{text-transform:none}select{word-wrap:normal}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=date],input[type=datetime-local],input[type=month],input[type=time]{-webkit-appearance:listbox}progress{vertical-align:baseline}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.lead{font-size:1.375rem;font-weight:400}@media(max-width:1200px){.lead{font-size:calc(1.2625rem+.15vw)}}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.list-inline{padding-left:0;list-style:none}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}pre{display:block;font-size:87.5%;color:#495057}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}.order-0{order:0}.order-1{order:1}.order-2{order:2}.order-3{order:3}.order-4{order:4}.order-5{order:5}.order-6{order:6}.order-7{order:7}.order-8{order:8}.order-9{order:9}.order-10{order:10}.order-11{order:11}.order-12{order:12}.offset-1{margin-left:8.3333333333%}.offset-2{margin-left:16.6666666667%}.offset-3{margin-left:25%}.offset-4{margin-left:33.3333333333%}.offset-5{margin-left:41.6666666667%}.offset-6{margin-left:50%}.offset-7{margin-left:58.3333333333%}.offset-8{margin-left:66.6666666667%}.offset-9{margin-left:75%}.offset-10{margin-left:83.3333333333%}.offset-11{margin-left:91.6666666667%}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}.order-md-0{order:0}.order-md-1{order:1}.order-md-2{order:2}.order-md-3{order:3}.order-md-4{order:4}.order-md-5{order:5}.order-md-6{order:6}.order-md-7{order:7}.order-md-8{order:8}.order-md-9{order:9}.order-md-10{order:10}.order-md-11{order:11}.order-md-12{order:12}.offset-md-0{margin-left:0}.offset-md-1{margin-left:8.3333333333%}.offset-md-2{margin-left:16.6666666667%}.offset-md-3{margin-left:25%}.offset-md-4{margin-left:33.3333333333%}.offset-md-5{margin-left:41.6666666667%}.offset-md-6{margin-left:50%}.offset-md-7{margin-left:58.3333333333%}.offset-md-8{margin-left:66.6666666667%}.offset-md-9{margin-left:75%}.offset-md-10{margin-left:83.3333333333%}.offset-md-11{margin-left:91.6666666667%}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}.order-lg-0{order:0}.order-lg-1{order:1}.order-lg-2{order:2}.order-lg-3{order:3}.order-lg-4{order:4}.order-lg-5{order:5}.order-lg-6{order:6}.order-lg-7{order:7}.order-lg-8{order:8}.order-lg-9{order:9}.order-lg-10{order:10}.order-lg-11{order:11}.order-lg-12{order:12}.offset-lg-0{margin-left:0}.offset-lg-1{margin-left:8.3333333333%}.offset-lg-2{margin-left:16.6666666667%}.offset-lg-3{margin-left:25%}.offset-lg-4{margin-left:33.3333333333%}.offset-lg-5{margin-left:41.6666666667%}.offset-lg-6{margin-left:50%}.offset-lg-7{margin-left:58.3333333333%}.offset-lg-8{margin-left:66.6666666667%}.offset-lg-9{margin-left:75%}.offset-lg-10{margin-left:83.3333333333%}.offset-lg-11{margin-left:91.6666666667%}}.table{width:100%;margin-bottom:8px;color:#212529}.table-primary{background-color:#fff1b8}.table-light{background-color:#fbfcfd}.table-dark{background-color:#ccced0}.table-primary-light{background-color:#fffefb}.table-white{background-color:#fff}.table-black{background-color:#c1c2c3}.table-orange{background-color:#ffdfb8}.table-light-orange{background-color:#fff7ea}.table-dark{color:#fff;background-color:#343a40}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:none}.btn:disabled{opacity:.65}.btn-primary{color:#495057;background-color:#fc0;border-color:#fc0}.btn-primary:focus,.btn-primary:hover{color:#495057;background-color:#d9ad00;border-color:#cca300}.btn-primary:focus{box-shadow:0 0 0 0 rgba(228,185,13,.5)}.btn-primary:disabled{color:#495057;background-color:#fc0;border-color:#fc0}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-primary-light{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-primary-light:focus,.btn-primary-light:hover{color:#495057;background-color:#ffedca;border-color:#ffe9bd}.btn-primary-light:focus{box-shadow:0 0 0 0 rgba(228,225,217,.5)}.btn-primary-light:disabled{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-primary{color:#fc0;border-color:#fc0}.btn-outline-primary:hover{color:#495057;background-color:#fc0;border-color:#fc0}.btn-outline-primary:focus{box-shadow:0 0 0 0 rgba(255,204,0,.5)}.btn-outline-primary:disabled{color:#fc0;background-color:transparent}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-primary-light{color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:hover{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:focus{box-shadow:0 0 0 0 rgba(255,250,240,.5)}.btn-outline-primary-light:disabled{color:#fffaf0;background-color:transparent}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-group-lg>.btn,.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-block{width:100%}.btn-group{position:relative;display:inline-flex;vertical-align:middle}.btn-group>.btn{position:relative;flex:1 1 auto}.btn-group>.btn:active,.btn-group>.btn:focus,.btn-group>.btn:hover{z-index:1}.btn-group>.btn-group:not(:first-child),.btn-group>.btn:not(:first-child){margin-left:-1px}.btn-group>.btn-group:not(:last-child)>.btn{border-top-right-radius:0;border-bottom-right-radius:0}.btn-group>.btn-group:not(:first-child)>.btn,.btn-group>.btn:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.input-group{position:relative;display:flex;flex-wrap:wrap;align-items:stretch;width:100%}.input-group>.custom-file,.input-group>.custom-select{position:relative;flex:1 1 0;min-width:0;margin-bottom:0}.input-group>.custom-file+.custom-file,.input-group>.custom-file+.custom-select,.input-group>.custom-select+.custom-file,.input-group>.custom-select+.custom-select{margin-left:-1px}.input-group>.custom-select:focus{z-index:3}.input-group>.custom-file .custom-file-input:focus{z-index:4}.input-group>.custom-select:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.input-group>.custom-select:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.input-group>.custom-file{display:flex;align-items:center}.input-group-text{display:flex;align-items:center;padding:.375rem .75rem;margin-bottom:0;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;text-align:center;white-space:nowrap;background-color:#e9ecef;border:1px solid #ced4da;border-radius:8px}.input-group-text input[type=checkbox],.input-group-text input[type=radio]{margin-top:0}.input-group-lg>.custom-select{height:calc(1.5em+1rem+2px)}.input-group-lg>.custom-select{padding:.5rem 1rem;font-size:1.125rem;line-height:1.5;border-radius:8px}.input-group-lg>.custom-select{padding-right:1.75rem}.custom-select{display:inline-block;width:100%;height:calc(1.5em+.75rem+2px);padding:.375rem 1.75rem .375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;border:1px solid #ced4da;border-radius:8px;-webkit-appearance:none;-moz-appearance:none;appearance:none}.custom-select:focus{border-color:#ffe680;outline:0;box-shadow:0 0 0 .2rem rgba(255,204,0,.25)}.custom-select:focus::-ms-value{color:#6c757d;background-color:#fff}.custom-select[multiple],.custom-select[size]:not([size="1"]){height:auto;padding-right:.75rem;background-image:none}.custom-select:disabled{color:#6c757d;background-color:#e9ecef}.custom-select::-ms-expand{display:none}.custom-select:-moz-focusring{color:transparent;text-shadow:0 0 0 #6c757d}.custom-select-lg{height:calc(1.5em+1rem+2px);padding-top:.5rem;padding-bottom:.5rem;padding-left:1rem;font-size:1.125rem}.custom-file{display:inline-block;margin-bottom:0}.custom-file,.custom-file-input{position:relative;width:100%;height:calc(1.5em+.75rem+2px)}.custom-file-input{z-index:2;margin:0;opacity:0}.custom-select{transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.custom-select{transition:none}}pre{white-space:pre-wrap}pre{border:1px solid #d6dbdf;page-break-inside:avoid}img{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}.table{border-collapse:collapse}.table-dark{color:inherit}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/docs/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/docs/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+    <div class="alert alert-primary" role="alert">
+      <p class="display-5 mb-2">Help wanted!</p>
+      <p class="lead">The following content of this documentation page has been machine-translated. But unlike other websites, it is not done on the fly. This translated text lives on GitHub repository alongside main ClickHouse codebase and waits for fellow native speakers to make it more human-readable. <a href="/docs/en/sql-reference/functions/other-functions/" class="alert-link">You can also use the original English version as a reference.</a></p>
+      <p class="lead">
+          <a class="btn btn-lg btn-primary text-white" href="https://github.com/ClickHouse/ClickHouse/edit/master/docs/ja/sql-reference/functions/other-functions.md" target="_blank" rel="external nofollow noreferrer">
+              Help ClickHouse documentation by editing this page
+          </a>
+      </p>
+    </div>
+
+          <h1 id=other-functions>その他の機能<a class=headerlink href=../amp/#other-functions title="Permanent link"> </a></h1> <h2 id=hostname>ホスト名()<a class=headerlink href=../amp/#hostname title="Permanent link"> </a></h2> <p>この関数が実行されたホストの名前を持つ文字列を返します。 分散処理の場合、関数がリモートサーバーで実行される場合、これはリモートサーバーホストの名前です。</p> <h2 id=getmacro>getMacro<a class=headerlink href=../amp/#getmacro title="Permanent link"> </a></h2> <p>から名前付きの値を取得します <a href=../../../../operations/server-configuration-parameters/settings/amp/#macros>マクロ</a> サーバー構成のセクション。</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>getMacro</span><span class=p>(</span><span class=n>name</span><span class=p>);</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ</strong></p> <ul> <li><code class=syntax>name</code> — Name to retrieve from the <code class=syntax>macros</code> セクション <a href=../../../data-types/string/amp/#string>文字列</a>.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li>指定されたマクロの値。</li> </ul> <p>タイプ: <a href=../../../data-types/string/amp/ >文字列</a>.</p> <p><strong>例</strong></p> <p>例 <code class=syntax>macros</code> サーバー設定ファイルのセクション:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;macros&gt;</span>
+    <span class=nt>&lt;test&gt;</span>Value<span class=nt>&lt;/test&gt;</span>
+<span class=nt>&lt;/macros&gt;</span>
+</code></pre></div> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>getMacro</span><span class=p>(</span><span class=s1>'test'</span><span class=p>);</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─getMacro('test')─┐
+│ Value            │
+└──────────────────┘
+</code></pre></div> <p>同じ値を取得する別の方法:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=k>system</span><span class=p>.</span><span class=n>macros</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=n>macro</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'test'</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─macro─┬─substitution─┐
+│ test  │ Value        │
+└───────┴──────────────┘
+</code></pre></div> <h2 id=fqdn>FQDN<a class=headerlink href=../amp/#fqdn title="Permanent link"> </a></h2> <p>完全修飾ドメイン名を返します。</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>fqdn</span><span class=p>();</span><span class=w></span>
+</code></pre></div> <p>この関数は、大文字と小文字を区別しません。</p> <p><strong>戻り値</strong></p> <ul> <li>完全修飾ドメイン名を持つ文字列。</li> </ul> <p>タイプ: <code class=syntax>String</code>.</p> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>FQDN</span><span class=p>();</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─FQDN()──────────────────────────┐
+│ clickhouse.ru-central1.internal │
+└─────────────────────────────────┘
+</code></pre></div> <h2 id=basename>ベース名<a class=headerlink href=../amp/#basename title="Permanent link"> </a></h2> <p>最後のスラッシュまたはバックスラッシュの後の文字列の末尾の部分を抽出します。 この関数は、パスからファイル名を抽出するためによく使用されます。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>basename</span><span class=p>(</span><span class=w> </span><span class=n>expr</span><span class=w> </span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ</strong></p> <ul> <li><code class=syntax>expr</code> — Expression resulting in a <a href=../../../data-types/string/amp/ >文字列</a> タイプ値。 結果の値では、すべての円記号をエスケープする必要があります。</li> </ul> <p><strong>戻り値</strong></p> <p>以下を含む文字列:</p> <ul> <li> <p>最後のスラッシュまたはバックスラッシュの後の文字列の末尾の部分。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>If</span> <span class=nv>the</span> <span class=nv>input</span> <span class=nv>string</span> <span class=nv>contains</span> <span class=nv>a</span> <span class=nv>path</span> <span class=nv>ending</span> <span class=nv>with</span> <span class=nv>slash</span> <span class=nv>or</span> <span class=nv>backslash</span>, <span class=k>for</span> <span class=nv>example</span>, `<span class=o>/</span>` <span class=nv>or</span> `<span class=nv>c</span>:\`, <span class=nv>the</span> <span class=nv>function</span> <span class=nv>returns</span> <span class=nv>an</span> <span class=nv>empty</span> <span class=nv>string</span>.
+</code></pre></div> </li> <li> <p>スラッシュまたは円記号がない場合の元の文字列。</p> </li> </ul> <p><strong>例</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=s1>'some/long/path/to/file'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>a</span><span class=p>,</span><span class=w> </span><span class=n>basename</span><span class=p>(</span><span class=n>a</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─a──────────────────────┬─basename('some\\long\\path\\to\\file')─┐
+│ some\long\path\to\file │ file                                   │
+└────────────────────────┴────────────────────────────────────────┘
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=s1>'some\\long\\path\\to\\file'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>a</span><span class=p>,</span><span class=w> </span><span class=n>basename</span><span class=p>(</span><span class=n>a</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─a──────────────────────┬─basename('some\\long\\path\\to\\file')─┐
+│ some\long\path\to\file │ file                                   │
+└────────────────────────┴────────────────────────────────────────┘
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=s1>'some-file-name'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>a</span><span class=p>,</span><span class=w> </span><span class=n>basename</span><span class=p>(</span><span class=n>a</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─a──────────────┬─basename('some-file-name')─┐
+│ some-file-name │ some-file-name             │
+└────────────────┴────────────────────────────┘
+</code></pre></div> <h2 id=visiblewidthx>visibleWidth(x)<a class=headerlink href=../amp/#visiblewidthx title="Permanent link"> </a></h2> <p>テキスト形式（タブ区切り）でコンソールに値を出力するときのおおよその幅を計算します。<br> この関数は、システムがPretty形式を実装するために使用されます。</p> <p><code class=syntax>NULL</code> に対応する文字列として表される。 <code class=syntax>NULL</code> で <code class=syntax>Pretty</code> フォーマット。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>visibleWidth</span><span class=p>(</span><span class=k>NULL</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─visibleWidth(NULL)─┐
+│                  4 │
+└────────────────────┘
+</code></pre></div> <h2 id=totypenamex>トータイプ名(x)<a class=headerlink href=../amp/#totypenamex title="Permanent link"> </a></h2> <p>渡された引数の型名を含む文字列を返します。</p> <p>もし <code class=syntax>NULL</code> 関数に入力として渡されると、 <code class=syntax>Nullable(Nothing)</code> 内部に対応する型 <code class=syntax>NULL</code> ClickHouseでの表現。</p> <h2 id=function-blocksize>ブロックサイズ()<a class=headerlink href=../amp/#function-blocksize title="Permanent link"> </a></h2> <p>ブロックのサイズを取得します。<br> ClickHouseでは、クエリは常にブロック(列部分のセット)で実行されます。 この関数では、呼び出したブロックのサイズを取得できます。</p> <h2 id=materializex>マテリアライズ(x)<a class=headerlink href=../amp/#materializex title="Permanent link"> </a></h2> <p>定数を一つの値だけを含む完全な列に変換します。<br> ClickHouseでは、完全な列と定数はメモリ内で異なって表されます。 関数は、定数引数と通常の引数（異なるコードが実行される）では異なる動作をしますが、結果はほとんど常に同じです。 この機能はデバッグするための</p> <h2 id=ignore>ignore(…)<a class=headerlink href=../amp/#ignore title="Permanent link"> </a></h2> <p>受け入れる引数を含む <code class=syntax>NULL</code>. 常に0を返します。<br> しかし、引数はまだ評価されています。 これはベンチマークに使用できます。</p> <h2 id=sleepseconds>スリープ(秒)<a class=headerlink href=../amp/#sleepseconds title="Permanent link"> </a></h2> <p>眠る ‘seconds’ 各データブロックの秒数。 整数または浮動小数点数を指定できます。</p> <h2 id=sleepeachrowseconds>sleepEachRow(秒)<a class=headerlink href=../amp/#sleepeachrowseconds title="Permanent link"> </a></h2> <p>眠る ‘seconds’ 各行の秒数。 整数または浮動小数点数を指定できます。</p> <h2 id=currentdatabase>currentDatabase()<a class=headerlink href=../amp/#currentdatabase title="Permanent link"> </a></h2> <p>現在のデータベースの名前を返します。<br> この関数は、データベースを指定する必要があるCREATE TABLEクエリのテーブルエンジンパラメーターで使用できます。</p> <h2 id=other-function-currentuser>currentUser()<a class=headerlink href=../amp/#other-function-currentuser title="Permanent link"> </a></h2> <p>現在のユーザーのログインを返します。 ユーザーのログイン、その開始されたクエリは、distibutedクエリの場合に返されます。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>currentUser</span><span class=p>();</span><span class=w></span>
+</code></pre></div> <p>別名: <code class=syntax>user()</code>, <code class=syntax>USER()</code>.</p> <p><strong>戻り値</strong></p> <ul> <li>現在のユーザーのログイン。</li> <li>分割されたクエリの場合にクエリを開始したユーザーのログイン。</li> </ul> <p>タイプ: <code class=syntax>String</code>.</p> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>currentUser</span><span class=p>();</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─currentUser()─┐
+│ default       │
+└───────────────┘
+</code></pre></div> <h2 id=is-constant>isConstant<a class=headerlink href=../amp/#is-constant title="Permanent link"> </a></h2> <p>引数が定数式かどうかを確認します。</p> <p>A constant expression means an expression whose resulting value is known at the query analysis (i.e. before execution). For example, expressions over <a href=../../../syntax/amp/#literals>リテラル</a> は定数式です。</p> <p>この機能は開発のアプリケーションのデバッグおよびデモンストレーション</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>isConstant</span><span class=p>(</span><span class=n>x</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ</strong></p> <ul> <li><code class=syntax>x</code> — Expression to check.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li><code class=syntax>1</code> — <code class=syntax>x</code> 定数です。</li> <li><code class=syntax>0</code> — <code class=syntax>x</code> は定数ではありません。</li> </ul> <p>タイプ: <a href=../../../data-types/int-uint/amp/ >UInt8</a>.</p> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>isConstant</span><span class=p>(</span><span class=n>x</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=p>(</span><span class=k>SELECT</span><span class=w> </span><span class=mi>43</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>x</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─isConstant(plus(x, 1))─┐
+│                      1 │
+└────────────────────────┘
+</code></pre></div> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>WITH</span><span class=w> </span><span class=mi>3</span><span class=p>.</span><span class=mi>14</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>pi</span><span class=w> </span><span class=k>SELECT</span><span class=w> </span><span class=n>isConstant</span><span class=p>(</span><span class=n>cos</span><span class=p>(</span><span class=n>pi</span><span class=p>))</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─isConstant(cos(pi))─┐
+│                   1 │
+└─────────────────────┘
+</code></pre></div> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>isConstant</span><span class=p>(</span><span class=nb>number</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─isConstant(number)─┐
+│                  0 │
+└────────────────────┘
+</code></pre></div> <h2 id=isfinitex>isFinite(x)<a class=headerlink href=../amp/#isfinitex title="Permanent link"> </a></h2> <p>Float32とFloat64を受け入れ、引数が無限でなくNaNでない場合はUInt8を1、それ以外の場合は0を返します。</p> <h2 id=isinfinitex>イシンフィナイト(x)<a class=headerlink href=../amp/#isinfinitex title="Permanent link"> </a></h2> <p>Float32とFloat64を受け入れ、引数が無限の場合はUInt8を1、それ以外の場合は0を返します。 NaNの場合は0が返されることに注意してください。</p> <h2 id=ifnotfinite>ifNotFinite<a class=headerlink href=../amp/#ifnotfinite title="Permanent link"> </a></h2> <p>浮動小数点値が有限かどうかをチェックします。</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax>ifNotFinite(x,y)
+</code></pre></div> <p><strong>パラメータ</strong></p> <ul> <li><code class=syntax>x</code> — Value to be checked for infinity. Type: <a href=../../../data-types/float/amp/ >フロート*</a>.</li> <li><code class=syntax>y</code> — Fallback value. Type: <a href=../../../data-types/float/amp/ >フロート*</a>.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li><code class=syntax>x</code> もし <code class=syntax>x</code> は有限である。</li> <li><code class=syntax>y</code> もし <code class=syntax>x</code> 有限ではない。</li> </ul> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax>SELECT 1/0 as infimum, ifNotFinite(infimum,42)
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─infimum─┬─ifNotFinite(divide(1, 0), 42)─┐
+│     inf │                            42 │
+└─────────┴───────────────────────────────┘
+</code></pre></div> <p>同様の結果を得るには、次のようにします <a href=../../conditional-functions/amp/#ternary-operator>三項演算子</a>: <code class=syntax>isFinite(x) ? x : y</code>.</p> <h2 id=isnanx>イスナン(x)<a class=headerlink href=../amp/#isnanx title="Permanent link"> </a></h2> <p>Float32とFloat64を受け入れ、引数がNaNの場合はUInt8が1、それ以外の場合は0を返します。</p> <h2 id=hascolumnintablehostname-username-password-database-table-column>hasColumnInTable([‘hostname’[, ‘username’[, ‘password’]],] ‘database’, ‘table’, ‘column’)<a class=headerlink href=../amp/#hascolumnintablehostname-username-password-database-table-column title="Permanent link"> </a></h2> <p>データベース名、テーブル名、および列名の定数文字列を受け入れます。 列がある場合はUInt8定数式を1、それ以外の場合は0を返します。 Hostnameパラメータが設定されている場合、テストはリモートサーバーで実行されます。<br> テーブルが存在しない場合、この関数は例外をスローします。<br> 入れ子になったデータ構造の要素の場合、関数は列の存在をチェックします。 入れ子になったデータ構造自体の場合、関数は0を返します。</p> <h2 id=function-bar>バー<a class=headerlink href=../amp/#function-bar title="Permanent link"> </a></h2> <p>Unicodeアート図を作成できます。</p> <p><code class=syntax>bar(x, min, max, width)</code> 幅に比例したバンドを描画します <code class=syntax>(x - min)</code> と等しい <code class=syntax>width</code> ときの文字 <code class=syntax>x = max</code>.</p> <p>パラメータ:</p> <ul> <li><code class=syntax>x</code> — Size to display.</li> <li><code class=syntax>min, max</code> — Integer constants. The value must fit in <code class=syntax>Int64</code>.</li> <li><code class=syntax>width</code> — Constant, positive integer, can be fractional.</li> </ul> <p>バンドは、シンボルの第八に正確に描かれています。</p> <p>例:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>toHour</span><span class=p>(</span><span class=n>EventTime</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>h</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=k>count</span><span class=p>()</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>c</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>bar</span><span class=p>(</span><span class=k>c</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=mi>600000</span><span class=p>,</span><span class=w> </span><span class=mi>20</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>bar</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>hits</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>h</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>h</span><span class=w> </span><span class=k>ASC</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌──h─┬──────c─┬─bar────────────────┐
+│  0 │ 292907 │ █████████▋         │
+│  1 │ 180563 │ ██████             │
+│  2 │ 114861 │ ███▋               │
+│  3 │  85069 │ ██▋                │
+│  4 │  68543 │ ██▎                │
+│  5 │  78116 │ ██▌                │
+│  6 │ 113474 │ ███▋               │
+│  7 │ 170678 │ █████▋             │
+│  8 │ 278380 │ █████████▎         │
+│  9 │ 391053 │ █████████████      │
+│ 10 │ 457681 │ ███████████████▎   │
+│ 11 │ 493667 │ ████████████████▍  │
+│ 12 │ 509641 │ ████████████████▊  │
+│ 13 │ 522947 │ █████████████████▍ │
+│ 14 │ 539954 │ █████████████████▊ │
+│ 15 │ 528460 │ █████████████████▌ │
+│ 16 │ 539201 │ █████████████████▊ │
+│ 17 │ 523539 │ █████████████████▍ │
+│ 18 │ 506467 │ ████████████████▊  │
+│ 19 │ 520915 │ █████████████████▎ │
+│ 20 │ 521665 │ █████████████████▍ │
+│ 21 │ 542078 │ ██████████████████ │
+│ 22 │ 493642 │ ████████████████▍  │
+│ 23 │ 400397 │ █████████████▎     │
+└────┴────────┴────────────────────┘
+</code></pre></div> <h2 id=transform>変換<a class=headerlink href=../amp/#transform title="Permanent link"> </a></h2> <p>いくつかの要素と他の要素との明示的に定義されたマッピングに従って値を変換します。<br> あーならではのバリエーション機能:</p> <h3 id=transformx-array-from-array-to-default>transform(x,array_from,array_to,デフォルト)<a class=headerlink href=../amp/#transformx-array-from-array-to-default title="Permanent link"> </a></h3> <p><code class=syntax>x</code> – What to transform.</p> <p><code class=syntax>array_from</code> – Constant array of values for converting.</p> <p><code class=syntax>array_to</code> – Constant array of values to convert the values in ‘from’ に。</p> <p><code class=syntax>default</code> – Which value to use if ‘x’ の値のいずれとも等しくない。 ‘from’.</p> <p><code class=syntax>array_from</code> と <code class=syntax>array_to</code> – Arrays of the same size.</p> <p>タイプ:</p> <p><code class=syntax>transform(T, Array(T), Array(U), U) -&gt; U</code></p> <p><code class=syntax>T</code> と <code class=syntax>U</code> 数値、文字列、または日付またはDateTime型を指定できます。<br> 同じ文字が示されている場合（TまたはU）、数値型の場合、これらは一致する型ではなく、共通の型を持つ型である可能性があります。<br> たとえば、最初の引数はInt64型で、二番目の引数は配列(UInt16)型です。</p> <p>もし ‘x’ 値は、要素のいずれかに等しいです。 ‘array_from’ これは、配列から既存の要素（つまり、同じ番号が付けられている）を返します。 ‘array_to’ 配列 それ以外の場合は、 ‘default’. 複数の一致する要素がある場合 ‘array_from’,一致するもののいずれかを返します。</p> <p>例:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=k>transform</span><span class=p>(</span><span class=n>SearchEngineID</span><span class=p>,</span><span class=w> </span><span class=p>[</span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>3</span><span class=p>],</span><span class=w> </span><span class=p>[</span><span class=s1>'Yandex'</span><span class=p>,</span><span class=w> </span><span class=s1>'Google'</span><span class=p>],</span><span class=w> </span><span class=s1>'Other'</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>title</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=k>count</span><span class=p>()</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>c</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>hits</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=n>SearchEngineID</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=mi>0</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>title</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>c</span><span class=w> </span><span class=k>DESC</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─title─────┬──────c─┐
+│ Yandex    │ 498635 │
+│ Google    │ 229872 │
+│ Other     │ 104472 │
+└───────────┴────────┘
+</code></pre></div> <h3 id=transformx-array-from-array-to>変換(x,array_from,array_to)<a class=headerlink href=../amp/#transformx-array-from-array-to title="Permanent link"> </a></h3> <p>最初のバリエーションとは異なり、 ‘default’ 引数は省略される。<br> もし ‘x’ 値は、要素のいずれかに等しいです。 ‘array_from’ これは、配列から一致する要素（つまり、同じ番号が付けられている）を返します。 ‘array_to’ 配列 それ以外の場合は、 ‘x’.</p> <p>タイプ:</p> <p><code class=syntax>transform(T, Array(T), Array(T)) -&gt; T</code></p> <p>例:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=k>transform</span><span class=p>(</span><span class=k>domain</span><span class=p>(</span><span class=n>Referer</span><span class=p>),</span><span class=w> </span><span class=p>[</span><span class=s1>'yandex.ru'</span><span class=p>,</span><span class=w> </span><span class=s1>'google.ru'</span><span class=p>,</span><span class=w> </span><span class=s1>'vk.com'</span><span class=p>],</span><span class=w> </span><span class=p>[</span><span class=s1>'www.yandex'</span><span class=p>,</span><span class=w> </span><span class=s1>'example.com'</span><span class=p>])</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>s</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=k>count</span><span class=p>()</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>c</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>test</span><span class=p>.</span><span class=n>hits</span><span class=w></span>
+<span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>domain</span><span class=p>(</span><span class=n>Referer</span><span class=p>)</span><span class=w></span>
+<span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=k>count</span><span class=p>()</span><span class=w> </span><span class=k>DESC</span><span class=w></span>
+<span class=k>LIMIT</span><span class=w> </span><span class=mi>10</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─s──────────────┬───────c─┐
+│                │ 2906259 │
+│ www.yandex     │  867767 │
+│ ███████.ru     │  313599 │
+│ mail.yandex.ru │  107147 │
+│ ██████.ru      │  100355 │
+│ █████████.ru   │   65040 │
+│ news.yandex.ru │   64515 │
+│ ██████.net     │   59141 │
+│ example.com    │   57316 │
+└────────────────┴─────────┘
+</code></pre></div> <h2 id=formatreadablesizex>formatReadableSize(x)<a class=headerlink href=../amp/#formatreadablesizex title="Permanent link"> </a></h2> <p>サイズ(バイト数)を受け入れます。 サフィックス(kib、MiBなど)を持つ丸められたサイズを返します。）文字列として。</p> <p>例:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>arrayJoin</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>1024</span><span class=p>,</span><span class=w> </span><span class=mi>1024</span><span class=o>*</span><span class=mi>1024</span><span class=p>,</span><span class=w> </span><span class=mi>192851925</span><span class=p>])</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>filesize_bytes</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>formatReadableSize</span><span class=p>(</span><span class=n>filesize_bytes</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>filesize</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─filesize_bytes─┬─filesize───┐
+│              1 │ 1.00 B     │
+│           1024 │ 1.00 KiB   │
+│        1048576 │ 1.00 MiB   │
+│      192851925 │ 183.92 MiB │
+└────────────────┴────────────┘
+</code></pre></div> <h2 id=leasta-b>最小(a,b)<a class=headerlink href=../amp/#leasta-b title="Permanent link"> </a></h2> <p>Aとbの最小値を返します。</p> <h2 id=greatesta-b>グレイテスト(a,b)<a class=headerlink href=../amp/#greatesta-b title="Permanent link"> </a></h2> <p>Aとbの最大値を返します。</p> <h2 id=uptime>稼働時間()<a class=headerlink href=../amp/#uptime title="Permanent link"> </a></h2> <p>サーバーの稼働時間を秒単位で返します。</p> <h2 id=version>バージョン()<a class=headerlink href=../amp/#version title="Permanent link"> </a></h2> <p>サーバーのバージョンを文字列として返します。</p> <h2 id=timezone>タイムゾーン()<a class=headerlink href=../amp/#timezone title="Permanent link"> </a></h2> <p>サーバーのタイムゾーンを返します。</p> <h2 id=blocknumber>ブロックナンバー<a class=headerlink href=../amp/#blocknumber title="Permanent link"> </a></h2> <p>行があるデータブロックのシーケンス番号を返します。</p> <h2 id=function-rownumberinblock>rowNumberInBlock<a class=headerlink href=../amp/#function-rownumberinblock title="Permanent link"> </a></h2> <p>データブロック内の行の序数を返します。 異なるデータブロックは常に再計算されます。</p> <h2 id=rownumberinallblocks>ローナンバリンブロック()<a class=headerlink href=../amp/#rownumberinallblocks title="Permanent link"> </a></h2> <p>データブロック内の行の序数を返します。 この機能のみを考慮した影響のデータブロックとなります。</p> <h2 id=neighbor>隣人<a class=headerlink href=../amp/#neighbor title="Permanent link"> </a></h2> <p>指定された列の現在の行の前または後に来る指定されたオフセットの行へのアクセスを提供するウィンドウ関数。</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>neighbor</span><span class=p>(</span><span class=k>column</span><span class=p>,</span><span class=w> </span><span class=k>offset</span><span class=p>[,</span><span class=w> </span><span class=n>default_value</span><span class=p>])</span><span class=w></span>
+</code></pre></div> <p>関数の結果は、影響を受けるデータブロックとブロック内のデータの順序によって異なります。<br> ORDER BYを使用してサブクエリを作成し、サブクエリの外部から関数を呼び出すと、期待される結果が得られます。</p> <p><strong>パラメータ</strong></p> <ul> <li><code class=syntax>column</code> — A column name or scalar expression.</li> <li><code class=syntax>offset</code> — The number of rows forwards or backwards from the current row of <code class=syntax>column</code>. <a href=../../../data-types/int-uint/amp/ >Int64</a>.</li> <li><code class=syntax>default_value</code> — Optional. The value to be returned if offset goes beyond the scope of the block. Type of data blocks affected.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li>の値 <code class=syntax>column</code> で <code class=syntax>offset</code> 現在の行からの距離if <code class=syntax>offset</code> 値がブロック境界外ではありません。</li> <li>のデフォルト値 <code class=syntax>column</code> もし <code class=syntax>offset</code> 値はブロック境界外です。 もし <code class=syntax>default_value</code> が与えられると、それが使用されます。</li> </ul> <p>タイプ:タイプのデータブロックの影響を受けまたはデフォルト値タイプです。</p> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=nb>number</span><span class=p>,</span><span class=w> </span><span class=n>neighbor</span><span class=p>(</span><span class=nb>number</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=k>system</span><span class=p>.</span><span class=n>numbers</span><span class=w> </span><span class=k>LIMIT</span><span class=w> </span><span class=mi>10</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─number─┬─neighbor(number, 2)─┐
+│      0 │                   2 │
+│      1 │                   3 │
+│      2 │                   4 │
+│      3 │                   5 │
+│      4 │                   6 │
+│      5 │                   7 │
+│      6 │                   8 │
+│      7 │                   9 │
+│      8 │                   0 │
+│      9 │                   0 │
+└────────┴─────────────────────┘
+</code></pre></div> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=nb>number</span><span class=p>,</span><span class=w> </span><span class=n>neighbor</span><span class=p>(</span><span class=nb>number</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>999</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=k>system</span><span class=p>.</span><span class=n>numbers</span><span class=w> </span><span class=k>LIMIT</span><span class=w> </span><span class=mi>10</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─number─┬─neighbor(number, 2, 999)─┐
+│      0 │                        2 │
+│      1 │                        3 │
+│      2 │                        4 │
+│      3 │                        5 │
+│      4 │                        6 │
+│      5 │                        7 │
+│      6 │                        8 │
+│      7 │                        9 │
+│      8 │                      999 │
+│      9 │                      999 │
+└────────┴──────────────────────────┘
+</code></pre></div> <p>この関数を使用して、前年比メトリック値を計算できます:</p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>WITH</span><span class=w> </span><span class=n>toDate</span><span class=p>(</span><span class=s1>'2018-01-01'</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>start_date</span><span class=w></span>
+<span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>toStartOfMonth</span><span class=p>(</span><span class=n>start_date</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mi>32</span><span class=p>))</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>month</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>toInt32</span><span class=p>(</span><span class=k>month</span><span class=p>)</span><span class=w> </span><span class=o>%</span><span class=w> </span><span class=mi>100</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>money</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>neighbor</span><span class=p>(</span><span class=n>money</span><span class=p>,</span><span class=w> </span><span class=o>-</span><span class=mi>12</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>prev_year</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>round</span><span class=p>(</span><span class=n>prev_year</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=n>money</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>year_over_year</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>16</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌──────month─┬─money─┬─prev_year─┬─year_over_year─┐
+│ 2018-01-01 │    32 │         0 │              0 │
+│ 2018-02-01 │    63 │         0 │              0 │
+│ 2018-03-01 │    91 │         0 │              0 │
+│ 2018-04-01 │    22 │         0 │              0 │
+│ 2018-05-01 │    52 │         0 │              0 │
+│ 2018-06-01 │    83 │         0 │              0 │
+│ 2018-07-01 │    13 │         0 │              0 │
+│ 2018-08-01 │    44 │         0 │              0 │
+│ 2018-09-01 │    75 │         0 │              0 │
+│ 2018-10-01 │     5 │         0 │              0 │
+│ 2018-11-01 │    36 │         0 │              0 │
+│ 2018-12-01 │    66 │         0 │              0 │
+│ 2019-01-01 │    97 │        32 │           0.33 │
+│ 2019-02-01 │    28 │        63 │           2.25 │
+│ 2019-03-01 │    56 │        91 │           1.62 │
+│ 2019-04-01 │    87 │        22 │           0.25 │
+└────────────┴───────┴───────────┴────────────────┘
+</code></pre></div> <h2 id=other_functions-runningdifference>runningDifference(x)<a class=headerlink href=../amp/#other_functions-runningdifference title="Permanent link"> </a></h2> <p>Calculates the difference between successive row values ​​in the data block.<br> 最初の行には0を返し、後続の行ごとに前の行との差を返します。</p> <p>関数の結果は、影響を受けるデータブロックとブロック内のデータの順序によって異なります。<br> ORDER BYを使用してサブクエリを作成し、サブクエリの外部から関数を呼び出すと、期待される結果が得られます。</p> <p>例:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=n>EventID</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>EventTime</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>runningDifference</span><span class=p>(</span><span class=n>EventTime</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>delta</span><span class=w></span>
+<span class=k>FROM</span><span class=w></span>
+<span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>SELECT</span><span class=w></span>
+<span class=w>        </span><span class=n>EventID</span><span class=p>,</span><span class=w></span>
+<span class=w>        </span><span class=n>EventTime</span><span class=w></span>
+<span class=w>    </span><span class=k>FROM</span><span class=w> </span><span class=n>events</span><span class=w></span>
+<span class=w>    </span><span class=k>WHERE</span><span class=w> </span><span class=n>EventDate</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>'2016-11-24'</span><span class=w></span>
+<span class=w>    </span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>EventTime</span><span class=w> </span><span class=k>ASC</span><span class=w></span>
+<span class=w>    </span><span class=k>LIMIT</span><span class=w> </span><span class=mi>5</span><span class=w></span>
+<span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─EventID─┬───────────EventTime─┬─delta─┐
+│    1106 │ 2016-11-24 00:00:04 │     0 │
+│    1107 │ 2016-11-24 00:00:05 │     1 │
+│    1108 │ 2016-11-24 00:00:05 │     0 │
+│    1109 │ 2016-11-24 00:00:09 │     4 │
+│    1110 │ 2016-11-24 00:00:10 │     1 │
+└─────────┴─────────────────────┴───────┘
+</code></pre></div> <p>注意-ブロックサイズは結果に影響します。 それぞれの新しいブロックでは、 <code class=syntax>runningDifference</code> 状態がリセットされます。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=nb>number</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>runningDifference</span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>diff</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>100000</span><span class=p>)</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=n>diff</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─number─┬─diff─┐
+│      0 │    0 │
+└────────┴──────┘
+┌─number─┬─diff─┐
+│  65536 │    0 │
+└────────┴──────┘
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax><span class=k>set</span><span class=w> </span><span class=n>max_block_size</span><span class=o>=</span><span class=mi>100000</span><span class=w> </span><span class=c1>-- default value is 65536!</span>
+
+<span class=k>SELECT</span><span class=w></span>
+<span class=w>    </span><span class=nb>number</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>runningDifference</span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>diff</span><span class=w></span>
+<span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>100000</span><span class=p>)</span><span class=w></span>
+<span class=k>WHERE</span><span class=w> </span><span class=n>diff</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─number─┬─diff─┐
+│      0 │    0 │
+└────────┴──────┘
+</code></pre></div> <h2 id=runningdifferencestartingwithfirstvalue>runningDifferenceStartingWithFirstvalue<a class=headerlink href=../amp/#runningdifferencestartingwithfirstvalue title="Permanent link"> </a></h2> <p>同じように <a href=.././amp/#other_functions-runningdifference>runningDifference</a>、差は、最初の行の値であり、最初の行の値を返し、後続の各行は、前の行からの差を返します。</p> <h2 id=macnumtostringnum>マクナムトストリング(num)<a class=headerlink href=../amp/#macnumtostringnum title="Permanent link"> </a></h2> <p>UInt64番号を受け入れます。 ビッグエンディアンのMACアドレスとして解釈します。 対応するMACアドレスを含む文字列をAA:BB:CC:DD:EE:FF(十六進形式のコロン区切りの数値)の形式で返します。</p> <h2 id=macstringtonums>マクストリングトナム(s)<a class=headerlink href=../amp/#macstringtonums title="Permanent link"> </a></h2> <p>MACNumToStringの逆関数。 MACアドレスの形式が無効な場合は、0を返します。</p> <h2 id=macstringtoouis>マクストリングトゥーイ(s)<a class=headerlink href=../amp/#macstringtoouis title="Permanent link"> </a></h2> <p>AA:BB:CC:DD:EE:FF(十六進形式のコロン区切りの数字)の形式でMACアドレスを受け入れます。 Uint64番号として最初の三つのオクテットを返します。 MACアドレスの形式が無効な場合は、0を返します。</p> <h2 id=getsizeofenumtype>getSizeOfEnumType<a class=headerlink href=../amp/#getsizeofenumtype title="Permanent link"> </a></h2> <p>フィールドの数を返します。 <a href=../../../data-types/enum/amp/ >Enum</a>.</p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>getSizeOfEnumType</span><span class=p>(</span><span class=n>value</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ:</strong></p> <ul> <li><code class=syntax>value</code> — Value of type <code class=syntax>Enum</code>.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li>フィールドの数 <code class=syntax>Enum</code> 入力値。</li> <li>型が指定されていない場合、例外がスローされます <code class=syntax>Enum</code>.</li> </ul> <p><strong>例</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>getSizeOfEnumType</span><span class=p>(</span><span class=w> </span><span class=k>CAST</span><span class=p>(</span><span class=s1>'a'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>Enum8</span><span class=p>(</span><span class=s1>'a'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>'b'</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>2</span><span class=p>)</span><span class=w> </span><span class=p>)</span><span class=w> </span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>x</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┐
+│ 2 │
+└───┘
+</code></pre></div> <h2 id=blockserializedsize>blockSerializedSize<a class=headerlink href=../amp/#blockserializedsize title="Permanent link"> </a></h2> <p>圧縮を考慮せずにディスク上のサイズを返します。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>blockSerializedSize</span><span class=p>(</span><span class=n>value</span><span class=p>[,</span><span class=w> </span><span class=n>value</span><span class=p>[,</span><span class=w> </span><span class=p>...]])</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ:</strong></p> <ul> <li><code class=syntax>value</code> — Any value.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li>値のブロック(圧縮なし)のためにディスクに書き込まれるバイト数。</li> </ul> <p><strong>例</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>blockSerializedSize</span><span class=p>(</span><span class=n>maxState</span><span class=p>(</span><span class=mi>1</span><span class=p>))</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=n>x</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─x─┐
+│ 2 │
+└───┘
+</code></pre></div> <h2 id=tocolumntypename>toColumnTypeName<a class=headerlink href=../amp/#tocolumntypename title="Permanent link"> </a></h2> <p>RAM内の列のデータ型を表すクラスの名前を返します。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>toColumnTypeName</span><span class=p>(</span><span class=n>value</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ:</strong></p> <ul> <li><code class=syntax>value</code> — Any type of value.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li>表すために使用されるクラスの名前を持つ文字列 <code class=syntax>value</code> RAMのデータ型。</li> </ul> <p><strong>の違いの例<code class=syntax>toTypeName ' and ' toColumnTypeName</code></strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>toTypeName</span><span class=p>(</span><span class=k>CAST</span><span class=p>(</span><span class=s1>'2018-01-01 01:02:03'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>DateTime</span><span class=p>))</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─toTypeName(CAST('2018-01-01 01:02:03', 'DateTime'))─┐
+│ DateTime                                            │
+└─────────────────────────────────────────────────────┘
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>toColumnTypeName</span><span class=p>(</span><span class=k>CAST</span><span class=p>(</span><span class=s1>'2018-01-01 01:02:03'</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>DateTime</span><span class=p>))</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─toColumnTypeName(CAST('2018-01-01 01:02:03', 'DateTime'))─┐
+│ Const(UInt32)                                             │
+└───────────────────────────────────────────────────────────┘
+</code></pre></div> <p>この例では、 <code class=syntax>DateTime</code> デー <code class=syntax>Const(UInt32)</code>.</p> <h2 id=dumpcolumnstructure>dumpColumnStructure<a class=headerlink href=../amp/#dumpcolumnstructure title="Permanent link"> </a></h2> <p>RAM内のデータ構造の詳細な説明を出力します</p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>dumpColumnStructure</span><span class=p>(</span><span class=n>value</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ:</strong></p> <ul> <li><code class=syntax>value</code> — Any type of value.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li>表すために使用される構造体を記述する文字列 <code class=syntax>value</code> RAMのデータ型。</li> </ul> <p><strong>例</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>dumpColumnStructure</span><span class=p>(</span><span class=k>CAST</span><span class=p>(</span><span class=s1>'2018-01-01 01:02:03'</span><span class=p>,</span><span class=w> </span><span class=s1>'DateTime'</span><span class=p>))</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─dumpColumnStructure(CAST('2018-01-01 01:02:03', 'DateTime'))─┐
+│ DateTime, Const(size = 1, UInt32(size = 1))                  │
+└──────────────────────────────────────────────────────────────┘
+</code></pre></div> <h2 id=defaultvalueofargumenttype>defaultValueOfArgumentType<a class=headerlink href=../amp/#defaultvalueofargumenttype title="Permanent link"> </a></h2> <p>データ型の既定値を出力します。</p> <p>ユーザーが設定したカスタム列の既定値は含まれません。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>defaultValueOfArgumentType</span><span class=p>(</span><span class=n>expression</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ:</strong></p> <ul> <li><code class=syntax>expression</code> — Arbitrary type of value or an expression that results in a value of an arbitrary type.</li> </ul> <p><strong>戻り値</strong></p> <ul> <li><code class=syntax>0</code> 数字のために。</li> <li>文字列の場合は空の文字列です。</li> <li><code class=syntax>ᴺᵁᴸᴸ</code> のために <a href=../../../data-types/nullable/amp/ >Null可能</a>.</li> </ul> <p><strong>例</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>defaultValueOfArgumentType</span><span class=p>(</span><span class=w> </span><span class=k>CAST</span><span class=p>(</span><span class=mi>1</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=nb>Int8</span><span class=p>)</span><span class=w> </span><span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─defaultValueOfArgumentType(CAST(1, 'Int8'))─┐
+│                                           0 │
+└─────────────────────────────────────────────┘
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>defaultValueOfArgumentType</span><span class=p>(</span><span class=w> </span><span class=k>CAST</span><span class=p>(</span><span class=mi>1</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>Nullable</span><span class=p>(</span><span class=nb>Int8</span><span class=p>)</span><span class=w> </span><span class=p>)</span><span class=w> </span><span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─defaultValueOfArgumentType(CAST(1, 'Nullable(Int8)'))─┐
+│                                                  ᴺᵁᴸᴸ │
+└───────────────────────────────────────────────────────┘
+</code></pre></div> <h2 id=other-functions-replicate>複製<a class=headerlink href=../amp/#other-functions-replicate title="Permanent link"> </a></h2> <p>単一の値を持つ配列を作成します。</p> <p>内部実装のために使用される <a href=../../array-join/amp/#functions_arrayjoin>アレイジョイン</a>.</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>replicate</span><span class=p>(</span><span class=n>x</span><span class=p>,</span><span class=w> </span><span class=n>arr</span><span class=p>);</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ:</strong></p> <ul> <li><code class=syntax>arr</code> — Original array. ClickHouse creates a new array of the same length as the original and fills it with the value <code class=syntax>x</code>.</li> <li><code class=syntax>x</code> — The value that the resulting array will be filled with.</li> </ul> <p><strong>戻り値</strong></p> <p>値で満たされた配列 <code class=syntax>x</code>.</p> <p>タイプ: <code class=syntax>Array</code>.</p> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>replicate</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=p>[</span><span class=s1>'a'</span><span class=p>,</span><span class=w> </span><span class=s1>'b'</span><span class=p>,</span><span class=w> </span><span class=s1>'c'</span><span class=p>])</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─replicate(1, ['a', 'b', 'c'])─┐
+│ [1,1,1]                       │
+└───────────────────────────────┘
+</code></pre></div> <h2 id=filesystemavailable>filesystemAvailable<a class=headerlink href=../amp/#filesystemavailable title="Permanent link"> </a></h2> <p>返金額の残存スペースのファイルシステムのファイルのデータベースはあります。 これは、常に合計空き領域よりも小さいです (<a href=../amp/#filesystemfree>filesystemFree</a>）一部のスペースはOS用に予約されているため。</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>filesystemAvailable</span><span class=p>()</span><span class=w></span>
+</code></pre></div> <p><strong>戻り値</strong></p> <ul> <li>バイト単位で使用可能な残りの領域の量。</li> </ul> <p>タイプ: <a href=../../../data-types/int-uint/amp/ >UInt64</a>.</p> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>formatReadableSize</span><span class=p>(</span><span class=n>filesystemAvailable</span><span class=p>())</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=ss>"Available space"</span><span class=p>,</span><span class=w> </span><span class=n>toTypeName</span><span class=p>(</span><span class=n>filesystemAvailable</span><span class=p>())</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=ss>"Type"</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─Available space─┬─Type───┐
+│ 30.75 GiB       │ UInt64 │
+└─────────────────┴────────┘
+</code></pre></div> <h2 id=filesystemfree>filesystemFree<a class=headerlink href=../amp/#filesystemfree title="Permanent link"> </a></h2> <p>データベースのファイルがあるファイルシステム上の空き領域の合計量を返します。 も参照。 <code class=syntax>filesystemAvailable</code></p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>filesystemFree</span><span class=p>()</span><span class=w></span>
+</code></pre></div> <p><strong>戻り値</strong></p> <ul> <li>バイト単位の空き領域の量。</li> </ul> <p>タイプ: <a href=../../../data-types/int-uint/amp/ >UInt64</a>.</p> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>formatReadableSize</span><span class=p>(</span><span class=n>filesystemFree</span><span class=p>())</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=ss>"Free space"</span><span class=p>,</span><span class=w> </span><span class=n>toTypeName</span><span class=p>(</span><span class=n>filesystemFree</span><span class=p>())</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=ss>"Type"</span><span class=p>;</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─Free space─┬─Type───┐
+│ 32.39 GiB  │ UInt64 │
+└────────────┴────────┘
+</code></pre></div> <h2 id=filesystemcapacity>filesystemCapacity<a class=headerlink href=../amp/#filesystemcapacity title="Permanent link"> </a></h2> <p>ファイルシステムの容量をバイト単位で返します。 評価のために、 <a href=../../../../operations/server-configuration-parameters/settings/amp/#server_configuration_parameters-path>パス</a> データディレ</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>filesystemCapacity</span><span class=p>()</span><span class=w></span>
+</code></pre></div> <p><strong>戻り値</strong></p> <ul> <li>バイト単位のファイルシステムの容量情報。</li> </ul> <p>タイプ: <a href=../../../data-types/int-uint/amp/ >UInt64</a>.</p> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>formatReadableSize</span><span class=p>(</span><span class=n>filesystemCapacity</span><span class=p>())</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=ss>"Capacity"</span><span class=p>,</span><span class=w> </span><span class=n>toTypeName</span><span class=p>(</span><span class=n>filesystemCapacity</span><span class=p>())</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=ss>"Type"</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─Capacity──┬─Type───┐
+│ 39.32 GiB │ UInt64 │
+└───────────┴────────┘
+</code></pre></div> <h2 id=function-finalizeaggregation>finalizeAggregation<a class=headerlink href=../amp/#function-finalizeaggregation title="Permanent link"> </a></h2> <p>集計関数の状態をとります。 集計結果(最終状態)を返します。</p> <h2 id=function-runningaccumulate>runningAccumulate<a class=headerlink href=../amp/#function-runningaccumulate title="Permanent link"> </a></h2> <p>集計関数の状態を取り、値を持つ列を返し、最初から現在の行に、ブロック行のセットのためにこれらの状態の蓄積の結果です。<br> たとえば、集計関数の状態をとり（例えばrunningAccumulate(uniqState(UserID))）、ブロックの各行に対して、すべての前の行と現在の行の状態のマージ時に集計関数の結果を返します。<br> したがって、関数の結果は、データのブロックへの分割およびブロック内のデータの順序に依存する。</p> <h2 id=joinget>joinGet<a class=headerlink href=../amp/#joinget title="Permanent link"> </a></h2> <p>この関数を使用すると、aと同じ方法でテーブルからデータを抽出できます <a href=../../../dictionaries/amp/ >辞書</a>.</p> <p>データの取得 <a href=../../../../engines/table-engines/special/join/amp/#creating-a-table>参加</a> 指定された結合キーを使用するテーブル。</p> <p>サポートするだけでなくテーブルで作成された <code class=syntax>ENGINE = Join(ANY, LEFT, &lt;join_keys&gt;)</code> 声明。</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>joinGet</span><span class=p>(</span><span class=n>join_storage_table_name</span><span class=p>,</span><span class=w> </span><span class=o>`</span><span class=n>value_column</span><span class=o>`</span><span class=p>,</span><span class=w> </span><span class=n>join_keys</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ</strong></p> <ul> <li><code class=syntax>join_storage_table_name</code> — an <a href=../../../syntax/amp/#syntax-identifiers>識別子</a> 検索が実行される場所を示します。 識別子は既定のデータベースで検索されます(パラメーターを参照 <code class=syntax>default_database</code> 設定ファイル内）。 デフォルトのデータベースを上書きするには <code class=syntax>USE db_name</code> またはを指定しデータベースのテーブルのセパレータ <code class=syntax>db_name.db_table</code>、例を参照。</li> <li><code class=syntax>value_column</code> — name of the column of the table that contains required data.</li> <li><code class=syntax>join_keys</code> — list of keys.</li> </ul> <p><strong>戻り値</strong></p> <p>キーのリストに対応する値のリストを返します。</p> <p>ソーステーブルに特定のものが存在しない場合、 <code class=syntax>0</code> または <code class=syntax>null</code> に基づいて返されます <a href=../../../../operations/settings/settings/amp/#join_use_nulls>join_use_nulls</a> 設定。</p> <p>詳細について <code class=syntax>join_use_nulls</code> で <a href=../../../../engines/table-engines/special/join/amp/ >結合操作</a>.</p> <p><strong>例</strong></p> <p>入力テーブル:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>CREATE</span><span class=w> </span><span class=k>DATABASE</span><span class=w> </span><span class=n>db_test</span><span class=w></span>
+<span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>db_test</span><span class=p>.</span><span class=n>id_val</span><span class=p>(</span><span class=o>`</span><span class=n>id</span><span class=o>`</span><span class=w> </span><span class=n>UInt32</span><span class=p>,</span><span class=w> </span><span class=o>`</span><span class=n>val</span><span class=o>`</span><span class=w> </span><span class=n>UInt32</span><span class=p>)</span><span class=w> </span><span class=n>ENGINE</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>Join</span><span class=p>(</span><span class=k>ANY</span><span class=p>,</span><span class=w> </span><span class=k>LEFT</span><span class=p>,</span><span class=w> </span><span class=n>id</span><span class=p>)</span><span class=w> </span><span class=n>SETTINGS</span><span class=w> </span><span class=n>join_use_nulls</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+<span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=n>db_test</span><span class=p>.</span><span class=n>id_val</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>11</span><span class=p>)(</span><span class=mi>2</span><span class=p>,</span><span class=mi>12</span><span class=p>)(</span><span class=mi>4</span><span class=p>,</span><span class=mi>13</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─id─┬─val─┐
+│  4 │  13 │
+│  2 │  12 │
+│  1 │  11 │
+└────┴─────┘
+</code></pre></div> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>joinGet</span><span class=p>(</span><span class=n>db_test</span><span class=p>.</span><span class=n>id_val</span><span class=p>,</span><span class=s1>'val'</span><span class=p>,</span><span class=n>toUInt32</span><span class=p>(</span><span class=nb>number</span><span class=p>))</span><span class=w> </span><span class=k>from</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>4</span><span class=p>)</span><span class=w> </span><span class=n>SETTINGS</span><span class=w> </span><span class=n>join_use_nulls</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─joinGet(db_test.id_val, 'val', toUInt32(number))─┐
+│                                                0 │
+│                                               11 │
+│                                               12 │
+│                                                0 │
+└──────────────────────────────────────────────────┘
+</code></pre></div> <h2 id=function-modelevaluate>modelEvaluate(model_name, …)<a class=headerlink href=../amp/#function-modelevaluate title="Permanent link"> </a></h2> <p>外部モデルの評価<br> モデル名とモデル引数を受け取ります。 Float64を返します。</p> <h2 id=throwifx-custom-message>throwIf(x[,custom_message])<a class=headerlink href=../amp/#throwifx-custom-message title="Permanent link"> </a></h2> <p>引数がゼロ以外の場合は例外をスローします。<br> custom_message-オプションのパラメータです。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=n>throwIf</span><span class=p>(</span><span class=nb>number</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>3</span><span class=p>,</span><span class=w> </span><span class=s1>'Too many'</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>numbers</span><span class=p>(</span><span class=mi>10</span><span class=p>);</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>↙ Progress: 0.00 rows, 0.00 B (0.00 rows/s., 0.00 B/s.) Received exception from server (version 19.14.1):
+Code: 395. DB::Exception: Received from localhost:9000. DB::Exception: Too many.
+</code></pre></div> <h2 id=identity>id<a class=headerlink href=../amp/#identity title="Permanent link"> </a></h2> <p>引数として使用されたのと同じ値を返します。 インデックスを使用してキャンセルし、フルスキャンのクエリパフォーマンスを取得することができます。 クエリを分析してインデックスを使用する可能性がある場合、アナライザは内部を見ません <code class=syntax>identity</code> 機能。</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>identity</span><span class=p>(</span><span class=n>x</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>例</strong></p> <p>クエリ:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=k>identity</span><span class=p>(</span><span class=mi>42</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p>結果:</p> <div class=codehilite><pre><span></span><code class=syntax>┌─identity(42)─┐
+│           42 │
+└──────────────┘
+</code></pre></div> <h2 id=randomascii>randomPrintableASCII<a class=headerlink href=../amp/#randomascii title="Permanent link"> </a></h2> <p>のランダムなセットを持つ文字列を生成します <a href=https://en.wikipedia.org/wiki/ASCII#Printable_characters rel="external nofollow noreferrer" target=_blank>ASCII</a> 印刷可能な文字。</p> <p><strong>構文</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=n>randomPrintableASCII</span><span class=p>(</span><span class=k>length</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p><strong>パラメータ</strong></p> <ul> <li><code class=syntax>length</code> — Resulting string length. Positive integer.<div class=codehilite><pre><span></span><code class=syntax><span class=k>If</span> <span class=nv>you</span> <span class=nv>pass</span> `<span class=nv>length</span> <span class=o>&lt;</span> <span class=mi>0</span>`, <span class=nv>behavior</span> <span class=nv>of</span> <span class=nv>the</span> <span class=nv>function</span> <span class=nv>is</span> <span class=nv>undefined</span>.
+</code></pre></div> </li> </ul> <p><strong>戻り値</strong></p> <ul> <li>のランダムなセットを持つ文字列 <a href=https://en.wikipedia.org/wiki/ASCII#Printable_characters rel="external nofollow noreferrer" target=_blank>ASCII</a> 印刷可能な文字。</li> </ul> <p>タイプ: <a href=../../../data-types/string/amp/ >文字列</a></p> <p><strong>例</strong></p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=nb>number</span><span class=p>,</span><span class=w> </span><span class=n>randomPrintableASCII</span><span class=p>(</span><span class=mi>30</span><span class=p>)</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=n>str</span><span class=p>,</span><span class=w> </span><span class=k>length</span><span class=p>(</span><span class=n>str</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=k>system</span><span class=p>.</span><span class=n>numbers</span><span class=w> </span><span class=k>LIMIT</span><span class=w> </span><span class=mi>3</span><span class=w></span>
+</code></pre></div> <div class=codehilite><pre><span></span><code class=syntax>┌─number─┬─str────────────────────────────┬─length(randomPrintableASCII(30))─┐
+│      0 │ SuiCOSTvC0csfABSw=UcSzp2.`rv8x │                               30 │
+│      1 │ 1Ag NlJ &amp;RCN:*&gt;HVPG;PE-nO"SUFD │                               30 │
+│      2 │ /"+&lt;"wUTh:=LjJ Vm!c&amp;hI*m#XTfzz │                               30 │
+└────────┴────────────────────────────────┴──────────────────────────────────┘
+</code></pre></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/38993f215f9186c1ac3505b1e09697cd9a468b5d" rel="external nofollow noreferrer" target="_blank" class="text-reset">38993f21</a>
+    
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/ja/sql-reference/functions/other-functions/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>

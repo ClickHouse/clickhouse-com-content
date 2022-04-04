@@ -1,0 +1,141 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>数据备份 | ClickHouse文档</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/zh/operations/backup/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "数据备份 | ClickHouse文档",
+"mainEntityOfPage": "https://clickhouse.com/docs/zh/operations/backup/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "数据备份 | ClickHouse文档",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}b,strong{font-weight:bolder}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}table{border-collapse:collapse}select{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}select{text-transform:none}select{word-wrap:normal}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}}.table{width:100%;margin-bottom:8px;color:#212529}.table-primary{background-color:#fff1b8}.table-light{background-color:#fbfcfd}.table-dark{background-color:#ccced0}.table-primary-light{background-color:#fffefb}.table-white{background-color:#fff}.table-black{background-color:#c1c2c3}.table-orange{background-color:#ffdfb8}.table-light-orange{background-color:#fff7ea}.table-dark{color:#fff;background-color:#343a40}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:none}.btn:disabled{opacity:.65}.btn-primary{color:#495057;background-color:#fc0;border-color:#fc0}.btn-primary:focus,.btn-primary:hover{color:#495057;background-color:#d9ad00;border-color:#cca300}.btn-primary:focus{box-shadow:0 0 0 0 rgba(228,185,13,.5)}.btn-primary:disabled{color:#495057;background-color:#fc0;border-color:#fc0}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-primary-light{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-primary-light:focus,.btn-primary-light:hover{color:#495057;background-color:#ffedca;border-color:#ffe9bd}.btn-primary-light:focus{box-shadow:0 0 0 0 rgba(228,225,217,.5)}.btn-primary-light:disabled{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-primary{color:#fc0;border-color:#fc0}.btn-outline-primary:hover{color:#495057;background-color:#fc0;border-color:#fc0}.btn-outline-primary:focus{box-shadow:0 0 0 0 rgba(255,204,0,.5)}.btn-outline-primary:disabled{color:#fc0;background-color:transparent}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-primary-light{color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:hover{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:focus{box-shadow:0 0 0 0 rgba(255,250,240,.5)}.btn-outline-primary-light:disabled{color:#fffaf0;background-color:transparent}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}.custom-select{display:inline-block;width:100%;height:calc(1.5em+.75rem+2px);padding:.375rem 1.75rem .375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;border:1px solid #ced4da;border-radius:8px;-webkit-appearance:none;-moz-appearance:none;appearance:none}.custom-select:focus{border-color:#ffe680;outline:0;box-shadow:0 0 0 .2rem rgba(255,204,0,.25)}.custom-select:focus::-ms-value{color:#6c757d;background-color:#fff}.custom-select[multiple],.custom-select[size]:not([size="1"]){height:auto;padding-right:.75rem;background-image:none}.custom-select:disabled{color:#6c757d;background-color:#e9ecef}.custom-select::-ms-expand{display:none}.custom-select:-moz-focusring{color:transparent;text-shadow:0 0 0 #6c757d}.custom-select-lg{height:calc(1.5em+1rem+2px);padding-top:.5rem;padding-bottom:.5rem;padding-left:1rem;font-size:1.125rem}.custom-select{transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.custom-select{transition:none}}img{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}.table{border-collapse:collapse}.table-dark{color:inherit}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/docs/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/docs/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+          <h1 id=data-backup>数据备份<a class=headerlink href=../amp/#data-backup title="Permanent link"> </a></h1> <p>尽管 <a href=../../../engines/table-engines/mergetree-family/replication/amp/ >副本</a> 可以提供针对硬件的错误防护, 但是它不能预防人为操作失误: 数据的意外删除, 错误表的删除或者错误集群上表的删除, 以及导致错误数据处理或者数据损坏的软件bug. 在很多案例中，这类意外可能会影响所有的副本. ClickHouse 有内置的保护措施可以预防一些错误 — 例如, 默认情况下 <a href=../../server-configuration-parameters/settings/amp/#max-table-size-to-drop>不能人工删除使用带有MergeTree引擎且包含超过50Gb数据的表</a>. 但是，这些保护措施不能覆盖所有可能情况，并且这些措施可以被绕过。</p> <p>为了有效地减少可能的人为错误，您应该 <strong>提前</strong> 仔细的准备备份和数据还原的策略.</p> <p>不同公司有不同的可用资源和业务需求，因此不存在一个通用的解决方案可以应对各种情况下的ClickHouse备份和恢复。 适用于 1GB 数据的方案可能并不适用于几十 PB 数据的情况。 有多种具备各自优缺点的可能方法，将在下面对其进行讨论。最好使用几种方法而不是仅仅使用一种方法来弥补它们的各种缺点。。</p> <div class="admonition note alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">注</p> <p>需要注意的是，如果您备份了某些内容并且从未尝试过还原它，那么当您实际需要它时可能无法正常恢复（或者至少需要的时间比业务能够容忍的时间更长）。 因此，无论您选择哪种备份方法，请确保自动还原过程，并定期在备用ClickHouse群集上演练。</p> </div> <h2 id=duplicating-source-data-somewhere-else>将源数据复制到其它地方<a class=headerlink href=../amp/#duplicating-source-data-somewhere-else title="Permanent link"> </a></h2> <p>通常摄入到ClickHouse的数据是通过某种持久队列传递的，例如 <a href=https://kafka.apache.org rel="external nofollow noreferrer" target=_blank>Apache Kafka</a>. 在这种情况下，可以配置一组额外的订阅服务器，这些订阅服务器将在写入ClickHouse时读取相同的数据流，并将其存储在冷存储中。 大多数公司已经有一些默认推荐的冷存储，可能是对象存储或分布式文件系统，如 <a href=https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html rel="external nofollow noreferrer" target=_blank>HDFS</a>.</p> <h2 id=filesystem-snapshots>文件系统快照<a class=headerlink href=../amp/#filesystem-snapshots title="Permanent link"> </a></h2> <p>某些本地文件系统提供快照功能（例如, <a href=https://en.wikipedia.org/wiki/ZFS rel="external nofollow noreferrer" target=_blank>ZFS</a>），但它们可能不是提供实时查询的最佳选择。 一个可能的解决方案是使用这种文件系统创建额外的副本，并将它们与用于<code class=syntax>SELECT</code> 查询的 <a href=../../../engines/table-engines/special/distributed/amp/ >分布式</a> 表分离。 任何修改数据的查询都无法访问此类副本上的快照。 作为回报，这些副本可能具有特殊的硬件配置，每个服务器附加更多的磁盘，这将是经济高效的。</p> <h2 id=clickhouse-copier>clickhouse-copier<a class=headerlink href=../amp/#clickhouse-copier title="Permanent link"> </a></h2> <p><a href=../../utilities/clickhouse-copier/amp/ >clickhouse-copier</a> 是一个多功能工具，最初创建它是为了用于重新切分pb大小的表。 因为它能够在ClickHouse表和集群之间可靠地复制数据，所以它也可用于备份和还原数据。</p> <p>对于较小的数据量，一个简单的 <code class=syntax>INSERT INTO ... SELECT ...</code> 到远程表也可以工作。</p> <h2 id=manipulations-with-parts>part操作<a class=headerlink href=../amp/#manipulations-with-parts title="Permanent link"> </a></h2> <p>ClickHouse允许使用 <code class=syntax>ALTER TABLE ... FREEZE PARTITION ...</code> 查询以创建表分区的本地副本。 这是利用硬链接(hardlink)到 <code class=syntax>/var/lib/clickhouse/shadow/</code> 文件夹中实现的，所以它通常不会因为旧数据而占用额外的磁盘空间。 创建的文件副本不由ClickHouse服务器处理，所以你可以把它们留在那里：你将有一个简单的备份，不需要任何额外的外部系统，但它仍然容易出现硬件问题。 出于这个原因，最好将它们远程复制到另一个位置，然后删除本地副本。 分布式文件系统和对象存储仍然是一个不错的选择，但是具有足够大容量的正常附加文件服务器也可以工作（在这种情况下，传输将通过网络文件系统或者也许是 <a href=https://en.wikipedia.org/wiki/Rsync rel="external nofollow noreferrer" target=_blank>rsync</a> 来进行).</p> <p>数据可以使用 <code class=syntax>ALTER TABLE ... ATTACH PARTITION ...</code> 从备份中恢复。</p> <p>有关与分区操作相关的查询的详细信息，请参阅 <a href=../../../sql-reference/statements/alter/amp/#alter_manipulations-with-partitions>更改文档</a>.</p> <p>第三方工具可用于自动化此方法: <a href=https://github.com/AlexAkulov/clickhouse-backup rel="external nofollow noreferrer" target=_blank>clickhouse-backup</a>.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/38993f215f9186c1ac3505b1e09697cd9a468b5d" rel="external nofollow noreferrer" target="_blank" class="text-reset">38993f21</a>
+    
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/zh/operations/backup/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>

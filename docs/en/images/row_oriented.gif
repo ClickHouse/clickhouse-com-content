@@ -1,0 +1,15 @@
+<!--[if IE 6]> Redirect: /docs/en/images/row-oriented.gif <![endif]-->
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="0; url=/docs/en/images/row-oriented.gif">
+        <script type="text/javascript">
+            window.location.href = "/docs/en/images/row-oriented.gif";
+        </script>
+        <title>Page Redirection</title>
+    </head>
+    <body>
+        If you are not redirected automatically, follow this <a href="/docs/en/images/row-oriented.gif">link</a>.
+    </body>
+</html>

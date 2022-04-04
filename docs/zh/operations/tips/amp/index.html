@@ -1,0 +1,227 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>使用建议 | ClickHouse文档</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/zh/operations/tips/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}b{font-weight:bolder}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}pre{margin-top:0;margin-bottom:1rem;overflow:auto}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}pre{display:block;font-size:87.5%;color:#495057}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn.focus,.btn:focus{outline:0;box-shadow:none}.btn:disabled{opacity:.65}.btn-info{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-info.focus,.btn-info:focus,.btn-info:hover{color:#fff;background-color:#138496;border-color:#117a8b}.btn-info.focus,.btn-info:focus{box-shadow:0 0 0 0 rgba(58,176,195,.5)}.btn-info:disabled{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light.focus,.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light.focus,.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark.focus,.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark.focus,.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white.focus,.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white.focus,.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black.focus,.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black.focus,.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange.focus,.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange.focus,.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange.focus,.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange.focus,.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-info{color:#17a2b8;border-color:#17a2b8}.btn-outline-info:hover{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-outline-info.focus,.btn-outline-info:focus{box-shadow:0 0 0 0 rgba(23,162,184,.5)}.btn-outline-info:disabled{color:#17a2b8;background-color:transparent}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light.focus,.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark.focus,.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white.focus,.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black.focus,.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange.focus,.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange.focus,.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link.focus,.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-group-lg>.btn,.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}.btn-group{position:relative;display:inline-flex;vertical-align:middle}.btn-group>.btn{position:relative;flex:1 1 auto}.btn-group>.btn:active,.btn-group>.btn:focus,.btn-group>.btn:hover{z-index:1}.btn-group>.btn-group:not(:first-child),.btn-group>.btn:not(:first-child){margin-left:-1px}.btn-group>.btn-group:not(:last-child)>.btn{border-top-right-radius:0;border-bottom-right-radius:0}.btn-group>.btn-group:not(:first-child)>.btn,.btn-group>.btn:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.custom-file{display:inline-block;margin-bottom:0}.custom-file{position:relative;width:100%;height:calc(1.5em+.75rem+2px)}pre{white-space:pre-wrap}pre{border:1px solid #d6dbdf;page-break-inside:avoid}img{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/docs/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/docs/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+          <h1 id=usage-recommendations>使用建议<a class=headerlink href=../amp/#usage-recommendations title="Permanent link"> </a></h1> <h2 id=cpu-scaling-governor>CPU频率调节器<a class=headerlink href=../amp/#cpu-scaling-governor title="Permanent link"> </a></h2> <p>始终使用 <code class=syntax>performance</code> 频率调节器。 <code class=syntax>on-demand</code> 频率调节器在持续高需求的情况下，效果更差。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nb>echo</span> <span class=s1>'performance'</span> <span class=p>|</span> sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+</code></pre></div> <h2 id=cpu-limitations>CPU限制<a class=headerlink href=../amp/#cpu-limitations title="Permanent link"> </a></h2> <p>处理器可能会过热。 使用 <code class=syntax>dmesg</code> 查看CPU的时钟速率是否由于过热而受到限制。<br> 该限制也可以在数据中心级别外部设置。 您可以使用 <code class=syntax>turbostat</code> 在负载下对其进行监控。</p> <h2 id=ram>RAM<a class=headerlink href=../amp/#ram title="Permanent link"> </a></h2> <p>对于少量数据（压缩后约200GB），最好使用与数据量一样多的内存。<br> 对于大量数据，以及在处理交互式（在线）查询时，应使用合理数量的RAM（128GB或更多），以便热数据子集适合页面缓存。<br> 即使对于每台服务器约50TB的数据量，与64GB相比，使用128GB的RAM也可以显着提高查询性能。</p> <p>不要禁用 overcommit。<code class=syntax>cat /proc/sys/vm/overcommit_memory</code> 的值应该为0或1。运行</p> <div class=codehilite><pre><span></span><code class=syntax>$ <span class=nb>echo</span> <span class=m>0</span> <span class=p>|</span> sudo tee /proc/sys/vm/overcommit_memory
+</code></pre></div> <h2 id=huge-pages>大页(Huge Pages)<a class=headerlink href=../amp/#huge-pages title="Permanent link"> </a></h2> <p>始终禁用透明大页(transparent huge pages)。 它会干扰内存分配器，从而导致显着的性能下降。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nb>echo</span> <span class=s1>'never'</span> <span class=p>|</span> sudo tee /sys/kernel/mm/transparent_hugepage/enabled
+</code></pre></div> <p>使用 <code class=syntax>perf top</code> 来查看内核在内存管理上花费的时间。<br> 永久大页(permanent huge pages)也不需要被分配。</p> <h2 id=storage-subsystem>存储子系统<a class=headerlink href=../amp/#storage-subsystem title="Permanent link"> </a></h2> <p>如果您的预算允许您使用SSD，请使用SSD。<br> 如果没有，请使用硬盘。 SATA硬盘7200转就行了。</p> <p>优先选择许多带有本地硬盘驱动器的服务器，而不是少量带有附加磁盘架的服务器。<br> 但是对于存储极少查询的档案，架子可以使用。</p> <h2 id=raid>RAID<a class=headerlink href=../amp/#raid title="Permanent link"> </a></h2> <p>当使用硬盘，你可以结合他们的RAID-10，RAID-5，RAID-6或RAID-50。<br> 对于Linux，软件RAID更好（使用 <code class=syntax>mdadm</code>). 我们不建议使用LVM。<br> 当创建RAID-10，选择 <code class=syntax>far</code> 布局。<br> 如果您的预算允许，请选择RAID-10。</p> <p>如果您有4个以上的磁盘，请使用RAID-6（首选）或RAID-50，而不是RAID-5。<br> 当使用RAID-5、RAID-6或RAID-50时，始终增加stripe_cache_size，因为默认值通常不是最佳选择。</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nb>echo</span> <span class=m>4096</span> <span class=p>|</span> sudo tee /sys/block/md2/md/stripe_cache_size
+</code></pre></div> <p>使用以下公式从设备数量和块大小中计算出确切的数量: <code class=syntax>2 * num_devices * chunk_size_in_bytes / 4096</code>。</p> <p>1024KB的块大小足以满足所有RAID配置。<br> 切勿将块大小设置得太小或太大。</p> <p>您可以在SSD上使用RAID-0。<br> 无论使用哪种RAID，始终使用复制来保证数据安全。</p> <p>启用有长队列的NCQ。 对于HDD，选择CFQ调度程序，对于SSD，选择noop。 不要减少 ‘readahead’ 设置。<br> 对于HDD，启用写入缓存。</p> <h2 id=file-system>文件系统<a class=headerlink href=../amp/#file-system title="Permanent link"> </a></h2> <p>Ext4是最可靠的选择。 设置挂载选项 <code class=syntax>noatime</code>.<br> XFS也是合适的，但它还没有经过ClickHouse的全面测试。<br> 大多数其他文件系统也应该可以正常工作。 具有延迟分配的文件系统工作得更好。</p> <h2 id=linux-kernel>Linux内核<a class=headerlink href=../amp/#linux-kernel title="Permanent link"> </a></h2> <p>不要使用过时的Linux内核。</p> <h2 id=network>网络<a class=headerlink href=../amp/#network title="Permanent link"> </a></h2> <p>如果使用的是IPv6，请增加路由缓存的大小。<br> 3.2之前的Linux内核在IPv6实现方面存在许多问题。</p> <p>如果可能的话，至少使用10GB的网络。1GB也可以工作，但对于使用数十TB的数据修补副本或处理具有大量中间数据的分布式查询，情况会更糟。</p> <h2 id=xu-ni-ji-jian-shi-qi-hypervisor-pei-zhi>虚拟机监视器(Hypervisor)配置<a class=headerlink href=../amp/#xu-ni-ji-jian-shi-qi-hypervisor-pei-zhi title="Permanent link"> </a></h2> <p>如果您使用的是OpenStack，请在nova.conf中设置</p> <div class=codehilite><pre><span></span><code class=syntax>cpu_mode=host-passthrough
+</code></pre></div> <p>。</p> <p>如果您使用的是libvirt，请在XML配置中设置</p> <div class=codehilite><pre><span></span><code class=syntax>&lt;cpu mode='host-passthrough'/&gt;
+</code></pre></div> <p>。</p> <p>这对于ClickHouse能够通过 <code class=syntax>cpuid</code> 指令获取正确的信息非常重要。<br> 否则，当在旧的CPU型号上运行虚拟机监视器时，可能会导致 <code class=syntax>Illegal instruction</code> 崩溃。</p> <h2 id=zookeeper>Zookeeper<a class=headerlink href=../amp/#zookeeper title="Permanent link"> </a></h2> <p>您可能已经将ZooKeeper用于其他目的。 如果它还没有超载，您可以使用相同的zookeeper。</p> <p>最好使用新版本的Zookeeper – 3.4.9 或更高的版本. 稳定的Liunx发行版中的Zookeeper版本可能已过时。</p> <p>你永远不要使用手动编写的脚本在不同的Zookeeper集群之间传输数据, 这可能会导致序列节点的数据不正确。出于相同的原因，永远不要使用 zkcopy 工具: <a href=https://github.com/ksprojects/zkcopy/issues/15 target=_blank>https://github.com/ksprojects/zkcopy/issues/15</a></p> <p>如果要将现有的ZooKeeper集群分为两个，正确的方法是增加其副本的数量，然后将其重新配置为两个独立的集群。</p> <p>不要在ClickHouse所在的服务器上运行ZooKeeper。 因为ZooKeeper对延迟非常敏感，而ClickHouse可能会占用所有可用的系统资源。</p> <p>默认设置下，ZooKeeper 就像是一个定时炸弹:</p> <p>当使用默认配置时，ZooKeeper服务器不会从旧的快照和日志中删除文件（请参阅autopurge），这是操作员的责任。</p> <p>必须拆除炸弹。</p> <p>下面的ZooKeeper（3.5.1）配置在 Yandex.Metrica 的生产环境中使用截至2017年5月20日:</p> <p>zoo.cfg:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=c1># http://hadoop.apache.org/zookeeper/docs/current/zookeeperAdmin.html</span>
+
+<span class=c1># The number of milliseconds of each tick</span>
+<span class=nv>tickTime</span><span class=o>=</span><span class=m>2000</span>
+<span class=c1># The number of ticks that the initial</span>
+<span class=c1># synchronization phase can take</span>
+<span class=nv>initLimit</span><span class=o>=</span><span class=m>30000</span>
+<span class=c1># The number of ticks that can pass between</span>
+<span class=c1># sending a request and getting an acknowledgement</span>
+<span class=nv>syncLimit</span><span class=o>=</span><span class=m>10</span>
+
+<span class=nv>maxClientCnxns</span><span class=o>=</span><span class=m>2000</span>
+
+<span class=nv>maxSessionTimeout</span><span class=o>=</span><span class=m>60000000</span>
+<span class=c1># the directory where the snapshot is stored.</span>
+<span class=nv>dataDir</span><span class=o>=</span>/opt/zookeeper/<span class=o>{{</span> cluster<span class=o>[</span><span class=s1>'name'</span><span class=o>]</span> <span class=o>}}</span>/data
+<span class=c1># Place the dataLogDir to a separate physical disc for better performance</span>
+<span class=nv>dataLogDir</span><span class=o>=</span>/opt/zookeeper/<span class=o>{{</span> cluster<span class=o>[</span><span class=s1>'name'</span><span class=o>]</span> <span class=o>}}</span>/logs
+
+autopurge.snapRetainCount<span class=o>=</span><span class=m>10</span>
+autopurge.purgeInterval<span class=o>=</span><span class=m>1</span>
+
+
+<span class=c1># To avoid seeks ZooKeeper allocates space in the transaction log file in</span>
+<span class=c1># blocks of preAllocSize kilobytes. The default block size is 64M. One reason</span>
+<span class=c1># for changing the size of the blocks is to reduce the block size if snapshots</span>
+<span class=c1># are taken more often. (Also, see snapCount).</span>
+<span class=nv>preAllocSize</span><span class=o>=</span><span class=m>131072</span>
+
+<span class=c1># Clients can submit requests faster than ZooKeeper can process them,</span>
+<span class=c1># especially if there are a lot of clients. To prevent ZooKeeper from running</span>
+<span class=c1># out of memory due to queued requests, ZooKeeper will throttle clients so that</span>
+<span class=c1># there is no more than globalOutstandingLimit outstanding requests in the</span>
+<span class=c1># system. The default limit is 1,000.ZooKeeper logs transactions to a</span>
+<span class=c1># transaction log. After snapCount transactions are written to a log file a</span>
+<span class=c1># snapshot is started and a new transaction log file is started. The default</span>
+<span class=c1># snapCount is 10,000.</span>
+<span class=nv>snapCount</span><span class=o>=</span><span class=m>3000000</span>
+
+<span class=c1># If this option is defined, requests will be will logged to a trace file named</span>
+<span class=c1># traceFile.year.month.day.</span>
+<span class=c1>#traceFile=</span>
+
+<span class=c1># Leader accepts client connections. Default value is "yes". The leader machine</span>
+<span class=c1># coordinates updates. For higher update throughput at thes slight expense of</span>
+<span class=c1># read throughput the leader can be configured to not accept clients and focus</span>
+<span class=c1># on coordination.</span>
+<span class=nv>leaderServes</span><span class=o>=</span>yes
+
+<span class=nv>standaloneEnabled</span><span class=o>=</span><span class=nb>false</span>
+<span class=nv>dynamicConfigFile</span><span class=o>=</span>/etc/zookeeper-<span class=o>{{</span> cluster<span class=o>[</span><span class=s1>'name'</span><span class=o>]</span> <span class=o>}}</span>/conf/zoo.cfg.dynamic
+</code></pre></div> <p>Java版本:</p> <div class=codehilite><pre><span></span><code class=syntax>Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
+Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
+</code></pre></div> <p>JVM参数:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nv>NAME</span><span class=o>=</span>zookeeper-<span class=o>{{</span> cluster<span class=o>[</span><span class=s1>'name'</span><span class=o>]</span> <span class=o>}}</span>
+<span class=nv>ZOOCFGDIR</span><span class=o>=</span>/etc/<span class=nv>$NAME</span>/conf
+
+<span class=c1># TODO this is really ugly</span>
+<span class=c1># How to find out, which jars are needed?</span>
+<span class=c1># seems, that log4j requires the log4j.properties file to be in the classpath</span>
+<span class=nv>CLASSPATH</span><span class=o>=</span><span class=s2>"</span><span class=nv>$ZOOCFGDIR</span><span class=s2>:/usr/build/classes:/usr/build/lib/*.jar:/usr/share/zookeeper/zookeeper-3.5.1-metrika.jar:/usr/share/zookeeper/slf4j-log4j12-1.7.5.jar:/usr/share/zookeeper/slf4j-api-1.7.5.jar:/usr/share/zookeeper/servlet-api-2.5-20081211.jar:/usr/share/zookeeper/netty-3.7.0.Final.jar:/usr/share/zookeeper/log4j-1.2.16.jar:/usr/share/zookeeper/jline-2.11.jar:/usr/share/zookeeper/jetty-util-6.1.26.jar:/usr/share/zookeeper/jetty-6.1.26.jar:/usr/share/zookeeper/javacc.jar:/usr/share/zookeeper/jackson-mapper-asl-1.9.11.jar:/usr/share/zookeeper/jackson-core-asl-1.9.11.jar:/usr/share/zookeeper/commons-cli-1.2.jar:/usr/src/java/lib/*.jar:/usr/etc/zookeeper"</span>
+
+<span class=nv>ZOOCFG</span><span class=o>=</span><span class=s2>"</span><span class=nv>$ZOOCFGDIR</span><span class=s2>/zoo.cfg"</span>
+<span class=nv>ZOO_LOG_DIR</span><span class=o>=</span>/var/log/<span class=nv>$NAME</span>
+<span class=nv>USER</span><span class=o>=</span>zookeeper
+<span class=nv>GROUP</span><span class=o>=</span>zookeeper
+<span class=nv>PIDDIR</span><span class=o>=</span>/var/run/<span class=nv>$NAME</span>
+<span class=nv>PIDFILE</span><span class=o>=</span><span class=nv>$PIDDIR</span>/<span class=nv>$NAME</span>.pid
+<span class=nv>SCRIPTNAME</span><span class=o>=</span>/etc/init.d/<span class=nv>$NAME</span>
+<span class=nv>JAVA</span><span class=o>=</span>/usr/bin/java
+<span class=nv>ZOOMAIN</span><span class=o>=</span><span class=s2>"org.apache.zookeeper.server.quorum.QuorumPeerMain"</span>
+<span class=nv>ZOO_LOG4J_PROP</span><span class=o>=</span><span class=s2>"INFO,ROLLINGFILE"</span>
+<span class=nv>JMXLOCALONLY</span><span class=o>=</span><span class=nb>false</span>
+<span class=nv>JAVA_OPTS</span><span class=o>=</span><span class=s2>"-Xms{{ cluster.get('xms','128M') }} \</span>
+<span class=s2>    -Xmx{{ cluster.get('xmx','1G') }} \</span>
+<span class=s2>    -Xloggc:/var/log/</span><span class=nv>$NAME</span><span class=s2>/zookeeper-gc.log \</span>
+<span class=s2>    -XX:+UseGCLogFileRotation \</span>
+<span class=s2>    -XX:NumberOfGCLogFiles=16 \</span>
+<span class=s2>    -XX:GCLogFileSize=16M \</span>
+<span class=s2>    -verbose:gc \</span>
+<span class=s2>    -XX:+PrintGCTimeStamps \</span>
+<span class=s2>    -XX:+PrintGCDateStamps \</span>
+<span class=s2>    -XX:+PrintGCDetails</span>
+<span class=s2>    -XX:+PrintTenuringDistribution \</span>
+<span class=s2>    -XX:+PrintGCApplicationStoppedTime \</span>
+<span class=s2>    -XX:+PrintGCApplicationConcurrentTime \</span>
+<span class=s2>    -XX:+PrintSafepointStatistics \</span>
+<span class=s2>    -XX:+UseParNewGC \</span>
+<span class=s2>    -XX:+UseConcMarkSweepGC \</span>
+<span class=s2>-XX:+CMSParallelRemarkEnabled"</span>
+</code></pre></div> <p>初始化:</p> <div class=codehilite><pre><span></span><code class=syntax>description "zookeeper-{{ cluster['name'] }} centralized coordination service"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+
+limit nofile 8192 8192
+
+pre-start script
+    [ -r "/etc/zookeeper-{{ cluster['name'] }}/conf/environment" ] || exit 0
+    . /etc/zookeeper-{{ cluster['name'] }}/conf/environment
+    [ -d <span class=nv>$ZOO_LOG_DIR</span> ] || mkdir -p <span class=nv>$ZOO_LOG_DIR</span>
+    chown <span class=nv>$USER</span>:<span class=nv>$GROUP</span> <span class=nv>$ZOO_LOG_DIR</span>
+end script
+
+script
+    . /etc/zookeeper-{{ cluster['name'] }}/conf/environment
+    [ -r /etc/default/zookeeper ] <span class=err>&amp;&amp;</span> . /etc/default/zookeeper
+    if [ -z "<span class=nv>$JMXDISABLE</span>" ]; then
+        JAVA_OPTS="<span class=nv>$JAVA_OPTS</span> -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=<span class=nv>$JMXLOCALONLY</span>"
+    fi
+    exec start-stop-daemon --start -c <span class=nv>$USER</span> --exec <span class=nv>$JAVA</span> --name zookeeper-{{ cluster['name'] }} \
+        -- -cp <span class=nv>$CLASSPATH</span> <span class=nv>$JAVA_OPTS</span> -Dzookeeper.log.dir=<span class=cp>${</span><span class=n>ZOO_LOG_DIR</span><span class=cp>}</span> \
+        -Dzookeeper.root.logger=<span class=cp>${</span><span class=n>ZOO_LOG4J_PROP</span><span class=cp>}</span> <span class=nv>$ZOOMAIN</span> <span class=nv>$ZOOCFG</span>
+end script
+</code></pre></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/38993f215f9186c1ac3505b1e09697cd9a468b5d" rel="external nofollow noreferrer" target="_blank" class="text-reset">38993f21</a>
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/zh/operations/tips/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>

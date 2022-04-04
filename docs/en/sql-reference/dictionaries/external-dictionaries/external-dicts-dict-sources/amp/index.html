@@ -1,0 +1,529 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+    
+    
+
+
+
+
+
+
+    <!doctype html>
+<html ⚡ lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>Sources of External Dictionaries | ClickHouse Documentation</title>
+    <link rel="canonical" href="https://clickhouse.com/docs/en/sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+<script type="application/ld+json">[{
+"@context": "http://schema.org",
+"@type": "TechArticle",
+"headline": "Sources of External Dictionaries | ClickHouse Documentation",
+"mainEntityOfPage": "https://clickhouse.com/docs/en/sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources/",
+
+
+
+
+"image": "https://clickhouse.com/images/clickhouse-209x60.png",
+"author": {
+  "@type": "Project",
+  "name": "ClickHouse"
+},
+"publisher": {
+  "@type": "Organization",
+  "name": "ClickHouse, Inc.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://clickhouse.com/images/logo-400x240.png",
+    "width": 400,
+    "height": 240
+  }
+}}, {
+"@context": "http://schema.org",
+"@type": "Episode",
+"name": "Sources of External Dictionaries | ClickHouse Documentation",
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": RATING_VALUE,
+  "ratingCount": RATING_COUNT
+}
+}]</script>
+
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--gray:#6c757d;--gray-dark:#343a40;--brand-primary:#fc0;--brand-secondary:#ff3939;--primary-accent-yellow:#fc0;--primary-accent-light-yellow:#fffaf0;--primary-accent-blue:#257af4;--primary-accent-light-blue:#e3f1fe;--secondary-accent-orange:#ff8c00;--secondary-accent-light-orange:#ffe4b5;--secondary-accent-red:#ff3939;--secondary-accent-light-red:#ffe4e1;--primary:#fc0;--secondary:#212529;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f1f6f9;--dark:#495057;--primary-light:#fffaf0;--secondary-light:#fff;--tertiary:#257af4;--tertiary-light:#e3f1fe;--white:#fff;--black:#212529;--blue:#257af4;--light-blue:#e3f1fe;--yellow:#fc0;--light-yellow:#fffaf0;--orange:#ff8c00;--light-orange:#ffe4b5;--red:#ff3939;--light-red:#ffe4e1;--medium:#d6dbdf;--breakpoint-xxs:0;--breakpoint-xs:400px;--breakpoint-sm:616px;--breakpoint-md:768px;--breakpoint-lg:980px;--breakpoint-xl:1240px;--font-family-sans-serif:"Noto Sans",sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(33,37,41,0)}article,footer,header,main,section{display:block}body{margin:0;font-family:Noto Sans,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus:not(:focus-visible){outline:0}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:16px}p{margin-top:0;margin-bottom:1rem}ul{margin-bottom:1rem}ul{margin-top:0}ul ul{margin-bottom:0}b,strong{font-weight:bolder}a{text-decoration:none;background-color:transparent}a,a:hover{color:#ff8c00}a:hover{text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}pre{margin-top:0;margin-bottom:1rem;overflow:auto}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}table{border-collapse:collapse}select{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}select{text-transform:none}select{word-wrap:normal}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}[hidden]{display:none}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:16px;font-family:Hind Siliguri,sans-serif;font-weight:500;line-height:1.125}.h1,h1{font-size:2.5rem}@media(max-width:1200px){.h1,h1{font-size:calc(1.375rem+1.5vw)}}.h2,h2{font-size:2rem}@media(max-width:1200px){.h2,h2{font-size:calc(1.325rem+.9vw)}}.h3,h3{font-size:1.75rem}@media(max-width:1200px){.h3,h3{font-size:calc(1.3rem+.6vw)}}.h4,h4{font-size:1.5rem}@media(max-width:1200px){.h4,h4{font-size:calc(1.275rem+.3vw)}}.h5,h5{font-size:1.125rem}.h6,h6{font-size:.875rem}.display-1{font-size:4rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-1{font-size:calc(1.525rem+3.3vw)}}.display-2{font-size:2.5rem;font-weight:600;line-height:1.125}@media(max-width:1200px){.display-2{font-size:calc(1.375rem+1.5vw)}}.display-3{font-size:2rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-3{font-size:calc(1.325rem+.9vw)}}.display-4{font-size:1.75rem;font-weight:500;line-height:1.125}@media(max-width:1200px){.display-4{font-size:calc(1.3rem+.6vw)}}.list-inline{padding-left:0;list-style:none}.list-inline-item{display:inline-block}.list-inline-item:not(:last-child){margin-right:.5rem}.img-fluid{max-width:100%;height:auto}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}a>code{color:inherit}pre{display:block;font-size:87.5%;color:#495057}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container{max-width:958px}}@media(min-width:980px){.container{max-width:1008px}}@media(min-width:1240px){.container{max-width:1118px}}.container-fluid,.container-lg,.container-md{width:100%;padding-right:20px;padding-left:20px;margin-right:auto;margin-left:auto}@media(min-width:400px){.container{max-width:576px}}@media(min-width:616px){.container{max-width:576px}}@media(min-width:768px){.container,.container-md{max-width:958px}}@media(min-width:980px){.container,.container-lg,.container-md{max-width:1008px}}@media(min-width:1240px){.container,.container-lg,.container-md{max-width:1118px}}.row{display:flex;flex-wrap:wrap;margin-right:-20px;margin-left:-20px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:20px;padding-left:20px}.col{flex-basis:0;flex-grow:1;max-width:100%}.col-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-3{flex:0 0 25%;max-width:25%}.col-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-6{flex:0 0 50%;max-width:50%}.col-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-9{flex:0 0 75%;max-width:75%}.col-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-12{flex:0 0 100%;max-width:100%}.order-first{order:-1}.order-0{order:0}.order-1{order:1}.order-2{order:2}.order-3{order:3}.order-4{order:4}.order-5{order:5}.order-6{order:6}.order-7{order:7}.order-8{order:8}.order-9{order:9}.order-10{order:10}.order-11{order:11}.order-12{order:12}@media(min-width:768px){.col-md{flex-basis:0;flex-grow:1;max-width:100%}.col-md-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-md-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-md-3{flex:0 0 25%;max-width:25%}.col-md-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-md-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-md-6{flex:0 0 50%;max-width:50%}.col-md-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-md-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-md-9{flex:0 0 75%;max-width:75%}.col-md-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-md-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-md-12{flex:0 0 100%;max-width:100%}.order-md-first{order:-1}.order-md-0{order:0}.order-md-1{order:1}.order-md-2{order:2}.order-md-3{order:3}.order-md-4{order:4}.order-md-5{order:5}.order-md-6{order:6}.order-md-7{order:7}.order-md-8{order:8}.order-md-9{order:9}.order-md-10{order:10}.order-md-11{order:11}.order-md-12{order:12}}@media(min-width:980px){.col-lg{flex-basis:0;flex-grow:1;max-width:100%}.col-lg-1{flex:0 0 8.3333333333%;max-width:8.3333333333%}.col-lg-2{flex:0 0 16.6666666667%;max-width:16.6666666667%}.col-lg-3{flex:0 0 25%;max-width:25%}.col-lg-4{flex:0 0 33.3333333333%;max-width:33.3333333333%}.col-lg-5{flex:0 0 41.6666666667%;max-width:41.6666666667%}.col-lg-6{flex:0 0 50%;max-width:50%}.col-lg-7{flex:0 0 58.3333333333%;max-width:58.3333333333%}.col-lg-8{flex:0 0 66.6666666667%;max-width:66.6666666667%}.col-lg-9{flex:0 0 75%;max-width:75%}.col-lg-10{flex:0 0 83.3333333333%;max-width:83.3333333333%}.col-lg-11{flex:0 0 91.6666666667%;max-width:91.6666666667%}.col-lg-12{flex:0 0 100%;max-width:100%}.order-lg-first{order:-1}.order-lg-0{order:0}.order-lg-1{order:1}.order-lg-2{order:2}.order-lg-3{order:3}.order-lg-4{order:4}.order-lg-5{order:5}.order-lg-6{order:6}.order-lg-7{order:7}.order-lg-8{order:8}.order-lg-9{order:9}.order-lg-10{order:10}.order-lg-11{order:11}.order-lg-12{order:12}}.table{width:100%;margin-bottom:8px;color:#212529}.table-primary{background-color:#fff1b8}.table-info{background-color:#bee5eb}.table-warning{background-color:#ffeeba}.table-light{background-color:#fbfcfd}.table-dark{background-color:#ccced0}.table-primary-light{background-color:#fffefb}.table-white{background-color:#fff}.table-black{background-color:#c1c2c3}.table-orange{background-color:#ffdfb8}.table-light-orange{background-color:#fff7ea}.table-dark{color:#fff;background-color:#343a40}.btn{display:inline-block;font-family:inherit;font-weight:700;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:12px 32px;font-size:.875rem;line-height:20px;border-radius:8px;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:none}.btn.disabled,.btn:disabled{opacity:.65}a.btn.disabled{pointer-events:none}.btn-primary{color:#495057;background-color:#fc0;border-color:#fc0}.btn-primary:focus,.btn-primary:hover{color:#495057;background-color:#d9ad00;border-color:#cca300}.btn-primary:focus{box-shadow:0 0 0 0 rgba(228,185,13,.5)}.btn-primary.disabled,.btn-primary:disabled{color:#495057;background-color:#fc0;border-color:#fc0}.btn-primary:not(:disabled):not(.disabled):active{color:#495057;background-color:#cca300;border-color:#bf9900}.btn-primary:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,185,13,.5)}.btn-info{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-info:focus,.btn-info:hover{color:#fff;background-color:#138496;border-color:#117a8b}.btn-info:focus{box-shadow:0 0 0 0 rgba(58,176,195,.5)}.btn-info.disabled,.btn-info:disabled{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-info:not(:disabled):not(.disabled):active{color:#fff;background-color:#117a8b;border-color:#10707f}.btn-info:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(58,176,195,.5)}.btn-warning{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-warning:focus,.btn-warning:hover{color:#495057;background-color:#e0a800;border-color:#d39e00}.btn-warning:focus{box-shadow:0 0 0 0 rgba(228,176,19,.5)}.btn-warning.disabled,.btn-warning:disabled{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-warning:not(:disabled):not(.disabled):active{color:#495057;background-color:#d39e00;border-color:#c69500}.btn-warning:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,176,19,.5)}.btn-light{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:focus,.btn-light:hover{color:#495057;background-color:#d6e5ee;border-color:#cddfea}.btn-light:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-light.disabled,.btn-light:disabled{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-light:not(:disabled):not(.disabled):active{color:#495057;background-color:#cddfea;border-color:#c4d9e6}.btn-light:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(216,221,225,.5)}.btn-dark{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:focus,.btn-dark:hover{color:#fff;background-color:#383d42;border-color:#32373b}.btn-dark:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-dark.disabled,.btn-dark:disabled{color:#fff;background-color:#495057;border-color:#495057}.btn-dark:not(:disabled):not(.disabled):active{color:#fff;background-color:#32373b;border-color:#2c3034}.btn-dark:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(100,106,112,.5)}.btn-primary-light{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-primary-light:focus,.btn-primary-light:hover{color:#495057;background-color:#ffedca;border-color:#ffe9bd}.btn-primary-light:focus{box-shadow:0 0 0 0 rgba(228,225,217,.5)}.btn-primary-light.disabled,.btn-primary-light:disabled{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-primary-light:not(:disabled):not(.disabled):active{color:#495057;background-color:#ffe9bd;border-color:#ffe5b0}.btn-primary-light:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,225,217,.5)}.btn-white{color:#495057;background-color:#fff;border-color:#fff}.btn-white:focus,.btn-white:hover{color:#495057;background-color:#ececec;border-color:#e6e6e6}.btn-white:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-white.disabled,.btn-white:disabled{color:#495057;background-color:#fff;border-color:#fff}.btn-white:not(:disabled):not(.disabled):active{color:#495057;background-color:#e6e6e6;border-color:#dfdfdf}.btn-white:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,229,230,.5)}.btn-black{color:#fff;background-color:#212529;border-color:#212529}.btn-black:focus,.btn-black:hover{color:#fff;background-color:#101214;border-color:#0a0c0d}.btn-black:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-black.disabled,.btn-black:disabled{color:#fff;background-color:#212529;border-color:#212529}.btn-black:not(:disabled):not(.disabled):active{color:#fff;background-color:#0a0c0d;border-color:#050506}.btn-black:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(66,70,73,.5)}.btn-orange{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:focus,.btn-orange:hover{color:#fff;background-color:#d97700;border-color:#cc7000}.btn-orange:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-orange.disabled,.btn-orange:disabled{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-orange:not(:disabled):not(.disabled):active{color:#fff;background-color:#cc7000;border-color:#bf6900}.btn-orange:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,131,13,.5)}.btn-light-orange{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:focus,.btn-light-orange:hover{color:#495057;background-color:#ffd68f;border-color:#ffd182}.btn-light-orange:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-light-orange.disabled,.btn-light-orange:disabled{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-light-orange:not(:disabled):not(.disabled):active{color:#495057;background-color:#ffd182;border-color:#ffcd75}.btn-light-orange:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(228,206,167,.5)}.btn-outline-primary{color:#fc0;border-color:#fc0}.btn-outline-primary:hover{color:#495057;background-color:#fc0;border-color:#fc0}.btn-outline-primary:focus{box-shadow:0 0 0 0 rgba(255,204,0,.5)}.btn-outline-primary.disabled,.btn-outline-primary:disabled{color:#fc0;background-color:transparent}.btn-outline-primary:not(:disabled):not(.disabled):active{color:#495057;background-color:#fc0;border-color:#fc0}.btn-outline-primary:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(255,204,0,.5)}.btn-outline-info{color:#17a2b8;border-color:#17a2b8}.btn-outline-info:hover{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-outline-info:focus{box-shadow:0 0 0 0 rgba(23,162,184,.5)}.btn-outline-info.disabled,.btn-outline-info:disabled{color:#17a2b8;background-color:transparent}.btn-outline-info:not(:disabled):not(.disabled):active{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-outline-info:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(23,162,184,.5)}.btn-outline-warning{color:#ffc107;border-color:#ffc107}.btn-outline-warning:hover{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-outline-warning:focus{box-shadow:0 0 0 0 rgba(255,193,7,.5)}.btn-outline-warning.disabled,.btn-outline-warning:disabled{color:#ffc107;background-color:transparent}.btn-outline-warning:not(:disabled):not(.disabled):active{color:#495057;background-color:#ffc107;border-color:#ffc107}.btn-outline-warning:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(255,193,7,.5)}.btn-outline-light{color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:hover{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-light.disabled,.btn-outline-light:disabled{color:#f1f6f9;background-color:transparent}.btn-outline-light:not(:disabled):not(.disabled):active{color:#495057;background-color:#f1f6f9;border-color:#f1f6f9}.btn-outline-light:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(241,246,249,.5)}.btn-outline-dark{color:#495057;border-color:#495057}.btn-outline-dark:hover{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-dark.disabled,.btn-outline-dark:disabled{color:#495057;background-color:transparent}.btn-outline-dark:not(:disabled):not(.disabled):active{color:#fff;background-color:#495057;border-color:#495057}.btn-outline-dark:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(73,80,87,.5)}.btn-outline-primary-light{color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:hover{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:focus{box-shadow:0 0 0 0 rgba(255,250,240,.5)}.btn-outline-primary-light.disabled,.btn-outline-primary-light:disabled{color:#fffaf0;background-color:transparent}.btn-outline-primary-light:not(:disabled):not(.disabled):active{color:#495057;background-color:#fffaf0;border-color:#fffaf0}.btn-outline-primary-light:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(255,250,240,.5)}.btn-outline-white{color:#fff;border-color:#fff}.btn-outline-white:hover{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-white.disabled,.btn-outline-white:disabled{color:#fff;background-color:transparent}.btn-outline-white:not(:disabled):not(.disabled):active{color:#495057;background-color:#fff;border-color:#fff}.btn-outline-white:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 hsla(0,0%,100%,.5)}.btn-outline-black{color:#212529;border-color:#212529}.btn-outline-black:hover{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-black.disabled,.btn-outline-black:disabled{color:#212529;background-color:transparent}.btn-outline-black:not(:disabled):not(.disabled):active{color:#fff;background-color:#212529;border-color:#212529}.btn-outline-black:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(33,37,41,.5)}.btn-outline-orange{color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:hover{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-orange.disabled,.btn-outline-orange:disabled{color:#ff8c00;background-color:transparent}.btn-outline-orange:not(:disabled):not(.disabled):active{color:#495057;background-color:#ff8c00;border-color:#ff8c00}.btn-outline-orange:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(255,140,0,.5)}.btn-outline-light-orange{color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:hover{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-outline-light-orange.disabled,.btn-outline-light-orange:disabled{color:#ffe4b5;background-color:transparent}.btn-outline-light-orange:not(:disabled):not(.disabled):active{color:#495057;background-color:#ffe4b5;border-color:#ffe4b5}.btn-outline-light-orange:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 0 rgba(255,228,181,.5)}.btn-link{font-weight:400;color:#ff8c00;text-decoration:none}.btn-link:hover{color:#ff8c00;text-decoration:underline}.btn-link:focus{text-decoration:underline;box-shadow:none}.btn-link.disabled,.btn-link:disabled{color:#d6dbdf;pointer-events:none}.btn-lg{padding:16px 32px;font-size:1.125rem;line-height:26px;border-radius:8px}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:24px}.custom-select{display:inline-block;width:100%;height:calc(1.5em+.75rem+2px);padding:.375rem 1.75rem .375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#6c757d;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;border:1px solid #ced4da;border-radius:8px;-webkit-appearance:none;-moz-appearance:none;appearance:none}.custom-select:focus{border-color:#ffe680;outline:0;box-shadow:0 0 0 .2rem rgba(255,204,0,.25)}.custom-select:focus::-ms-value{color:#6c757d;background-color:#fff}.custom-select[multiple],.custom-select[size]:not([size="1"]){height:auto;padding-right:.75rem;background-image:none}.custom-select:disabled{color:#6c757d;background-color:#e9ecef}.custom-select::-ms-expand{display:none}.custom-select:-moz-focusring{color:transparent;text-shadow:0 0 0 #6c757d}.custom-select-lg{height:calc(1.5em+1rem+2px);padding-top:.5rem;padding-bottom:.5rem;padding-left:1rem;font-size:1.125rem}.custom-file{display:inline-block;margin-bottom:0}.custom-file{position:relative;width:100%;height:calc(1.5em+.75rem+2px)}.custom-select{transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media(prefers-reduced-motion:reduce){.custom-select{transition:none}}pre{white-space:pre-wrap}pre{border:1px solid #d6dbdf;page-break-inside:avoid}img{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}.container,body{min-width:980px}.table{border-collapse:collapse}.table-dark{color:inherit}</style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  </head>
+  <body class="amp" dir="ltr">
+    <div class="container-fluid container-lg pb-5">
+      <div class="row pt-3 mb-3">
+        <div class="col">
+          <a href="/" class="text-decoration-none">
+            <amp-img class="d-inline-block mr-3" layout="fixed" width="40" height="36" src="/docs/images/logo.svg" alt="ClickHouse logo" title="ClickHouse logo"></amp-img><amp-img class="invert-dark d-inline-block" layout="fixed" width="238" height="36" src="/docs/images/clickhouse-black.svg" alt="ClickHouse" title="ClickHouse"></amp-img>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="content" class="col">
+          
+          <h1 id=dicts-external-dicts-dict-sources>Sources of External Dictionaries<a class=headerlink href=../amp/#dicts-external-dicts-dict-sources title="Permanent link"> </a></h1> <p>An external dictionary can be connected from many different sources.</p> <p>If dictionary is configured using xml-file, the configuration looks like this:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;clickhouse&gt;</span>
+  <span class=nt>&lt;dictionary&gt;</span>
+    ...
+    <span class=nt>&lt;source&gt;</span>
+      <span class=nt>&lt;source_type&gt;</span>
+        <span class=cm>&lt;!-- Source configuration --&gt;</span>
+      <span class=nt>&lt;/source_type&gt;</span>
+    <span class=nt>&lt;/source&gt;</span>
+    ...
+  <span class=nt>&lt;/dictionary&gt;</span>
+  ...
+<span class=nt>&lt;/clickhouse&gt;</span>
+</code></pre></div> <p>In case of <a href=../../../../statements/create/dictionary/amp/ >DDL-query</a>, equal configuration will looks like:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>CREATE</span><span class=w> </span><span class=k>DICTIONARY</span><span class=w> </span><span class=n>dict_name</span><span class=w> </span><span class=p>(...)</span><span class=w></span>
+<span class=p>...</span><span class=w></span>
+<span class=k>SOURCE</span><span class=p>(</span><span class=n>SOURCE_TYPE</span><span class=p>(</span><span class=n>param1</span><span class=w> </span><span class=n>val1</span><span class=w> </span><span class=p>...</span><span class=w> </span><span class=n>paramN</span><span class=w> </span><span class=n>valN</span><span class=p>))</span><span class=w> </span><span class=c1>-- Source configuration</span>
+<span class=p>...</span><span class=w></span>
+</code></pre></div> <p>The source is configured in the <code class=syntax>source</code> section.</p> <p>For source types <a href=../amp/#dicts-external_dicts_dict_sources-local_file>Local file</a>, <a href=../amp/#dicts-external_dicts_dict_sources-executable>Executable file</a>, <a href=../amp/#dicts-external_dicts_dict_sources-http>HTTP(s)</a>, <a href=../amp/#dicts-external_dicts_dict_sources-clickhouse>ClickHouse</a><br> optional settings are available:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+  <span class=nt>&lt;file&gt;</span>
+    <span class=nt>&lt;path&gt;</span>/opt/dictionaries/os.tsv<span class=nt>&lt;/path&gt;</span>
+    <span class=nt>&lt;format&gt;</span>TabSeparated<span class=nt>&lt;/format&gt;</span>
+  <span class=nt>&lt;/file&gt;</span>
+  <span class=nt>&lt;settings&gt;</span>
+      <span class=nt>&lt;format_csv_allow_single_quotes&gt;</span>0<span class=nt>&lt;/format_csv_allow_single_quotes&gt;</span>
+  <span class=nt>&lt;/settings&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>FILE</span><span class=p>(</span><span class=n>path</span><span class=w> </span><span class=s1>'./user_files/os.tsv'</span><span class=w> </span><span class=n>format</span><span class=w> </span><span class=s1>'TabSeparated'</span><span class=p>))</span><span class=w></span>
+<span class=n>SETTINGS</span><span class=p>(</span><span class=n>format_csv_allow_single_quotes</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p>Types of sources (<code class=syntax>source_type</code>):</p> <ul> <li><a href=../amp/#dicts-external_dicts_dict_sources-local_file>Local file</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-executable>Executable File</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-executable_pool>Executable Pool</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-http>HTTP(s)</a></li> <li>DBMS<ul> <li><a href=../amp/#dicts-external_dicts_dict_sources-odbc>ODBC</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-mysql>MySQL</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-clickhouse>ClickHouse</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-mongodb>MongoDB</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-redis>Redis</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-cassandra>Cassandra</a></li> <li><a href=../amp/#dicts-external_dicts_dict_sources-postgresql>PostgreSQL</a></li> </ul> </li> </ul> <h2 id=dicts-external_dicts_dict_sources-local_file>Local File<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-local_file title="Permanent link"> </a></h2> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+  <span class=nt>&lt;file&gt;</span>
+    <span class=nt>&lt;path&gt;</span>/opt/dictionaries/os.tsv<span class=nt>&lt;/path&gt;</span>
+    <span class=nt>&lt;format&gt;</span>TabSeparated<span class=nt>&lt;/format&gt;</span>
+  <span class=nt>&lt;/file&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>FILE</span><span class=p>(</span><span class=n>path</span><span class=w> </span><span class=s1>'./user_files/os.tsv'</span><span class=w> </span><span class=n>format</span><span class=w> </span><span class=s1>'TabSeparated'</span><span class=p>))</span><span class=w></span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>path</code> – The absolute path to the file.</li> <li><code class=syntax>format</code> – The file format. All the formats described in <a href=../../../../../interfaces/formats/amp/#formats>Formats</a> are supported.</li> </ul> <p>When dictionary with source <code class=syntax>FILE</code> is created via DDL command (<code class=syntax>CREATE DICTIONARY ...</code>), the source file needs to be located in <code class=syntax>user_files</code> directory, to prevent DB users accessing arbitrary file on ClickHouse node.</p> <p><strong>See Also</strong></p> <ul> <li><a href=../../../../table-functions/dictionary/amp/#dictionary-function>Dictionary function</a></li> </ul> <h2 id=dicts-external_dicts_dict_sources-executable>Executable File<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-executable title="Permanent link"> </a></h2> <p>Working with executable files depends on <a href=../../external-dicts-dict-layout/amp/ >how the dictionary is stored in memory</a>. If the dictionary is stored using <code class=syntax>cache</code> and <code class=syntax>complex_key_cache</code>, ClickHouse requests the necessary keys by sending a request to the executable file’s STDIN. Otherwise, ClickHouse starts executable file and treats its output as dictionary data.</p> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+    <span class=nt>&lt;executable&gt;</span>
+        <span class=nt>&lt;command&gt;</span>cat /opt/dictionaries/os.tsv<span class=nt>&lt;/command&gt;</span>
+        <span class=nt>&lt;format&gt;</span>TabSeparated<span class=nt>&lt;/format&gt;</span>
+        <span class=nt>&lt;implicit_key&gt;</span>false<span class=nt>&lt;/implicit_key&gt;</span>
+    <span class=nt>&lt;/executable&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>command</code> — The absolute path to the executable file, or the file name (if the program directory is written to <code class=syntax>PATH</code>).</li> <li><code class=syntax>format</code> — The file format. All the formats described in <a href=../../../../../interfaces/formats/amp/#formats>Formats</a> are supported.</li> <li><code class=syntax>command_termination_timeout</code> — executable script should contain main read-write loop. After dictionary is destroyed, pipe is closed, and executable file will have <code class=syntax>command_termination_timeout</code> seconds to shutdown, before ClickHouse will send SIGTERM signal to child process. Specified in seconds. Default value is 10. Optional parameter.</li> <li><code class=syntax>command_read_timeout</code> - timeout for reading data from command stdout in milliseconds. Default value 10000. Optional parameter.</li> <li><code class=syntax>command_write_timeout</code> - timeout for writing data to command stdin in milliseconds. Default value 10000. Optional parameter.</li> <li><code class=syntax>implicit_key</code> — The executable source file can return only values, and the correspondence to the requested keys is determined implicitly — by the order of rows in the result. Default value is false.</li> <li><code class=syntax>execute_direct</code> - If <code class=syntax>execute_direct</code> = <code class=syntax>1</code>, then <code class=syntax>command</code> will be searched inside user_scripts folder. Additional script arguments can be specified using whitespace separator. Example: <code class=syntax>script_name arg1 arg2</code>. If <code class=syntax>execute_direct</code> = <code class=syntax>0</code>, <code class=syntax>command</code> is passed as argument for <code class=syntax>bin/sh -c</code>. Default value is <code class=syntax>0</code>. Optional parameter.</li> <li><code class=syntax>send_chunk_header</code> - controls whether to send row count before sending a chunk of data to process. Optional. Default value is <code class=syntax>false</code>.</li> </ul> <p>That dictionary source can be configured only via XML configuration. Creating dictionaries with executable source via DDL is disabled, otherwise, the DB user would be able to execute arbitrary binary on ClickHouse node.</p> <h2 id=dicts-external_dicts_dict_sources-executable_pool>Executable Pool<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-executable_pool title="Permanent link"> </a></h2> <p>Executable pool allows loading data from pool of processes. This source does not work with dictionary layouts that need to load all data from source. Executable pool works if the dictionary <a href=../../external-dicts-dict-layout/amp/#ways-to-store-dictionaries-in-memory>is stored</a> using <code class=syntax>cache</code>, <code class=syntax>complex_key_cache</code>, <code class=syntax>ssd_cache</code>, <code class=syntax>complex_key_ssd_cache</code>, <code class=syntax>direct</code>, <code class=syntax>complex_key_direct</code> layouts.</p> <p>Executable pool will spawn pool of processes with specified command and keep them running until they exit. The program should read data from STDIN while it is available and output result to STDOUT, and it can wait for next block of data on STDIN. ClickHouse will not close STDIN after processing a block of data but will pipe another chunk of data when needed. The executable script should be ready for this way of data processing — it should poll STDIN and flush data to STDOUT early.</p> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+    <span class=nt>&lt;executable_pool&gt;</span>
+        <span class=nt>&lt;command&gt;&lt;command&gt;</span>while read key; do printf "$key\tData for key $key\n"; done<span class=err>&lt;</span>/command<span class=nt>&lt;/command&gt;</span>
+        <span class=nt>&lt;format&gt;</span>TabSeparated<span class=nt>&lt;/format&gt;</span>
+        <span class=nt>&lt;pool_size&gt;</span>10<span class=nt>&lt;/pool_size&gt;</span>
+        <span class=nt>&lt;max_command_execution_time&gt;</span>10<span class=nt>&lt;max_command_execution_time&gt;</span>
+        <span class=nt>&lt;implicit_key&gt;</span>false<span class=nt>&lt;/implicit_key&gt;</span>
+    <span class=nt>&lt;/executable_pool&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>command</code> — The absolute path to the executable file, or the file name (if the program directory is written to <code class=syntax>PATH</code>).</li> <li><code class=syntax>format</code> — The file format. All the formats described in “<a href=../../../../../interfaces/formats/amp/#formats>Formats</a>” are supported.</li> <li><code class=syntax>pool_size</code> — Size of pool. If 0 is specified as <code class=syntax>pool_size</code> then there is no pool size restrictions. Default value is <code class=syntax>16</code>.</li> <li><code class=syntax>command_termination_timeout</code> — executable script should contain main read-write loop. After dictionary is destroyed, pipe is closed, and executable file will have <code class=syntax>command_termination_timeout</code> seconds to shutdown, before ClickHouse will send SIGTERM signal to child process. Specified in seconds. Default value is 10. Optional parameter.</li> <li><code class=syntax>max_command_execution_time</code> — Maximum executable script command execution time for processing block of data. Specified in seconds. Default value is 10. Optional parameter.</li> <li><code class=syntax>command_read_timeout</code> - timeout for reading data from command stdout in milliseconds. Default value 10000. Optional parameter.</li> <li><code class=syntax>command_write_timeout</code> - timeout for writing data to command stdin in milliseconds. Default value 10000. Optional parameter.</li> <li><code class=syntax>implicit_key</code> — The executable source file can return only values, and the correspondence to the requested keys is determined implicitly — by the order of rows in the result. Default value is false. Optional parameter.</li> <li><code class=syntax>execute_direct</code> - If <code class=syntax>execute_direct</code> = <code class=syntax>1</code>, then <code class=syntax>command</code> will be searched inside user_scripts folder. Additional script arguments can be specified using whitespace separator. Example: <code class=syntax>script_name arg1 arg2</code>. If <code class=syntax>execute_direct</code> = <code class=syntax>0</code>, <code class=syntax>command</code> is passed as argument for <code class=syntax>bin/sh -c</code>. Default value is <code class=syntax>1</code>. Optional parameter.</li> <li><code class=syntax>send_chunk_header</code> - controls whether to send row count before sending a chunk of data to process. Optional. Default value is <code class=syntax>false</code>.</li> </ul> <p>That dictionary source can be configured only via XML configuration. Creating dictionaries with executable source via DDL is disabled, otherwise, the DB user would be able to execute arbitrary binary on ClickHouse node.</p> <h2 id=dicts-external_dicts_dict_sources-http>Http(s)<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-http title="Permanent link"> </a></h2> <p>Working with an HTTP(s) server depends on <a href=../../external-dicts-dict-layout/amp/ >how the dictionary is stored in memory</a>. If the dictionary is stored using <code class=syntax>cache</code> and <code class=syntax>complex_key_cache</code>, ClickHouse requests the necessary keys by sending a request via the <code class=syntax>POST</code> method.</p> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+    <span class=nt>&lt;http&gt;</span>
+        <span class=nt>&lt;url&gt;</span>http://[::1]/os.tsv<span class=nt>&lt;/url&gt;</span>
+        <span class=nt>&lt;format&gt;</span>TabSeparated<span class=nt>&lt;/format&gt;</span>
+        <span class=nt>&lt;credentials&gt;</span>
+            <span class=nt>&lt;user&gt;</span>user<span class=nt>&lt;/user&gt;</span>
+            <span class=nt>&lt;password&gt;</span>password<span class=nt>&lt;/password&gt;</span>
+        <span class=nt>&lt;/credentials&gt;</span>
+        <span class=nt>&lt;headers&gt;</span>
+            <span class=nt>&lt;header&gt;</span>
+                <span class=nt>&lt;name&gt;</span>API-KEY<span class=nt>&lt;/name&gt;</span>
+                <span class=nt>&lt;value&gt;</span>key<span class=nt>&lt;/value&gt;</span>
+            <span class=nt>&lt;/header&gt;</span>
+        <span class=nt>&lt;/headers&gt;</span>
+    <span class=nt>&lt;/http&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>HTTP</span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=n>url</span><span class=w> </span><span class=s1>'http://[::1]/os.tsv'</span><span class=w></span>
+<span class=w>    </span><span class=n>format</span><span class=w> </span><span class=s1>'TabSeparated'</span><span class=w></span>
+<span class=w>    </span><span class=n>credentials</span><span class=p>(</span><span class=k>user</span><span class=w> </span><span class=s1>'user'</span><span class=w> </span><span class=n>password</span><span class=w> </span><span class=s1>'password'</span><span class=p>)</span><span class=w></span>
+<span class=w>    </span><span class=n>headers</span><span class=p>(</span><span class=n>header</span><span class=p>(</span><span class=n>name</span><span class=w> </span><span class=s1>'API-KEY'</span><span class=w> </span><span class=n>value</span><span class=w> </span><span class=s1>'key'</span><span class=p>))</span><span class=w></span>
+<span class=p>))</span><span class=w></span>
+</code></pre></div> <p>In order for ClickHouse to access an HTTPS resource, you must <a href=../../../../../operations/server-configuration-parameters/settings/amp/#server_configuration_parameters-openssl>configure openSSL</a> in the server configuration.</p> <p>Setting fields:</p> <ul> <li><code class=syntax>url</code> – The source URL.</li> <li><code class=syntax>format</code> – The file format. All the formats described in “<a href=../../../../../interfaces/formats/amp/#formats>Formats</a>” are supported.</li> <li><code class=syntax>credentials</code> – Basic HTTP authentication. Optional parameter.</li> <li><code class=syntax>user</code> – Username required for the authentication.</li> <li><code class=syntax>password</code> – Password required for the authentication.</li> <li><code class=syntax>headers</code> – All custom HTTP headers entries used for the HTTP request. Optional parameter.</li> <li><code class=syntax>header</code> – Single HTTP header entry.</li> <li><code class=syntax>name</code> – Identifiant name used for the header send on the request.</li> <li><code class=syntax>value</code> – Value set for a specific identifiant name.</li> </ul> <p>When creating a dictionary using the DDL command (<code class=syntax>CREATE DICTIONARY ...</code>) remote hosts for HTTP dictionaries are checked against the contents of <code class=syntax>remote_url_allow_hosts</code> section from config to prevent database users to access arbitrary HTTP server.</p> <h3 id=known-vulnerability-of-the-odbc-dictionary-functionality>Known Vulnerability of the ODBC Dictionary Functionality<a class=headerlink href=../amp/#known-vulnerability-of-the-odbc-dictionary-functionality title="Permanent link"> </a></h3> <div class="admonition attention alert pb-0 mb-4 alert-warning" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">Attention</p> <p>When connecting to the database through the ODBC driver connection parameter <code class=syntax>Servername</code> can be substituted. In this case values of <code class=syntax>USERNAME</code> and <code class=syntax>PASSWORD</code> from <code class=syntax>odbc.ini</code> are sent to the remote server and can be compromised.</p> </div> <p><strong>Example of insecure use</strong></p> <p>Let’s configure unixODBC for PostgreSQL. Content of <code class=syntax>/etc/odbc.ini</code>:</p> <div class=codehilite><pre><span></span><code class=syntax>[gregtest]
+Driver = /usr/lib/psqlodbca.so
+Servername = localhost
+PORT = 5432
+DATABASE = test_db
+#OPTION = 3
+USERNAME = test
+PASSWORD = test
+</code></pre></div> <p>If you then make a query such as</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>odbc</span><span class=p>(</span><span class=s1>'DSN=gregtest;Servername=some-server.com'</span><span class=p>,</span><span class=w> </span><span class=s1>'test_db'</span><span class=p>);</span><span class=w></span>
+</code></pre></div> <p>ODBC driver will send values of <code class=syntax>USERNAME</code> and <code class=syntax>PASSWORD</code> from <code class=syntax>odbc.ini</code> to <code class=syntax>some-server.com</code>.</p> <h3 id=example-of-connecting-postgresql>Example of Connecting Postgresql<a class=headerlink href=../amp/#example-of-connecting-postgresql title="Permanent link"> </a></h3> <p>Ubuntu OS.</p> <p>Installing unixODBC and the ODBC driver for PostgreSQL:</p> <div class=codehilite><pre><span></span><code class=syntax>$ sudo apt-get install -y unixodbc odbcinst odbc-postgresql
+</code></pre></div> <p>Configuring <code class=syntax>/etc/odbc.ini</code> (or <code class=syntax>~/.odbc.ini</code> if you signed in under a user that runs ClickHouse):</p> <div class=codehilite><pre><span></span><code class=syntax>    [DEFAULT]
+    Driver = myconnection
+
+    [myconnection]
+    Description         = PostgreSQL connection to my_db
+    Driver              = PostgreSQL Unicode
+    Database            = my_db
+    Servername          = 127.0.0.1
+    UserName            = username
+    Password            = password
+    Port                = 5432
+    Protocol            = 9.3
+    ReadOnly            = No
+    RowVersioning       = No
+    ShowSystemTables    = No
+    ConnSettings        =
+</code></pre></div> <p>The dictionary configuration in ClickHouse:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;clickhouse&gt;</span>
+    <span class=nt>&lt;dictionary&gt;</span>
+        <span class=nt>&lt;name&gt;</span>table_name<span class=nt>&lt;/name&gt;</span>
+        <span class=nt>&lt;source&gt;</span>
+            <span class=nt>&lt;odbc&gt;</span>
+                <span class=cm>&lt;!-- You can specify the following parameters in connection_string: --&gt;</span>
+                <span class=cm>&lt;!-- DSN=myconnection;UID=username;PWD=password;HOST=127.0.0.1;PORT=5432;DATABASE=my_db --&gt;</span>
+                <span class=nt>&lt;connection_string&gt;</span>DSN=myconnection<span class=nt>&lt;/connection_string&gt;</span>
+                <span class=nt>&lt;table&gt;</span>postgresql_table<span class=nt>&lt;/table&gt;</span>
+            <span class=nt>&lt;/odbc&gt;</span>
+        <span class=nt>&lt;/source&gt;</span>
+        <span class=nt>&lt;lifetime&gt;</span>
+            <span class=nt>&lt;min&gt;</span>300<span class=nt>&lt;/min&gt;</span>
+            <span class=nt>&lt;max&gt;</span>360<span class=nt>&lt;/max&gt;</span>
+        <span class=nt>&lt;/lifetime&gt;</span>
+        <span class=nt>&lt;layout&gt;</span>
+            <span class=nt>&lt;hashed/&gt;</span>
+        <span class=nt>&lt;/layout&gt;</span>
+        <span class=nt>&lt;structure&gt;</span>
+            <span class=nt>&lt;id&gt;</span>
+                <span class=nt>&lt;name&gt;</span>id<span class=nt>&lt;/name&gt;</span>
+            <span class=nt>&lt;/id&gt;</span>
+            <span class=nt>&lt;attribute&gt;</span>
+                <span class=nt>&lt;name&gt;</span>some_column<span class=nt>&lt;/name&gt;</span>
+                <span class=nt>&lt;type&gt;</span>UInt64<span class=nt>&lt;/type&gt;</span>
+                <span class=nt>&lt;null_value&gt;</span>0<span class=nt>&lt;/null_value&gt;</span>
+            <span class=nt>&lt;/attribute&gt;</span>
+        <span class=nt>&lt;/structure&gt;</span>
+    <span class=nt>&lt;/dictionary&gt;</span>
+<span class=nt>&lt;/clickhouse&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>CREATE</span><span class=w> </span><span class=k>DICTIONARY</span><span class=w> </span><span class=k>table_name</span><span class=w> </span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=n>id</span><span class=w> </span><span class=n>UInt64</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>some_column</span><span class=w> </span><span class=n>UInt64</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=mi>0</span><span class=w></span>
+<span class=p>)</span><span class=w></span>
+<span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=w> </span><span class=n>id</span><span class=w></span>
+<span class=k>SOURCE</span><span class=p>(</span><span class=n>ODBC</span><span class=p>(</span><span class=n>connection_string</span><span class=w> </span><span class=s1>'DSN=myconnection'</span><span class=w> </span><span class=k>table</span><span class=w> </span><span class=s1>'postgresql_table'</span><span class=p>))</span><span class=w></span>
+<span class=n>LAYOUT</span><span class=p>(</span><span class=n>HASHED</span><span class=p>())</span><span class=w></span>
+<span class=n>LIFETIME</span><span class=p>(</span><span class=k>MIN</span><span class=w> </span><span class=mi>300</span><span class=w> </span><span class=k>MAX</span><span class=w> </span><span class=mi>360</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <p>You may need to edit <code class=syntax>odbc.ini</code> to specify the full path to the library with the driver <code class=syntax>DRIVER=/usr/local/lib/psqlodbcw.so</code>.</p> <h3 id=example-of-connecting-ms-sql-server>Example of Connecting MS SQL Server<a class=headerlink href=../amp/#example-of-connecting-ms-sql-server title="Permanent link"> </a></h3> <p>Ubuntu OS.</p> <p>Installing the ODBC driver for connecting to MS SQL:</p> <div class=codehilite><pre><span></span><code class=syntax>$ sudo apt-get install tdsodbc freetds-bin sqsh
+</code></pre></div> <p>Configuring the driver:</p> <div class=codehilite><pre><span></span><code class=syntax>    $ cat /etc/freetds/freetds.conf
+    ...
+
+    <span class=o>[</span>MSSQL<span class=o>]</span>
+    <span class=nv>host</span> <span class=o>=</span> <span class=m>192</span>.168.56.101
+    <span class=nv>port</span> <span class=o>=</span> <span class=m>1433</span>
+    tds <span class=nv>version</span> <span class=o>=</span> <span class=m>7</span>.0
+    client <span class=nv>charset</span> <span class=o>=</span> UTF-8
+
+    <span class=c1># test TDS connection</span>
+    $ sqsh -S MSSQL -D database -U user -P password
+
+
+    $ cat /etc/odbcinst.ini
+
+    <span class=o>[</span>FreeTDS<span class=o>]</span>
+    <span class=nv>Description</span>     <span class=o>=</span> FreeTDS
+    <span class=nv>Driver</span>          <span class=o>=</span> /usr/lib/x86_64-linux-gnu/odbc/libtdsodbc.so
+    <span class=nv>Setup</span>           <span class=o>=</span> /usr/lib/x86_64-linux-gnu/odbc/libtdsS.so
+    <span class=nv>FileUsage</span>       <span class=o>=</span> <span class=m>1</span>
+    <span class=nv>UsageCount</span>      <span class=o>=</span> <span class=m>5</span>
+
+    $ cat /etc/odbc.ini
+    <span class=c1># $ cat ~/.odbc.ini # if you signed in under a user that runs ClickHouse</span>
+
+    <span class=o>[</span>MSSQL<span class=o>]</span>
+    <span class=nv>Description</span>     <span class=o>=</span> FreeTDS
+    <span class=nv>Driver</span>          <span class=o>=</span> FreeTDS
+    <span class=nv>Servername</span>      <span class=o>=</span> MSSQL
+    <span class=nv>Database</span>        <span class=o>=</span> <span class=nb>test</span>
+    <span class=nv>UID</span>             <span class=o>=</span> <span class=nb>test</span>
+    <span class=nv>PWD</span>             <span class=o>=</span> <span class=nb>test</span>
+    <span class=nv>Port</span>            <span class=o>=</span> <span class=m>1433</span>
+
+
+    <span class=c1># (optional) test ODBC connection (to use isql-tool install the [unixodbc](https://packages.debian.org/sid/unixodbc)-package)</span>
+    $ isql -v MSSQL <span class=s2>"user"</span> <span class=s2>"password"</span>
+</code></pre></div> <p>Remarks:<br> - to determine the earliest TDS version that is supported by a particular SQL Server version, refer to the product documentation or look at <a href=https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-tds/135d0ebe-5c4c-4a94-99bf-1811eccb9f4a rel="external nofollow noreferrer" target=_blank>MS-TDS Product Behavior</a></p> <p>Configuring the dictionary in ClickHouse:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;clickhouse&gt;</span>
+    <span class=nt>&lt;dictionary&gt;</span>
+        <span class=nt>&lt;name&gt;</span>test<span class=nt>&lt;/name&gt;</span>
+        <span class=nt>&lt;source&gt;</span>
+            <span class=nt>&lt;odbc&gt;</span>
+                <span class=nt>&lt;table&gt;</span>dict<span class=nt>&lt;/table&gt;</span>
+                <span class=nt>&lt;connection_string&gt;</span>DSN=MSSQL;UID=test;PWD=test<span class=nt>&lt;/connection_string&gt;</span>
+            <span class=nt>&lt;/odbc&gt;</span>
+        <span class=nt>&lt;/source&gt;</span>
+
+        <span class=nt>&lt;lifetime&gt;</span>
+            <span class=nt>&lt;min&gt;</span>300<span class=nt>&lt;/min&gt;</span>
+            <span class=nt>&lt;max&gt;</span>360<span class=nt>&lt;/max&gt;</span>
+        <span class=nt>&lt;/lifetime&gt;</span>
+
+        <span class=nt>&lt;layout&gt;</span>
+            <span class=nt>&lt;flat</span> <span class=nt>/&gt;</span>
+        <span class=nt>&lt;/layout&gt;</span>
+
+        <span class=nt>&lt;structure&gt;</span>
+            <span class=nt>&lt;id&gt;</span>
+                <span class=nt>&lt;name&gt;</span>k<span class=nt>&lt;/name&gt;</span>
+            <span class=nt>&lt;/id&gt;</span>
+            <span class=nt>&lt;attribute&gt;</span>
+                <span class=nt>&lt;name&gt;</span>s<span class=nt>&lt;/name&gt;</span>
+                <span class=nt>&lt;type&gt;</span>String<span class=nt>&lt;/type&gt;</span>
+                <span class=nt>&lt;null_value&gt;&lt;/null_value&gt;</span>
+            <span class=nt>&lt;/attribute&gt;</span>
+        <span class=nt>&lt;/structure&gt;</span>
+    <span class=nt>&lt;/dictionary&gt;</span>
+<span class=nt>&lt;/clickhouse&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>CREATE</span><span class=w> </span><span class=k>DICTIONARY</span><span class=w> </span><span class=n>test</span><span class=w> </span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=n>k</span><span class=w> </span><span class=n>UInt64</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=n>s</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=s1>''</span><span class=w></span>
+<span class=p>)</span><span class=w></span>
+<span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=w> </span><span class=n>k</span><span class=w></span>
+<span class=k>SOURCE</span><span class=p>(</span><span class=n>ODBC</span><span class=p>(</span><span class=k>table</span><span class=w> </span><span class=s1>'dict'</span><span class=w> </span><span class=n>connection_string</span><span class=w> </span><span class=s1>'DSN=MSSQL;UID=test;PWD=test'</span><span class=p>))</span><span class=w></span>
+<span class=n>LAYOUT</span><span class=p>(</span><span class=n>FLAT</span><span class=p>())</span><span class=w></span>
+<span class=n>LIFETIME</span><span class=p>(</span><span class=k>MIN</span><span class=w> </span><span class=mi>300</span><span class=w> </span><span class=k>MAX</span><span class=w> </span><span class=mi>360</span><span class=p>)</span><span class=w></span>
+</code></pre></div> <h2 id=dbms>DBMS<a class=headerlink href=../amp/#dbms title="Permanent link"> </a></h2> <h3 id=dicts-external_dicts_dict_sources-odbc>ODBC<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-odbc title="Permanent link"> </a></h3> <p>You can use this method to connect any database that has an ODBC driver.</p> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+    <span class=nt>&lt;odbc&gt;</span>
+        <span class=nt>&lt;db&gt;</span>DatabaseName<span class=nt>&lt;/db&gt;</span>
+        <span class=nt>&lt;table&gt;</span>ShemaName.TableName<span class=nt>&lt;/table&gt;</span>
+        <span class=nt>&lt;connection_string&gt;</span>DSN=some_parameters<span class=nt>&lt;/connection_string&gt;</span>
+        <span class=nt>&lt;invalidate_query&gt;</span>SQL_QUERY<span class=nt>&lt;/invalidate_query&gt;</span>
+        <span class=nt>&lt;query&gt;</span>SELECT id, value_1, value_2 FROM ShemaName.TableName<span class=nt>&lt;/query&gt;</span>
+    <span class=nt>&lt;/odbc&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>ODBC</span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=n>db</span><span class=w> </span><span class=s1>'DatabaseName'</span><span class=w></span>
+<span class=w>    </span><span class=k>table</span><span class=w> </span><span class=s1>'SchemaName.TableName'</span><span class=w></span>
+<span class=w>    </span><span class=n>connection_string</span><span class=w> </span><span class=s1>'DSN=some_parameters'</span><span class=w></span>
+<span class=w>    </span><span class=n>invalidate_query</span><span class=w> </span><span class=s1>'SQL_QUERY'</span><span class=w></span>
+<span class=w>    </span><span class=n>query</span><span class=w> </span><span class=s1>'SELECT id, value_1, value_2 FROM db_name.table_name'</span><span class=w></span>
+<span class=p>))</span><span class=w></span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>db</code> – Name of the database. Omit it if the database name is set in the <code class=syntax>&lt;connection_string&gt;</code> parameters.</li> <li><code class=syntax>table</code> – Name of the table and schema if exists.</li> <li><code class=syntax>connection_string</code> – Connection string.</li> <li><code class=syntax>invalidate_query</code> – Query for checking the dictionary status. Optional parameter. Read more in the section <a href=../../external-dicts-dict-lifetime/amp/ >Updating dictionaries</a>.</li> <li><code class=syntax>query</code> – The custom query. Optional parameter.</li> </ul> <div class="admonition info alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">Note</p> <p>The <code class=syntax>table</code> and <code class=syntax>query</code> fields cannot be used together. And either one of the <code class=syntax>table</code> or <code class=syntax>query</code> fields must be declared.</p> </div> <p>ClickHouse receives quoting symbols from ODBC-driver and quote all settings in queries to driver, so it’s necessary to set table name accordingly to table name case in database.</p> <p>If you have a problems with encodings when using Oracle, see the corresponding <a href=../../../../../faq/integration/oracle-odbc/amp/ >F.A.Q.</a> item.</p> <h3 id=dicts-external_dicts_dict_sources-mysql>Mysql<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-mysql title="Permanent link"> </a></h3> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+  <span class=nt>&lt;mysql&gt;</span>
+      <span class=nt>&lt;port&gt;</span>3306<span class=nt>&lt;/port&gt;</span>
+      <span class=nt>&lt;user&gt;</span>clickhouse<span class=nt>&lt;/user&gt;</span>
+      <span class=nt>&lt;password&gt;</span>qwerty<span class=nt>&lt;/password&gt;</span>
+      <span class=nt>&lt;replica&gt;</span>
+          <span class=nt>&lt;host&gt;</span>example01-1<span class=nt>&lt;/host&gt;</span>
+          <span class=nt>&lt;priority&gt;</span>1<span class=nt>&lt;/priority&gt;</span>
+      <span class=nt>&lt;/replica&gt;</span>
+      <span class=nt>&lt;replica&gt;</span>
+          <span class=nt>&lt;host&gt;</span>example01-2<span class=nt>&lt;/host&gt;</span>
+          <span class=nt>&lt;priority&gt;</span>1<span class=nt>&lt;/priority&gt;</span>
+      <span class=nt>&lt;/replica&gt;</span>
+      <span class=nt>&lt;db&gt;</span>db_name<span class=nt>&lt;/db&gt;</span>
+      <span class=nt>&lt;table&gt;</span>table_name<span class=nt>&lt;/table&gt;</span>
+      <span class=nt>&lt;where&gt;</span>id=10<span class=nt>&lt;/where&gt;</span>
+      <span class=nt>&lt;invalidate_query&gt;</span>SQL_QUERY<span class=nt>&lt;/invalidate_query&gt;</span>
+      <span class=nt>&lt;fail_on_connection_loss&gt;</span>true<span class=nt>&lt;/fail_on_connection_loss&gt;</span>
+      <span class=nt>&lt;query&gt;</span>SELECT id, value_1, value_2 FROM db_name.table_name<span class=nt>&lt;/query&gt;</span>
+  <span class=nt>&lt;/mysql&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>MYSQL</span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=n>port</span><span class=w> </span><span class=mi>3306</span><span class=w></span>
+<span class=w>    </span><span class=k>user</span><span class=w> </span><span class=s1>'clickhouse'</span><span class=w></span>
+<span class=w>    </span><span class=n>password</span><span class=w> </span><span class=s1>'qwerty'</span><span class=w></span>
+<span class=w>    </span><span class=n>replica</span><span class=p>(</span><span class=k>host</span><span class=w> </span><span class=s1>'example01-1'</span><span class=w> </span><span class=n>priority</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w></span>
+<span class=w>    </span><span class=n>replica</span><span class=p>(</span><span class=k>host</span><span class=w> </span><span class=s1>'example01-2'</span><span class=w> </span><span class=n>priority</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w></span>
+<span class=w>    </span><span class=n>db</span><span class=w> </span><span class=s1>'db_name'</span><span class=w></span>
+<span class=w>    </span><span class=k>table</span><span class=w> </span><span class=s1>'table_name'</span><span class=w></span>
+<span class=w>    </span><span class=k>where</span><span class=w> </span><span class=s1>'id=10'</span><span class=w></span>
+<span class=w>    </span><span class=n>invalidate_query</span><span class=w> </span><span class=s1>'SQL_QUERY'</span><span class=w></span>
+<span class=w>    </span><span class=n>fail_on_connection_loss</span><span class=w> </span><span class=s1>'true'</span><span class=w></span>
+<span class=w>    </span><span class=n>query</span><span class=w> </span><span class=s1>'SELECT id, value_1, value_2 FROM db_name.table_name'</span><span class=w></span>
+<span class=p>))</span><span class=w></span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li> <p><code class=syntax>port</code> – The port on the MySQL server. You can specify it for all replicas, or for each one individually (inside <code class=syntax>&lt;replica&gt;</code>).</p> </li> <li> <p><code class=syntax>user</code> – Name of the MySQL user. You can specify it for all replicas, or for each one individually (inside <code class=syntax>&lt;replica&gt;</code>).</p> </li> <li> <p><code class=syntax>password</code> – Password of the MySQL user. You can specify it for all replicas, or for each one individually (inside <code class=syntax>&lt;replica&gt;</code>).</p> </li> <li> <p><code class=syntax>replica</code> – Section of replica configurations. There can be multiple sections.</p> <div class=codehilite><pre><span></span><code class=syntax><span class=o>-</span> `<span class=nv>replica</span><span class=o>/</span><span class=nv>host</span>` – <span class=nv>The</span> <span class=nv>MySQL</span> <span class=nv>host</span>.
+<span class=o>-</span> `<span class=nv>replica</span><span class=o>/</span><span class=nv>priority</span>` – <span class=nv>The</span> <span class=nv>replica</span> <span class=nv>priority</span>. <span class=nv>When</span> <span class=nv>attempting</span> <span class=nv>to</span> <span class=k>connect</span>, <span class=nv>ClickHouse</span> <span class=nv>traverses</span> <span class=nv>the</span> <span class=nv>replicas</span> <span class=nv>in</span> <span class=nv>order</span> <span class=nv>of</span> <span class=nv>priority</span>. <span class=nv>The</span> <span class=nv>lower</span> <span class=nv>the</span> <span class=nv>number</span>, <span class=nv>the</span> <span class=nv>higher</span> <span class=nv>the</span> <span class=nv>priority</span>.
+</code></pre></div> </li> <li> <p><code class=syntax>db</code> – Name of the database.</p> </li> <li> <p><code class=syntax>table</code> – Name of the table.</p> </li> <li> <p><code class=syntax>where</code> – The selection criteria. The syntax for conditions is the same as for <code class=syntax>WHERE</code> clause in MySQL, for example, <code class=syntax>id &gt; 10 AND id &lt; 20</code>. Optional parameter.</p> </li> <li> <p><code class=syntax>invalidate_query</code> – Query for checking the dictionary status. Optional parameter. Read more in the section <a href=../../external-dicts-dict-lifetime/amp/ >Updating dictionaries</a>.</p> </li> <li> <p><code class=syntax>fail_on_connection_loss</code> – The configuration parameter that controls behavior of the server on connection loss. If <code class=syntax>true</code>, an exception is thrown immediately if the connection between client and server was lost. If <code class=syntax>false</code>, the ClickHouse server retries to execute the query three times before throwing an exception. Note that retrying leads to increased response times. Default value: <code class=syntax>false</code>.</p> </li> <li> <p><code class=syntax>query</code> – The custom query. Optional parameter.</p> </li> </ul> <div class="admonition info alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">Note</p> <p>The <code class=syntax>table</code> or <code class=syntax>where</code> fields cannot be used together with the <code class=syntax>query</code> field. And either one of the <code class=syntax>table</code> or <code class=syntax>query</code> fields must be declared.</p> </div> <p>MySQL can be connected on a local host via sockets. To do this, set <code class=syntax>host</code> and <code class=syntax>socket</code>.</p> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+  <span class=nt>&lt;mysql&gt;</span>
+      <span class=nt>&lt;host&gt;</span>localhost<span class=nt>&lt;/host&gt;</span>
+      <span class=nt>&lt;socket&gt;</span>/path/to/socket/file.sock<span class=nt>&lt;/socket&gt;</span>
+      <span class=nt>&lt;user&gt;</span>clickhouse<span class=nt>&lt;/user&gt;</span>
+      <span class=nt>&lt;password&gt;</span>qwerty<span class=nt>&lt;/password&gt;</span>
+      <span class=nt>&lt;db&gt;</span>db_name<span class=nt>&lt;/db&gt;</span>
+      <span class=nt>&lt;table&gt;</span>table_name<span class=nt>&lt;/table&gt;</span>
+      <span class=nt>&lt;where&gt;</span>id=10<span class=nt>&lt;/where&gt;</span>
+      <span class=nt>&lt;invalidate_query&gt;</span>SQL_QUERY<span class=nt>&lt;/invalidate_query&gt;</span>
+      <span class=nt>&lt;fail_on_connection_loss&gt;</span>true<span class=nt>&lt;/fail_on_connection_loss&gt;</span>
+      <span class=nt>&lt;query&gt;</span>SELECT id, value_1, value_2 FROM db_name.table_name<span class=nt>&lt;/query&gt;</span>
+  <span class=nt>&lt;/mysql&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>MYSQL</span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>host</span><span class=w> </span><span class=s1>'localhost'</span><span class=w></span>
+<span class=w>    </span><span class=n>socket</span><span class=w> </span><span class=s1>'/path/to/socket/file.sock'</span><span class=w></span>
+<span class=w>    </span><span class=k>user</span><span class=w> </span><span class=s1>'clickhouse'</span><span class=w></span>
+<span class=w>    </span><span class=n>password</span><span class=w> </span><span class=s1>'qwerty'</span><span class=w></span>
+<span class=w>    </span><span class=n>db</span><span class=w> </span><span class=s1>'db_name'</span><span class=w></span>
+<span class=w>    </span><span class=k>table</span><span class=w> </span><span class=s1>'table_name'</span><span class=w></span>
+<span class=w>    </span><span class=k>where</span><span class=w> </span><span class=s1>'id=10'</span><span class=w></span>
+<span class=w>    </span><span class=n>invalidate_query</span><span class=w> </span><span class=s1>'SQL_QUERY'</span><span class=w></span>
+<span class=w>    </span><span class=n>fail_on_connection_loss</span><span class=w> </span><span class=s1>'true'</span><span class=w></span>
+<span class=w>    </span><span class=n>query</span><span class=w> </span><span class=s1>'SELECT id, value_1, value_2 FROM db_name.table_name'</span><span class=w></span>
+<span class=p>))</span><span class=w></span>
+</code></pre></div> <h3 id=dicts-external_dicts_dict_sources-clickhouse>ClickHouse<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-clickhouse title="Permanent link"> </a></h3> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+    <span class=nt>&lt;clickhouse&gt;</span>
+        <span class=nt>&lt;host&gt;</span>example01-01-1<span class=nt>&lt;/host&gt;</span>
+        <span class=nt>&lt;port&gt;</span>9000<span class=nt>&lt;/port&gt;</span>
+        <span class=nt>&lt;user&gt;</span>default<span class=nt>&lt;/user&gt;</span>
+        <span class=nt>&lt;password&gt;&lt;/password&gt;</span>
+        <span class=nt>&lt;db&gt;</span>default<span class=nt>&lt;/db&gt;</span>
+        <span class=nt>&lt;table&gt;</span>ids<span class=nt>&lt;/table&gt;</span>
+        <span class=nt>&lt;where&gt;</span>id=10<span class=nt>&lt;/where&gt;</span>
+        <span class=nt>&lt;secure&gt;</span>1<span class=nt>&lt;/secure&gt;</span>
+        <span class=nt>&lt;query&gt;</span>SELECT id, value_1, value_2 FROM default.ids<span class=nt>&lt;/query&gt;</span>
+    <span class=nt>&lt;/clickhouse&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>CLICKHOUSE</span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>host</span><span class=w> </span><span class=s1>'example01-01-1'</span><span class=w></span>
+<span class=w>    </span><span class=n>port</span><span class=w> </span><span class=mi>9000</span><span class=w></span>
+<span class=w>    </span><span class=k>user</span><span class=w> </span><span class=s1>'default'</span><span class=w></span>
+<span class=w>    </span><span class=n>password</span><span class=w> </span><span class=s1>''</span><span class=w></span>
+<span class=w>    </span><span class=n>db</span><span class=w> </span><span class=s1>'default'</span><span class=w></span>
+<span class=w>    </span><span class=k>table</span><span class=w> </span><span class=s1>'ids'</span><span class=w></span>
+<span class=w>    </span><span class=k>where</span><span class=w> </span><span class=s1>'id=10'</span><span class=w></span>
+<span class=w>    </span><span class=n>secure</span><span class=w> </span><span class=mi>1</span><span class=w></span>
+<span class=w>    </span><span class=n>query</span><span class=w> </span><span class=s1>'SELECT id, value_1, value_2 FROM default.ids'</span><span class=w></span>
+<span class=p>));</span><span class=w></span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>host</code> – The ClickHouse host. If it is a local host, the query is processed without any network activity. To improve fault tolerance, you can create a <a href=../../../../../engines/table-engines/special/distributed/amp/ >Distributed</a> table and enter it in subsequent configurations.</li> <li><code class=syntax>port</code> – The port on the ClickHouse server.</li> <li><code class=syntax>user</code> – Name of the ClickHouse user.</li> <li><code class=syntax>password</code> – Password of the ClickHouse user.</li> <li><code class=syntax>db</code> – Name of the database.</li> <li><code class=syntax>table</code> – Name of the table.</li> <li><code class=syntax>where</code> – The selection criteria. May be omitted.</li> <li><code class=syntax>invalidate_query</code> – Query for checking the dictionary status. Optional parameter. Read more in the section <a href=../../external-dicts-dict-lifetime/amp/ >Updating dictionaries</a>.</li> <li><code class=syntax>secure</code> - Use ssl for connection.</li> <li><code class=syntax>query</code> – The custom query. Optional parameter.</li> </ul> <div class="admonition info alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">Note</p> <p>The <code class=syntax>table</code> or <code class=syntax>where</code> fields cannot be used together with the <code class=syntax>query</code> field. And either one of the <code class=syntax>table</code> or <code class=syntax>query</code> fields must be declared.</p> </div> <h3 id=dicts-external_dicts_dict_sources-mongodb>Mongodb<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-mongodb title="Permanent link"> </a></h3> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+    <span class=nt>&lt;mongodb&gt;</span>
+        <span class=nt>&lt;host&gt;</span>localhost<span class=nt>&lt;/host&gt;</span>
+        <span class=nt>&lt;port&gt;</span>27017<span class=nt>&lt;/port&gt;</span>
+        <span class=nt>&lt;user&gt;&lt;/user&gt;</span>
+        <span class=nt>&lt;password&gt;&lt;/password&gt;</span>
+        <span class=nt>&lt;db&gt;</span>test<span class=nt>&lt;/db&gt;</span>
+        <span class=nt>&lt;collection&gt;</span>dictionary_source<span class=nt>&lt;/collection&gt;</span>
+    <span class=nt>&lt;/mongodb&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>MONGODB</span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>host</span><span class=w> </span><span class=s1>'localhost'</span><span class=w></span>
+<span class=w>    </span><span class=n>port</span><span class=w> </span><span class=mi>27017</span><span class=w></span>
+<span class=w>    </span><span class=k>user</span><span class=w> </span><span class=s1>''</span><span class=w></span>
+<span class=w>    </span><span class=n>password</span><span class=w> </span><span class=s1>''</span><span class=w></span>
+<span class=w>    </span><span class=n>db</span><span class=w> </span><span class=s1>'test'</span><span class=w></span>
+<span class=w>    </span><span class=n>collection</span><span class=w> </span><span class=s1>'dictionary_source'</span><span class=w></span>
+<span class=p>))</span><span class=w></span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>host</code> – The MongoDB host.</li> <li><code class=syntax>port</code> – The port on the MongoDB server.</li> <li><code class=syntax>user</code> – Name of the MongoDB user.</li> <li><code class=syntax>password</code> – Password of the MongoDB user.</li> <li><code class=syntax>db</code> – Name of the database.</li> <li><code class=syntax>collection</code> – Name of the collection.</li> </ul> <h3 id=dicts-external_dicts_dict_sources-redis>Redis<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-redis title="Permanent link"> </a></h3> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+    <span class=nt>&lt;redis&gt;</span>
+        <span class=nt>&lt;host&gt;</span>localhost<span class=nt>&lt;/host&gt;</span>
+        <span class=nt>&lt;port&gt;</span>6379<span class=nt>&lt;/port&gt;</span>
+        <span class=nt>&lt;storage_type&gt;</span>simple<span class=nt>&lt;/storage_type&gt;</span>
+        <span class=nt>&lt;db_index&gt;</span>0<span class=nt>&lt;/db_index&gt;</span>
+    <span class=nt>&lt;/redis&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>REDIS</span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=k>host</span><span class=w> </span><span class=s1>'localhost'</span><span class=w></span>
+<span class=w>    </span><span class=n>port</span><span class=w> </span><span class=mi>6379</span><span class=w></span>
+<span class=w>    </span><span class=n>storage_type</span><span class=w> </span><span class=s1>'simple'</span><span class=w></span>
+<span class=w>    </span><span class=n>db_index</span><span class=w> </span><span class=mi>0</span><span class=w></span>
+<span class=p>))</span><span class=w></span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>host</code> – The Redis host.</li> <li><code class=syntax>port</code> – The port on the Redis server.</li> <li><code class=syntax>storage_type</code> – The structure of internal Redis storage using for work with keys. <code class=syntax>simple</code> is for simple sources and for hashed single key sources, <code class=syntax>hash_map</code> is for hashed sources with two keys. Ranged sources and cache sources with complex key are unsupported. May be omitted, default value is <code class=syntax>simple</code>.</li> <li><code class=syntax>db_index</code> – The specific numeric index of Redis logical database. May be omitted, default value is 0.</li> </ul> <h3 id=dicts-external_dicts_dict_sources-cassandra>Cassandra<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-cassandra title="Permanent link"> </a></h3> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+    <span class=nt>&lt;cassandra&gt;</span>
+        <span class=nt>&lt;host&gt;</span>localhost<span class=nt>&lt;/host&gt;</span>
+        <span class=nt>&lt;port&gt;</span>9042<span class=nt>&lt;/port&gt;</span>
+        <span class=nt>&lt;user&gt;</span>username<span class=nt>&lt;/user&gt;</span>
+        <span class=nt>&lt;password&gt;</span>qwerty123<span class=nt>&lt;/password&gt;</span>
+        <span class=nt>&lt;keyspase&gt;</span>database_name<span class=nt>&lt;/keyspase&gt;</span>
+        <span class=nt>&lt;column_family&gt;</span>table_name<span class=nt>&lt;/column_family&gt;</span>
+        <span class=nt>&lt;allow_filering&gt;</span>1<span class=nt>&lt;/allow_filering&gt;</span>
+        <span class=nt>&lt;partition_key_prefix&gt;</span>1<span class=nt>&lt;/partition_key_prefix&gt;</span>
+        <span class=nt>&lt;consistency&gt;</span>One<span class=nt>&lt;/consistency&gt;</span>
+        <span class=nt>&lt;where&gt;</span>"SomeColumn" = 42<span class=nt>&lt;/where&gt;</span>
+        <span class=nt>&lt;max_threads&gt;</span>8<span class=nt>&lt;/max_threads&gt;</span>
+        <span class=nt>&lt;query&gt;</span>SELECT id, value_1, value_2 FROM database_name.table_name<span class=nt>&lt;/query&gt;</span>
+    <span class=nt>&lt;/cassandra&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>host</code> – The Cassandra host or comma-separated list of hosts.</li> <li><code class=syntax>port</code> – The port on the Cassandra servers. If not specified, default port 9042 is used.</li> <li><code class=syntax>user</code> – Name of the Cassandra user.</li> <li><code class=syntax>password</code> – Password of the Cassandra user.</li> <li><code class=syntax>keyspace</code> – Name of the keyspace (database).</li> <li><code class=syntax>column_family</code> – Name of the column family (table).</li> <li><code class=syntax>allow_filering</code> – Flag to allow or not potentially expensive conditions on clustering key columns. Default value is 1.</li> <li><code class=syntax>partition_key_prefix</code> – Number of partition key columns in primary key of the Cassandra table. Required for compose key dictionaries. Order of key columns in the dictionary definition must be the same as in Cassandra. Default value is 1 (the first key column is a partition key and other key columns are clustering key).</li> <li><code class=syntax>consistency</code> – Consistency level. Possible values: <code class=syntax>One</code>, <code class=syntax>Two</code>, <code class=syntax>Three</code>, <code class=syntax>All</code>, <code class=syntax>EachQuorum</code>, <code class=syntax>Quorum</code>, <code class=syntax>LocalQuorum</code>, <code class=syntax>LocalOne</code>, <code class=syntax>Serial</code>, <code class=syntax>LocalSerial</code>. Default value is <code class=syntax>One</code>.</li> <li><code class=syntax>where</code> – Optional selection criteria.</li> <li><code class=syntax>max_threads</code> – The maximum number of threads to use for loading data from multiple partitions in compose key dictionaries.</li> <li><code class=syntax>query</code> – The custom query. Optional parameter.</li> </ul> <div class="admonition info alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">Note</p> <p>The <code class=syntax>column_family</code> or <code class=syntax>where</code> fields cannot be used together with the <code class=syntax>query</code> field. And either one of the <code class=syntax>column_family</code> or <code class=syntax>query</code> fields must be declared.</p> </div> <h3 id=dicts-external_dicts_dict_sources-postgresql>PostgreSQL<a class=headerlink href=../amp/#dicts-external_dicts_dict_sources-postgresql title="Permanent link"> </a></h3> <p>Example of settings:</p> <div class=codehilite><pre><span></span><code class=syntax><span class=nt>&lt;source&gt;</span>
+  <span class=nt>&lt;postgresql&gt;</span>
+      <span class=nt>&lt;port&gt;</span>5432<span class=nt>&lt;/port&gt;</span>
+      <span class=nt>&lt;user&gt;</span>clickhouse<span class=nt>&lt;/user&gt;</span>
+      <span class=nt>&lt;password&gt;</span>qwerty<span class=nt>&lt;/password&gt;</span>
+      <span class=nt>&lt;db&gt;</span>db_name<span class=nt>&lt;/db&gt;</span>
+      <span class=nt>&lt;table&gt;</span>table_name<span class=nt>&lt;/table&gt;</span>
+      <span class=nt>&lt;where&gt;</span>id=10<span class=nt>&lt;/where&gt;</span>
+      <span class=nt>&lt;invalidate_query&gt;</span>SQL_QUERY<span class=nt>&lt;/invalidate_query&gt;</span>
+      <span class=nt>&lt;query&gt;</span>SELECT id, value_1, value_2 FROM db_name.table_name<span class=nt>&lt;/query&gt;</span>
+  <span class=nt>&lt;/postgresql&gt;</span>
+<span class=nt>&lt;/source&gt;</span>
+</code></pre></div> <p>or</p> <div class=codehilite><pre><span></span><code class=syntax><span class=k>SOURCE</span><span class=p>(</span><span class=n>POSTGRESQL</span><span class=p>(</span><span class=w></span>
+<span class=w>    </span><span class=n>port</span><span class=w> </span><span class=mi>5432</span><span class=w></span>
+<span class=w>    </span><span class=k>host</span><span class=w> </span><span class=s1>'postgresql-hostname'</span><span class=w></span>
+<span class=w>    </span><span class=k>user</span><span class=w> </span><span class=s1>'postgres_user'</span><span class=w></span>
+<span class=w>    </span><span class=n>password</span><span class=w> </span><span class=s1>'postgres_password'</span><span class=w></span>
+<span class=w>    </span><span class=n>db</span><span class=w> </span><span class=s1>'db_name'</span><span class=w></span>
+<span class=w>    </span><span class=k>table</span><span class=w> </span><span class=s1>'table_name'</span><span class=w></span>
+<span class=w>    </span><span class=n>replica</span><span class=p>(</span><span class=k>host</span><span class=w> </span><span class=s1>'example01-1'</span><span class=w> </span><span class=n>port</span><span class=w> </span><span class=mi>5432</span><span class=w> </span><span class=n>priority</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w></span>
+<span class=w>    </span><span class=n>replica</span><span class=p>(</span><span class=k>host</span><span class=w> </span><span class=s1>'example01-2'</span><span class=w> </span><span class=n>port</span><span class=w> </span><span class=mi>5432</span><span class=w> </span><span class=n>priority</span><span class=w> </span><span class=mi>2</span><span class=p>)</span><span class=w></span>
+<span class=w>    </span><span class=k>where</span><span class=w> </span><span class=s1>'id=10'</span><span class=w></span>
+<span class=w>    </span><span class=n>invalidate_query</span><span class=w> </span><span class=s1>'SQL_QUERY'</span><span class=w></span>
+<span class=w>    </span><span class=n>query</span><span class=w> </span><span class=s1>'SELECT id, value_1, value_2 FROM db_name.table_name'</span><span class=w></span>
+<span class=p>))</span><span class=w></span>
+</code></pre></div> <p>Setting fields:</p> <ul> <li><code class=syntax>host</code> – The host on the PostgreSQL server. You can specify it for all replicas, or for each one individually (inside <code class=syntax>&lt;replica&gt;</code>).</li> <li><code class=syntax>port</code> – The port on the PostgreSQL server. You can specify it for all replicas, or for each one individually (inside <code class=syntax>&lt;replica&gt;</code>).</li> <li><code class=syntax>user</code> – Name of the PostgreSQL user. You can specify it for all replicas, or for each one individually (inside <code class=syntax>&lt;replica&gt;</code>).</li> <li><code class=syntax>password</code> – Password of the PostgreSQL user. You can specify it for all replicas, or for each one individually (inside <code class=syntax>&lt;replica&gt;</code>).</li> <li><code class=syntax>replica</code> – Section of replica configurations. There can be multiple sections:<ul> <li><code class=syntax>replica/host</code> – The PostgreSQL host.</li> <li><code class=syntax>replica/port</code> – The PostgreSQL port.</li> <li><code class=syntax>replica/priority</code> – The replica priority. When attempting to connect, ClickHouse traverses the replicas in order of priority. The lower the number, the higher the priority.</li> </ul> </li> <li><code class=syntax>db</code> – Name of the database.</li> <li><code class=syntax>table</code> – Name of the table.</li> <li><code class=syntax>where</code> – The selection criteria. The syntax for conditions is the same as for <code class=syntax>WHERE</code> clause in PostgreSQL. For example, <code class=syntax>id &gt; 10 AND id &lt; 20</code>. Optional parameter.</li> <li><code class=syntax>invalidate_query</code> – Query for checking the dictionary status. Optional parameter. Read more in the section <a href=../../external-dicts-dict-lifetime/amp/ >Updating dictionaries</a>.</li> <li><code class=syntax>query</code> – The custom query. Optional parameter.</li> </ul> <div class="admonition info alert pb-0 mb-4 alert-primary" role=alert> <p class="admonition-title alert-heading display-4 text-reset mb-2">Note</p> <p>The <code class=syntax>table</code> or <code class=syntax>where</code> fields cannot be used together with the <code class=syntax>query</code> field. And either one of the <code class=syntax>table</code> or <code class=syntax>query</code> fields must be declared.</p> </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          
+<div class="alert alert-light my-3">
+  <p class="float-right mb-0">Rating: RATING_VALUE - RATING_COUNT votes</p>
+  <span class="alert-heading display-6">Article Rating</span>
+  <div id="rating-stars" class="display-6 mb-0"
+     
+  >RATING_STARS</div>
+</div>
+
+<div id="content-footer" class="text-muted pt-3 mb-5">
+    <div class="float-md-right">©2016–2022 ClickHouse, Inc.</div>
+    <div>Built from <a href="https://github.com/ClickHouse/ClickHouse/commit/38993f215f9186c1ac3505b1e09697cd9a468b5d" rel="external nofollow noreferrer" target="_blank" class="text-reset">38993f21</a>
+    
+    </div>
+</div>
+
+        </div>
+      </div>
+      <div id="to-full-website" class="row fixed-bottom text-center bg-white py-3">
+        <div class="col">
+          <a class="btn btn-lg btn-outline-orange" href="https://clickhouse.com/docs/en/sql-reference/dictionaries/external-dictionaries/external-dicts-dict-sources/">To full website</a>
+        </div>
+      </div>
+    </div>
+    <amp-analytics type="metrika">
+      <script type="application/json">{
+"vars": {
+  "counterId": "18343495",
+  "triggers": {
+    "notBounce": {
+      "on": "timer",
+      "timerSpec": {
+        "immediate": false,
+        "interval": 15,
+        "maxTimerLength": 16
+      },
+      "request": "notBounce"
+    }
+  }
+}
+}</script>
+  </amp-analytics>
+  </body>
+</html>
